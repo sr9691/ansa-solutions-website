@@ -14,7 +14,7 @@ get_header();
 		<div class="hero__content">
 			<span class="badge badge--primary">Enterprise Automation</span>
 			<h1 class="hero__title">
-				Process Automation That Delivers <span class="text-accent">Results</span>
+				Process Automation That<br>Delivers <span class="text-accent">Results</span>
 			</h1>
 			<p class="hero__subtitle">
 				We partner with platforms like Workato to design, build, and operate intelligent automation that connects your systems and eliminates manual work.
@@ -84,9 +84,6 @@ get_header();
 			</div>
 
 			<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; position: relative;">
-				<!-- Connecting line -->
-				<div style="display: none; position: absolute; top: 32px; left: 12%; right: 12%; height: 2px; background: var(--border); z-index: 0;"></div>
-
 				<!-- Step 1 -->
 				<div style="text-align: center; position: relative; z-index: 1;">
 					<div style="width: 64px; height: 64px; background: linear-gradient(135deg, var(--accent), #6d5ce7); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; color: #fff; font-size: 1.5rem; font-weight: 700;">1</div>
