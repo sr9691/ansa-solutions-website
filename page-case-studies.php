@@ -201,11 +201,11 @@ get_header();
 
 <section class="section">
 	<div class="container">
-		<!-- HydroPoint Case Study -->
+		<!-- Smart Water Management Case Study -->
 		<div class="case-study-card">
-			<h3>HydroPoint</h3>
+			<h3>Smart Water Management</h3>
 			<p class="tagline">Automating Field, Finance, and Customer Operations</p>
-			<p class="description">HydroPoint provides intelligent water management solutions that operate at the intersection of physical infrastructure, software, and customer-facing services. Their environment required highly reliable data movement between field operations, billing systems, and customer platforms. ANSA delivered event-driven orchestration that reduced manual reconciliation, improved data accuracy, and ensured operational data flowed predictably across systems.</p>
+			<p class="description">This smart water management company provides intelligent solutions that operate at the intersection of physical infrastructure, software, and customer-facing services. Their environment required highly reliable data movement between field operations, billing systems, and customer platforms. ANSA delivered event-driven orchestration that reduced manual reconciliation, improved data accuracy, and ensured operational data flowed predictably across systems.</p>
 			<div class="case-study-grid">
 				<div class="case-study-column">
 					<h4>
@@ -251,11 +251,11 @@ get_header();
 			</div>
 		</div>
 
-		<!-- Pinnacle Engineering Case Study -->
+		<!-- Multi-Discipline Engineering Case Study -->
 		<div class="case-study-card">
-			<h3>Pinnacle Engineering</h3>
+			<h3>Multi-Discipline Engineering</h3>
 			<p class="tagline">Engineering, Finance, and Project Workflow Orchestration</p>
-			<p class="description">Pinnacle Engineering is a multi-discipline engineering firm where project execution, financial accuracy, and compliance are tightly coupled. As the firm grew, disconnected systems across CRM, project accounting, expense management, and finance created delays and reporting challenges. ANSA designed and implemented clean, auditable workflows that orchestrated project setup, cost tracking, and billing processes.</p>
+			<p class="description">This multi-discipline engineering firm executes projects where project execution, financial accuracy, and compliance are tightly coupled. As the firm grew, disconnected systems across CRM, project accounting, expense management, and finance created delays and reporting challenges. ANSA designed and implemented clean, auditable workflows that orchestrated project setup, cost tracking, and billing processes.</p>
 			<div class="case-study-grid">
 				<div class="case-study-column">
 					<h4>
@@ -279,7 +279,7 @@ get_header();
 						What We Delivered
 					</h4>
 					<ul>
-						<li>End-to-end orchestration across Salesforce, Ajera, Corpay, and operational systems</li>
+						<li>End-to-end orchestration across CRM, project accounting, expense management, and operational systems</li>
 						<li>Automated project setup, cost tracking, and financial workflows</li>
 						<li>Clear audit trails across engineering and finance processes</li>
 					</ul>
@@ -301,11 +301,11 @@ get_header();
 			</div>
 		</div>
 
-		<!-- SafetyBoss Case Study -->
+		<!-- Industrial Safety & Compliance Case Study -->
 		<div class="case-study-card">
-			<h3>SafetyBoss</h3>
+			<h3>Industrial Safety & Compliance</h3>
 			<p class="tagline">Operational Safety Data at Scale</p>
-			<p class="description">SafetyBoss supports organizations operating in high-risk environments where safety data must be timely, accurate, and audit-ready. Their challenge was not lack of data, but friction in how incidents, follow-ups, and compliance documentation moved across teams and systems. ANSA automated the ingestion, routing, and lifecycle management of safety events.</p>
+			<p class="description">This industrial safety company supports organizations operating in high-risk environments where safety data must be timely, accurate, and audit-ready. Their challenge was not lack of data, but friction in how incidents, follow-ups, and compliance documentation moved across teams and systems. ANSA automated the ingestion, routing, and lifecycle management of safety events.</p>
 			<div class="case-study-grid">
 				<div class="case-study-column">
 					<h4>
@@ -351,11 +351,11 @@ get_header();
 			</div>
 		</div>
 
-		<!-- Kissel Capital Case Study -->
+		<!-- Financial Services Case Study -->
 		<div class="case-study-card">
-			<h3>Kissel Capital</h3>
+			<h3>Financial Services</h3>
 			<p class="tagline">Operational Automation for Financial Services</p>
-			<p class="description">Kissel Capital operates in a fast-moving financial environment where consistency, traceability, and speed are critical. Manual deal intake, document handling, and approval processes introduced variability and risk. ANSA implemented a state-machine–driven automation model that standardized workflows, enforced governance, and improved visibility across deal lifecycles.</p>
+			<p class="description">This financial services firm operates in a fast-moving environment where consistency, traceability, and speed are critical. Manual deal intake, document handling, and approval processes introduced variability and risk. ANSA implemented a state-machine–driven automation model that standardized workflows, enforced governance, and improved visibility across deal lifecycles.</p>
 			<div class="case-study-grid">
 				<div class="case-study-column">
 					<h4>
