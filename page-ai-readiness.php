@@ -318,8 +318,7 @@ get_header();
 						<li>Discovery call</li>
 						<li>Summary report</li>
 					</ul>
-					<!-- Stripe: Replace YOUR_STRIPE_ESSENTIALS_LINK -->
-					<a href="https://buy.stripe.com/YOUR_STRIPE_ESSENTIALS_LINK" target="_blank" rel="noopener" class="button button--secondary button--full-width">Get Started</a>
+					<a href="<?php echo esc_url( home_url( '/ai-readiness-intake' ) ); ?>" class="button button--secondary button--full-width">Get Started</a>
 				</div>
 
 				<div class="pricing-card pricing-card--featured">
@@ -335,8 +334,7 @@ get_header();
 						<li>Gap analysis</li>
 						<li>Phased action plan</li>
 					</ul>
-					<!-- Stripe: Replace YOUR_STRIPE_STANDARD_LINK -->
-					<a href="https://buy.stripe.com/YOUR_STRIPE_STANDARD_LINK" target="_blank" rel="noopener" class="button button--primary button--full-width">Get Started</a>
+					<a href="<?php echo esc_url( home_url( '/ai-readiness-intake' ) ); ?>" class="button button--primary button--full-width">Get Started</a>
 				</div>
 
 				<div class="pricing-card">
@@ -350,8 +348,7 @@ get_header();
 						<li>30-minute report walkthrough call</li>
 						<li>Leadership presentation guidance</li>
 					</ul>
-					<!-- Stripe: Replace YOUR_STRIPE_PREMIUM_LINK -->
-					<a href="https://buy.stripe.com/YOUR_STRIPE_PREMIUM_LINK" target="_blank" rel="noopener" class="button button--secondary button--full-width">Get Started</a>
+					<a href="<?php echo esc_url( home_url( '/ai-readiness-intake' ) ); ?>" class="button button--secondary button--full-width">Get Started</a>
 				</div>
 			</div>
 		</div>
