@@ -78,7 +78,19 @@ get_header();
 				<h2>Choose Your Bundle</h2>
 				<p>Pre-configured automation for your team's biggest challenges</p>
 			</div>
-			<div class="bundles-grid">
+			<style>
+				.bundles-grid--5col {
+					display: grid !important;
+					grid-template-columns: repeat(3, 1fr) !important;
+					gap: 2rem !important;
+				}
+				@media (max-width: 768px) {
+					.bundles-grid--5col {
+						grid-template-columns: 1fr !important;
+					}
+				}
+			</style>
+			<div class="bundles-grid bundles-grid--5col">
 
 				<!-- Meeting Transcript Aggregator Bundle -->
 				<div class="bundle-card">
@@ -98,13 +110,13 @@ get_header();
 						A foundational layer that continuously ingests, processes, and indexes every client conversation across all meeting platforms — so nothing falls through the cracks.
 					</p>
 					<div class="bundle-card__accelerators">
-						<h4>How It Works:</h4>
+						<h4>Key Capabilities:</h4>
 						<ul>
-							<li><strong>Ingest</strong> — Detects new transcripts via webhooks or scheduled polling from connected meeting tools</li>
-							<li><strong>Identify</strong> — Matches attendees to CRM contacts, companies, and deals</li>
-							<li><strong>Process</strong> — AI summarizes, extracts action items, decisions, and commitments; tags by theme and scores sentiment</li>
-							<li><strong>Enrich</strong> — Cross-references with email threads and CRM activity to identify gaps and follow-up status</li>
-							<li><strong>Index</strong> — Stores structured summaries in a searchable knowledge layer, indexed by account, contact, deal, date, and theme</li>
+							<li>Auto-Ingest Transcripts</li>
+							<li>CRM Contact Matching</li>
+							<li>AI Summarization & Tagging</li>
+							<li>Email Cross-referencing</li>
+							<li>Searchable Knowledge Index</li>
 						</ul>
 					</div>
 					<a href="#book-demo" class="button button--secondary button--full-width book-demo-btn" data-bundle="Meeting Transcript Aggregator">
