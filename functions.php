@@ -161,9 +161,12 @@ function ansa_enqueue_scripts() {
     wp_enqueue_style('google-fonts-pjs', 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap', array(), null);
     wp_enqueue_style('google-fonts-inter', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap', array(), null);
 
-    wp_enqueue_style('ansa-theme-style', ANSA_THEME_URI . '/style.css', array(), ANSA_VERSION);
+    $css_ver = file_exists(ANSA_THEME_DIR . '/style.css') ? filemtime(ANSA_THEME_DIR . '/style.css') : ANSA_VERSION;
+    wp_enqueue_style('ansa-theme-style', ANSA_THEME_URI . '/style.css', array('google-fonts-pjs', 'google-fonts-inter'), $css_ver);
 
-    wp_enqueue_script('ansa-theme-script', ANSA_THEME_URI . '/assets/js/main.js', array('jquery'), ANSA_VERSION, true);
+    if (file_exists(ANSA_THEME_DIR . '/assets/js/main.js')) {
+        wp_enqueue_script('ansa-theme-script', ANSA_THEME_URI . '/assets/js/main.js', array('jquery'), ANSA_VERSION, true);
+    }
 
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
