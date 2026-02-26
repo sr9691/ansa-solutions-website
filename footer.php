@@ -29,10 +29,9 @@
             <div class="footer-section">
                 <h4><?php esc_html_e('Services', 'ansa-solutions'); ?></h4>
                 <ul>
-                    <li><a href="<?php echo esc_url(home_url('/services/')); ?>">All Services</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/services/process-automation/')); ?>">Process Automation</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/services/ai-readiness-assessment/')); ?>">AI Readiness</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/services/automation-accelerators/')); ?>">Acceleration</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/process-automation/')); ?>">Process Automation</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/ai-readiness-assessment/')); ?>">AI Readiness</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/automation-accelerators/')); ?>">Accelerators</a></li>
                 </ul>
             </div>
 
