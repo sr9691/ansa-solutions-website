@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Contact
- * Description: Contact page with form and company information
+ * Description: Contact page with HubSpot Meetings embed and company information
  */
 
 get_header();
@@ -24,46 +24,17 @@ get_header();
 		<div class="container">
 			<div class="contact-wrapper">
 
-				<!-- Contact Form Column -->
+				<!-- Meetings Embed Column -->
 				<div class="contact-form-column">
-					<h2>Send Us a Message</h2>
-
-					<form id="contact-form" class="contact-form" method="POST" action="">
-						<div class="form-group">
-							<label for="contact-name">Name</label>
-							<input type="text" id="contact-name" name="name" class="form-control" required>
-						</div>
-
-						<div class="form-group">
-							<label for="contact-email">Email</label>
-							<input type="email" id="contact-email" name="email" class="form-control" required>
-						</div>
-
-						<div class="form-group">
-							<label for="contact-company">Company</label>
-							<input type="text" id="contact-company" name="company" class="form-control">
-						</div>
-
-						<div class="form-group">
-							<label for="contact-subject">Subject</label>
-							<select id="contact-subject" name="subject" class="form-control" required>
-								<option value="">Select a subject</option>
-								<option value="general-inquiry">General Inquiry</option>
-								<option value="ai-readiness">AI Readiness Assessment</option>
-								<option value="process-automation">Process Automation</option>
-								<option value="accelerators">Automation Accelerators</option>
-							</select>
-						</div>
-
-						<div class="form-group">
-							<label for="contact-message">Message</label>
-							<textarea id="contact-message" name="message" class="form-control" rows="6" required></textarea>
-						</div>
-
-						<button type="submit" class="btn btn-primary">Send Message</button>
-
-						<p class="form-note">We typically respond within 1 business day.</p>
-					</form>
+					<h2>Book a Conversation</h2>
+					<style>
+						.meetings-iframe-container {
+							width: 100% !important;
+							min-height: 700px;
+						}
+					</style>
+					<div class="meetings-iframe-container" data-src="https://meetings.hubspot.com/sundaresh?embed=true"></div>
+					<script type="text/javascript" src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"></script>
 				</div>
 
 				<!-- Contact Info Column -->
@@ -92,7 +63,7 @@ get_header();
 
 						<div class="contact-info-block contact-expectations">
 							<h4>What to Expect</h4>
-							<p>We typically respond within 1 business day. We're committed to understanding your challenges and exploring how we can help.</p>
+							<p>Pick a time that works for you and we'll connect to understand your challenges and explore how we can help.</p>
 						</div>
 					</div>
 				</div>
