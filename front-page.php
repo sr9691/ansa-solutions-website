@@ -14,7 +14,7 @@ get_header(); ?>
 		<div class="hero-badge" style="display: inline-block; padding: 0.5rem 1rem; background-color: rgba(255, 255, 255, 0.15); border-radius: 999px; margin-bottom: 1.5rem; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.5px;">
 			AI Strategy & Implementation
 		</div>
-		<h1 style="margin-bottom: 1.5rem; font-size: 3.5rem;">
+		<h1 style="margin-bottom: 1.5rem; font-size: 3.5rem; color: #FFFFFF;">
 			Empowering Businesses with <span style="color: var(--accent);">AI-driven Automation</span>
 		</h1>
 		<p class="subtitle" style="font-size: 1.25rem; color: rgba(255, 255, 255, 0.9); margin-bottom: 2.5rem; max-width: 700px; margin-left: auto; margin-right: auto;">
