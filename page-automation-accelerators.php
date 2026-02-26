@@ -89,6 +89,21 @@ get_header();
 						grid-template-columns: 1fr !important;
 					}
 				}
+				.bundle-icon.transcript-icon {
+					width: 44px;
+					height: 44px;
+					background: linear-gradient(135deg, #f59e0b, #d97706);
+					border-radius: 10px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					flex-shrink: 0;
+				}
+				.bundle-icon.transcript-icon svg {
+					width: 22px;
+					height: 22px;
+					stroke: #fff;
+				}
 			</style>
 			<div class="bundles-grid bundles-grid--5col">
 
