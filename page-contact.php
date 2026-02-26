@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Contact
- * Description: Contact page with HubSpot Meetings embed and company information
+ * Description: Contact page with form and company information
  */
 
 get_header();
@@ -24,17 +24,24 @@ get_header();
 		<div class="container">
 			<div class="contact-wrapper">
 
-				<!-- Meetings Embed Column -->
+				<!-- Contact Form Column -->
 				<div class="contact-form-column">
-					<h2>Book a Conversation</h2>
-					<style>
-						.meetings-iframe-container {
-							width: 100% !important;
-							min-height: 700px;
-						}
-					</style>
-					<div class="meetings-iframe-container" data-src="https://meetings.hubspot.com/sundaresh?embed=true"></div>
-					<script type="text/javascript" src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"></script>
+					<h2>Send Us a Message</h2>
+
+					<!-- HubSpot Embedded Form — Replace formId with your new Contact Us form -->
+					<div class="hubspot-form-container" style="min-height: 400px;">
+						<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+						<script>
+							hbspt.forms.create({
+								region: "na1",
+								portalId: "242976044",
+								formId: "REPLACE_WITH_YOUR_CONTACT_FORM_ID"
+							});
+						</script>
+						<noscript>
+							<p>Please enable JavaScript to use this form, or <a href="mailto:sr@ansa.solutions">email us directly</a>.</p>
+						</noscript>
+					</div>
 				</div>
 
 				<!-- Contact Info Column -->
@@ -63,7 +70,7 @@ get_header();
 
 						<div class="contact-info-block contact-expectations">
 							<h4>What to Expect</h4>
-							<p>Pick a time that works for you and we'll connect to understand your challenges and explore how we can help.</p>
+							<p>We typically respond within 1 business day. We're committed to understanding your challenges and exploring how we can help.</p>
 						</div>
 					</div>
 				</div>
