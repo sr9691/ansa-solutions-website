@@ -17,7 +17,10 @@ get_header();
 				<h1 style="font-size: 2.75rem; color: #FFFFFF; margin-bottom: 1.25rem;">Partnerships that Multiply<br><span style="color: var(--accent);">Automation Impact</span></h1>
 				<p style="font-size: 1.1rem; color: rgba(255,255,255,0.9); margin-bottom: 1.5rem; line-height: 1.8;">Join an ecosystem of consultants, integrators, and technology providers transforming how businesses work with AI-powered automation.</p>
 				<p style="font-size: 1rem; color: rgba(255,255,255,0.8); margin-bottom: 2rem; line-height: 1.8;">At ANSA Solutions, we collaborate with select partners to help organizations modernize operations with AI, orchestration platforms, and intelligent document processing. Together, we design and deliver automation programs that unlock new revenue, reduce operational friction, and create measurable business outcomes in weeks, not years.</p>
-				<a href="#apply" class="btn btn-primary" style="background: var(--accent); color: #fff; padding: 0.85rem 2rem; font-weight: 600; border-radius: 8px; text-decoration: none; display: inline-block;">Become a Partner</a>
+				<div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+					<a href="#apply" class="btn btn-primary" style="background: var(--accent); color: #fff; padding: 0.85rem 2rem; font-weight: 600; border-radius: 8px; text-decoration: none; display: inline-block;">Become a Partner</a>
+					<a href="#lets-talk" style="color: #fff; padding: 0.85rem 2rem; font-weight: 600; border: 2px solid rgba(255,255,255,0.3); border-radius: 8px; text-decoration: none; display: inline-block;">Let's Talk</a>
+				</div>
 			</div>
 			<div style="display: flex; align-items: center; justify-content: center;">
 				<div style="width: 100%; height: 320px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5);">
@@ -163,6 +166,23 @@ get_header();
 					</p>
 				</noscript>
 			</div>
+		</div>
+	</section>
+
+	<!-- Let's Talk - Meetings Embed -->
+	<section id="lets-talk" style="padding: 5rem 1.5rem; background-color: #f9fafb;">
+		<div style="max-width: 800px; margin: 0 auto; text-align: center;">
+			<div style="color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; font-size: 0.9rem;">Prefer a Conversation?</div>
+			<h2 style="margin-bottom: 0.75rem;">Let's Talk</h2>
+			<p style="color: var(--text-light); font-size: 1.05rem; margin-bottom: 2rem;">Not ready to apply? Pick a time and let's explore what a partnership could look like.</p>
+			<style>
+				.meetings-iframe-container {
+					width: 100% !important;
+					min-height: 700px;
+				}
+			</style>
+			<div class="meetings-iframe-container" data-src="https://meetings.hubspot.com/sundaresh?embed=true"></div>
+			<script type="text/javascript" src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"></script>
 		</div>
 	</section>
 
