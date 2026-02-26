@@ -85,823 +85,859 @@ body::before {
   gap: 10px;
 }
 .logo-mark {
-  width: 40px; height: 40px; border-radius: 8px;
-  background: linear-gradient(135deg, var(--purple) 0%, rgba(69,44,234,0.6) 100%);
-  display: flex; align-items: center; justify-content: center;
-  color: white; font-weight: 700; font-size: 22px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--purple) 0%, #8b5cf6 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 20px;
 }
 .logo-text {
-  color: white;
+  font-family: 'Fraunces', serif;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
+  color: white;
 }
-.progress-text {
-  color: rgba(255, 255, 255, 0.6);
+.header-nav {
+  display: flex;
+  gap: 30px;
+}
+.header-nav a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
   font-size: 14px;
+  transition: color 0.3s;
+}
+.header-nav a:hover {
+  color: white;
 }
 
-/* ── Container ── */
+/* ── Main Container ── */
 .container {
-  flex: 1;
   max-width: 720px;
   margin: 0 auto;
-  padding: 40px 24px;
-  width: 100%;
+  padding: 40px 20px;
+  flex-grow: 1;
 }
 
-/* ── Steps section ── */
-.steps {
-  display: flex;
-  gap: 8px;
+.form-header {
+  text-align: center;
   margin-bottom: 40px;
 }
-
-.step {
-  flex: 1;
-  height: 4px;
-  background: var(--border);
-  border-radius: 2px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.step.active {
-  background: var(--purple);
-}
-
-.step:hover {
-  background: var(--purple);
-}
-
-/* ── Section styling ── */
-.form-section {
-  display: none;
-  animation: fadeIn 0.3s ease-in;
-}
-
-.form-section.active {
-  display: block;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.section-title {
-  font-size: 28px;
+.form-header h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 42px;
   font-weight: 700;
   color: var(--darker);
   margin-bottom: 12px;
-  font-family: 'Fraunces', serif;
+  line-height: 1.2;
 }
-
-.section-subtitle {
+.form-header p {
   color: var(--muted);
-  margin-bottom: 32px;
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
-/* ── Form group ── */
+/* ── Form Styles ── */
 .form-group {
   margin-bottom: 32px;
+  animation: slideIn 0.5s ease-out forwards;
+  opacity: 0;
 }
 
-.form-label {
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-group:nth-child(1) { animation-delay: 0.05s; }
+.form-group:nth-child(2) { animation-delay: 0.1s; }
+.form-group:nth-child(3) { animation-delay: 0.15s; }
+.form-group:nth-child(4) { animation-delay: 0.2s; }
+.form-group:nth-child(5) { animation-delay: 0.25s; }
+.form-group:nth-child(6) { animation-delay: 0.3s; }
+.form-group:nth-child(7) { animation-delay: 0.35s; }
+.form-group:nth-child(8) { animation-delay: 0.4s; }
+
+label {
   display: block;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--darker);
-  margin-bottom: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  color: var(--dark);
+  font-weight: 500;
+  font-size: 16px;
 }
 
-.form-input, .form-textarea, .form-select {
+label .required {
+  color: var(--red);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+select,
+textarea {
   width: 100%;
   padding: 12px 16px;
   border: 1px solid var(--border);
   border-radius: 8px;
-  font-size: 15px;
   font-family: 'DM Sans', sans-serif;
-  background: var(--card);
+  font-size: 14px;
   color: var(--dark);
-  transition: border-color 0.3s;
+  background: var(--card);
+  transition: all 0.3s;
 }
 
-.form-input:focus, .form-textarea:focus, .form-select:focus {
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
   outline: none;
   border-color: var(--purple);
+  background: linear-gradient(135deg, rgba(69,44,234,0.03) 0%, rgba(139,92,246,0.03) 100%);
   box-shadow: 0 0 0 3px var(--purple-glow);
 }
 
-.form-textarea {
+textarea {
   resize: vertical;
-  min-height: 120px;
+  min-height: 100px;
 }
 
-/* ── Radio/Checkbox groups ── */
-.radio-group, .checkbox-group {
+/* ── Checkbox & Radio Styles ── */
+.checkbox-group,
+.radio-group {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.radio-item, .check-item {
+.checkbox-item,
+.radio-item {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  gap: 10px;
   cursor: pointer;
-  transition: all 0.3s;
+  padding: 10px;
+  border-radius: 6px;
+  transition: background 0.2s;
 }
 
-.radio-item:hover, .check-item:hover {
-  border-color: var(--purple);
+.checkbox-item:hover,
+.radio-item:hover {
   background: var(--purple-light);
 }
 
-.radio-item input, .check-item input {
-  margin-right: 12px;
+input[type="checkbox"],
+input[type="radio"] {
+  width: 18px;
+  height: 18px;
   cursor: pointer;
   accent-color: var(--purple);
 }
 
-.radio-item input:disabled, .check-item input:disabled {
-  cursor: not-allowed;
+/* ── Helper Text ── */
+.help-text {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 6px;
 }
 
-.radio-item.selected, .check-item.selected {
-  border-color: var(--purple);
-  background: var(--purple-light);
+/* ── Section Title ── */
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--darker);
+  margin-top: 48px;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--purple-light);
 }
 
-.radio-item label, .check-item label {
-  cursor: pointer;
-  flex: 1;
-  margin: 0;
-}
-
-/* ── Rating scale ── */
-.rating-group {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
-}
-
-.rating-option {
-  padding: 12px 8px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.rating-option:hover {
-  border-color: var(--purple);
-  background: var(--purple-light);
-}
-
-.rating-option.selected {
-  border-color: var(--purple);
-  background: var(--purple);
-  color: white;
-}
-
-/* ── Controls ── */
-.form-controls {
+/* ── Button Styles ── */
+.button-group {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   margin-top: 40px;
-  justify-content: space-between;
+  justify-content: center;
 }
 
-.btn {
-  padding: 12px 24px;
+button {
+  padding: 12px 32px;
   border: none;
   border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
-  font-family: 'DM Sans', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.btn-secondary {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--dark);
-}
-
-.btn-secondary:hover {
-  border-color: var(--purple);
-  color: var(--purple);
-}
-
-.btn-primary {
-  background: var(--purple);
+.btn-submit {
+  background: linear-gradient(135deg, var(--purple) 0%, #8b5cf6 100%);
   color: white;
-  flex: 1;
+  min-width: 140px;
 }
 
-.btn-primary:hover {
-  background: #3a23b8;
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(69,44,234,0.3);
 }
 
-.btn-primary:disabled {
+.btn-submit:active {
+  transform: translateY(0);
+}
+
+.btn-clear {
   background: var(--border);
-  cursor: not-allowed;
+  color: var(--dark);
+  min-width: 140px;
 }
 
-/* ── Success state ── */
-.success-state {
-  text-align: center;
-  padding: 60px 24px;
-}
-
-.success-icon {
-  width: 80px;
-  height: 80px;
-  background: var(--purple-light);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 24px;
-  font-size: 40px;
-}
-
-.success-title {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--darker);
-  margin-bottom: 12px;
-  font-family: 'Fraunces', serif;
-}
-
-.success-message {
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.6;
-  margin-bottom: 32px;
-}
-
-.btn-home {
-  display: inline-block;
-  background: var(--purple);
+.btn-clear:hover {
+  background: var(--muted);
   color: white;
-  text-decoration: none;
-  padding: 12px 24px;
+}
+
+/* ── Status Messages ── */
+.message {
+  padding: 16px;
   border-radius: 8px;
-  font-weight: 600;
-  transition: all 0.3s;
-}
-
-.btn-home:hover {
-  background: #3a23b8;
-}
-
-/* ── Conditional field ── */
-#regulationsOther {
+  margin-bottom: 20px;
+  animation: slideIn 0.3s ease-out;
   display: none;
-  margin-top: 12px;
+}
+
+.message.show {
+  display: block;
+}
+
+.message.success {
+  background: rgba(16,185,129,0.1);
+  color: #047857;
+  border-left: 4px solid var(--green);
+}
+
+.message.error {
+  background: rgba(239,68,68,0.1);
+  color: #991b1b;
+  border-left: 4px solid var(--red);
+}
+
+/* ── Footer ── */
+footer {
+  background: var(--darker);
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+  padding: 24px 20px;
+  font-size: 13px;
 }
 
 /* ── Responsive ── */
-@media (max-width: 640px) {
-  .header {
-    padding: 24px 16px;
-  }
+@media (max-width: 768px) {
   .container {
     padding: 24px 16px;
   }
-  .section-title {
-    font-size: 22px;
+  
+  .form-header h1 {
+    font-size: 32px;
   }
-  .rating-group {
-    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  
+  .header-nav {
+    gap: 15px;
   }
-  .form-controls {
+  
+  .button-group {
     flex-direction: column;
   }
-  .btn {
+  
+  button {
     width: 100%;
   }
 }
+
+.bookmark-note {
+  background: #fffbeb;
+  border-left: 4px solid var(--amber);
+  padding: 16px;
+  margin-bottom: 24px;
+  border-radius: 6px;
+  color: #92400e;
+  font-size: 14px;
+  line-height: 1.5;
+}
 </style>
+
 <div class="page">
-  <div class="header">
+  <header class="header">
     <div class="header-inner">
       <div class="logo">
         <div class="logo-mark">A</div>
         <div class="logo-text">ANSA</div>
       </div>
-      <div class="progress-text">AI Readiness Assessment</div>
+      <nav class="header-nav">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/services">Services</a>
+        <a href="/contact">Contact</a>
+      </nav>
     </div>
-  </div>
+  </header>
 
   <div class="container">
-    <div class="steps" id="steps"></div>
-
-    <!-- Step 1: Basic Information -->
-    <div class="form-section active" id="section-0">
-      <h2 class="section-title">Let's Start with Your Basics</h2>
-      <p class="section-subtitle">Tell us about your organization so we can tailor our assessment.</p>
-      
-      <form id="form">
-        <div class="form-group">
-          <label class="form-label">Organization Name</label>
-          <input type="text" name="orgName" class="form-input" placeholder="Enter your organization name" required>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Industry</label>
-          <select name="industry" class="form-select" required>
-            <option value="">Select your industry</option>
-            <option value="tech">Technology</option>
-            <option value="healthcare">Healthcare</option>
-            <option value="finance">Finance</option>
-            <option value="retail">Retail & E-Commerce</option>
-            <option value="manufacturing">Manufacturing</option>
-            <option value="education">Education</option>
-            <option value="government">Government</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Number of Employees</label>
-          <select name="employees" class="form-select" required>
-            <option value="">Select range</option>
-            <option value="1-50">1-50</option>
-            <option value="51-200">51-200</option>
-            <option value="201-500">201-500</option>
-            <option value="501-1000">501-1,000</option>
-            <option value="1000+">1,000+</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Contact Email</label>
-          <input type="email" name="contactEmail" class="form-input" placeholder="your@email.com" required>
-        </div>
-
-        <div class="form-controls">
-          <button type="button" class="btn btn-primary" onclick="nextStep()">Continue</button>
-        </div>
-      </form>
+    <div class="form-header">
+      <h1>AI Readiness Assessment</h1>
+      <p>Take this questionnaire to identify your organization's AI readiness and receive personalized insights.</p>
     </div>
 
-    <!-- Step 2: Current State -->
-    <div class="form-section" id="section-1">
-      <h2 class="section-title">Your Current AI Maturity</h2>
-      <p class="section-subtitle">Help us understand where you are today in your AI journey.</p>
+    <div id="message" class="message"></div>
 
-      <div class="form-group">
-        <label class="form-label">How would you rate your organization's current AI maturity?</label>
-        <div class="rating-group" id="maturityRating">
-          <button type="button" class="rating-option" data-value="1" onclick="selectRating(this, 'maturity')">No experience</button>
-          <button type="button" class="rating-option" data-value="2" onclick="selectRating(this, 'maturity')">Exploring</button>
-          <button type="button" class="rating-option" data-value="3" onclick="selectRating(this, 'maturity')">Experimenting</button>
-          <button type="button" class="rating-option" data-value="4" onclick="selectRating(this, 'maturity')">Deploying</button>
-          <button type="button" class="rating-option" data-value="5" onclick="selectRating(this, 'maturity')">Advanced</button>
-        </div>
-        <input type="hidden" name="maturity">
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">What's your primary interest in AI?</label>
-        <div class="radio-group">
-          <label class="radio-item">
-            <input type="radio" name="interest" value="efficiency" required>
-            <label>Improve operational efficiency</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="interest" value="innovation" required>
-            <label>Enable new business models</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="interest" value="competitive" required>
-            <label>Stay competitive</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="interest" value="customer" required>
-            <label>Enhance customer experience</label>
-          </label>
-        </div>
-      </div>
-
-      <div class="form-controls">
-        <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
-        <button type="button" class="btn btn-primary" onclick="nextStep()">Continue</button>
-      </div>
+    <div class="bookmark-note">
+      <strong>Bookmark this page:</strong> You can save your progress and return later. Your answers are saved to this browser session.
     </div>
 
-    <!-- Step 3: Technical Assessment -->
-    <div class="form-section" id="section-2">
-      <h2 class="section-title">Technical Readiness</h2>
-      <p class="section-subtitle">Let's assess your technical capabilities.</p>
+    <form id="intakeForm">
+      <!-- Organization Information -->
+      <div class="section-title">Organization Information</div>
 
       <div class="form-group">
-        <label class="form-label">What's your data infrastructure maturity?</label>
-        <div class="radio-group">
-          <label class="radio-item">
-            <input type="radio" name="dataInfra" value="fragmented" required>
-            <label>Fragmented (multiple disconnected systems)</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="dataInfra" value="integrated" required>
-            <label>Partially integrated</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="dataInfra" value="unified" required>
-            <label>Unified data platform</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="dataInfra" value="modern" required>
-            <label>Modern cloud-based architecture</label>
-          </label>
-        </div>
+        <label for="organization">Organization Name <span class="required">*</span></label>
+        <input type="text" id="organization" name="organization" required>
+        <div class="help-text">Enter the official name of your organization</div>
       </div>
 
       <div class="form-group">
-        <label class="form-label">Which of these technical areas do you have in place?</label>
-        <div class="checkbox-group">
-          <label class="check-item">
-            <input type="checkbox" name="techAreas" value="cloud">
-            <label>Cloud infrastructure</label>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" name="techAreas" value="analytics">
-            <label>Data analytics capabilities</label>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" name="techAreas" value="mlops">
-            <label>ML/MLOps infrastructure</label>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" name="techAreas" value="api">
-            <label>API management</label>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" name="techAreas" value="monitoring">
-            <label>Monitoring & observability</label>
-          </label>
-        </div>
-      </div>
-
-      <div class="form-controls">
-        <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
-        <button type="button" class="btn btn-primary" onclick="nextStep()">Continue</button>
-      </div>
-    </div>
-
-    <!-- Step 4: Organizational Readiness -->
-    <div class="form-section" id="section-3">
-      <h2 class="section-title">Organizational Readiness</h2>
-      <p class="section-subtitle">Understanding your people and processes.</p>
-
-      <div class="form-group">
-        <label class="form-label">What's your organization's data culture?</label>
-        <div class="radio-group">
-          <label class="radio-item">
-            <input type="radio" name="culture" value="limited" required>
-            <label>Limited data awareness</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="culture" value="developing" required>
-            <label>Developing data consciousness</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="culture" value="strong" required>
-            <label>Strong data-driven culture</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="culture" value="advanced" required>
-            <label>Advanced AI-focused culture</label>
-          </label>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Do you have relevant skills in-house?</label>
-        <div class="radio-group">
-          <label class="radio-item">
-            <input type="radio" name="skills" value="none" required>
-            <label>No data science or ML expertise</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="skills" value="limited" required>
-            <label>Limited expertise (1-2 people)</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="skills" value="moderate" required>
-            <label>Moderate team (3-5 people)</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="skills" value="strong" required>
-            <label>Strong team (5+ people)</label>
-          </label>
-        </div>
-      </div>
-
-      <div class="form-controls">
-        <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
-        <button type="button" class="btn btn-primary" onclick="nextStep()">Continue</button>
-      </div>
-    </div>
-
-    <!-- Step 5: Governance & Compliance -->
-    <div class="form-section" id="section-4">
-      <h2 class="section-title">Governance & Compliance</h2>
-      <p class="section-subtitle">Understanding your risk and compliance landscape.</p>
-
-      <div class="form-group">
-        <label class="form-label">Which regulations apply to your organization?</label>
-        <div class="checkbox-group">
-          <label class="check-item">
-            <input type="checkbox" name="regulations" value="gdpr">
-            <label>GDPR</label>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" name="regulations" value="ccpa">
-            <label>CCPA</label>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" name="regulations" value="hipaa">
-            <label>HIPAA</label>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" name="regulations" value="sox">
-            <label>SOX</label>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" name="regulations" value="other">
-            <label>Other</label>
-          </label>
-        </div>
-        <input type="text" id="regulationsOther" name="regulationsOther" class="form-input" placeholder="Specify other regulations...">
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Data privacy concerns for AI implementation?</label>
-        <div class="radio-group">
-          <label class="radio-item">
-            <input type="radio" name="privacy" value="minimal" required>
-            <label>Minimal concerns</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="privacy" value="moderate" required>
-            <label>Moderate concerns</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="privacy" value="significant" required>
-            <label>Significant concerns</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="privacy" value="critical" required>
-            <label>Critical - must solve before proceeding</label>
-          </label>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Do you have an AI governance framework?</label>
-        <div class="radio-group">
-          <label class="radio-item">
-            <input type="radio" name="governance" value="none" required>
-            <label>None yet</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="governance" value="developing" required>
-            <label>In development</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="governance" value="implemented" required>
-            <label>Implemented</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="governance" value="mature" required>
-            <label>Mature and established</label>
-          </label>
-        </div>
-      </div>
-
-      <div class="form-controls">
-        <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
-        <button type="button" class="btn btn-primary" onclick="nextStep()">Continue</button>
-      </div>
-    </div>
-
-    <!-- Step 6: Additional Information -->
-    <div class="form-section" id="section-5">
-      <h2 class="section-title">Additional Context</h2>
-      <p class="section-subtitle">Help us provide more targeted recommendations.</p>
-
-      <div class="form-group">
-        <label class="form-label">What specific business challenges do you want to solve with AI?</label>
-        <textarea name="challenges" class="form-textarea" placeholder="Describe your key business challenges..."></textarea>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">What's your timeline for AI implementation?</label>
-        <div class="radio-group">
-          <label class="radio-item">
-            <input type="radio" name="timeline" value="3months" required>
-            <label>Within 3 months</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="timeline" value="6months" required>
-            <label>3-6 months</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="timeline" value="12months" required>
-            <label>6-12 months</label>
-          </label>
-          <label class="radio-item">
-            <input type="radio" name="timeline" value="exploring" required>
-            <label>Just exploring at this stage</label>
-          </label>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Budget allocated for AI initiatives?</label>
-        <select name="budget" class="form-select" required>
-          <option value="">Select budget range</option>
-          <option value="0-50k">$0-50K</option>
-          <option value="50-100k">$50K-100K</option>
-          <option value="100-250k">$100K-250K</option>
-          <option value="250-500k">$250K-500K</option>
-          <option value="500k+">$500K+</option>
+        <label for="industry">Industry <span class="required">*</span></label>
+        <select id="industry" name="industry" required>
+          <option value="">Select your industry...</option>
+          <option value="technology">Technology</option>
+          <option value="healthcare">Healthcare</option>
+          <option value="finance">Finance</option>
+          <option value="retail">Retail</option>
+          <option value="manufacturing">Manufacturing</option>
+          <option value="education">Education</option>
+          <option value="energy">Energy</option>
+          <option value="telecommunications">Telecommunications</option>
+          <option value="transportation">Transportation</option>
+          <option value="other">Other</option>
         </select>
+        <div class="help-text">Select the primary industry your organization operates in</div>
       </div>
 
-      <div class="form-controls">
-        <button type="button" class="btn btn-secondary" onclick="prevStep()">Back</button>
-        <button type="button" class="btn btn-primary" onclick="submitForm()">Submit Assessment</button>
+      <div class="form-group">
+        <label for="employees">Number of Employees <span class="required">*</span></label>
+        <select id="employees" name="employees" required>
+          <option value="">Select employee range...</option>
+          <option value="1-50">1-50</option>
+          <option value="51-200">51-200</option>
+          <option value="201-500">201-500</option>
+          <option value="501-1000">501-1000</option>
+          <option value="1000+">1000+</option>
+        </select>
+        <div class="help-text">Choose the range that matches your organization size</div>
       </div>
-    </div>
 
-    <!-- Success State -->
-    <div class="form-section" id="section-success">
-      <div class="success-state">
-        <div class="success-icon">✓</div>
-        <h2 class="success-title">Assessment Complete!</h2>
-        <p class="success-message">Thank you for completing the AI Readiness Assessment. Our team will review your responses and reach out within 24-48 hours with personalized recommendations.</p>
-        <a href="/" class="btn-home">Return to Home</a>
+      <!-- Current AI/ML Usage -->
+      <div class="section-title">Current AI/ML Usage</div>
+
+      <div class="form-group">
+        <label>Are you currently using any AI or ML technologies? <span class="required">*</span></label>
+        <div class="radio-group">
+          <label class="radio-item">
+            <input type="radio" name="currentAI" value="yes" required>
+            <span>Yes, we have AI/ML implementations</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="currentAI" value="exploring" required>
+            <span>We're exploring and piloting AI/ML</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="currentAI" value="planning" required>
+            <span>We're planning to implement AI/ML</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="currentAI" value="no" required>
+            <span>No, this is new to us</span>
+          </label>
+        </div>
+        <div class="help-text">Select the option that best describes your current AI/ML adoption stage</div>
       </div>
-    </div>
+
+      <div class="form-group">
+        <label for="aiAreas">If using AI/ML, in which areas? (Select all that apply)</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" name="aiAreas" value="predictive_analytics">
+            <span>Predictive Analytics</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="aiAreas" value="process_automation">
+            <span>Process Automation / RPA</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="aiAreas" value="nlp">
+            <span>Natural Language Processing (NLP)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="aiAreas" value="computer_vision">
+            <span>Computer Vision</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="aiAreas" value="recommendation_systems">
+            <span>Recommendation Systems</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="aiAreas" value="customer_analytics">
+            <span>Customer Analytics</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="aiAreas" value="other">
+            <span>Other</span>
+          </label>
+        </div>
+        <div class="help-text">Leave blank if not currently using AI/ML</div>
+      </div>
+
+      <!-- Data & Infrastructure -->
+      <div class="section-title">Data & Infrastructure</div>
+
+      <div class="form-group">
+        <label>How mature is your data infrastructure? <span class="required">*</span></label>
+        <div class="radio-group">
+          <label class="radio-item">
+            <input type="radio" name="dataMaturity" value="emerging" required>
+            <span>Emerging - scattered data, limited integration</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="dataMaturity" value="developing" required>
+            <span>Developing - some centralization, partial integration</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="dataMaturity" value="advanced" required>
+            <span>Advanced - centralized data warehouse/lake</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="dataMaturity" value="mature" required>
+            <span>Mature - advanced analytics platform with real-time processing</span>
+          </label>
+        </div>
+        <div class="help-text">Select the stage that best describes your current data infrastructure</div>
+      </div>
+
+      <div class="form-group">
+        <label for="dataQuality">Data Quality & Governance <span class="required">*</span></label>
+        <div class="radio-group">
+          <label class="radio-item">
+            <input type="radio" name="dataQuality" value="poor" required>
+            <span>Poor - data quality issues are common, limited governance</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="dataQuality" value="fair" required>
+            <span>Fair - some data governance, moderate quality issues</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="dataQuality" value="good" required>
+            <span>Good - solid governance, data quality is generally reliable</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="dataQuality" value="excellent" required>
+            <span>Excellent - robust governance, high data quality standards</span>
+          </label>
+        </div>
+        <div class="help-text">Assess your organization's data quality and governance practices</div>
+      </div>
+
+      <div class="form-group">
+        <label>What cloud platforms does your organization use? (Select all that apply)</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" name="cloudPlatforms" value="aws">
+            <span>Amazon Web Services (AWS)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="cloudPlatforms" value="azure">
+            <span>Microsoft Azure</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="cloudPlatforms" value="gcp">
+            <span>Google Cloud Platform (GCP)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="cloudPlatforms" value="on_premise">
+            <span>On-Premise / Private Infrastructure</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="cloudPlatforms" value="multi_cloud">
+            <span>Multiple clouds (multi-cloud setup)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="cloudPlatforms" value="none">
+            <span>None yet</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Skills & Talent -->
+      <div class="section-title">Skills & Talent</div>
+
+      <div class="form-group">
+        <label>Does your organization have in-house AI/ML expertise? <span class="required">*</span></label>
+        <div class="radio-group">
+          <label class="radio-item">
+            <input type="radio" name="aiExpertise" value="none" required>
+            <span>None - we need external support</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="aiExpertise" value="limited" required>
+            <span>Limited - we have a small team or individuals</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="aiExpertise" value="moderate" required>
+            <span>Moderate - we have a dedicated AI/ML team</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="aiExpertise" value="strong" required>
+            <span>Strong - we have advanced expertise and a mature team</span>
+          </label>
+        </div>
+        <div class="help-text">Assess your current AI/ML skill level and team structure</div>
+      </div>
+
+      <div class="form-group">
+        <label>What skills gaps exist in your organization? (Select all that apply)</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" name="skillGaps" value="data_science">
+            <span>Data Science / ML Engineering</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="skillGaps" value="data_engineering">
+            <span>Data Engineering / ETL</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="skillGaps" value="data_analytics">
+            <span>Data Analytics / BI</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="skillGaps" value="ai_leadership">
+            <span>AI Strategy / Leadership</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="skillGaps" value="change_management">
+            <span>Change Management / Organizational Skills</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="skillGaps" value="no_gaps">
+            <span>No significant gaps</span>
+          </label>
+        </div>
+        <div class="help-text">Identify areas where you need to build or acquire talent</div>
+      </div>
+
+      <!-- Budget & Resources -->
+      <div class="section-title">Budget & Resources</div>
+
+      <div class="form-group">
+        <label>What is your annual AI/ML budget? <span class="required">*</span></label>
+        <select id="budget" name="budget" required>
+          <option value="">Select budget range...</option>
+          <option value="no_budget">We don't have a dedicated AI/ML budget yet</option>
+          <option value="under_100k">Under $100K</option>
+          <option value="100k_500k">$100K - $500K</option>
+          <option value="500k_1m">$500K - $1M</option>
+          <option value="1m_5m">$1M - $5M</option>
+          <option value="5m_plus">$5M+</option>
+        </select>
+        <div class="help-text">Provide your organization's annual budget allocation for AI/ML initiatives</div>
+      </div>
+
+      <div class="form-group">
+        <label>What are your top business priorities for AI? (Select top 3)</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" name="aiPriorities" value="cost_reduction">
+            <span>Cost Reduction / Efficiency</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="aiPriorities" value="revenue_growth">
+            <span>Revenue Growth / New Revenue Streams</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="aiPriorities" value="customer_experience">
+            <span>Customer Experience Improvement</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="aiPriorities" value="innovation">
+            <span>Product / Service Innovation</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="aiPriorities" value="risk_management">
+            <span>Risk Management / Compliance</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="aiPriorities" value="competitive_advantage">
+            <span>Competitive Advantage</span>
+          </label>
+        </div>
+        <div class="help-text">Select up to three priorities that matter most to your organization</div>
+      </div>
+
+      <!-- Challenges & Concerns -->
+      <div class="section-title">Challenges & Concerns</div>
+
+      <div class="form-group">
+        <label>What are your main concerns about AI implementation? (Select all that apply)</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" name="concerns" value="data_privacy">
+            <span>Data Privacy & Security</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="concerns" value="regulatory_compliance">
+            <span>Regulatory Compliance</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="concerns" value="talent_shortage">
+            <span>Talent Shortage / Skills Gap</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="concerns" value="integration_complexity">
+            <span>Integration with Existing Systems</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="concerns" value="roi_uncertainty">
+            <span>ROI Uncertainty</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="concerns" value="change_resistance">
+            <span>Organizational Change Resistance</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="concerns" value="model_bias">
+            <span>Model Bias / Fairness</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="concerns" value="no_concerns">
+            <span>No major concerns</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="otherChallenges">Other challenges or concerns (optional)</label>
+        <textarea id="otherChallenges" name="otherChallenges" placeholder="Please describe any other challenges..."></textarea>
+      </div>
+
+      <!-- Regulatory & Compliance -->
+      <div class="section-title">Regulatory & Compliance</div>
+
+      <div class="form-group">
+        <label>Which regulations apply to your organization? (Select all that apply)</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" name="regulations" value="gdpr">
+            <span>GDPR (General Data Protection Regulation)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="regulations" value="hipaa">
+            <span>HIPAA (Healthcare)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="regulations" value="pci_dss">
+            <span>PCI-DSS (Payment Card Industry)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="regulations" value="sox">
+            <span>SOX (Sarbanes-Oxley)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="regulations" value="ccpa">
+            <span>CCPA (California Consumer Privacy Act)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="regulations" value="none">
+            <span>None of the above</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="regulations" value="other">
+            <span>Other</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group" id="otherRegulationsGroup" style="display: none;">
+        <label for="otherRegulations">Please specify other regulations:</label>
+        <input type="text" id="otherRegulations" name="otherRegulations" placeholder="Enter other applicable regulations...">
+      </div>
+
+      <!-- Contact Information -->
+      <div class="section-title">Contact Information</div>
+
+      <div class="form-group">
+        <label for="contactName">Your Name <span class="required">*</span></label>
+        <input type="text" id="contactName" name="contactName" required>
+      </div>
+
+      <div class="form-group">
+        <label for="contactEmail">Your Email <span class="required">*</span></label>
+        <input type="email" id="contactEmail" name="contactEmail" required>
+      </div>
+
+      <div class="form-group">
+        <label for="contactPhone">Your Phone (optional)</label>
+        <input type="text" id="contactPhone" name="contactPhone" placeholder="+1 (555) 000-0000">
+      </div>
+
+      <div class="form-group">
+        <label for="comments">Additional Comments (optional)</label>
+        <textarea id="comments" name="comments" placeholder="Share any additional information..."></textarea>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="button-group">
+        <button type="submit" class="btn-submit">Submit Assessment</button>
+        <button type="reset" class="btn-clear">Clear Form</button>
+      </div>
+    </form>
   </div>
 </div>
 
 <script>
-// ── Bookmark restoration ──
-const STORAGE_KEY = 'aiReadinessForm';
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('intakeForm');
+  const messageDiv = document.getElementById('message');
 
-function saveProgress() {
-  const formData = new FormData(document.getElementById('form'));
-  const currentStep = Array.from(document.querySelectorAll('.form-section')).findIndex(s => s.classList.contains('active'));
-  
-  const data = {
-    step: currentStep,
-    fields: Object.fromEntries(formData),
-  };
-  
-  sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-}
+  // Load saved form data from localStorage
+  loadFormData();
 
-function restoreProgress() {
-  const saved = sessionStorage.getItem(STORAGE_KEY);
-  if (!saved) return;
-  
-  const data = JSON.parse(saved);
-  
-  // Restore fields
-  Object.entries(data.fields).forEach(([name, value]) => {
-    const field = document.querySelector(`[name="${name}"]`);
-    if (!field) return;
-    
-    if (field.type === 'checkbox') {
-      field.checked = value === 'true' || value === 'on';
-    } else if (field.type === 'radio') {
-      document.querySelector(`[name="${name}"][value="${value}"]`).checked = true;
-    } else {
-      field.value = value;
-    }
+  // Auto-save form data on input change
+  form.addEventListener('change', function() {
+    saveFormData();
   });
-  
-  // Restore step
-  goToStep(data.step);
-}
 
-// ── Form navigation ──
-const sections = document.querySelectorAll('.form-section');
-const steps = document.getElementById('steps');
-
-function init() {
-  // Create step indicators
-  for (let i = 0; i < sections.length - 1; i++) {
-    const step = document.createElement('div');
-    step.className = i === 0 ? 'step active' : 'step';
-    step.onclick = () => goToStep(i);
-    steps.appendChild(step);
-  }
-  
-  // Restore saved progress
-  restoreProgress();
-  
-  // Save progress on input changes
-  document.getElementById('form').addEventListener('change', saveProgress);
-  document.getElementById('form').addEventListener('input', saveProgress);
-}
-
-function goToStep(n) {
-  sections.forEach((s, i) => {
-    s.classList.toggle('active', i === n);
+  form.addEventListener('input', function() {
+    saveFormData();
   });
-  
-  document.querySelectorAll('.step').forEach((s, i) => {
-    s.classList.toggle('active', i === n);
-  });
-}
 
-function nextStep() {
-  const current = Array.from(sections).findIndex(s => s.classList.contains('active'));
-  if (current < sections.length - 2) {
-    saveProgress();
-    goToStep(current + 1);
-    window.scrollTo(0, 0);
-  }
-}
+  // Handle form submission
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
 
-function prevStep() {
-  const current = Array.from(sections).findIndex(s => s.classList.contains('active'));
-  if (current > 0) {
-    goToStep(current - 1);
-    window.scrollTo(0, 0);
-  }
-}
+    // Get form data
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
 
-function submitForm() {
-  const form = document.getElementById('form');
-  if (!form.checkValidity()) {
-    alert('Please fill in all required fields');
-    return;
-  }
-  
-  const formData = new FormData(form);
-  const data = Object.fromEntries(formData);
-  
-  // Log form data (replace with actual submission)
-  console.log('Form submitted:', data);
-  
-  // Clear saved progress
-  sessionStorage.removeItem(STORAGE_KEY);
-  
-  // Show success state
-  const current = Array.from(sections).findIndex(s => s.classList.contains('active'));
-  goToStep(sections.length - 1);
-  window.scrollTo(0, 0);
-}
+    // Get all checkbox values for fields with multiple selections
+    const checkboxGroups = {
+      aiAreas: [],
+      cloudPlatforms: [],
+      skillGaps: [],
+      aiPriorities: [],
+      concerns: [],
+      regulations: []
+    };
 
-// ── Conditional checkbox field ──
-document.querySelectorAll('input[name="techAreas"]').forEach(checkbox => {
-  checkbox.addEventListener('change', function() {
-    const checkboxes = document.querySelectorAll('input[name="techAreas"]');
-    if (checkboxes.some(c => c.checked)) {
-          checkboxes.forEach(c => { if (!c.checked) c.disabled = true; });
-        } else {
-          checkboxes.forEach(c => { c.closest('.check-item').style.opacity = '1'; c.disabled = false; });
+    for (let [key, value] of formData) {
+      if (key in checkboxGroups) {
+        if (!checkboxGroups[key].includes(value)) {
+          checkboxGroups[key].push(value);
         }
-      });
-    });
+      }
+    }
+
+    // Merge checkbox data into main data object
+    Object.assign(data, checkboxGroups);
+
+    // Here you would typically send the data to a server
+    console.log('Form Data:', data);
+
+    // Show success message
+    showMessage('Thank you! Your assessment has been submitted. We will review your responses and contact you soon.', 'success');
+
+    // Optionally clear the form after submission
+    // form.reset();
+    // localStorage.removeItem('intakeFormData');
   });
-}
 
-// ── Rating scale ──
-function selectRating(el, name) {
-  el.parentElement.querySelectorAll('.rating-option').forEach(o => o.classList.remove('selected'));
-  el.classList.add('selected');
-  document.querySelector(`input[name="${name}"]`).value = el.dataset.value;
-}
+  function saveFormData() {
+    const formData = new FormData(form);
+    const data = {};
 
-// ── Init ──
-init();
+    for (let [key, value] of formData) {
+      if (data[key]) {
+        if (Array.isArray(data[key])) {
+          data[key].push(value);
+        } else {
+          data[key] = [data[key], value];
+        }
+      } else {
+        data[key] = value;
+      }
+    }
 
-// ── Regulations "Other" toggle ──
-document.querySelectorAll('input[name="regulations"]').forEach(cb => {
-  cb.addEventListener('change', () => {
-    const otherField = document.getElementById('regulationsOther');
+    localStorage.setItem('intakeFormData', JSON.stringify(data));
+  }
+
+  function loadFormData() {
+    const savedData = localStorage.getItem('intakeFormData');
+    if (!savedData) return;
+
+    try {
+      const data = JSON.parse(savedData);
+
+      for (let [key, value] of Object.entries(data)) {
+        const elements = form.querySelectorAll(`[name="${key}"]`);
+
+        elements.forEach(element => {
+          if (element.type === 'checkbox' || element.type === 'radio') {
+            if (Array.isArray(value)) {
+              element.checked = value.includes(element.value);
+            } else {
+              element.checked = element.value === value;
+            }
+          } else {
+            element.value = value;
+          }
+        });
+      }
+
+      // Update the visibility of the "other regulations" field
+      updateOtherRegulationsVisibility();
+    } catch (e) {
+      console.error('Error loading form data:', e);
+    }
+  }
+
+  function showMessage(text, type) {
+    messageDiv.textContent = text;
+    messageDiv.className = `message ${type} show`;
+    setTimeout(() => {
+      messageDiv.classList.remove('show');
+    }, 6000);
+  }
+
+  // Handle "other" regulations checkbox
+  function updateOtherRegulationsVisibility() {
+    const otherRegField = document.getElementById('otherRegulationsGroup');
     const otherChecked = document.querySelector('input[name="regulations"][value="other"]').checked;
     otherField.style.display = otherChecked ? 'block' : 'none';
     if (!otherChecked) otherField.value = '';
+  }
+
+  document.querySelector('input[name="regulations"][value="other"]').addEventListener('change', function() {
+    updateOtherRegulationsVisibility();
   });
 });
 </script>
