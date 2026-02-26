@@ -8,6 +8,7 @@
 get_header();
 ?>
 
+<main class="site-content">
     <div class="container" style="padding-top: 3rem; padding-bottom: 3rem;">
         <?php
         while (have_posts()) {
@@ -16,6 +17,7 @@ get_header();
         }
         ?>
     </div>
+</main>
 
 <?php
 get_footer();
