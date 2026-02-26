@@ -13,9 +13,13 @@
         <div class="header-wrapper">
             <!-- Logo -->
             <div class="site-logo">
-                <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
-                    <span class="logo-an">AN</span><span class="logo-sa">SA</span>
-                </a>
+                <?php if ( has_custom_logo() ) : ?>
+                    <?php the_custom_logo(); ?>
+                <?php else : ?>
+                    <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
+                        <span class="logo-an">AN</span><span class="logo-sa">SA</span>
+                    </a>
+                <?php endif; ?>
             </div>
 
             <!-- Navigation -->
@@ -88,4 +92,3 @@
         });
     </script>
 
-    <main class="site-content">
