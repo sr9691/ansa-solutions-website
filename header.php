@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?php wp_head(); ?>
+    <style>
+        /* Widen dropdown to prevent menu items wrapping to two lines */
+        .primary-nav .sub-menu {
+            min-width: 260px !important;
+        }
+    </style>
 </head>
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
