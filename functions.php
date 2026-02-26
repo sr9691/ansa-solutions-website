@@ -71,44 +71,6 @@ function ansa_primary_menu_fallback() {
 }
 
 /**
- * Register custom post types
- */
-function ansa_register_post_types() {
-    register_post_type('case_study', array(
-        'labels'             => array(
-            'name'               => _x('Case Studies', 'post type general name', 'ansa-solutions'),
-            'singular_name'      => _x('Case Study', 'post type singular name', 'ansa-solutions'),
-            'menu_name'          => _x('Case Studies', 'admin menu', 'ansa-solutions'),
-            'name_admin_bar'     => _x('Case Study', 'add new on admin bar', 'ansa-solutions'),
-            'add_new'            => _x('Add New', 'case study', 'ansa-solutions'),
-            'add_new_item'       => __('Add New Case Study', 'ansa-solutions'),
-            'new_item'           => __('New Case Study', 'ansa-solutions'),
-            'edit_item'          => __('Edit Case Study', 'ansa-solutions'),
-            'view_item'          => __('View Case Study', 'ansa-solutions'),
-            'all_items'          => __('All Case Studies', 'ansa-solutions'),
-            'search_items'       => __('Search Case Studies', 'ansa-solutions'),
-            'not_found'          => __('No case studies found.', 'ansa-solutions'),
-            'not_found_in_trash' => __('No case studies found in Trash.', 'ansa-solutions'),
-        ),
-        'public'             => true,
-        'publicly_queryable' => true,
-        'show_ui'            => true,
-        'show_in_menu'       => true,
-        'query_var'          => true,
-        'rewrite'            => array('slug' => 'case-studies'),
-        'capability_type'    => 'post',
-        'has_archive'        => true,
-        'hierarchical'       => false,
-        'menu_position'      => 5,
-        'menu_icon'          => 'dashicons-analytics',
-        'supports'           => array('title', 'editor', 'author', 'thumbnail', 'excerpt'),
-        'taxonomies'         => array('category', 'post_tag'),
-        'show_in_rest'       => true,
-    ));
-}
-add_action('init', 'ansa_register_post_types');
-
-/**
  * Register widget areas
  */
 function ansa_widgets_init() {
@@ -282,14 +244,6 @@ function ansa_body_classes($classes) {
 
     if (is_page_template('template-services.php')) {
         $classes[] = 'services-page';
-    }
-
-    if (is_singular('case_study')) {
-        $classes[] = 'single-case-study';
-    }
-
-    if (is_post_type_archive('case_study')) {
-        $classes[] = 'archive-case-studies';
     }
 
     return $classes;
