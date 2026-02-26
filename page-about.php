@@ -72,45 +72,33 @@ get_header();
 		</div>
 	</section>
 
-	<!-- Meet Sundaresh - moved from homepage -->
-	<section style="padding: 5rem 1.5rem; max-width: 1200px; margin: 0 auto;">
-		<div style="display: grid; grid-template-columns: 340px 1fr; gap: 3rem; align-items: start;">
-			<!-- Leadership Image Placeholder -->
-			<div style="width: 340px; height: 420px; background-color: var(--border-light); border-radius: var(--radius-lg); overflow: hidden; display: flex; align-items: center; justify-content: center; color: var(--text-lighter); position: sticky; top: 120px;">
-				<div style="text-align: center;">
-					<div style="font-size: 3rem; margin-bottom: 1rem;">📷</div>
-					<p>Sundaresh Ramanathan</p>
-				</div>
-			</div>
+	<!-- Our Team -->
+	<section style="padding: 5rem 1.5rem; max-width: 900px; margin: 0 auto;">
+		<div style="text-align: center; margin-bottom: 2.5rem;">
+			<div style="color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; font-size: 0.9rem;">Our Team</div>
+			<h2 style="margin-bottom: 1rem;">Passion, Experience & Knowledge</h2>
+		</div>
 
-			<!-- Leadership Content -->
-			<div>
-				<div style="color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; font-size: 0.9rem;">Leadership</div>
-				<h2 style="margin-bottom: 0.5rem;">Meet Sundaresh Ramanathan</h2>
-				<p style="color: var(--accent); font-weight: 600; margin-bottom: 1.5rem; font-size: 1.05rem;">Founder & Principal</p>
+		<p style="font-size: 1.1rem; color: var(--text-light); line-height: 1.8; margin-bottom: 1.5rem;">
+			Our team brings together decades of combined experience in technology leadership, process automation, data analytics, and AI-driven transformation. We've led successful implementations across financial services, manufacturing, healthcare, engineering, and professional services — and we bring that cross-industry perspective to every engagement.
+		</p>
 
-				<p style="color: var(--text-light); margin-bottom: 1.25rem; line-height: 1.8;">
-					Sundaresh brings over a decade of experience in technology leadership, process automation, and data analytics. With a proven track record of helping mid-market organizations transform their operations, he has led successful implementations across industries including financial services, manufacturing, healthcare, and professional services.
-				</p>
+		<p style="font-size: 1.1rem; color: var(--text-light); line-height: 1.8; margin-bottom: 1.5rem;">
+			What unites us is a shared passion for solving real operational problems. We're not theorists — we've been in the trenches, working hands-on with platforms like Workato, building integrations, and delivering results that move the needle. Our engagements have helped organizations reduce operational costs by 30% and improve productivity by 40%.
+		</p>
 
-				<p style="color: var(--text-light); margin-bottom: 1.25rem; line-height: 1.8;">
-					His expertise encompasses enterprise architecture, IT strategy, and AI-driven automation — from identifying opportunities to designing solutions to overseeing delivery. He's worked hands-on with platforms like Workato and led engagements that reduced operational costs by 30% and improved productivity by 40%.
-				</p>
+		<p style="font-size: 1.1rem; color: var(--text-light); line-height: 1.8; margin-bottom: 2rem;">
+			Based in Carmel, Indiana, we're driven by a single belief: mid-market businesses deserve the same caliber of AI strategy and automation expertise that enterprise organizations take for granted. Our approach ensures you don't just adopt tools — you build sustainable, scalable practices that drive measurable business value.
+		</p>
 
-				<p style="color: var(--text-light); margin-bottom: 2rem; line-height: 1.8;">
-					Based in Carmel, Indiana, Sundaresh is passionate about bridging the gap between business strategy and technical execution. His approach ensures organizations don't just adopt automation tools — they build sustainable, scalable practices that drive measurable business value.
-				</p>
-
-				<div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-					<a href="https://www.linkedin.com/company/ansa-solutions/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent); font-weight: 600; text-decoration: none;">
-						<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-						Connect on LinkedIn
-					</a>
-					<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent); font-weight: 600; text-decoration: none;">
-						Get in Touch →
-					</a>
-				</div>
-			</div>
+		<div style="display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;">
+			<a href="https://www.linkedin.com/company/ansa-solutions/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent); font-weight: 600; text-decoration: none;">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+				Follow Us on LinkedIn
+			</a>
+			<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent); font-weight: 600; text-decoration: none;">
+				Get in Touch →
+			</a>
 		</div>
 	</section>
 
