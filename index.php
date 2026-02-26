@@ -8,6 +8,7 @@
 get_header();
 ?>
 
+<main class="site-content">
     <div class="container" style="padding-top: 2rem; padding-bottom: 2rem;">
         <?php
         if (have_posts()) {
@@ -43,6 +44,7 @@ get_header();
         }
         ?>
     </div>
+</main>
 
 <?php
 get_footer();
