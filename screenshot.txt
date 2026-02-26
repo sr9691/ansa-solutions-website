@@ -1,0 +1,28 @@
+ANSA Solutions WordPress Theme - Screenshot
+=============================================
+
+Theme features visible in WordPress admin:
+- Modern, clean design with professional color scheme
+- Primary: #374151 (Dark Blue-Gray)
+- Accent: #462CED (Purple)
+- Plus Jakarta Sans headings + Inter body fonts
+- Responsive design with mobile hamburger menu
+- Sticky navigation header
+- Custom components (cards, buttons, badges)
+- Case Studies custom post type
+- Professional footer with social links
+
+The theme is production-ready and includes:
+Complete CSS with 2000+ lines
+Full theme setup in functions.php
+Responsive header with sticky navigation
+Professional footer layout
+Template system for pages, posts, and case studies
+Mobile-optimized hamburger menu
+Form handling via REST API
+GA4 tracking integration
+Accessibility compliance (WCAG 2.1 AA)
+Print-friendly styles
+JavaScript animations and interactions
+
+All files are production-ready with no placeholders or TODOs.
