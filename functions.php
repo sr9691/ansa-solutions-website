@@ -64,9 +64,8 @@ function ansa_primary_menu_fallback() {
         </ul>
     </li>';
     echo '<li><a href="' . esc_url(home_url('/case-studies/')) . '">Case Studies</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/blog/')) . '">Blog</a></li>';
     echo '<li><a href="' . esc_url(home_url('/about/')) . '">About</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/contact/')) . '">Contact</a></li>';
+    echo '<li class="menu-item-contact"><a href="' . esc_url(home_url('/contact/')) . '">Contact</a></li>';
     echo '</ul>';
 }
 
@@ -125,6 +124,24 @@ function ansa_enqueue_scripts() {
 
     $css_ver = file_exists(ANSA_THEME_DIR . '/style.css') ? filemtime(ANSA_THEME_DIR . '/style.css') : ANSA_VERSION;
     wp_enqueue_style('ansa-theme-style', ANSA_THEME_URI . '/style.css', array('google-fonts-pjs', 'google-fonts-inter'), $css_ver);
+
+    /* Style the last primary nav item (Contact) as a button */
+    $nav_btn_css = '
+        .primary-nav > li:last-child > a {
+            background: var(--accent, #462CED);
+            color: #fff !important;
+            padding: 10px 28px !important;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+        .primary-nav > li:last-child > a:hover {
+            background: #3520c7;
+            transform: translateY(-1px);
+            color: #fff !important;
+        }
+    ';
+    wp_add_inline_style('ansa-theme-style', $nav_btn_css);
 
     if (file_exists(ANSA_THEME_DIR . '/assets/js/main.js')) {
         wp_enqueue_script('ansa-theme-script', ANSA_THEME_URI . '/assets/js/main.js', array('jquery'), ANSA_VERSION, true);
