@@ -28,16 +28,10 @@ get_header();
 				<div class="contact-form-column">
 					<h2>Send Us a Message</h2>
 
-					<!-- HubSpot Embedded Form — Replace formId with your new Contact Us form -->
+					<!-- HubSpot Embedded Contact Form -->
 					<div class="hubspot-form-container" style="min-height: 400px;">
-						<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
-						<script>
-							hbspt.forms.create({
-								region: "na1",
-								portalId: "242976044",
-								formId: "REPLACE_WITH_YOUR_CONTACT_FORM_ID"
-							});
-						</script>
+						<script src="https://js.hsforms.net/forms/embed/50725925.js" defer></script>
+						<div class="hs-form-frame" data-region="na1" data-form-id="1a8a8d6f-d8cb-4876-bf15-5df9da9d85ec" data-portal-id="50725925"></div>
 						<noscript>
 							<p>Please enable JavaScript to use this form, or <a href="mailto:sr@ansa.solutions">email us directly</a>.</p>
 						</noscript>
