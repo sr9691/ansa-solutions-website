@@ -2,6 +2,7 @@
 
     <footer class="site-footer">
         <div class="footer-wrapper">
+            <!-- Logo & Tagline -->
             <div class="footer-section">
                 <div class="footer-logo">
                     <span class="logo-an">AN</span><span class="logo-sa">SA</span>
@@ -24,6 +25,7 @@
                 </div>
             </div>
 
+            <!-- Services -->
             <div class="footer-section">
                 <h4><?php esc_html_e('Services', 'ansa-solutions'); ?></h4>
                 <ul>
@@ -34,6 +36,7 @@
                 </ul>
             </div>
 
+            <!-- Resources -->
             <div class="footer-section">
                 <h4><?php esc_html_e('Resources', 'ansa-solutions'); ?></h4>
                 <ul>
@@ -44,6 +47,7 @@
                 </ul>
             </div>
 
+            <!-- Company -->
             <div class="footer-section">
                 <h4><?php esc_html_e('Company', 'ansa-solutions'); ?></h4>
                 <ul>
