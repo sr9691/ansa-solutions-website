@@ -14,7 +14,7 @@ get_header();
 		<div class="hero__content">
 			<span class="badge badge--primary">Enterprise Automation</span>
 			<h1 class="hero__title">
-				Process Automation That<br>Delivers <span class="text-accent">Results</span>
+				Process Automation That<br><span class="text-accent">Delivers Results</span>
 			</h1>
 			<p class="hero__subtitle">
 				We partner with platforms like Workato to design, build, and operate intelligent automation that connects your systems and eliminates manual work.
