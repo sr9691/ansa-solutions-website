@@ -150,19 +150,13 @@ get_header();
 				<p style="color: rgba(255,255,255,0.85); font-size: 1.05rem;">Fill out the form below and we'll be in touch to discuss how we can work together.</p>
 			</div>
 
-			<!-- HubSpot Embedded Form -->
+			<!-- HubSpot Embedded Partner Application Form -->
 			<div class="hubspot-form-container" style="background: #fff; border-radius: var(--radius-lg); padding: 2.5rem; min-height: 400px;">
-				<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
-				<script>
-					hbspt.forms.create({
-						region: "na1",
-						portalId: "242976044",
-						formId: "db1c2dba-f810-4e38-9d52-50ad350f76e3"
-					});
-				</script>
+				<script src="https://js.hsforms.net/forms/embed/50725925.js" defer></script>
+				<div class="hs-form-frame" data-region="na1" data-form-id="c708ed0a-f810-4e38-9d52-50ad350f75e3" data-portal-id="50725925"></div>
 				<noscript>
 					<p style="text-align: center; padding: 2rem;">
-						<a href="https://u78dh.share.hsforms.com/2xwjtCvgQTjidUlCtNQ914w" target="_blank" rel="noopener" style="color: var(--accent); font-weight: 600;">Open the partner application form →</a>
+						Please enable JavaScript to use this form, or <a href="mailto:sr@ansa.solutions" style="color: var(--accent); font-weight: 600;">email us directly</a>.
 					</p>
 				</noscript>
 			</div>
