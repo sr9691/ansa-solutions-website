@@ -40,7 +40,7 @@ get_header();
 				<h2 style="margin-bottom: 1rem;">What Makes Us Different</h2>
 			</div>
 
-			<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+			<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;">
 				<!-- Card 1 -->
 				<div style="background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem;">
 					<div style="width: 48px; height: 48px; background: rgba(70,44,237,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; font-size: 1.3rem;">🎯</div>
