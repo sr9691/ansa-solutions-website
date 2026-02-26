@@ -3,14 +3,8 @@
  * Template Name: AI Readiness Intake Form
  * Template Post Type: page
  */
-// Standalone template - questionnaire has its own styling
+get_header();
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Readiness Assessment | ANSA Solutions</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -543,9 +537,13 @@ select { cursor: pointer; appearance: none; background-image: url("data:image/sv
   .btn { padding: 12px 20px; font-size: 14px; }
   .section-intro h2 { font-size: 19px; }
 }
+
+/* Ensure form works within WordPress theme */
+.page { padding-top: 0; }
+.site-content { padding: 0; }
+.header { margin-top: 0; }
 </style>
-</head>
-<body>
+
 <div class="page">
 
 <!-- ── Header ── -->
@@ -1193,7 +1191,7 @@ async function submitForm() {
   const data = collectFormData();
 
   // Log payload for debugging
-  console.log('📋 Form payload:', JSON.stringify(data, null, 2));
+  console.log('Form payload:', JSON.stringify(data, null, 2));
 
   try {
     // Send to webhook
@@ -1333,5 +1331,4 @@ document.querySelectorAll('input[name="regulations"]').forEach(cb => {
   });
 });
 </script>
-</body>
-</html>
+<?php get_footer(); ?>
