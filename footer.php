@@ -5,7 +5,19 @@
             <!-- Logo & Tagline -->
             <div class="footer-section">
                 <div class="footer-logo">
-                    <span class="logo-an">AN</span><span class="logo-sa">SA</span>
+                    <?php if (has_custom_logo()) : ?>
+                        <?php
+                        $custom_logo_id = get_theme_mod('custom_logo');
+                        $logo_url = wp_get_attachment_image_url($custom_logo_id, 'medium');
+                        ?>
+                        <a href="<?php echo esc_url(home_url('/')); ?>">
+                            <img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" style="max-height: 40px; width: auto; filter: brightness(0) invert(1);">
+                        </a>
+                    <?php else : ?>
+                        <a href="<?php echo esc_url(home_url('/')); ?>" style="color: #fff; font-size: 24px; font-weight: 800; text-decoration: none; letter-spacing: 1px;">
+                            <?php echo esc_html(get_bloginfo('name')); ?>
+                        </a>
+                    <?php endif; ?>
                 </div>
                 <p class="footer-tagline">AI Strategy & Implementation</p>
                 <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.95rem; margin-bottom: 1rem;">
