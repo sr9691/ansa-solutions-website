@@ -15,7 +15,7 @@ get_header(); ?>
 			AI Strategy & Implementation
 		</div>
 		<h1 style="margin-bottom: 1.5rem; font-size: 3.5rem; color: #FFFFFF;">
-			Empowering Businesses with <span style="color: var(--accent);">AI-driven Automation</span>
+			Empowering Businesses with <br><span style="color: var(--accent);">AI-driven Automation</span>
 		</h1>
 		<p class="subtitle" style="font-size: 1.25rem; color: rgba(255, 255, 255, 0.9); margin-bottom: 2.5rem; max-width: 700px; margin-left: auto; margin-right: auto;">
 			We help mid-market organizations streamline operations, enhance efficiency, and drive growth through intelligent automation and AI strategy.
@@ -43,12 +43,12 @@ get_header(); ?>
 			<p class="stat-label" style="color: rgba(255, 255, 255, 0.8); margin: 0;">Increase in productivity</p>
 		</div>
 		<div class="stat">
-			<h3 class="stat-number" style="color: #FFFFFF; margin-bottom: 0.5rem; font-size: 2.5rem;">2 weeks</h3>
-			<p class="stat-label" style="color: rgba(255, 255, 255, 0.8); margin: 0;">To AI Readiness Report</p>
+			<h3 class="stat-number" style="color: #FFFFFF; margin-bottom: 0.5rem; font-size: 2.5rem;">6–8 weeks</h3>
+			<p class="stat-label" style="color: rgba(255, 255, 255, 0.8); margin: 0;">To measurable value</p>
 		</div>
 		<div class="stat">
-			<h3 class="stat-number" style="color: #FFFFFF; margin-bottom: 0.5rem; font-size: 2.5rem;">6-8 weeks</h3>
-			<p class="stat-label" style="color: rgba(255, 255, 255, 0.8); margin: 0;">To measurable value</p>
+			<h3 class="stat-number" style="color: #FFFFFF; margin-bottom: 0.5rem; font-size: 2.5rem;">1 week</h3>
+			<p class="stat-label" style="color: rgba(255, 255, 255, 0.8); margin: 0;">To AI Readiness Report</p>
 		</div>
 	</div>
 </section>
@@ -87,7 +87,7 @@ get_header(); ?>
 			</div>
 			<h3 style="margin-bottom: 1rem; color: var(--text);">AI Readiness Assessment</h3>
 			<p style="flex-grow: 1; color: var(--text-light); margin-bottom: 1.5rem;">
-				A fixed-fee assessment that tells you exactly where AI can create value, what's blocking you, and what to do first. Results in ~2 weeks.
+				A fixed-fee assessment that tells you exactly where AI can create value, what's blocking you, and what to do first. Results in ~1 week.
 			</p>
 			<a href="<?php echo esc_url( home_url( '/ai-readiness-assessment' ) ); ?>" style="color: var(--accent); font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem; border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 1rem;">
 				Learn more <span style="transition: var(--transition);">→</span>
@@ -185,7 +185,7 @@ get_header(); ?>
 			Is Your Business <span style="color: var(--accent);">AI Ready</span>?
 		</h2>
 		<p style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; margin-bottom: 2rem;">
-			Our AI Readiness Assessment reveals exactly where you can win with automation and AI. Get a clear roadmap in just 2 weeks.
+			Our AI Readiness Assessment reveals exactly where you can win with automation and AI. Get a clear roadmap in just 1 week.
 		</p>
 		<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
 			<a href="<?php echo esc_url( home_url( '/ai-readiness-assessment' ) ); ?>" class="btn btn-white" style="background-color: #FFFFFF; color: var(--accent); border: 2px solid transparent; padding: 0.75rem 1.5rem; font-weight: 600;">
