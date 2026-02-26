@@ -38,8 +38,6 @@
                     'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
                 ));
                 ?>
-
-                <a href="#contact" class="btn btn-primary">Contact Us</a>
             </nav>
         </div>
     </header>
