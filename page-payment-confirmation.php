@@ -9,6 +9,9 @@ get_header();
 // Sanitize and validate tier parameter
 $tier = isset( $_GET['tier'] ) ? sanitize_text_field( wp_unslash( $_GET['tier'] ) ) : '';
 
+// Capture Stripe checkout session ID
+$session_id = isset( $_GET['session_id'] ) ? sanitize_text_field( wp_unslash( $_GET['session_id'] ) ) : '';
+
 // Define tier information
 $tiers = array(
 	'essentials' => array(
@@ -44,27 +47,19 @@ $tiers = array(
 // Validate tier
 $valid_tier = isset( $tiers[ $tier ] ) ? $tier : null;
 $tier_data  = $valid_tier ? $tiers[ $valid_tier ] : null;
+
+// Build questionnaire URL with session_id and tier for bookmarking
+$questionnaire_args = array();
+if ( $session_id ) {
+	$questionnaire_args['session_id'] = $session_id;
+}
+if ( $valid_tier ) {
+	$questionnaire_args['tier'] = $valid_tier;
+}
+$questionnaire_url = add_query_arg( $questionnaire_args, home_url( '/ai-readiness-intake' ) );
 ?>
 
 <style>
-	.hero--dark-gradient {
-		background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
-		color: white;
-		padding: 60px 20px;
-		text-align: center;
-	}
-
-	.hero--dark-gradient h1 {
-		font-size: 2.5rem;
-		margin-bottom: 10px;
-		font-weight: 700;
-	}
-
-	.hero--dark-gradient p {
-		font-size: 1.1rem;
-		opacity: 0.9;
-	}
-
 	.confirmation-container {
 		max-width: 700px;
 		margin: 40px auto;
@@ -170,6 +165,20 @@ $tier_data  = $valid_tier ? $tiers[ $valid_tier ] : null;
 		text-decoration: none;
 	}
 
+	.bookmark-note {
+		background: rgba(70, 44, 237, 0.06);
+		border: 1px solid rgba(70, 44, 237, 0.15);
+		border-radius: 6px;
+		padding: 12px 16px;
+		font-size: 0.85rem;
+		color: var(--text-light, #6B7280);
+		margin-bottom: 30px;
+	}
+
+	.bookmark-note strong {
+		color: var(--primary, #374151);
+	}
+
 	.next-steps {
 		background: #f3f4f6;
 		border-radius: 6px;
@@ -228,8 +237,10 @@ $tier_data  = $valid_tier ? $tiers[ $valid_tier ] : null;
 </style>
 
 <div class="hero hero--dark-gradient">
-	<h1>Payment Received</h1>
-	<p>Thank you for your investment in AI readiness</p>
+	<div class="hero__content">
+		<h1 class="hero__title">Payment Received</h1>
+		<p class="hero__subtitle">Thank you for your investment in AI readiness</p>
+	</div>
 </div>
 
 <div class="confirmation-container">
@@ -253,9 +264,13 @@ $tier_data  = $valid_tier ? $tiers[ $valid_tier ] : null;
 				</ul>
 			</div>
 
-			<a href="<?php echo esc_url( home_url( '/ai-readiness-intake' ) ); ?>" class="cta-button">
+			<a href="<?php echo esc_url( $questionnaire_url ); ?>" class="cta-button">
 				Start Your Questionnaire
 			</a>
+
+			<div class="bookmark-note">
+				<strong>Bookmark this link:</strong> You can save the questionnaire link above and return to it anytime to complete or continue your assessment.
+			</div>
 
 			<div class="next-steps">
 				<div class="next-steps-title">What Happens Next</div>
@@ -274,7 +289,7 @@ $tier_data  = $valid_tier ? $tiers[ $valid_tier ] : null;
 					Your payment has been successfully received. We appreciate your trust and look forward to working with you.
 				</p>
 
-				<a href="<?php echo esc_url( home_url( '/ai-readiness-intake' ) ); ?>" class="cta-button">
+				<a href="<?php echo esc_url( $questionnaire_url ); ?>" class="cta-button">
 					Continue to Questionnaire
 				</a>
 
