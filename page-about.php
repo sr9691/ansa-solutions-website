@@ -13,7 +13,7 @@ get_header();
 	<section class="page-hero" style="background: linear-gradient(135deg, var(--primary) 0%, #1f2937 100%); padding: 5rem 1.5rem; color: #FFFFFF; text-align: center;">
 		<div style="max-width: 800px; margin: 0 auto;">
 			<span class="badge" style="display: inline-block; padding: 0.5rem 1rem; background-color: rgba(255,255,255,0.15); border-radius: 999px; margin-bottom: 1.5rem; font-size: 0.9rem; font-weight: 600; color: #fff; letter-spacing: 0.5px;">About ANSA Solutions</span>
-			<h1 style="font-size: 3rem; color: #FFFFFF; margin-bottom: 1.25rem;">AI Strategy Meets <span style="color: var(--accent);">Operational Excellence</span></h1>
+			<h1 style="font-size: 3rem; color: #FFFFFF; margin-bottom: 1.25rem;">AI Strategy Meets<br><span style="color: var(--accent);">Operational Excellence</span></h1>
 			<p style="font-size: 1.2rem; color: rgba(255,255,255,0.9); max-width: 650px; margin: 0 auto;">We help mid-market organizations harness AI and automation strategically — turning operational friction into measurable business outcomes.</p>
 		</div>
 	</section>
