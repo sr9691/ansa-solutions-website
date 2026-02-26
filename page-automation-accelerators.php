@@ -80,6 +80,38 @@ get_header();
 			</div>
 			<div class="bundles-grid">
 
+				<!-- Meeting Transcript Aggregator Bundle -->
+				<div class="bundle-card">
+					<div class="bundle-card__header">
+						<div class="bundle-icon transcript-icon">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+								<path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+								<line x1="12" y1="19" x2="12" y2="23"></line>
+								<line x1="8" y1="23" x2="16" y2="23"></line>
+							</svg>
+						</div>
+						<h3 class="bundle-card__title">Meeting Transcript Aggregator</h3>
+					</div>
+					<p class="bundle-card__target">For All Teams & Leaders</p>
+					<p class="bundle-card__description">
+						A foundational layer that continuously ingests, processes, and indexes every client conversation across all meeting platforms — so nothing falls through the cracks.
+					</p>
+					<div class="bundle-card__accelerators">
+						<h4>How It Works:</h4>
+						<ul>
+							<li><strong>Ingest</strong> — Detects new transcripts via webhooks or scheduled polling from connected meeting tools</li>
+							<li><strong>Identify</strong> — Matches attendees to CRM contacts, companies, and deals</li>
+							<li><strong>Process</strong> — AI summarizes, extracts action items, decisions, and commitments; tags by theme and scores sentiment</li>
+							<li><strong>Enrich</strong> — Cross-references with email threads and CRM activity to identify gaps and follow-up status</li>
+							<li><strong>Index</strong> — Stores structured summaries in a searchable knowledge layer, indexed by account, contact, deal, date, and theme</li>
+						</ul>
+					</div>
+					<a href="#book-demo" class="button button--secondary button--full-width book-demo-btn" data-bundle="Meeting Transcript Aggregator">
+						Book a Demo
+					</a>
+				</div>
+
 				<!-- Revenue Operations Bundle -->
 				<div class="bundle-card">
 					<div class="bundle-card__header">
@@ -271,6 +303,7 @@ get_header();
 							<label style="display: block; color: rgba(255,255,255,0.7); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.4rem;">Accelerator Bundle</label>
 							<select name="bundle" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(255,255,255,0.06); color: #fff; font-size: 0.95rem; font-family: var(--font-body); transition: border-color 0.2s;">
 								<option value="">Select a bundle</option>
+								<option value="transcript-aggregator">Meeting Transcript Aggregator</option>
 								<option value="revenue-ops">Revenue Operations</option>
 								<option value="customer-success">Customer Success</option>
 								<option value="finance-procurement">Finance & Procurement</option>
