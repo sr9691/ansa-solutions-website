@@ -149,37 +149,8 @@ get_header(); ?>
 	</div>
 </section>
 
-<!-- About/Leadership Section -->
-<section class="section" style="padding: 5rem 1.5rem; max-width: 1400px; margin: 0 auto;">
-	<div class="about-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: center;">
-		<!-- Leadership Image Placeholder -->
-		<div class="about-image" style="width: 340px; height: 400px; background-color: var(--border-light); border-radius: var(--radius-lg); overflow: hidden; display: flex; align-items: center; justify-content: center; color: var(--text-lighter);">
-			<div style="text-align: center;">
-				<div style="font-size: 3rem; margin-bottom: 1rem;">📷</div>
-				<p>Sundaresh Ramanathan Headshot</p>
-			</div>
-		</div>
-
-		<!-- Leadership Content -->
-		<div class="about-content">
-			<div class="section-label" style="color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; font-size: 0.9rem;">
-				Leadership
-			</div>
-			<h2 style="margin-bottom: 1.5rem;">Meet Sundaresh Ramanathan</h2>
-
-			<p style="color: var(--text-light); margin-bottom: 1.5rem;">
-				Sundaresh brings over a decade of experience in technology leadership, process automation, and data analytics. With a proven track record of helping mid-market organizations transform their operations, he has led successful implementations across industries including financial services, manufacturing, healthcare, and professional services.
-			</p>
-
-			<p style="color: var(--text-light); margin-bottom: 0;">
-				Based in Carmel, Indiana, Sundaresh is passionate about bridging the gap between business strategy and technical execution. His approach combines deep domain expertise with practical understanding of implementation challenges, ensuring organizations don't just adopt automation tools—they build sustainable, scalable automation practices that drive measurable business value.
-			</p>
-		</div>
-	</div>
-</section>
-
 <!-- AI Readiness CTA Section -->
-<section class="cta-section" style="background: linear-gradient(135deg, var(--primary) 0%, #1f2937 100%); color: #FFFFFF; padding: 4rem 1.5rem; text-align: center; max-width: 100%; margin: 5rem 0 0 0;">
+<section class="cta-section" style="background: linear-gradient(135deg, var(--primary) 0%, #1f2937 100%); color: #FFFFFF; padding: 4rem 1.5rem; text-align: center; max-width: 100%; margin: 0;">
 	<div class="cta-wrapper" style="max-width: 900px; margin: 0 auto;">
 		<h2 style="color: #FFFFFF; margin-bottom: 1rem;">
 			Is Your Business <span style="color: var(--accent);">AI Ready</span>?
