@@ -42,8 +42,8 @@
                 <h4><?php esc_html_e('Services', 'ansa-solutions'); ?></h4>
                 <ul>
                     <li><a href="<?php echo esc_url(home_url('/process-automation/')); ?>">Process Automation</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/ai-readiness-assessment/')); ?>">AI Readiness</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/automation-accelerators/')); ?>">Accelerators</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/ai-readiness-assessment/')); ?>">AI Readiness Assessment</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/automation-accelerators/')); ?>">Automation Accelerators</a></li>
                 </ul>
             </div>
 
@@ -52,8 +52,7 @@
                 <h4><?php esc_html_e('Resources', 'ansa-solutions'); ?></h4>
                 <ul>
                     <li><a href="<?php echo esc_url(home_url('/case-studies/')); ?>">Case Studies</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/about/')); ?>">About Us</a></li>
+                    <li><a href="<?php echo esc_url(home_url('/about/')); ?>">About</a></li>
                     <li><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
                 </ul>
             </div>
