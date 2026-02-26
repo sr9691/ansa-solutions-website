@@ -238,9 +238,9 @@ get_header();
 	<!-- Final CTA / Demo Request Section -->
 	<section class="section section--final-cta section--cta-dark" id="book-demo">
 		<div class="container">
-			<h2>Ready to See Accelerators in Action?</h2>
-			<p>Let's walk through how we'd set up automation for your team</p>
-			<div id="demo-form" style="max-width: 540px; margin: 2rem auto 0;">
+			<div style="max-width: 640px; margin: 0 auto;">
+				<h2 style="color: #FFFFFF; margin-bottom: 0.5rem;">Ready to See Accelerators in Action?</h2>
+				<p style="color: rgba(255,255,255,0.8); font-size: 1.05rem; margin-bottom: 2rem;">Book a 30-minute demo and we'll show you exactly how these automations work for your team.</p>
 				<!--
 					HubSpot Embedded Form Placeholder
 					Replace with your HubSpot form embed code:
@@ -253,21 +253,36 @@ get_header();
 						});
 					</script>
 				-->
-				<form class="demo-request-form" method="post" action="#">
-					<div style="display:grid; gap:1rem;">
-						<input type="text" name="name" placeholder="Full Name" required style="padding:12px 16px; border:1px solid rgba(255,255,255,0.3); border-radius:8px; background:rgba(255,255,255,0.1); color:#fff; font-size:15px;">
-						<input type="email" name="email" placeholder="Work Email" required style="padding:12px 16px; border:1px solid rgba(255,255,255,0.3); border-radius:8px; background:rgba(255,255,255,0.1); color:#fff; font-size:15px;">
-						<input type="text" name="company" placeholder="Company Name" style="padding:12px 16px; border:1px solid rgba(255,255,255,0.3); border-radius:8px; background:rgba(255,255,255,0.1); color:#fff; font-size:15px;">
-						<select name="bundle" style="padding:12px 16px; border:1px solid rgba(255,255,255,0.3); border-radius:8px; background:rgba(255,255,255,0.1); color:#fff; font-size:15px;">
-							<option value="">Select an Accelerator</option>
-							<option value="revenue-ops">Revenue Operations</option>
-							<option value="customer-success">Customer Success</option>
-							<option value="finance-procurement">Finance & Procurement</option>
-							<option value="it-security">IT & Security Operations</option>
-						</select>
-						<button type="submit" class="button button--primary button--large" style="width:100%;">Request a Demo</button>
+				<form class="demo-request-form" method="post" action="#" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 16px; padding: 2rem;">
+					<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+						<div>
+							<label style="display: block; color: rgba(255,255,255,0.7); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.4rem;">Full Name *</label>
+							<input type="text" name="name" placeholder="Jane Smith" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(255,255,255,0.06); color: #fff; font-size: 0.95rem; font-family: var(--font-body); transition: border-color 0.2s;">
+						</div>
+						<div>
+							<label style="display: block; color: rgba(255,255,255,0.7); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.4rem;">Work Email *</label>
+							<input type="email" name="email" placeholder="jane@company.com" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(255,255,255,0.06); color: #fff; font-size: 0.95rem; font-family: var(--font-body); transition: border-color 0.2s;">
+						</div>
+						<div>
+							<label style="display: block; color: rgba(255,255,255,0.7); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.4rem;">Company</label>
+							<input type="text" name="company" placeholder="Acme Inc." style="width: 100%; padding: 0.75rem 1rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(255,255,255,0.06); color: #fff; font-size: 0.95rem; font-family: var(--font-body); transition: border-color 0.2s;">
+						</div>
+						<div>
+							<label style="display: block; color: rgba(255,255,255,0.7); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.4rem;">Accelerator Bundle</label>
+							<select name="bundle" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(255,255,255,0.06); color: #fff; font-size: 0.95rem; font-family: var(--font-body); transition: border-color 0.2s;">
+								<option value="">Select a bundle</option>
+								<option value="revenue-ops">Revenue Operations</option>
+								<option value="customer-success">Customer Success</option>
+								<option value="finance-procurement">Finance & Procurement</option>
+								<option value="it-security">IT & Security Operations</option>
+							</select>
+						</div>
+					</div>
+					<div style="margin-top: 1.25rem;">
+						<button type="submit" class="button button--primary button--large" style="width: 100%; padding: 0.9rem; font-size: 1rem;">Request a Demo</button>
 					</div>
 				</form>
+				<p style="color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-top: 1rem;">We'll reach out within 1 business day. No spam, ever.</p>
 			</div>
 		</div>
 	</section>
