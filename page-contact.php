@@ -7,6 +7,22 @@
 get_header();
 ?>
 
+<style>
+	.contact-layout {
+		display: grid !important;
+		grid-template-columns: 1fr 380px !important;
+		gap: 3rem !important;
+		align-items: start !important;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+	@media (max-width: 768px) {
+		.contact-layout {
+			grid-template-columns: 1fr !important;
+		}
+	}
+</style>
+
 <main id="primary" class="site-main">
 
 	<!-- Page Hero Section -->
@@ -22,7 +38,7 @@ get_header();
 	<!-- Contact Section -->
 	<section class="contact-section">
 		<div class="container">
-			<div class="contact-wrapper">
+			<div class="contact-layout">
 
 				<!-- Contact Form Column -->
 				<div class="contact-form-column">
@@ -33,7 +49,7 @@ get_header();
 						<script src="https://js.hsforms.net/forms/embed/50725925.js" defer></script>
 						<div class="hs-form-frame" data-region="na1" data-form-id="1a8a8d6f-d8cb-4876-bf15-5df9da9d85ec" data-portal-id="50725925"></div>
 						<noscript>
-							<p>Please enable JavaScript to use this form, or <a href="mailto:sr@ansa.solutions">email us directly</a>.</p>
+							<p>Please enable JavaScript to use this form, or <a href="mailto:info@ansa.solutions">email us directly</a>.</p>
 						</noscript>
 					</div>
 				</div>
@@ -51,7 +67,7 @@ get_header();
 						<div class="contact-info-block">
 							<h4>Email</h4>
 							<p>
-								<a href="mailto:sr@ansa.solutions">sr@ansa.solutions</a>
+								<a href="mailto:info@ansa.solutions">info@ansa.solutions</a>
 							</p>
 						</div>
 
