@@ -19,7 +19,7 @@ get_header();
 			<p class="hero__subtitle">
 				A comprehensive assessment that tells you exactly where AI can create value in your business, what's blocking you, and what to do first.
 			</p>
-			<a href="#questionnaire" class="button button--primary button--large">Start Your Assessment</a>
+			<a href="#pricing" class="button button--primary button--large">Start Your Assessment</a>
 		</div>
 	</section>
 
@@ -68,7 +68,7 @@ get_header();
 	</section>
 
 	<!-- Pricing Section -->
-	<section class="section section--pricing">
+	<section id="pricing" class="section section--pricing">
 		<div class="container">
 			<div class="section__header">
 				<h2>Choose Your Assessment Tier</h2>
@@ -180,7 +180,7 @@ get_header();
 				</div>
 				<div class="benefit-item">
 					<h3>Fast Turnaround</h3>
-					<p>Get your complete report in about 2 weeks</p>
+					<p>Get your complete report in about 1 week</p>
 				</div>
 				<div class="benefit-item">
 					<h3>Actionable, Not Theoretical</h3>
@@ -234,11 +234,11 @@ get_header();
 				</div>
 			</div>
 			<div class="section__cta" style="text-align: center; margin-top: 3rem;">
-				<button class="button button--primary" data-toggle="modal" data-target="#sample-report-modal">
+				<a href="<?php echo esc_url( home_url( '/sample-report-preview' ) ); ?>" class="button button--primary">
 					View Full Sample Report
-				</button>
+				</a>
 				<p style="font-size: 0.875rem; color: var(--text); margin-top: 1rem;">
-					We'll send you a preview — just provide your name and email
+					See a preview of what your personalized report will look like
 				</p>
 			</div>
 		</div>
@@ -249,7 +249,7 @@ get_header();
 		<div class="container">
 			<h2>Ready to Get Started?</h2>
 			<p>Take the first step toward understanding your AI potential</p>
-			<a href="#questionnaire" class="button button--primary button--large">Start the Assessment</a>
+			<a href="#pricing" class="button button--primary button--large">Start the Assessment</a>
 		</div>
 	</section>
 
