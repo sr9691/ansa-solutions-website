@@ -23,12 +23,7 @@ get_header();
 				</div>
 			</div>
 			<div style="display: flex; align-items: center; justify-content: center;">
-				<div style="width: 100%; height: 320px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5);">
-					<div style="text-align: center;">
-						<div style="font-size: 3rem; margin-bottom: 1rem;">🤝</div>
-						<p>Partnership Image</p>
-					</div>
-				</div>
+				<img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/partnership-hero.svg'); ?>" alt="Two professionals shaking hands representing ANSA Solutions partnership" style="width: 100%; max-width: 500px; height: auto; border-radius: var(--radius-lg);">
 			</div>
 		</div>
 	</section>
