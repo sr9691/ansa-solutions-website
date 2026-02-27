@@ -318,7 +318,7 @@ get_header();
 						<li>Discovery call</li>
 						<li>Summary report</li>
 					</ul>
-					<a href="https://buy.stripe.com/test_7sY4gy1GScAEdAG5no6Na00" class="button button--secondary button--full-width">Get Started</a>
+					<a href="<?php echo esc_url( home_url( '/payment/?tier=essentials' ) ); ?>" class="button button--secondary button--full-width">Get Started</a>
 				</div>
 
 				<div class="pricing-card pricing-card--featured">
@@ -334,7 +334,7 @@ get_header();
 						<li>Gap analysis</li>
 						<li>Phased action plan</li>
 					</ul>
-					<a href="https://buy.stripe.com/test_8x200igBM448406eXY6Na01" class="button button--primary button--full-width">Get Started</a>
+					<a href="<?php echo esc_url( home_url( '/payment/?tier=standard' ) ); ?>" class="button button--primary button--full-width">Get Started</a>
 				</div>
 
 				<div class="pricing-card">
@@ -348,7 +348,7 @@ get_header();
 						<li>30-minute report walkthrough call</li>
 						<li>Leadership presentation guidance</li>
 					</ul>
-					<a href="https://buy.stripe.com/test_00wcN42KWgQU7ci4jk6Na02" class="button button--secondary button--full-width">Get Started</a>
+					<a href="<?php echo esc_url( home_url( '/payment/?tier=premium' ) ); ?>" class="button button--secondary button--full-width">Get Started</a>
 				</div>
 			</div>
 		</div>
