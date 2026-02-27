@@ -464,7 +464,8 @@ add_filter('auto_core_update_send_email', '__return_false');
 
 /**
  * ──────────────────────────────────────────────
- * Stripe Payment Integration
+ * Stripe Payment Integration (SDK-free)
+ * Uses WordPress wp_remote_post() — no Composer needed
  * ──────────────────────────────────────────────
  */
 
@@ -480,32 +481,9 @@ function ansa_get_assessment_tiers() {
 }
 
 /**
- * Load Stripe PHP SDK (installed via Composer in theme root)
- */
-function ansa_load_stripe() {
-    $autoload = ANSA_THEME_DIR . '/vendor/autoload.php';
-    if ( file_exists( $autoload ) ) {
-        require_once $autoload;
-    }
-
-    if ( ! class_exists( '\Stripe\Stripe' ) ) {
-        return false;
-    }
-
-    $secret_key = defined( 'STRIPE_SECRET_KEY' ) ? STRIPE_SECRET_KEY : '';
-    if ( empty( $secret_key ) ) {
-        return false;
-    }
-
-    \Stripe\Stripe::setApiKey( $secret_key );
-    return true;
-}
-
-/**
  * Register Stripe REST routes
  */
 function ansa_register_stripe_routes() {
-    // Create PaymentIntent
     register_rest_route( 'ansa/v1', '/create-payment-intent', array(
         'methods'             => 'POST',
         'callback'            => 'ansa_create_payment_intent',
@@ -518,7 +496,6 @@ function ansa_register_stripe_routes() {
         ),
     ));
 
-    // Stripe webhook
     register_rest_route( 'ansa/v1', '/stripe-webhook', array(
         'methods'             => 'POST',
         'callback'            => 'ansa_stripe_webhook_handler',
@@ -528,24 +505,24 @@ function ansa_register_stripe_routes() {
 add_action( 'rest_api_init', 'ansa_register_stripe_routes' );
 
 /**
- * Handle PaymentIntent creation
+ * Create a Stripe PaymentIntent via the REST API (no SDK)
  */
 function ansa_create_payment_intent( $request ) {
-    if ( ! ansa_load_stripe() ) {
+    $secret_key = defined( 'STRIPE_SECRET_KEY' ) ? STRIPE_SECRET_KEY : '';
+    if ( empty( $secret_key ) ) {
         return new WP_REST_Response( array(
             'success' => false,
             'message' => 'Stripe is not configured. Please contact support.',
         ), 500 );
     }
 
-    $params = $request->get_json_params();
+    $params   = $request->get_json_params();
     $tier_key = strtolower( trim( $params['tier'] ?? '' ) );
     $email    = sanitize_email( $params['email'] ?? '' );
     $name     = sanitize_text_field( $params['name'] ?? '' );
     $company  = sanitize_text_field( $params['company'] ?? '' );
 
     $tiers = ansa_get_assessment_tiers();
-
     if ( ! isset( $tiers[ $tier_key ] ) ) {
         return new WP_REST_Response( array(
             'success' => false,
@@ -556,83 +533,116 @@ function ansa_create_payment_intent( $request ) {
     $tier   = $tiers[ $tier_key ];
     $amount = $tier['price'] * 100; // cents
 
-    try {
-        $intent = \Stripe\PaymentIntent::create( array(
+    $response = wp_remote_post( 'https://api.stripe.com/v1/payment_intents', array(
+        'headers' => array(
+            'Authorization' => 'Bearer ' . $secret_key,
+            'Content-Type'  => 'application/x-www-form-urlencoded',
+        ),
+        'body' => array(
             'amount'               => $amount,
             'currency'             => 'usd',
             'description'          => 'AI Readiness Assessment — ' . $tier['label'],
             'receipt_email'        => $email,
-            'metadata'             => array(
-                'tier'    => $tier_key,
-                'name'    => $name,
-                'email'   => $email,
-                'company' => $company,
-            ),
-        ));
+            'metadata[tier]'       => $tier_key,
+            'metadata[name]'       => $name,
+            'metadata[email]'      => $email,
+            'metadata[company]'    => $company,
+        ),
+        'timeout' => 30,
+    ));
 
-        return new WP_REST_Response( array(
-            'success'      => true,
-            'clientSecret' => $intent->client_secret,
-        ), 200 );
-
-    } catch ( \Stripe\Exception\ApiErrorException $e ) {
+    if ( is_wp_error( $response ) ) {
         return new WP_REST_Response( array(
             'success' => false,
-            'message' => $e->getMessage(),
+            'message' => 'Payment service unavailable. Please try again.',
         ), 500 );
     }
+
+    $body = json_decode( wp_remote_retrieve_body( $response ), true );
+    $code = wp_remote_retrieve_response_code( $response );
+
+    if ( $code !== 200 || empty( $body['client_secret'] ) ) {
+        $err_msg = isset( $body['error']['message'] ) ? $body['error']['message'] : 'Payment failed.';
+        return new WP_REST_Response( array(
+            'success' => false,
+            'message' => $err_msg,
+        ), $code >= 400 ? $code : 500 );
+    }
+
+    return new WP_REST_Response( array(
+        'success'      => true,
+        'clientSecret' => $body['client_secret'],
+    ), 200 );
 }
 
 /**
- * Handle Stripe webhook events
+ * Handle Stripe webhook events (SDK-free signature verification)
  */
 function ansa_stripe_webhook_handler( $request ) {
-    if ( ! ansa_load_stripe() ) {
+    $secret_key = defined( 'STRIPE_SECRET_KEY' ) ? STRIPE_SECRET_KEY : '';
+    $webhook_secret = defined( 'STRIPE_WEBHOOK_SECRET' ) ? STRIPE_WEBHOOK_SECRET : '';
+
+    if ( empty( $secret_key ) || empty( $webhook_secret ) ) {
         return new WP_REST_Response( array( 'error' => 'Stripe not configured' ), 500 );
     }
 
-    $payload   = $request->get_body();
-    $sig       = $request->get_header( 'stripe-signature' );
-    $secret    = defined( 'STRIPE_WEBHOOK_SECRET' ) ? STRIPE_WEBHOOK_SECRET : '';
+    $payload = $request->get_body();
+    $sig_header = $request->get_header( 'stripe-signature' );
 
-    if ( empty( $secret ) ) {
-        return new WP_REST_Response( array( 'error' => 'Webhook secret not configured' ), 500 );
+    // Parse signature header
+    $sig_parts = array();
+    foreach ( explode( ',', $sig_header ) as $part ) {
+        $kv = explode( '=', trim( $part ), 2 );
+        if ( count( $kv ) === 2 ) {
+            $sig_parts[ $kv[0] ] = $kv[1];
+        }
     }
 
-    try {
-        $event = \Stripe\Webhook::constructEvent( $payload, $sig, $secret );
-    } catch ( \UnexpectedValueException $e ) {
-        return new WP_REST_Response( array( 'error' => 'Invalid payload' ), 400 );
-    } catch ( \Stripe\Exception\SignatureVerificationException $e ) {
+    $timestamp = isset( $sig_parts['t'] ) ? $sig_parts['t'] : '';
+    $signature = isset( $sig_parts['v1'] ) ? $sig_parts['v1'] : '';
+
+    if ( empty( $timestamp ) || empty( $signature ) ) {
         return new WP_REST_Response( array( 'error' => 'Invalid signature' ), 400 );
     }
 
-    // Handle successful payments
-    if ( $event->type === 'payment_intent.succeeded' ) {
-        $intent   = $event->data->object;
-        $metadata = $intent->metadata;
+    // Verify signature
+    $signed_payload  = $timestamp . '.' . $payload;
+    $expected_sig    = hash_hmac( 'sha256', $signed_payload, $webhook_secret );
 
-        // Log the payment
+    if ( ! hash_equals( $expected_sig, $signature ) ) {
+        return new WP_REST_Response( array( 'error' => 'Invalid signature' ), 400 );
+    }
+
+    // Reject old events (5 min tolerance)
+    if ( abs( time() - intval( $timestamp ) ) > 300 ) {
+        return new WP_REST_Response( array( 'error' => 'Timestamp too old' ), 400 );
+    }
+
+    $event = json_decode( $payload, true );
+
+    if ( isset( $event['type'] ) && $event['type'] === 'payment_intent.succeeded' ) {
+        $intent   = $event['data']['object'];
+        $metadata = isset( $intent['metadata'] ) ? $intent['metadata'] : array();
+
         error_log( sprintf(
             '[ANSA Stripe] Payment succeeded: %s | Tier: %s | Email: %s | Company: %s | Amount: $%s',
-            $intent->id,
-            $metadata->tier ?? 'unknown',
-            $metadata->email ?? 'unknown',
-            $metadata->company ?? 'n/a',
-            number_format( $intent->amount / 100, 2 )
+            $intent['id'],
+            $metadata['tier'] ?? 'unknown',
+            $metadata['email'] ?? 'unknown',
+            $metadata['company'] ?? 'n/a',
+            number_format( $intent['amount'] / 100, 2 )
         ));
 
-        // Send admin notification email
         $admin_email = get_option( 'admin_email' );
-        $subject     = 'New AI Readiness Payment — ' . ucfirst( $metadata->tier ?? 'Unknown' );
+        $subject     = 'New AI Readiness Payment — ' . ucfirst( $metadata['tier'] ?? 'Unknown' );
         $body        = sprintf(
             "New payment received!\n\nTier: %s\nAmount: $%s\nName: %s\nEmail: %s\nCompany: %s\nStripe ID: %s",
-            ucfirst( $metadata->tier ?? 'Unknown' ),
-            number_format( $intent->amount / 100, 2 ),
-            $metadata->name ?? 'N/A',
-            $metadata->email ?? 'N/A',
-            $metadata->company ?? 'N/A',
-            $intent->id
+            ucfirst( $metadata['tier'] ?? 'Unknown' ),
+            number_format( $intent['amount'] / 100, 2 ),
+            $metadata['name'] ?? 'N/A',
+            $metadata['email'] ?? 'N/A',
+            $metadata['company'] ?? 'N/A',
+            $intent['id']
         );
         wp_mail( $admin_email, $subject, $body );
     }
