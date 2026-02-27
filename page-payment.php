@@ -35,7 +35,7 @@ get_header();
 <style>
     /* ── Payment Page Styles ── */
     .payment-page { display: flex; align-items: center; justify-content: center; min-height: 70vh; padding: 3rem 1.5rem; }
-    .payment-container { width: 100%; max-width: 480px; }
+    .payment-container { width: 100%; max-width: 580px; }
 
     /* Order Summary Banner */
     .order-summary { background: linear-gradient(135deg, var(--primary, #374151) 0%, #1f2937 100%); border-radius: 12px 12px 0 0; padding: 2rem 2.5rem; color: #fff; }
@@ -91,7 +91,7 @@ get_header();
     .error-page h2 { font-size: 1.4rem; margin-bottom: 0.5rem; }
     .error-page p { color: #6b7280; font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem; }
 
-    @media (max-width: 520px) {
+    @media (max-width: 620px) {
         .order-summary, .payment-form-card { padding: 1.5rem; }
         .form-grid { grid-template-columns: 1fr; }
     }
