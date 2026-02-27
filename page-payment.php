@@ -81,13 +81,6 @@ get_header();
     .secure-footer span { font-size: 0.78rem; color: #6b7280; }
     .secure-footer .stripe-badge { font-weight: 700; color: #635bff; font-size: 0.82rem; }
 
-    /* Success State */
-    .payment-success { display: none; text-align: center; background: #fff; border-radius: 12px; padding: 3rem 2.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04); }
-    .success-icon { width: 64px; height: 64px; background: rgba(34,197,94,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
-    .success-icon svg { width: 32px; height: 32px; color: #22c55e; }
-    .payment-success h2 { font-size: 1.4rem; margin-bottom: 0.75rem; }
-    .payment-success p { color: #6b7280; font-size: 0.95rem; line-height: 1.7; }
-
     /* Error page */
     .error-page { display: none; text-align: center; background: #fff; border-radius: 12px; padding: 3rem 2.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04); }
     .error-page h2 { font-size: 1.4rem; margin-bottom: 0.5rem; }
@@ -173,15 +166,6 @@ get_header();
                     </div>
                 </div>
 
-                <!-- Success State -->
-                <div class="payment-success" id="payment-success">
-                    <div class="success-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                    </div>
-                    <h2>Payment Successful!</h2>
-                    <p>Thank you for your purchase. A confirmation has been sent to your email. Our team will reach out within 1 business day to schedule your assessment.</p>
-                </div>
-
                 <script src="https://js.stripe.com/v3/"></script>
                 <script>
                 (function() {
@@ -190,6 +174,7 @@ get_header();
 
                     var tierKey   = '<?php echo esc_js( $tier_key ); ?>';
                     var tierPrice = <?php echo intval( $tier['price'] ); ?>;
+                    var questionnaireUrl = '<?php echo esc_url( home_url( "/questionnaire/" ) ); ?>';
 
                     var stripe = Stripe(STRIPE_PK);
                     var elements = stripe.elements({
@@ -245,8 +230,8 @@ get_header();
                                 payButton.classList.remove('loading');
                                 payButton.disabled = false;
                             } else if (result.paymentIntent.status === 'succeeded') {
-                                document.getElementById('payment-flow').style.display = 'none';
-                                document.getElementById('payment-success').style.display = 'block';
+                                // Redirect to questionnaire with tier info
+                                window.location.href = questionnaireUrl + '?tier=' + encodeURIComponent(tierKey) + '&paid=1';
                             }
                         } catch (err) {
                             document.getElementById('card-errors').textContent = err.message || 'Something went wrong. Please try again.';
