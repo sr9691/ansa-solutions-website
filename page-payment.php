@@ -55,16 +55,18 @@ get_header();
     /* Payment Form */
     .payment-form-card { background: #fff; border-radius: 0 0 12px 12px; padding: 2rem 2.5rem 2.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04); }
     .form-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 1.5rem; }
-    .form-row { margin-bottom: 1.15rem; }
-    .form-row label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text, #1f2937); }
-    .form-row input { width: 100%; padding: 0.7rem 0.9rem; border: 1.5px solid #e5e7eb; border-radius: 8px; font-family: inherit; font-size: 0.92rem; transition: border-color 0.2s; outline: none; background: #fff; }
-    .form-row input:focus { border-color: var(--accent, #462CED); box-shadow: 0 0 0 3px rgba(70,44,237,0.1); }
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
-    /* Stripe Element */
-    #card-element { padding: 0.7rem 0.9rem; border: 1.5px solid #e5e7eb; border-radius: 8px; background: #fff; transition: border-color 0.2s; }
-    #card-element.StripeElement--focus { border-color: var(--accent, #462CED); box-shadow: 0 0 0 3px rgba(70,44,237,0.1); }
-    #card-element.StripeElement--invalid { border-color: #ef4444; }
+    /* Form rows — force stacked layout */
+    .payment-form-card .form-row { display: flex !important; flex-direction: column !important; margin-bottom: 1.15rem; width: 100%; }
+    .payment-form-card .form-row label { display: block !important; float: none !important; width: 100% !important; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text, #1f2937); text-align: left; }
+    .payment-form-card .form-row input { display: block !important; width: 100% !important; padding: 0.7rem 0.9rem; border: 1.5px solid #e5e7eb; border-radius: 8px; font-family: inherit; font-size: 0.92rem; transition: border-color 0.2s; outline: none; background: #fff; box-sizing: border-box; }
+    .payment-form-card .form-row input:focus { border-color: var(--accent, #462CED); box-shadow: 0 0 0 3px rgba(70,44,237,0.1); }
+    .payment-form-card .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    /* Stripe Element — full width */
+    .payment-form-card #card-element { display: block !important; width: 100% !important; padding: 0.75rem 0.9rem; border: 1.5px solid #e5e7eb; border-radius: 8px; background: #fff; transition: border-color 0.2s; box-sizing: border-box; min-height: 44px; }
+    .payment-form-card #card-element.StripeElement--focus { border-color: var(--accent, #462CED); box-shadow: 0 0 0 3px rgba(70,44,237,0.1); }
+    .payment-form-card #card-element.StripeElement--invalid { border-color: #ef4444; }
     #card-errors { color: #ef4444; font-size: 0.82rem; margin-top: 0.4rem; min-height: 1.1em; }
 
     .pay-button { width: 100%; padding: 0.85rem; background: var(--accent, #462CED); color: #fff; font-family: inherit; font-size: 0.95rem; font-weight: 600; border: none; border-radius: 8px; cursor: pointer; margin-top: 1.25rem; transition: background 0.2s, transform 0.15s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
@@ -93,7 +95,7 @@ get_header();
 
     @media (max-width: 620px) {
         .order-summary, .payment-form-card { padding: 1.5rem; }
-        .form-grid { grid-template-columns: 1fr; }
+        .payment-form-card .form-grid { grid-template-columns: 1fr; }
     }
 </style>
 
