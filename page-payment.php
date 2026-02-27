@@ -174,7 +174,7 @@ get_header();
 
                     var tierKey   = '<?php echo esc_js( $tier_key ); ?>';
                     var tierPrice = <?php echo intval( $tier['price'] ); ?>;
-                    var questionnaireUrl = '<?php echo esc_url( home_url( "/questionnaire/" ) ); ?>';
+                    var intakeBaseUrl = '<?php echo esc_url( home_url( "/ai-readiness-intake" ) ); ?>';
 
                     var stripe = Stripe(STRIPE_PK);
                     var elements = stripe.elements({
@@ -230,8 +230,9 @@ get_header();
                                 payButton.classList.remove('loading');
                                 payButton.disabled = false;
                             } else if (result.paymentIntent.status === 'succeeded') {
-                                // Redirect to questionnaire with tier info
-                                window.location.href = questionnaireUrl + '?tier=' + encodeURIComponent(tierKey) + '&paid=1';
+                                // Redirect to intake questionnaire with session_id (PaymentIntent ID) and tier
+                                var sessionId = result.paymentIntent.id;
+                                window.location.href = intakeBaseUrl + '?session_id=' + encodeURIComponent(sessionId) + '&tier=' + encodeURIComponent(tierKey);
                             }
                         } catch (err) {
                             document.getElementById('card-errors').textContent = err.message || 'Something went wrong. Please try again.';
