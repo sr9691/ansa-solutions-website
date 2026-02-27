@@ -461,3 +461,181 @@ add_filter('use_default_gallery_style', '__return_false');
 add_filter('auto_plugin_update_send_email', '__return_false');
 add_filter('auto_theme_update_send_email', '__return_false');
 add_filter('auto_core_update_send_email', '__return_false');
+
+/**
+ * ──────────────────────────────────────────────
+ * Stripe Payment Integration
+ * ──────────────────────────────────────────────
+ */
+
+/**
+ * Valid assessment tiers (single source of truth)
+ */
+function ansa_get_assessment_tiers() {
+    return array(
+        'essentials' => array( 'label' => 'Essentials', 'price' => 1500 ),
+        'standard'   => array( 'label' => 'Standard',   'price' => 2500 ),
+        'premium'    => array( 'label' => 'Premium',    'price' => 3000 ),
+    );
+}
+
+/**
+ * Load Stripe PHP SDK (installed via Composer in theme root)
+ */
+function ansa_load_stripe() {
+    $autoload = ANSA_THEME_DIR . '/vendor/autoload.php';
+    if ( file_exists( $autoload ) ) {
+        require_once $autoload;
+    }
+
+    if ( ! class_exists( '\Stripe\Stripe' ) ) {
+        return false;
+    }
+
+    $secret_key = defined( 'STRIPE_SECRET_KEY' ) ? STRIPE_SECRET_KEY : '';
+    if ( empty( $secret_key ) ) {
+        return false;
+    }
+
+    \Stripe\Stripe::setApiKey( $secret_key );
+    return true;
+}
+
+/**
+ * Register Stripe REST routes
+ */
+function ansa_register_stripe_routes() {
+    // Create PaymentIntent
+    register_rest_route( 'ansa/v1', '/create-payment-intent', array(
+        'methods'             => 'POST',
+        'callback'            => 'ansa_create_payment_intent',
+        'permission_callback' => '__return_true',
+        'args'                => array(
+            'tier'    => array( 'required' => true,  'sanitize_callback' => 'sanitize_text_field' ),
+            'email'   => array( 'required' => true,  'sanitize_callback' => 'sanitize_email' ),
+            'name'    => array( 'required' => true,  'sanitize_callback' => 'sanitize_text_field' ),
+            'company' => array( 'required' => false, 'sanitize_callback' => 'sanitize_text_field' ),
+        ),
+    ));
+
+    // Stripe webhook
+    register_rest_route( 'ansa/v1', '/stripe-webhook', array(
+        'methods'             => 'POST',
+        'callback'            => 'ansa_stripe_webhook_handler',
+        'permission_callback' => '__return_true',
+    ));
+}
+add_action( 'rest_api_init', 'ansa_register_stripe_routes' );
+
+/**
+ * Handle PaymentIntent creation
+ */
+function ansa_create_payment_intent( $request ) {
+    if ( ! ansa_load_stripe() ) {
+        return new WP_REST_Response( array(
+            'success' => false,
+            'message' => 'Stripe is not configured. Please contact support.',
+        ), 500 );
+    }
+
+    $params = $request->get_json_params();
+    $tier_key = strtolower( trim( $params['tier'] ?? '' ) );
+    $email    = sanitize_email( $params['email'] ?? '' );
+    $name     = sanitize_text_field( $params['name'] ?? '' );
+    $company  = sanitize_text_field( $params['company'] ?? '' );
+
+    $tiers = ansa_get_assessment_tiers();
+
+    if ( ! isset( $tiers[ $tier_key ] ) ) {
+        return new WP_REST_Response( array(
+            'success' => false,
+            'message' => 'Invalid assessment tier.',
+        ), 400 );
+    }
+
+    $tier   = $tiers[ $tier_key ];
+    $amount = $tier['price'] * 100; // cents
+
+    try {
+        $intent = \Stripe\PaymentIntent::create( array(
+            'amount'               => $amount,
+            'currency'             => 'usd',
+            'description'          => 'AI Readiness Assessment — ' . $tier['label'],
+            'receipt_email'        => $email,
+            'metadata'             => array(
+                'tier'    => $tier_key,
+                'name'    => $name,
+                'email'   => $email,
+                'company' => $company,
+            ),
+        ));
+
+        return new WP_REST_Response( array(
+            'success'      => true,
+            'clientSecret' => $intent->client_secret,
+        ), 200 );
+
+    } catch ( \Stripe\Exception\ApiErrorException $e ) {
+        return new WP_REST_Response( array(
+            'success' => false,
+            'message' => $e->getMessage(),
+        ), 500 );
+    }
+}
+
+/**
+ * Handle Stripe webhook events
+ */
+function ansa_stripe_webhook_handler( $request ) {
+    if ( ! ansa_load_stripe() ) {
+        return new WP_REST_Response( array( 'error' => 'Stripe not configured' ), 500 );
+    }
+
+    $payload   = $request->get_body();
+    $sig       = $request->get_header( 'stripe-signature' );
+    $secret    = defined( 'STRIPE_WEBHOOK_SECRET' ) ? STRIPE_WEBHOOK_SECRET : '';
+
+    if ( empty( $secret ) ) {
+        return new WP_REST_Response( array( 'error' => 'Webhook secret not configured' ), 500 );
+    }
+
+    try {
+        $event = \Stripe\Webhook::constructEvent( $payload, $sig, $secret );
+    } catch ( \UnexpectedValueException $e ) {
+        return new WP_REST_Response( array( 'error' => 'Invalid payload' ), 400 );
+    } catch ( \Stripe\Exception\SignatureVerificationException $e ) {
+        return new WP_REST_Response( array( 'error' => 'Invalid signature' ), 400 );
+    }
+
+    // Handle successful payments
+    if ( $event->type === 'payment_intent.succeeded' ) {
+        $intent   = $event->data->object;
+        $metadata = $intent->metadata;
+
+        // Log the payment
+        error_log( sprintf(
+            '[ANSA Stripe] Payment succeeded: %s | Tier: %s | Email: %s | Company: %s | Amount: $%s',
+            $intent->id,
+            $metadata->tier ?? 'unknown',
+            $metadata->email ?? 'unknown',
+            $metadata->company ?? 'n/a',
+            number_format( $intent->amount / 100, 2 )
+        ));
+
+        // Send admin notification email
+        $admin_email = get_option( 'admin_email' );
+        $subject     = 'New AI Readiness Payment — ' . ucfirst( $metadata->tier ?? 'Unknown' );
+        $body        = sprintf(
+            "New payment received!\n\nTier: %s\nAmount: $%s\nName: %s\nEmail: %s\nCompany: %s\nStripe ID: %s",
+            ucfirst( $metadata->tier ?? 'Unknown' ),
+            number_format( $intent->amount / 100, 2 ),
+            $metadata->name ?? 'N/A',
+            $metadata->email ?? 'N/A',
+            $metadata->company ?? 'N/A',
+            $intent->id
+        );
+        wp_mail( $admin_email, $subject, $body );
+    }
+
+    return new WP_REST_Response( array( 'received' => true ), 200 );
+}
