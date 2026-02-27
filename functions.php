@@ -55,14 +55,14 @@ add_action('after_setup_theme', 'ansa_theme_setup');
 function ansa_primary_menu_fallback() {
     echo '<ul class="primary-nav">';
     echo '<li><a href="' . esc_url(home_url('/')) . '">Home</a></li>';
-    echo '<li class="menu-item-has-children">';
-    echo '<a href="#">Services <span class="dropdown-arrow">▾</span></a>';
-    echo '<ul class="sub-menu">';
-    echo '<li><a href="' . esc_url(home_url('/process-automation/')) . '">Process Automation</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/ai-readiness-assessment/')) . '">AI Readiness Assessment</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/automation-accelerators/')) . '">Automation Accelerators</a></li>';
-    echo '</ul>';
-    echo '</li>';
+    echo '<li class="menu-item-has-children">
+        <a href="#">Services <span class="dropdown-arrow">▾</span></a>
+        <ul class="sub-menu">
+            <li><a href="' . esc_url(home_url('/process-automation/')) . '">Process Automation</a></li>
+            <li><a href="' . esc_url(home_url('/ai-readiness-assessment/')) . '">AI Readiness Assessment</a></li>
+            <li><a href="' . esc_url(home_url('/automation-accelerators/')) . '">Automation Accelerators</a></li>
+        </ul>
+    </li>';
     echo '<li><a href="' . esc_url(home_url('/case-studies/')) . '">Case Studies</a></li>';
     echo '<li><a href="' . esc_url(home_url('/about/')) . '">About</a></li>';
     echo '<li class="menu-item-contact"><a href="' . esc_url(home_url('/contact/')) . '">Contact</a></li>';
