@@ -53,21 +53,7 @@ add_action('after_setup_theme', 'ansa_theme_setup');
  * Fallback primary menu (used when no menu is assigned)
  */
 function ansa_primary_menu_fallback() {
-    echo '<ul class="primary-nav">';
-    echo '<li><a href="' . esc_url(home_url('/')) . '">Home</a></li>';
-    echo '<li class="menu-item-has-children">
-        <a href="#">Services <span class="dropdown-arrow">▾</span></a>
-        <ul class="sub-menu">
-            <li><a href="' . esc_url(home_url('/process-automation/')) . '">Process Automation</a></li>
-            <li><a href="' . esc_url(home_url('/ai-readiness-assessment/')) . '">AI Readiness Assessment</a></li>
-            <li><a href="' . esc_url(home_url('/automation-accelerators/')) . '">Automation Accelerators</a></li>
-        </ul>
-    </li>';
-    echo '<li><a href="' . esc_url(home_url('/case-studies/')) . '">Case Studies</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/about/')) . '">About</a></li>';
-    echo '<li class="menu-item-contact"><a href="' . esc_url(home_url('/contact/')) . '">Contact</a></li>';
-    echo '</ul>';
-}
+    echo '<ul class="primary-nav">';\n    echo '<li><a href="' . esc_url(home_url('/')) . '">Home</a></li>';\n    echo '<li class="menu-item-has-children">\n        <a href="#">Services <span class="dropdown-arrow">▾</span></a>\n        <ul class="sub-menu">\n            <li><a href="' . esc_url(home_url('/process-automation/')) . '">Process Automation</a></li>\n            <li><a href="' . esc_url(home_url('/ai-readiness-assessment/')) . '">AI Readiness Assessment</a></li>\n            <li><a href="' . esc_url(home_url('/automation-accelerators/')) . '">Automation Accelerators</a></li>\n        </ul>\n    </li>';\n    echo '<li><a href="' . esc_url(home_url('/case-studies/')) . '">Case Studies</a></li>';\n    echo '<li><a href="' . esc_url(home_url('/about/')) . '">About</a></li>';\n    echo '<li class="menu-item-contact"><a href="' . esc_url(home_url('/contact/')) . '">Contact</a></li>';\n    echo '</ul>';\n}
 
 /**
  * Register widget areas
