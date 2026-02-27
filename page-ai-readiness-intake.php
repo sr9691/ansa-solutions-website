@@ -895,6 +895,15 @@ document.getElementById('assessmentForm').addEventListener('submit', async funct
     submitBtn.disabled = false;
   }
 });
+
+document.querySelector('#assessmentForm')?.addEventListener('change', function(e) {
+  if (e.target.name === 'regulations') {
+    const otherField = document.querySelector('input[name="regulations_other"]');
+    const otherChecked = Array.from(document.querySelectorAll('input[name="regulations"][value="other"]')).some(input => input.checked);
+    otherField.style.display = otherChecked ? 'block' : 'none';
+    if (!otherChecked) otherField.value = '';
+  }
+});
 </script>
 
 <?php get_footer(); ?>
