@@ -45,7 +45,7 @@ get_header();
 				<div style="background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem;">
 					<div style="width: 48px; height: 48px; background: rgba(70,44,237,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; font-size: 1.3rem;">🎯</div>
 					<h3 style="font-size: 1.15rem; margin-bottom: 0.75rem;">Outcome-Focused, Not Platform-Led</h3>
-					<p style="color: var(--text-light); margin: 0; line-height: 1.7;">We don't sell tools. We solve problems. The platform choice follows the solution design — whether that's Workato, Zapier, or custom integrations.</p>
+					<p style="color: var(--text-light); margin: 0; line-height: 1.7;">We don't sell tools. We solve problems. The platform choice follows the solution design — whether that's Workato, cData, or custom integrations.</p>
 				</div>
 
 				<!-- Card 2 -->
