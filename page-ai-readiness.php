@@ -20,7 +20,7 @@ get_header();
 				A comprehensive assessment that tells you exactly where AI can create value in your business, what's blocking you, and what to do first.
 			</p>
 			<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
-				<a href="#pricing" class="button button--primary button--large">Start Your Assessment</a>
+				<a href="#get-started" class="button button--primary button--large">Start Your Assessment</a>
 				<a href="<?php echo esc_url( home_url( '/sample-report-preview' ) ); ?>" class="button button--outline button--large" style="border-color: rgba(255,255,255,0.4); color: #fff;">View Sample Report</a>
 			</div>
 		</div>
@@ -299,57 +299,17 @@ get_header();
 		</div>
 	</section>
 
-	<!-- Pricing Section -->
-	<section id="pricing" class="section section--pricing">
+	<!-- Get Started Section — Lead Gen Form -->
+	<section id="get-started" class="section" style="background: var(--border-light); padding: 4rem 1.5rem; border-radius: 0;">
 		<div class="container">
 			<div class="section__header" style="text-align: center;">
-				<h2>Choose Your Assessment Tier</h2>
-				<p style="color: var(--text-light);">All tiers include a personalized questionnaire and discovery session</p>
+				<h2>Get Your AI Readiness Assessment</h2>
+				<p style="color: var(--text-light); max-width: 540px; margin: 0 auto;">Tell us a bit about your business and we'll reach out to schedule your discovery session.</p>
 			</div>
-			<div class="pricing-grid">
-				<div class="pricing-card">
-					<h3 class="pricing-card__title">Essentials</h3>
-					<div class="pricing-card__price">
-						<span class="price-amount">$1,500</span>
-						<span class="price-period">one-time</span>
-					</div>
-					<ul class="pricing-card__features">
-						<li>Readiness scorecard</li>
-						<li>Discovery call</li>
-						<li>Summary report</li>
-					</ul>
-					<a href="<?php echo esc_url( home_url( '/payment/?tier=essentials' ) ); ?>" class="button button--secondary button--full-width">Get Started</a>
-				</div>
-
-				<div class="pricing-card pricing-card--featured">
-					<span class="pricing-badge">Recommended</span>
-					<h3 class="pricing-card__title">Standard</h3>
-					<div class="pricing-card__price">
-						<span class="price-amount">$2,500</span>
-						<span class="price-period">one-time</span>
-					</div>
-					<ul class="pricing-card__features">
-						<li>Full assessment</li>
-						<li>AI opportunities with ROI</li>
-						<li>Gap analysis</li>
-						<li>Phased action plan</li>
-					</ul>
-					<a href="<?php echo esc_url( home_url( '/payment/?tier=standard' ) ); ?>" class="button button--primary button--full-width">Get Started</a>
-				</div>
-
-				<div class="pricing-card">
-					<h3 class="pricing-card__title">Premium</h3>
-					<div class="pricing-card__price">
-						<span class="price-amount">$3,000</span>
-						<span class="price-period">one-time</span>
-					</div>
-					<ul class="pricing-card__features">
-						<li>Everything in Standard</li>
-						<li>30-minute report walkthrough call</li>
-						<li>Leadership presentation guidance</li>
-					</ul>
-					<a href="<?php echo esc_url( home_url( '/payment/?tier=premium' ) ); ?>" class="button button--secondary button--full-width">Get Started</a>
-				</div>
+			<div style="max-width: 600px; margin: 2rem auto 0; background: #fff; border-radius: 12px; padding: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
+				<noscript><p style="text-align: center; color: var(--text-light);">Please enable JavaScript to use this form, or <a href="mailto:info@ansa.solutions">email us directly</a>.</p></noscript>
+				<script src="https://js.hsforms.net/forms/embed/50725925.js" defer></script>
+				<div class="hs-form-frame" data-region="na1" data-form-id="1a8a8d6f-d8cb-4876-bf15-5df9da9d85ec" data-portal-id="50725925"></div>
 			</div>
 		</div>
 	</section>
@@ -360,7 +320,7 @@ get_header();
 			<h2>Ready to Discover Your AI Potential?</h2>
 			<p>Take the first step — most clients see their report within one week.</p>
 			<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-				<a href="#pricing" class="button button--primary button--large">Start the Assessment</a>
+				<a href="#get-started" class="button button--primary button--large">Start the Assessment</a>
 				<a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="button button--outline button--large" style="border-color: rgba(255,255,255,0.4); color: #fff;">Have Questions? Let's Talk</a>
 			</div>
 		</div>
