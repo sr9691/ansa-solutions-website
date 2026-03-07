@@ -734,10 +734,10 @@ get_header();
 <section class="section--cta-dark section--final-cta" id="get-started">
 	<div class="container">
 		<div class="cta-content">
-			<h2>See an AI Accelerator in Action</h2>
-			<p>Pick a time and we'll walk you through a live demo tailored to your team and industry.</p>
-			<div class="meetings-iframe-container" data-src="https://meetings.hubspot.com/sundaresh?embed=true"></div>
-			<script type="text/javascript" src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"></script>
+			<h2>Request a Live Demo</h2>
+			<p>Tell us a bit about your team and we'll show you an AI Accelerator built for your workflow.</p>
+			<script src="https://js.hsforms.net/forms/embed/50725925.js" defer></script>
+			<div class="hs-form-frame" data-region="na1" data-form-id="1a8a8d6f-d8cb-4876-bf15-5df9da9d85ec" data-portal-id="50725925"></div>
 		</div>
 	</div>
 </section>
