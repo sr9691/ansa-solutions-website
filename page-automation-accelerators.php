@@ -28,13 +28,15 @@ get_header();
 						class="aia-search__input"
 						id="aiaSearchInput"
 						type="text"
-						placeholder='Describe a problem or search by tool — try "my invoices take forever to approve"'
+						placeholder="What's slowing your team down?"
 						autocomplete="off"
 						aria-label="Search accelerators"
 					>
 					<span class="aia-search__spinner" id="aiaSpinner" aria-hidden="true"></span>
 					<button class="aia-search__clear" id="aiaClearBtn" onclick="aiaClear()" aria-label="Clear search">✕</button>
-					<button class="aia-search__btn" id="aiaSearchBtn" onclick="aiaRunSearch()" aria-label="Search">Search</button>
+					<button class="aia-search__btn" id="aiaSearchBtn" onclick="aiaRunSearch()" aria-label="Search">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+					</button>
 				</div>
 				<p class="aia-search__hint" id="aiaSearchHint">AI-powered search — describe your problem in plain English</p>
 			</div>
@@ -791,11 +793,12 @@ get_header();
 .aia-search__clear.visible { display: block; }
 .aia-search__btn {
 	background: #462CED; border: none; cursor: pointer;
-	color: #fff; padding: 8px 18px; border-radius: 10px;
-	font-size: 13px; font-weight: 600; font-family: var(--font-body);
-	white-space: nowrap; transition: var(--transition); flex-shrink: 0;
+	color: #fff; padding: 8px 14px; border-radius: 10px;
+	display: flex; align-items: center; justify-content: center;
+	transition: var(--transition); flex-shrink: 0;
 	line-height: 1;
 }
+.aia-search__btn svg { width: 18px; height: 18px; stroke: #fff; }
 .aia-search__btn:hover { background: #3520c7; }
 .aia-search__btn:disabled { opacity: 0.6; cursor: not-allowed; }
 .aia-search__hint {
@@ -945,7 +948,7 @@ get_header();
 	.aia-tabs { justify-content: flex-start; }
 	.aia-cards { grid-template-columns: 1fr; }
 	.aia-result-bar { flex-direction: column; align-items: flex-start; gap: 8px; }
-	.aia-search__btn { padding: 8px 14px; }
+	.aia-search__btn { padding: 8px 12px; }
 }
 </style>
 
