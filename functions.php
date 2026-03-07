@@ -642,3 +642,65 @@ function ansa_stripe_webhook_handler( $request ) {
 
     return new WP_REST_Response( array( 'received' => true ), 200 );
 }
+
+/**
+ * ──────────────────────────────────────────────
+ * Claude AI Search Proxy (for Automation Accelerators page)
+ * Requires ANTHROPIC_API_KEY defined in wp-config.php
+ * ──────────────────────────────────────────────
+ */
+function ansa_claude_search_handler() {
+    check_ajax_referer( 'ansa-nonce', 'nonce' );
+
+    $query   = sanitize_text_field( $_POST['query'] ?? '' );
+    $catalog = $_POST['catalog'] ?? '';
+
+    if ( empty( $query ) || empty( $catalog ) ) {
+        wp_send_json_error( 'Missing parameters' );
+    }
+
+    $api_key = defined( 'ANTHROPIC_API_KEY' ) ? ANTHROPIC_API_KEY : '';
+    if ( empty( $api_key ) ) {
+        wp_send_json_error( 'API key not configured' );
+    }
+
+    $prompt = "You are a search assistant for a catalog of AI automation accelerators.\n\n"
+            . "A user typed this query: \"{$query}\"\n\n"
+            . "Here is the full catalog as JSON:\n{$catalog}\n\n"
+            . "Return ONLY a JSON array of matching accelerator IDs (the \"id\" field), ranked best-match first. "
+            . "Include all accelerators that would genuinely help with the user's problem. "
+            . "Return an empty array if nothing matches. No explanation, no markdown, only the raw JSON array.";
+
+    $response = wp_remote_post( 'https://api.anthropic.com/v1/messages', array(
+        'headers' => array(
+            'x-api-key'         => $api_key,
+            'anthropic-version' => '2023-06-01',
+            'content-type'      => 'application/json',
+        ),
+        'body'    => wp_json_encode( array(
+            'model'      => 'claude-haiku-4-5-20251001',
+            'max_tokens' => 400,
+            'messages'   => array(
+                array( 'role' => 'user', 'content' => $prompt ),
+            ),
+        ) ),
+        'timeout' => 20,
+    ) );
+
+    if ( is_wp_error( $response ) ) {
+        wp_send_json_error( 'Request failed' );
+    }
+
+    $body = json_decode( wp_remote_retrieve_body( $response ), true );
+    $text = $body['content'][0]['text'] ?? '';
+    $text = trim( preg_replace( '/```json|```/', '', $text ) );
+
+    $ids = json_decode( $text, true );
+    if ( ! is_array( $ids ) ) {
+        wp_send_json_error( 'Invalid response' );
+    }
+
+    wp_send_json_success( $ids );
+}
+add_action( 'wp_ajax_ansa_claude_search',        'ansa_claude_search_handler' );
+add_action( 'wp_ajax_nopriv_ansa_claude_search', 'ansa_claude_search_handler' );
