@@ -908,13 +908,17 @@ get_header();
 .aia-no-results p { margin-bottom:1.25rem; }
 
 /* ---------- HubSpot form in dark CTA ---------- */
+.section--final-cta .cta-content {
+	max-width: 680px;
+	margin: 0 auto;
+	text-align: center;
+}
 .section--final-cta .hs-form-frame {
 	display: block;
-	background: #ffffff;
-	border-radius: 16px;
-	padding: 2rem 2.5rem;
 	margin: 2rem auto 0;
-	max-width: 640px;
+	max-width: 100%;
+	border-radius: 16px;
+	overflow: hidden;
 	box-shadow: 0 8px 40px rgba(0,0,0,0.25);
 }
 
