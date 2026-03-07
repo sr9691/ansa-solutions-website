@@ -647,29 +647,492 @@ function ansa_stripe_webhook_handler( $request ) {
  * ──────────────────────────────────────────────
  * Claude AI Search Proxy (for Automation Accelerators page)
  * Requires ANTHROPIC_API_KEY defined in wp-config.php
+ *
+ * System prompt contains the full catalog + matching philosophy.
+ * User message contains only the search query — no catalog payload
+ * is sent from the browser, keeping requests lean and the catalog
+ * server-side only.
  * ──────────────────────────────────────────────
  */
+function ansa_claude_search_system_prompt() {
+    return <<<'SYSTEM'
+You are a search assistant for ANSA Solutions' AI automation accelerator catalog. Your job is to match a user's plain-English query to the most relevant accelerators.
+
+Matching philosophy:
+- Match on the PROBLEM being solved, not just keywords
+- Understand intent: "my invoices take forever" → Invoice Automation Engine; "reps walk in blind" → Pre-Call Intelligence Brief; "we keep losing deals and don't know why" → Pipeline Health Sentinel
+- Match synonyms and related concepts: "chasing" = follow-up, "drowning in" = volume problem, "falling through cracks" = tracking/alerts, "take too long" = automation opportunity
+- Be inclusive: if in doubt, include it — a false positive is better than a miss
+- Rank by relevance, closest match first
+- Target: 90%+ of real user queries should return at least one match
+
+Output rules:
+- Return ONLY a raw JSON array of matching accelerator IDs
+- Example: ["ac-finance-1","ac-revops-3","ac-ops-2"]
+- No explanation, no markdown, no code fences, no commentary
+- Empty array [] only if the query is completely unrelated to business automation
+
+---
+
+ACCELERATOR CATALOG:
+
+## DEPARTMENT ACCELERATORS
+
+### Meeting Intelligence Engine (For All Teams)
+
+ID: ac-meeting-1 | Meeting Capture Hub
+Solves: "our meeting notes are scattered everywhere", "I can't find what was discussed last month", "recordings just sit in Zoom and nobody uses them", "we lose context between meetings"
+What it does: Automatically pulls transcripts from Zoom, Teams, Fireflies, Otter, Fathom, and tl;dv into a single searchable repository the moment a meeting ends.
+Tools: Zoom, MS Teams, Fireflies.ai, Otter.ai, Fathom, tl;dv
+
+ID: ac-meeting-2 | Attendee Intelligence Sync
+Solves: "meeting attendees never get logged in our CRM", "reps forget to add contacts after calls", "we don't know who we've met from each account", "our CRM contact data is always out of date"
+What it does: Parses meeting participants and maps them to existing CRM contacts, creating new records when no match is found.
+Tools: HubSpot, Salesforce, Pipedrive, Zoho CRM
+
+ID: ac-meeting-3 | Smart Meeting Digest
+Solves: "nobody reads the full transcript", "action items get lost after meetings", "we need a summary but don't have time to write one", "I need to know the sentiment from customer calls"
+What it does: Generates structured summaries with key topics, sentiment signals, and action items automatically tagged for downstream use.
+Tools: Fireflies.ai, Otter.ai, Fathom, Notion, Google Drive
+
+ID: ac-meeting-4 | Conversation Context Linker
+Solves: "I need the full picture before a call but have to dig through emails and notes separately", "can't connect what was said in meetings to what was promised over email", "too much context switching before customer interactions"
+What it does: Links meeting transcripts to related email threads, giving teams full context without manual research.
+Tools: Gmail, Outlook, HubSpot, Salesforce
+
+ID: ac-meeting-5 | Institutional Memory Builder
+Solves: "institutional knowledge walks out the door when someone leaves", "we keep having the same conversations because nobody can find past decisions", "new hires take months to get up to speed", "I can't find that conversation we had three months ago"
+What it does: Builds a persistent, queryable index of all conversation history so any team member can surface relevant past discussions in seconds.
+Tools: Notion, Confluence, Google Drive, SharePoint, Slack
+
+---
+
+### Revenue Operations (For Sales & Revenue Leaders)
+
+ID: ac-revops-1 | Pre-Call Intelligence Brief
+Solves: "reps walk into calls unprepared", "we don't know what's changed at an account before a meeting", "sales team wastes 30 min researching before every call", "missed context costs us deals"
+What it does: Assembles a pre-meeting briefing from CRM history, recent news, and open opportunities so reps walk in fully informed.
+Tools: HubSpot, Salesforce, LinkedIn Sales Nav, Apollo.io, Gmail
+
+ID: ac-revops-2 | Commitment Capture Engine
+Solves: "action items from sales calls never get logged", "reps forget to update the CRM after meetings", "we lose track of what we promised prospects", "follow-through is inconsistent across the team"
+What it does: Captures action items, next steps, and commitments from meeting transcripts and logs them directly into the CRM.
+Tools: HubSpot, Salesforce, Fireflies.ai, Asana, Notion
+
+ID: ac-revops-3 | Pipeline Health Sentinel
+Solves: "deals go quiet and we don't catch it until it's too late", "pipeline looks healthy but deals are actually stalling", "we don't have visibility into which deals are at risk", "reps are too optimistic about their forecast"
+What it does: Continuously evaluates open deals against engagement signals and pipeline velocity, alerting reps when a deal shows signs of stalling.
+Tools: HubSpot, Salesforce, Pipedrive, Slack
+
+ID: ac-revops-4 | Prospect Data Enricher
+Solves: "new leads come in with almost no information", "reps waste time researching every new lead manually", "we don't know if a lead is worth pursuing until we've already spent time on them", "our CRM data is always incomplete"
+What it does: Automatically enriches new leads with firmographic, technographic, and intent data the moment they enter the CRM.
+Tools: HubSpot, Salesforce, Apollo.io, Clearbit, ZoomInfo
+
+ID: ac-revops-5 | Revenue Signal Scorer
+Solves: "reps treat all leads the same and waste time on bad ones", "we don't know which inbound leads to call first", "marketing sends leads but sales doesn't know who's hot", "conversion rate is low because we're not prioritizing right"
+What it does: Scores inbound leads in real time based on fit and behavior signals, surfacing the highest-priority prospects for immediate follow-up.
+Tools: HubSpot, Salesforce, Marketo, ActiveCampaign
+
+ID: ac-revops-6 | Battlecard Intelligence Engine
+Solves: "reps don't know how to handle competitor objections", "our battlecards are always out of date", "we keep losing to the same competitors for the same reasons", "sales team is caught off guard when competitors come up on calls"
+What it does: Monitors competitor activity and automatically updates sales battlecards with fresh positioning and objection-handling guidance.
+Tools: Notion, Confluence, Crayon, Klue, G2
+
+---
+
+### Customer Success (For Customer Success Leaders)
+
+ID: ac-cs-1 | Account Health Radar
+Solves: "we find out a customer is unhappy only when they cancel", "no visibility into which accounts are at risk", "CSMs are managing too many accounts to watch all of them", "product usage is dropping and nobody noticed"
+What it does: Aggregates product usage, support history, and engagement data into a real-time health score with automated alerts when a customer's trajectory turns negative.
+Tools: HubSpot, Gainsight, ChurnZero, Zendesk, Mixpanel
+
+ID: ac-cs-2 | Renewal Risk Sentinel
+Solves: "we've missed renewals because nobody was tracking the dates", "renewals sneak up on us and we don't have time to prepare", "customers let contracts lapse because outreach was too late", "our renewal process is reactive not proactive"
+What it does: Tracks contract renewal dates and triggers timely, personalized outreach sequences so no renewal falls through the cracks.
+Tools: HubSpot, Salesforce, Gainsight, Gmail, Outlook
+
+ID: ac-cs-3 | Account Context Digest
+Solves: "CSMs spend an hour getting up to speed before every customer call", "new CSM taking over an account has no idea what's happened", "too much history to read through before a QBR", "we lose context on accounts all the time"
+What it does: Distills weeks of emails, calls, and tickets into a concise account summary, giving CSMs instant context before any customer interaction.
+Tools: HubSpot, Gmail, Zendesk, Fireflies.ai
+
+ID: ac-cs-4 | Quarterly Review Builder
+Solves: "QBR decks take hours to build manually", "we pull data from 5 different tools every quarter", "our QBRs don't feel personalized", "we're always scrambling the day before a quarterly review"
+What it does: Automatically compiles usage stats, milestone progress, support trends, and ROI metrics into a ready-to-present QBR deck.
+Tools: Gainsight, Salesforce, Google Slides, Mixpanel, Zendesk
+
+ID: ac-cs-5 | Churn Early Warning System
+Solves: "customers churn and we're always surprised", "we only find out there's a problem after they've already decided to leave", "support escalations aren't getting flagged to the right people fast enough", "usage drops aren't being caught in time"
+What it does: Detects early churn signals from usage drop-offs, sentiment shifts, and support escalations, triggering proactive save workflows before it's too late.
+Tools: Gainsight, ChurnZero, Zendesk, Slack
+
+---
+
+### Finance & Procurement (For Finance Leaders)
+
+ID: ac-finance-1 | Invoice Automation Engine
+Solves: "invoices take forever to get approved", "AP team is drowning in manual data entry", "we're paying late fees because the approval process is too slow", "invoices get lost in email threads", "our payment cycle is weeks longer than it should be"
+What it does: Extracts, validates, and routes incoming invoices for approval automatically, reducing manual data entry and accelerating payment cycles.
+Tools: QuickBooks, Xero, NetSuite, Sage, Bill.com, SAP
+
+ID: ac-finance-2 | Expense Policy Enforcer
+Solves: "employees are submitting out-of-policy expenses and nobody catches them", "expense reports take too long to review manually", "we find policy violations weeks after the fact", "finance spends days reviewing expense reports"
+What it does: Scans submitted expenses against policy rules and flags anomalies for review, reducing errors and out-of-policy spend.
+Tools: Expensify, Concur, Ramp, Brex, QuickBooks
+
+ID: ac-finance-3 | Vendor Contract Sentinel
+Solves: "we got hit with an auto-renewal we didn't want", "vendor contracts expire without anyone noticing", "we're paying for software nobody uses because the renewal slipped through", "no central view of what contracts are coming up"
+What it does: Tracks vendor contracts for upcoming renewals, auto-renewal clauses, and spend thresholds, alerting stakeholders in time to act.
+Tools: DocuSign, PandaDoc, Ironclad, Google Drive, SharePoint
+
+ID: ac-finance-4 | Cash Flow Early Warning
+Solves: "we've been caught off guard by cash shortfalls", "no early warning when cash flow is going to be tight", "leadership doesn't know the cash position until it's a problem", "receivables are slow and it's affecting operations"
+What it does: Monitors receivables and payables in real time, sending proactive alerts when cash flow is projected to fall below defined thresholds.
+Tools: QuickBooks, Xero, NetSuite, Stripe, Slack
+
+ID: ac-finance-5 | Close Orchestration Engine
+Solves: "month-end close is chaotic and always runs late", "tasks fall through the cracks and delay the close", "we don't know what's blocking the close until it's urgent", "the same people have to be chased every single month"
+What it does: Automates orchestration of month-end close tasks, notifying owners, tracking completion, and escalating blockers to keep the close on schedule.
+Tools: QuickBooks, Xero, NetSuite, Asana, Notion, Slack
+
+---
+
+### Marketing (For Marketing Leaders)
+
+ID: ac-mktg-1 | Content Multiplier Engine
+Solves: "we write one blog post and it just sits there", "our social channels are starved for content", "repurposing content takes as long as creating it", "we have a content library nobody is using across channels"
+What it does: Transforms a single long-form asset into social posts, email snippets, and ad copy, automatically formatted per channel.
+Tools: WordPress, HubSpot CMS, Buffer, Hootsuite, Mailchimp
+
+ID: ac-mktg-2 | Campaign Intelligence Digest
+Solves: "pulling a campaign report takes half a day", "leadership wants a weekly update but the data is in five tools", "we can't see the full picture of campaign performance in one place", "too much time spent on reporting, not enough on strategy"
+What it does: Aggregates cross-channel campaign metrics and delivers a plain-language executive summary with highlights and recommended actions.
+Tools: Google Analytics, HubSpot, Meta Ads, Google Ads, Databox
+
+ID: ac-mktg-3 | SEO Content Brief Builder
+Solves: "writers don't know what to include to rank for a keyword", "our content isn't competitive because briefs are weak", "SEO research takes too long before we even start writing", "we're publishing content that doesn't rank"
+What it does: Analyzes target keywords and competitor content to produce a structured SEO brief, ready for a writer or AI content tool to execute.
+Tools: Ahrefs, SEMrush, Moz, Google Search Console, Notion
+
+ID: ac-mktg-4 | Competitive Intelligence Feed
+Solves: "we find out about competitor moves too late", "no systematic way to track what competitors are doing", "our positioning feels stale because we're not watching the market", "sales team gets caught off guard by competitor announcements"
+What it does: Monitors competitor websites, press releases, and review sites, delivering a weekly digest of positioning changes and sentiment shifts.
+Tools: Google Alerts, Crayon, Klue, G2, Slack
+
+ID: ac-mktg-5 | Persona Message Engine
+Solves: "our messaging feels generic and doesn't convert", "we know we have different buyer types but send everyone the same thing", "writing persona-specific copy takes too long to scale", "email campaigns underperform because the message isn't tailored"
+What it does: Generates tailored messaging variations for each buyer persona using CRM segmentation data and approved brand voice guidelines.
+Tools: HubSpot, Salesforce, Marketo, ActiveCampaign, Notion
+
+---
+
+### HR & People Ops (For HR Leaders)
+
+ID: ac-hr-1 | Job Description Builder
+Solves: "writing JDs takes forever and they end up inconsistent", "hiring managers submit intake forms and nothing happens fast", "our job postings have bias we haven't caught", "we rewrite the same roles from scratch every time"
+What it does: Produces structured, bias-reviewed job descriptions from a hiring manager intake form — consistent, on-brand, and ready to post in minutes.
+Tools: Greenhouse, Lever, Workday, BambooHR, LinkedIn Jobs
+
+ID: ac-hr-2 | Candidate Shortlist Engine
+Solves: "we're drowning in applications and can't screen them fast enough", "it takes days to get a shortlist to a hiring manager", "screening is inconsistent across different recruiters", "good candidates slip through because volume is too high"
+What it does: Evaluates inbound applications against role criteria and delivers a ranked shortlist with a concise rationale for each candidate.
+Tools: Greenhouse, Lever, Workday, BambooHR, Rippling
+
+ID: ac-hr-3 | New Hire Orchestrator
+Solves: "new hires show up and their laptop isn't ready", "onboarding tasks fall through the cracks across IT, HR, and the manager", "every new hire has a different onboarding experience", "we have a checklist but nobody follows it"
+What it does: Automatically triggers and tracks all onboarding tasks across IT, HR, and the hiring team the moment an offer is accepted.
+Tools: BambooHR, Rippling, Workday, Asana, Slack
+
+ID: ac-hr-4 | Workforce Sentiment Radar
+Solves: "we do pulse surveys but nobody has time to read the open-text responses", "leadership wants to know how people are feeling but the data is raw", "we're missing themes in employee feedback", "engagement issues surface too late"
+What it does: Processes pulse survey responses and open-text feedback into structured theme reports for leadership.
+Tools: Lattice, Culture Amp, Leapsome, SurveyMonkey, Typeform
+
+ID: ac-hr-5 | HR Policy Assistant
+Solves: "HR gets the same questions about PTO and benefits every week", "employees don't know where to find policy docs", "HR spends too much time answering routine questions", "new hires are constantly asking about the same policies"
+What it does: Answers employee questions about PTO, benefits, and compliance policies instantly using existing HR documentation as the knowledge source.
+Tools: Slack, MS Teams, Notion, Confluence, BambooHR
+
+---
+
+### Operations (For Operations Leaders)
+
+ID: ac-ops-1 | Supplier Intelligence Scorecard
+Solves: "we have no objective way to evaluate vendors", "supplier reviews are based on gut feel, not data", "we don't know which vendors are consistently underperforming", "procurement decisions are made without a performance baseline"
+What it does: Aggregates delivery, quality, and SLA data across vendors into a regularly updated scorecard, making supplier reviews faster and more objective.
+Tools: QuickBooks, NetSuite, SAP, Google Sheets, Notion
+
+ID: ac-ops-2 | Process Documentation Engine
+Solves: "our processes only exist in people's heads", "we can't scale because nothing is documented", "every time someone leaves we lose their process knowledge", "our SOPs are outdated and nobody updates them"
+What it does: Converts process recordings, meeting transcripts, or written notes into structured, version-controlled SOPs ready for team distribution.
+Tools: Notion, Confluence, Google Docs, Loom, Fireflies.ai
+
+ID: ac-ops-3 | Decision-to-Action Converter
+Solves: "we leave meetings with decisions made but no one tracks who does what", "action items from standups never make it into the project tool", "things fall through the cracks between meetings", "we have great meetings but poor follow-through"
+What it does: Extracts decisions and action items from meeting transcripts and pushes them into your project management tool with owners and due dates.
+Tools: Asana, Monday.com, Jira, ClickUp, Fireflies.ai
+
+ID: ac-ops-4 | Project Pulse Digest
+Solves: "leadership asks for a status update and it takes 2 hours to compile", "project managers spend more time reporting than managing", "no one knows the current state of all active projects without a meeting", "weekly status emails are always incomplete"
+What it does: Pulls task completion data from project tools and generates a concise weekly status report formatted for leadership.
+Tools: Asana, Monday.com, Jira, ClickUp, Notion, Slack
+
+ID: ac-ops-5 | Inventory Threshold Sentinel
+Solves: "we run out of stock before anyone notices", "purchase requests are always reactive not proactive", "stockouts are hurting operations or sales", "reordering is manual and dependent on someone remembering to check"
+What it does: Monitors inventory levels against reorder thresholds and triggers purchase requests automatically when stock falls below target levels.
+Tools: QuickBooks, NetSuite, Shopify, Square, Cin7, Fishbowl
+
+---
+
+### Legal & Compliance (For Legal & Compliance Leaders)
+
+ID: ac-legalcomp-1 | Redline Intelligence Digest
+Solves: "legal spends hours reading through redlined contracts before they can respond", "we can't triage which redlines need attention first", "counterparty changes are buried in long documents", "response times on contract reviews are too slow"
+What it does: Reads incoming redlined contracts and produces a structured summary of changes by clause category so legal can triage and respond faster.
+Tools: DocuSign, PandaDoc, Ironclad, MS Word, Google Docs
+
+ID: ac-legalcomp-2 | Contract Clause Extractor
+Solves: "we can't quickly find what's in a specific contract", "we've been surprised by clauses we forgot were in old agreements", "building a contract summary takes hours of manual review", "no searchable record of what's been agreed to across vendors and partners"
+What it does: Extracts key clauses from agreements and stores them in a structured, searchable format for easy reference.
+Tools: DocuSign, PandaDoc, Ironclad, Notion, Airtable
+
+ID: ac-legalcomp-3 | Regulatory Change Sentinel
+Solves: "we find out about regulatory changes too late", "no systematic way to track rule changes in our industry", "compliance team is always playing catch-up", "we rely on consultants to tell us about regulatory updates"
+What it does: Tracks regulatory feeds and industry publications for relevant rule changes, delivering a prioritized alert with an impact summary.
+Tools: Google Alerts, RSS Feeds, LexisNexis, Thomson Reuters, Slack
+
+ID: ac-legalcomp-4 | Compliance Policy Assistant
+Solves: "employees ask the same compliance questions repeatedly", "teams don't know where to find the right policy docs", "compliance team spends too much time answering routine questions", "policy knowledge is locked in PDFs nobody reads"
+What it does: Answers internal questions about compliance policies and regulatory requirements by querying approved policy documentation.
+Tools: Slack, MS Teams, Notion, Confluence, Google Drive
+
+ID: ac-legalcomp-5 | Audit Trail Compiler
+Solves: "preparing for an audit takes weeks of manual log pulling", "we can't quickly prove who approved what and when", "audit requests are always stressful because the data is scattered", "we don't have a clean record of access and approval history"
+What it does: Compiles activity logs, approval records, and access histories into a formatted audit trail report ready for internal review or external examination.
+Tools: Google Workspace, Microsoft 365, Okta, DocuSign, NetSuite
+
+---
+
+## INDUSTRY ACCELERATORS
+
+### Professional Services (Consulting, Accounting & Advisory)
+
+ID: ac-ps-1 | Engagement Launch Engine
+Solves: "new client onboarding is chaotic after a contract is signed", "kickoff prep takes days of manual assembly", "team members don't know their roles on new engagements", "clients get a poor first impression because onboarding is disorganized"
+What it does: Automatically assembles a new client onboarding package the moment a contract is signed, covering scope summary, team assignments, milestones, and document checklist.
+Tools: HubSpot, Salesforce, DocuSign, Asana, Monday.com, Notion
+
+ID: ac-ps-2 | Utilization Health Monitor
+Solves: "we only find out utilization is low at the end of the month", "consultants forget to log hours and it throws off billing", "we don't know which projects are over- or under-resourced until it's too late", "billing cycle surprises because timesheets weren't tracked"
+What it does: Tracks billable hours logged per project and per consultant, alerting managers when utilization rates drift outside target thresholds before the billing cycle closes.
+Tools: Harvest, Toggl Track, BQE Core, QuickBooks Time, Deltek
+
+ID: ac-ps-3 | Proposal Intelligence Engine
+Solves: "proposals take too long to write and feel repetitive", "we're recreating the wheel on every RFP response", "discovery call notes don't make it into the proposal", "proposal quality varies too much across the team"
+What it does: Drafts a customized client proposal from a discovery call transcript and CRM data, pulling in relevant case studies, service descriptions, and pricing templates automatically.
+Tools: HubSpot, Salesforce, Fireflies.ai, PandaDoc, Google Docs
+
+ID: ac-ps-4 | Deliverable Risk Tracker
+Solves: "deliverables slip and we don't catch it until the client notices", "engagement leads don't have a clear view of what's overdue", "project management is inconsistent across engagements", "we miss deadlines because there's no central tracking"
+What it does: Monitors open deliverables across active engagements and surfaces overdue items to engagement leads before they become client issues.
+Tools: Asana, Monday.com, ClickUp, Notion, Jira, Slack
+
+ID: ac-ps-5 | Engagement Knowledge Vault
+Solves: "every engagement starts from zero because we don't capture what we learn", "junior staff reinvent solutions senior staff already figured out", "institutional knowledge is siloed in individual consultants", "we can't reuse work across similar engagements"
+What it does: Captures methodologies, frameworks, and lessons learned from completed engagements and indexes them into a searchable internal knowledge base.
+Tools: Notion, Confluence, Google Drive, SharePoint, Fireflies.ai, Guru
+
+---
+
+### Retail
+
+ID: ac-retail-1 | Stock Replenishment Engine
+Solves: "we run out of our best-selling products before anyone catches it", "purchase orders are always reactive", "stockouts are costing us sales", "inventory management is completely manual"
+What it does: Monitors stock levels in real time and automatically generates purchase orders when products fall below reorder thresholds.
+Tools: Shopify, Square, Lightspeed, QuickBooks, Cin7, Fishbowl
+
+ID: ac-retail-2 | Lapsed Customer Re-Engagement
+Solves: "we have thousands of customers who haven't bought in months", "no systematic outreach to lapsed buyers", "we're only marketing to active customers and ignoring the rest of our list", "customer LTV is suffering because we don't re-engage"
+What it does: Identifies lapsed customers based on purchase recency and automatically triggers personalized re-engagement sequences across email and SMS.
+Tools: Shopify, Klaviyo, Mailchimp, ActiveCampaign, HubSpot, Attentive
+
+ID: ac-retail-3 | Reputation Intelligence Monitor
+Solves: "negative reviews are sitting there unanswered", "we don't know what customers are saying about us online", "one bad review can hurt us and we find out too late", "we have no process for monitoring or responding to reviews"
+What it does: Aggregates customer reviews across Google, Yelp, and social channels, flags negative sentiment, and drafts response recommendations.
+Tools: Google Business Profile, Yelp, Podium, Birdeye, Yotpo
+
+ID: ac-retail-4 | Daily Revenue Digest
+Solves: "we don't know how the day went until we pull a report manually", "leadership wants a daily number but it takes too long to compile", "no visibility into which products are performing or underperforming day-to-day", "store managers are flying blind"
+What it does: Pulls POS and e-commerce data each day and delivers a plain-language performance summary covering revenue, top SKUs, returns, and variance from target.
+Tools: Shopify, Square, Lightspeed, Clover, QuickBooks, Slack
+
+ID: ac-retail-5 | Purchase Order Tracker
+Solves: "we don't know if a shipment is late until it doesn't show up", "vendor follow-up is completely manual", "PO discrepancies are caught too late and cost us", "we have no visibility into open orders"
+What it does: Tracks open purchase orders against expected delivery dates, sends automated follow-ups to vendors when shipments are delayed, and flags quantity discrepancies.
+Tools: QuickBooks, NetSuite, Cin7, Lightspeed, Shopify, Gmail
+
+---
+
+### Trades / Field Service (HVAC, Plumbing, Electrical)
+
+ID: ac-trades-1 | Estimate Conversion Engine
+Solves: "we send estimates and never hear back", "techs give quotes but nobody follows up", "estimates go cold because follow-up is inconsistent", "we're leaving money on the table because we don't chase estimates"
+What it does: Automatically sends timed follow-up messages to customers who received an estimate but haven't responded, including reminders, availability windows, and expiration notices.
+Tools: ServiceTitan, Jobber, Housecall Pro, FieldEdge, Twilio SMS
+
+ID: ac-trades-2 | Job Completion Automator
+Solves: "invoices go out late because someone forgets to send them after a job", "we're not collecting reviews at the right moment", "the gap between job completion and invoice is costing us cash flow", "customer satisfaction surveys never get sent"
+What it does: Detects when a job is marked complete and immediately triggers invoice generation, customer satisfaction survey delivery, and review request messaging.
+Tools: ServiceTitan, Jobber, Housecall Pro, QuickBooks, Stripe, Twilio SMS
+
+ID: ac-trades-3 | Recurring Revenue Engine
+Solves: "one-time jobs never turn into repeat business", "customers forget to schedule their annual service", "we have no systematic way to generate recurring revenue from past customers", "our book of business is always starting from zero"
+What it does: Tracks equipment service history and automatically sends seasonal or interval-based maintenance reminders, converting one-time jobs into recurring revenue.
+Tools: ServiceTitan, Jobber, Housecall Pro, Mailchimp, Twilio SMS
+
+ID: ac-trades-4 | Schedule Gap Optimizer
+Solves: "techs have gaps in their day that we don't catch in time to fill", "cancellations leave holes in the schedule that cost us", "routes are inefficient and waste drive time", "dispatchers are overwhelmed trying to rebalance the schedule"
+What it does: Monitors daily job schedules for gaps, cancellations, or travel inefficiencies and surfaces rebalancing recommendations to keep technicians productive.
+Tools: ServiceTitan, Jobber, Housecall Pro, Google Maps API, Slack
+
+ID: ac-trades-5 | Review Generation Engine
+Solves: "we do great work but don't have many Google reviews", "asking for reviews feels awkward so techs don't do it", "our competitors have more reviews even though our service is better", "we're not capitalizing on happy customers to build our reputation"
+What it does: Sends a personalized Google or Facebook review request to every customer within hours of a completed job, automatically pausing if a low satisfaction score is detected first.
+Tools: ServiceTitan, Jobber, Google Business Profile, Podium, Twilio SMS
+
+---
+
+### Marketing Agencies
+
+ID: ac-agency-1 | Agency Onboarding Engine
+Solves: "new client kickoffs are always chaotic", "assets and access credentials trickle in over weeks", "the first impression after signing is disorganized", "team members don't know what to do when a new client is signed"
+What it does: Triggers a structured onboarding workflow the moment a new client contract is signed, covering intake form delivery, kickoff scheduling, asset collection, and team briefing.
+Tools: HubSpot, Salesforce, DocuSign, Asana, Monday.com, Slack
+
+ID: ac-agency-2 | Client Report Packager
+Solves: "building client reports takes half a day every month", "we pull data from six platforms manually every reporting cycle", "clients want a clean summary and we send them a data dump", "reporting is eating into time we should spend on strategy"
+What it does: Pulls cross-channel performance data and assembles it into a client-ready, branded, narrative-annotated report delivered automatically without manual exports.
+Tools: Google Analytics, Google Ads, Meta Ads, HubSpot, AgencyAnalytics, Google Slides
+
+ID: ac-agency-3 | Scope & Budget Sentinel
+Solves: "we keep doing work outside of scope and not charging for it", "account managers don't know they're over budget until it's too late", "clients keep adding requests and we say yes without tracking", "profitability is suffering because scope isn't being enforced"
+What it does: Tracks hours and deliverables logged against contracted scope, alerting account managers when an engagement is approaching budget overrun.
+Tools: Harvest, Toggl Track, Asana, Monday.com, HubSpot, Slack
+
+ID: ac-agency-4 | Content Calendar Builder
+Solves: "building a content calendar from scratch every month is time-consuming", "clients want to see a plan but putting it together takes too long", "content planning is inconsistent across account teams", "we're reactive on content instead of planned"
+What it does: Generates a draft content calendar from a client's campaign brief, pre-populates it with post concepts by channel, and routes it for internal review before client presentation.
+Tools: Notion, Airtable, Asana, Buffer, Hootsuite, Slack
+
+ID: ac-agency-5 | Account Retention Radar
+Solves: "clients churn and we didn't see it coming", "we don't have a systematic way to know which accounts are at risk", "account teams are too close to their clients to be objective about health", "we lose clients at renewal because warning signs weren't caught earlier"
+What it does: Scores each client account by engagement responsiveness, NPS trends, budget utilization, and contract proximity, alerting account leads when a relationship shows early warning signs.
+Tools: HubSpot, Salesforce, Typeform, SurveyMonkey, Harvest, Slack
+
+---
+
+### RIA / Wealth Management
+
+ID: ac-ria-1 | Advisor Meeting Intelligence
+Solves: "advisors spend hours preparing for each client review meeting", "we pull portfolio data, life events, and action items from different places", "client meetings feel generic because prep is rushed", "advisors aren't walking in with the full picture"
+What it does: Automatically compiles a personalized pre-meeting briefing pulling portfolio performance, recent life events, open action items, and market context relevant to their holdings.
+Tools: Salesforce FSC, Redtail CRM, Wealthbox, Orion, Black Diamond, Fathom
+
+ID: ac-ria-2 | Regulatory Deadline Sentinel
+Solves: "ADV filings and client agreement renewals catch us off guard", "we've missed disclosure deadlines because nobody was tracking them", "compliance calendar is managed in a spreadsheet that doesn't alert anyone", "regulatory filing deadlines are a constant source of stress"
+What it does: Tracks expiration dates and filing deadlines for ADV forms, client agreements, and regulatory disclosures, sending automated alerts with sufficient lead time to act.
+Tools: Salesforce FSC, Redtail CRM, Wealthbox, DocuSign, SharePoint
+
+ID: ac-ria-3 | Prospect Nurture Engine
+Solves: "referrals come in but don't hear from us consistently", "warm leads go cold because follow-up is manual and inconsistent", "prospects fall through the cracks between initial conversation and becoming a client", "we're leaving AUM on the table because nurture is weak"
+What it does: Enrolls qualified prospects into personalized multi-touch nurture sequences based on wealth segment, stated goals, and referral source.
+Tools: Salesforce FSC, Redtail CRM, Wealthbox, Mailchimp, HubSpot
+
+ID: ac-ria-4 | Life Event Intelligence Monitor
+Solves: "we miss opportunities to reach out when clients have major life changes", "clients feel like we don't know what's going on in their lives", "advisors are reactive instead of proactively connecting life events to financial needs", "we find out about job changes or inheritances by accident"
+What it does: Monitors CRM notes, email threads, and public signals for life events and alerts advisors to proactively reach out with relevant guidance.
+Tools: Salesforce FSC, Redtail CRM, Wealthbox, Gmail, Google Alerts
+
+ID: ac-ria-5 | Advisor Notes Automator
+Solves: "advisors spend 30 minutes after every meeting updating the CRM", "meeting notes are inconsistent and incomplete", "action items from client meetings don't get logged properly", "compliance requires documentation but it's always a burden"
+What it does: Captures action items, client disclosures, and follow-up commitments from advisor meeting transcripts and automatically logs structured notes into the CRM.
+Tools: Salesforce FSC, Redtail CRM, Wealthbox, Fathom, Fireflies.ai, Zoom
+
+---
+
+### Engineering & Contractors
+
+ID: ac-const-1 | Bid Response Engine
+Solves: "responding to RFPs takes days and we're doing it from scratch every time", "bid quality varies depending on who's assembling it", "we miss RFP deadlines because the process is too slow", "pulling together past project profiles and team bios is always a scramble"
+What it does: Assembles a structured bid response from a project brief, pulling in relevant past project profiles, team bios, compliance certifications, and boilerplate scope language.
+Tools: Procore, Buildertrend, Autodesk ACC, Google Drive, DocuSign
+
+ID: ac-const-2 | Sub Compliance Sentinel
+Solves: "we've had subs on site with expired insurance", "license and certification tracking is done in a spreadsheet", "we find out a sub isn't compliant after work has already started", "compliance documentation is scattered and never up to date"
+What it does: Monitors insurance certificates, license expiration dates, and lien waiver submissions across the subcontractor roster, flagging non-compliant subs before work begins.
+Tools: Procore, Buildertrend, Autodesk ACC, DocuSign, Gmail
+
+ID: ac-const-3 | Field Intelligence Digest
+Solves: "PMs don't have time to read every field log", "field data is captured but never synthesized for stakeholders", "leadership has no visibility into daily site status without a call", "daily reports are inconsistent depending on who writes them"
+What it does: Aggregates daily field logs, weather notes, crew counts, and issue flags and delivers a consolidated project status summary to PMs and stakeholders.
+Tools: Procore, Buildertrend, PlanGrid, Fieldwire, Slack
+
+ID: ac-const-4 | RFI & Submittal Tracker
+Solves: "open RFIs are sitting unanswered and slowing the job down", "we don't know which submittals are overdue until the PM asks", "response deadlines are missed because nobody is tracking them", "schedule slippage is caused by slow RFI responses"
+What it does: Tracks open RFIs and submittals against response deadlines, sends automated reminders to responsible parties, and escalates overdue items to prevent schedule slippage.
+Tools: Procore, Autodesk ACC, Buildertrend, Bluebeam, Slack
+
+ID: ac-const-5 | Budget Variance Sentinel
+Solves: "we find out a project is over budget too late to course-correct", "PMs don't have real-time visibility into cost vs. budget", "budget overruns are a surprise at month-end", "we're not catching cost creep early enough"
+What it does: Compares actual costs against budget baselines in real time and sends proactive alerts when line items approach or breach threshold.
+Tools: Procore, Buildertrend, Sage 300, QuickBooks, Slack
+
+---
+
+### Legal (Law Firms & In-House Teams)
+
+ID: ac-legal-1 | Matter Intake Automator
+Solves: "new matter intake is slow and inconsistent", "conflict checks are done manually and take too long", "new matters don't get routed to the right attorney quickly enough", "intake process varies depending on who handles it"
+What it does: Automates the new matter intake process, collecting client information, triggering a conflict check, and routing the matter to the right attorney based on practice area.
+Tools: Clio, MyCase, PracticePanther, Filevine, Salesforce
+
+ID: ac-legal-2 | Docket & Deadline Sentinel
+Solves: "we've almost missed court deadlines because tracking is manual", "statute of limitations dates are managed in spreadsheets", "deadline management is a constant source of anxiety", "we don't have tiered alerts to remind us at the right intervals"
+What it does: Tracks court deadlines, statute of limitations dates, and filing windows across all active matters, sending tiered alerts at defined intervals before each deadline.
+Tools: Clio, MyCase, Filevine, CourtAlert, Google Calendar, Slack
+
+ID: ac-legal-3 | Client Status Briefer
+Solves: "clients constantly ask for updates and it takes time to compile them", "status updates are inconsistent depending on the attorney", "we're not being proactive enough with client communication", "billing entries and docket activity aren't being turned into client-facing summaries"
+What it does: Drafts a plain-language matter status update for each active client based on recent docket activity, billing entries, and CRM notes.
+Tools: Clio, MyCase, Filevine, Gmail, Fathom, Fireflies.ai
+
+ID: ac-legal-4 | Contract Risk Digest
+Solves: "reviewing incoming contracts takes too long before we can respond", "attorneys spend hours on initial contract review that could be triaged faster", "we can't quickly see where the risk areas are in a new contract", "non-standard clauses are buried and take too long to find"
+What it does: Reads incoming contracts and produces a structured issue summary organized by clause category, flagging non-standard terms, missing provisions, and key risk areas.
+Tools: NetDocuments, iManage, Clio, Google Drive, DocuSign
+
+ID: ac-legal-5 | WIP Revenue Digest
+Solves: "unbilled time slips through and we lose revenue", "attorneys don't know their realization rate until month-end", "billing leakage is a consistent problem we can't get ahead of", "WIP reports are manual and nobody looks at them until it's too late"
+What it does: Generates a weekly work-in-progress report for each attorney showing unbilled time, billing realization rates, and outstanding AR by client.
+Tools: Clio, MyCase, TimeSolv, Bill4Time, QuickBooks, Slack
+SYSTEM;
+}
+
 function ansa_claude_search_handler() {
     check_ajax_referer( 'ansa-nonce', 'nonce' );
 
-    $query   = sanitize_text_field( $_POST['query'] ?? '' );
-    $catalog = $_POST['catalog'] ?? '';
+    $query = sanitize_text_field( $_POST['query'] ?? '' );
 
-    if ( empty( $query ) || empty( $catalog ) ) {
-        wp_send_json_error( 'Missing parameters' );
+    if ( empty( $query ) ) {
+        wp_send_json_error( 'Missing query' );
     }
 
     $api_key = defined( 'ANTHROPIC_API_KEY' ) ? ANTHROPIC_API_KEY : '';
     if ( empty( $api_key ) ) {
         wp_send_json_error( 'API key not configured' );
     }
-
-    $prompt = "You are a search assistant for a catalog of AI automation accelerators.\n\n"
-            . "A user typed this query: \"{$query}\"\n\n"
-            . "Here is the full catalog as JSON:\n{$catalog}\n\n"
-            . "Return ONLY a JSON array of matching accelerator IDs (the \"id\" field), ranked best-match first. "
-            . "Include all accelerators that would genuinely help with the user's problem. "
-            . "Return an empty array if nothing matches. No explanation, no markdown, only the raw JSON array.";
 
     $response = wp_remote_post( 'https://api.anthropic.com/v1/messages', array(
         'headers' => array(
@@ -680,8 +1143,9 @@ function ansa_claude_search_handler() {
         'body'    => wp_json_encode( array(
             'model'      => 'claude-haiku-4-5-20251001',
             'max_tokens' => 400,
+            'system'     => ansa_claude_search_system_prompt(),
             'messages'   => array(
-                array( 'role' => 'user', 'content' => $prompt ),
+                array( 'role' => 'user', 'content' => $query ),
             ),
         ) ),
         'timeout' => 20,
