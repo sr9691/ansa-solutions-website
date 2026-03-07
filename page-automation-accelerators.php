@@ -919,6 +919,7 @@ get_header();
 	max-width: 100%;
 	border-radius: 16px;
 	overflow: hidden;
+	background: #ffffff;
 	box-shadow: 0 8px 40px rgba(0,0,0,0.25);
 }
 
