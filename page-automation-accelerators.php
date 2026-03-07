@@ -932,10 +932,14 @@ get_header();
 </style>
 
 <!-- ============================================================
-     SEARCH LOGIC (NLP via Claude API + keyword fallback)
+     SEARCH LOGIC (NLP via WP AJAX proxy → Claude API)
 ============================================================ -->
 <script>
 (function(){
+
+/* ── WordPress AJAX config (injected server-side) ── */
+const AJAX_URL   = <?php echo json_encode( admin_url('admin-ajax.php') ); ?>;
+const AJAX_NONCE = <?php echo json_encode( wp_create_nonce('ansa-nonce') ); ?>;
 
 /* ── catalog data ── */
 const CARDS = Array.from(document.querySelectorAll('.aia-card'));
@@ -1040,7 +1044,7 @@ function applySearch(q){
 	document.getElementById('aiaNoResults').style.display = visible === 0 ? 'block' : 'none';
 }
 
-/* ── NLP via Claude API ── */
+/* ── NLP via WordPress AJAX proxy (API key stays on server) ── */
 async function runNLP(query){
 	const spinner = document.getElementById('aiaSpinner');
 	spinner.classList.add('active');
@@ -1050,27 +1054,23 @@ async function runNLP(query){
 		id: c.id, name: c.name, desc: c.desc.slice(0,120)
 	})));
 
-	const prompt = `You are a search assistant for a catalog of AI automation accelerators.\n\nA user typed this query: "${query}"\n\nHere is the full catalog as JSON:\n${catalogJson}\n\nReturn ONLY a JSON array of matching accelerator IDs (the "id" field), ranked best-match first. Include all accelerators that would genuinely help with the user's problem. Return an empty array if nothing matches. No explanation, no markdown, only the raw JSON array.`;
-
 	try {
-		const res = await fetch('https://api.anthropic.com/v1/messages', {
-			method:'POST',
-			headers:{ 'Content-Type':'application/json' },
-			body: JSON.stringify({
-				model:'claude-sonnet-4-20250514',
-				max_tokens:400,
-				messages:[{ role:'user', content:prompt }]
-			})
+		const body = new URLSearchParams({
+			action:  'ansa_claude_search',
+			nonce:   AJAX_NONCE,
+			query:   query,
+			catalog: catalogJson,
 		});
+
+		const res  = await fetch(AJAX_URL, { method:'POST', body });
 		const data = await res.json();
-		const raw = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('');
-		const ids = JSON.parse(raw.replace(/```json|```/g,'').trim());
-		if(Array.isArray(ids) && ids.length > 0){
+
+		if(data.success && Array.isArray(data.data) && data.data.length > 0){
 			nlpMode = true;
-			nlpIds  = ids;
+			nlpIds  = data.data;
 			document.getElementById('aiaNlpBanner').style.display = 'flex';
 			document.getElementById('aiaNlpText').textContent =
-				`AI found ${ids.length} accelerator${ids.length!==1?'s':''} matching "${query}"`;
+				`AI found ${nlpIds.length} accelerator${nlpIds.length!==1?'s':''} matching "${query}"`;
 			document.getElementById('aiaSearchHint').textContent = 'Showing AI-matched results';
 			applySearch(query);
 		} else {
