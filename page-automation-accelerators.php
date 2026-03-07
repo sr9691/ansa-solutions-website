@@ -34,6 +34,7 @@ get_header();
 					>
 					<span class="aia-search__spinner" id="aiaSpinner" aria-hidden="true"></span>
 					<button class="aia-search__clear" id="aiaClearBtn" onclick="aiaClear()" aria-label="Clear search">✕</button>
+					<button class="aia-search__btn" id="aiaSearchBtn" onclick="aiaRunSearch()" aria-label="Search">Search</button>
 				</div>
 				<p class="aia-search__hint" id="aiaSearchHint">AI-powered search — describe your problem in plain English</p>
 			</div>
@@ -775,12 +776,20 @@ get_header();
 .aia-search__spinner.active { display:block; }
 @keyframes aia-spin { to { transform:rotate(360deg); } }
 .aia-search__clear {
-	display:none; background:#f3f4f6; border:none; cursor:pointer;
-	color:#6b7280; padding:8px 14px; border-radius:10px;
-	font-size:13px; font-weight:500; transition:var(--transition); font-family:var(--font-body);
+	display:none; background:none; border:none; cursor:pointer;
+	color:#9ca3af; padding:6px 8px;
+	font-size:14px; transition:var(--transition); font-family:var(--font-body);
 }
-.aia-search__clear:hover { background:#e5e7eb; color:#374151; }
+.aia-search__clear:hover { color:#374151; }
 .aia-search__clear.visible { display:block; }
+.aia-search__btn {
+	background:#462CED; border:none; cursor:pointer;
+	color:#fff; padding:10px 20px; border-radius:10px;
+	font-size:14px; font-weight:600; font-family:var(--font-body);
+	white-space:nowrap; transition:var(--transition); flex-shrink:0;
+}
+.aia-search__btn:hover { background:#3520c7; }
+.aia-search__btn:disabled { opacity:0.6; cursor:not-allowed; }
 .aia-search__hint {
 	font-size:12px; color:rgba(255,255,255,0.45); margin:10px 0 0; text-align:center;
 }
@@ -928,6 +937,7 @@ get_header();
 	.aia-tabs { justify-content:flex-start; }
 	.aia-cards { grid-template-columns:1fr; }
 	.aia-result-bar { flex-direction:column; align-items:flex-start; gap:8px; }
+	.aia-search__btn { padding:10px 14px; }
 }
 </style>
 
@@ -941,20 +951,10 @@ get_header();
 const AJAX_URL   = <?php echo json_encode( admin_url('admin-ajax.php') ); ?>;
 const AJAX_NONCE = <?php echo json_encode( wp_create_nonce('ansa-nonce') ); ?>;
 
-/* ── catalog data ── */
-const CARDS = Array.from(document.querySelectorAll('.aia-card'));
-const CATALOG_SUMMARY = CARDS.map(c => ({
-	id: c.id,
-	name: c.querySelector('.aia-card__name').textContent.trim(),
-	desc: c.querySelector('.aia-card__desc').textContent.trim(),
-	kw:  c.dataset.kw || ''
-}));
-
 /* ── state ── */
 let activeTab = 'departments';
 let nlpMode   = false;
 let nlpIds    = [];
-let debounceT = null;
 
 /* ── tab switch ── */
 window.aiaTab = function(tab, btn){
@@ -988,21 +988,26 @@ window.aiaClear = function(){
 	applySearch('');
 };
 
-/* ── input handler ── */
+/* ── input: update clear button + live keyword filter only ── */
 document.getElementById('aiaSearchInput').addEventListener('input', function(){
 	const q = this.value.trim();
 	document.getElementById('aiaClearBtn').classList.toggle('visible', q.length > 0);
-	clearTimeout(debounceT);
-	if(!q){ aiaClear(); return; }
-	if(q.length < 5 || q.split(' ').length <= 2){
-		nlpMode = false; nlpIds = [];
-		document.getElementById('aiaNlpBanner').style.display = 'none';
-		applySearch(q);
-	} else {
-		debounceT = setTimeout(() => runNLP(q), 600);
-		applySearch(q);
-	}
+	// Reset NLP mode when user edits query
+	if(nlpMode){ nlpMode = false; nlpIds = []; document.getElementById('aiaNlpBanner').style.display = 'none'; }
+	applySearch(q);
 });
+
+/* ── Enter key triggers AI search ── */
+document.getElementById('aiaSearchInput').addEventListener('keydown', function(e){
+	if(e.key === 'Enter'){ e.preventDefault(); aiaRunSearch(); }
+});
+
+/* ── Search button handler ── */
+window.aiaRunSearch = function(){
+	const q = document.getElementById('aiaSearchInput').value.trim();
+	if(!q) return;
+	runNLP(q);
+};
 
 /* ── keyword search ── */
 function applySearch(q){
@@ -1035,10 +1040,10 @@ function applySearch(q){
 	});
 	if(!ql && !nlpMode){
 		visible = activeTab === 'all'
-			? CARDS.length
+			? document.querySelectorAll('.aia-card').length
 			: document.querySelectorAll(`.aia-group-wrap[data-tab-group="${activeTab}"] .aia-card`).length;
 		document.querySelectorAll('.aia-group').forEach(g => g.style.display = '');
-		CARDS.forEach(c => { c.classList.remove('aia-hidden','aia-highlight','aia-dim'); });
+		document.querySelectorAll('.aia-card').forEach(c => { c.classList.remove('aia-hidden','aia-highlight','aia-dim'); });
 	}
 	document.getElementById('aiaCount').textContent = visible + ' accelerator' + (visible !== 1 ? 's' : '');
 	document.getElementById('aiaNoResults').style.display = visible === 0 ? 'block' : 'none';
@@ -1046,20 +1051,17 @@ function applySearch(q){
 
 /* ── NLP via WordPress AJAX proxy (API key stays on server) ── */
 async function runNLP(query){
+	const btn     = document.getElementById('aiaSearchBtn');
 	const spinner = document.getElementById('aiaSpinner');
+	btn.disabled  = true;
 	spinner.classList.add('active');
 	document.getElementById('aiaSearchHint').textContent = 'Searching with AI...';
 
-	const catalogJson = JSON.stringify(CATALOG_SUMMARY.map(c => ({
-		id: c.id, name: c.name, desc: c.desc.slice(0,120)
-	})));
-
 	try {
 		const body = new URLSearchParams({
-			action:  'ansa_claude_search',
-			nonce:   AJAX_NONCE,
-			query:   query,
-			catalog: catalogJson,
+			action: 'ansa_claude_search',
+			nonce:  AJAX_NONCE,
+			query:  query,
 		});
 
 		const res  = await fetch(AJAX_URL, { method:'POST', body });
@@ -1076,7 +1078,7 @@ async function runNLP(query){
 		} else {
 			nlpMode = false; nlpIds = [];
 			document.getElementById('aiaNlpBanner').style.display = 'none';
-			document.getElementById('aiaSearchHint').textContent = 'No AI matches found — showing keyword results';
+			document.getElementById('aiaSearchHint').textContent = 'No AI matches — showing keyword results';
 			applySearch(query);
 		}
 	} catch(e){
@@ -1085,6 +1087,7 @@ async function runNLP(query){
 		document.getElementById('aiaSearchHint').textContent = 'AI-powered search — describe your problem in plain English';
 		applySearch(query);
 	} finally {
+		btn.disabled = false;
 		spinner.classList.remove('active');
 	}
 }
