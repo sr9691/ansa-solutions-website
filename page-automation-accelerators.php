@@ -17,7 +17,7 @@ get_header();
 			<span class="badge badge--primary">AI-Powered Automation</span>
 			<h1 class="hero__title">AI Accelerators</h1>
 			<p class="hero__subtitle">
-				An AI Accelerator is a pre-built automation that connects your existing tools, applies AI where it adds leverage, and delivers a useful output — a briefing, an alert, a draft, a report — without anyone doing it manually. Browse 75+ ready-to-deploy accelerators across every department and industry we serve.
+				An AI Accelerator is a pre-built automation that connects your existing tools, applies AI where it adds leverage, and delivers a useful output. A briefing, an alert, a draft, a report. No manual work required. Browse 75+ ready-to-deploy accelerators across every department and industry we serve.
 			</p>
 
 			<!-- NLP Search -->
@@ -35,7 +35,7 @@ get_header();
 					<span class="aia-search__spinner" id="aiaSpinner" aria-hidden="true"></span>
 					<button class="aia-search__clear" id="aiaClearBtn" onclick="aiaClear()" aria-label="Clear search">✕</button>
 				</div>
-				<p class="aia-search__hint" id="aiaSearchHint">AI-powered — describe your problem in plain English</p>
+				<p class="aia-search__hint" id="aiaSearchHint">AI-powered search — describe your problem in plain English</p>
 			</div>
 
 			<!-- Tabs -->
@@ -201,7 +201,7 @@ get_header();
 					</div>
 					<div class="aia-card" id="ac-cs-5" data-kw="churn risk alerts usage drop sentiment escalation save workflow gainsight churnzero zendesk slack">
 						<div class="aia-card__head"><span class="aia-card__name">Churn Risk Alerts</span></div>
-						<p class="aia-card__desc">Detects early churn signals from usage drop-offs, sentiment shifts, and support escalations — triggering proactive save workflows before it's too late.</p>
+						<p class="aia-card__desc">Detects early churn signals from usage drop-offs, sentiment shifts, and support escalations, triggering proactive save workflows before it's too late.</p>
 						<div class="aia-card__systems"><span class="aia-chip">Gainsight</span><span class="aia-chip">ChurnZero</span><span class="aia-chip">Zendesk</span><span class="aia-chip">Slack</span></div>
 					</div>
 				</div>
@@ -223,7 +223,7 @@ get_header();
 				<div class="aia-cards">
 					<div class="aia-card" id="ac-finance-1" data-kw="invoice processing slow approval manual data entry payment cycle accounts payable quickbooks xero netsuite bill.com sap">
 						<div class="aia-card__head"><span class="aia-card__name">Invoice Processing</span></div>
-						<p class="aia-card__desc">Extracts, validates, and routes incoming invoices for approval automatically — reducing manual data entry and accelerating payment cycles.</p>
+						<p class="aia-card__desc">Extracts, validates, and routes incoming invoices for approval automatically, reducing manual data entry and accelerating payment cycles.</p>
 						<div class="aia-card__systems"><span class="aia-chip">QuickBooks</span><span class="aia-chip">Xero</span><span class="aia-chip">NetSuite</span><span class="aia-chip">Sage</span><span class="aia-chip">Bill.com</span><span class="aia-chip">SAP</span></div>
 					</div>
 					<div class="aia-card" id="ac-finance-2" data-kw="expense audit policy compliance out-of-policy spend anomalies expensify concur ramp brex quickbooks">
@@ -233,7 +233,7 @@ get_header();
 					</div>
 					<div class="aia-card" id="ac-finance-3" data-kw="contract monitor vendor renewal auto-renewal spend threshold docusign pandadoc ironclad hubspot">
 						<div class="aia-card__head"><span class="aia-card__name">Contract Monitor</span></div>
-						<p class="aia-card__desc">Tracks vendor contracts for upcoming renewals, auto-renewal clauses, and spend thresholds — alerting stakeholders in time to act.</p>
+						<p class="aia-card__desc">Tracks vendor contracts for upcoming renewals, auto-renewal clauses, and spend thresholds, alerting stakeholders in time to act.</p>
 						<div class="aia-card__systems"><span class="aia-chip">DocuSign</span><span class="aia-chip">PandaDoc</span><span class="aia-chip">Ironclad</span><span class="aia-chip">Google Drive</span><span class="aia-chip">SharePoint</span></div>
 					</div>
 					<div class="aia-card" id="ac-finance-4" data-kw="cash flow alerts receivables payables low balance forecast quickbooks xero netsuite stripe slack">
@@ -243,7 +243,7 @@ get_header();
 					</div>
 					<div class="aia-card" id="ac-finance-5" data-kw="month-end close checklist close tasks owners completion blockers quickbooks netsuite asana notion slack">
 						<div class="aia-card__head"><span class="aia-card__name">Month-End Close Checklist</span></div>
-						<p class="aia-card__desc">Automates the orchestration of month-end close tasks — notifying owners, tracking completion, and escalating blockers to keep the close on schedule.</p>
+						<p class="aia-card__desc">Automates the orchestration of month-end close tasks, notifying owners, tracking completion, and escalating blockers to keep the close on schedule.</p>
 						<div class="aia-card__systems"><span class="aia-chip">QuickBooks</span><span class="aia-chip">Xero</span><span class="aia-chip">NetSuite</span><span class="aia-chip">Asana</span><span class="aia-chip">Notion</span><span class="aia-chip">Slack</span></div>
 					</div>
 				</div>
@@ -265,7 +265,7 @@ get_header();
 				<div class="aia-cards">
 					<div class="aia-card" id="ac-mktg-1" data-kw="content repurposing pipeline blog post social media email ad copy channel wordpress hubspot buffer hootsuite mailchimp">
 						<div class="aia-card__head"><span class="aia-card__name">Content Repurposing Pipeline</span></div>
-						<p class="aia-card__desc">Transforms a single long-form asset into social posts, email snippets, and ad copy — automatically formatted per channel.</p>
+						<p class="aia-card__desc">Transforms a single long-form asset into social posts, email snippets, and ad copy, automatically formatted per channel.</p>
 						<div class="aia-card__systems"><span class="aia-chip">WordPress</span><span class="aia-chip">HubSpot CMS</span><span class="aia-chip">Buffer</span><span class="aia-chip">Hootsuite</span><span class="aia-chip">Mailchimp</span></div>
 					</div>
 					<div class="aia-card" id="ac-mktg-2" data-kw="campaign performance summarizer analytics metrics executive summary google analytics hubspot meta ads google ads databox">
@@ -307,7 +307,7 @@ get_header();
 				<div class="aia-cards">
 					<div class="aia-card" id="ac-hr-1" data-kw="job description generator hiring bias-reviewed intake form greenhouse lever workday bamboohr linkedin indeed">
 						<div class="aia-card__head"><span class="aia-card__name">Job Description Generator</span></div>
-						<p class="aia-card__desc">Produces structured, bias-reviewed job descriptions from a hiring manager intake form — consistent, on-brand, and ready to post in minutes.</p>
+						<p class="aia-card__desc">Produces structured, bias-reviewed job descriptions from a hiring manager intake form. Consistent, on-brand, and ready to post in minutes.</p>
 						<div class="aia-card__systems"><span class="aia-chip">Greenhouse</span><span class="aia-chip">Lever</span><span class="aia-chip">Workday</span><span class="aia-chip">BambooHR</span><span class="aia-chip">LinkedIn Jobs</span></div>
 					</div>
 					<div class="aia-card" id="ac-hr-2" data-kw="resume screening shortlist ranked applications role criteria candidate greenhouse lever bamboohr rippling">
@@ -349,7 +349,7 @@ get_header();
 				<div class="aia-cards">
 					<div class="aia-card" id="ac-ops-1" data-kw="vendor performance scorecard delivery quality sla supplier review quickbooks netsuite google sheets notion">
 						<div class="aia-card__head"><span class="aia-card__name">Vendor Performance Scorecard</span></div>
-						<p class="aia-card__desc">Aggregates delivery, quality, and SLA data across vendors into a regularly updated scorecard — making supplier reviews faster and more objective.</p>
+						<p class="aia-card__desc">Aggregates delivery, quality, and SLA data across vendors into a regularly updated scorecard, making supplier reviews faster and more objective.</p>
 						<div class="aia-card__systems"><span class="aia-chip">QuickBooks</span><span class="aia-chip">NetSuite</span><span class="aia-chip">SAP</span><span class="aia-chip">Google Sheets</span><span class="aia-chip">Notion</span></div>
 					</div>
 					<div class="aia-card" id="ac-ops-2" data-kw="sop documentation generator process recording transcript structured sop notion confluence loom fireflies">
@@ -438,7 +438,7 @@ get_header();
 				<div class="aia-cards">
 					<div class="aia-card" id="ac-ps-1" data-kw="engagement kickoff packager client onboarding scope team milestones checklist hubspot docusign asana notion">
 						<div class="aia-card__head"><span class="aia-card__name">Engagement Kickoff Packager</span></div>
-						<p class="aia-card__desc">Automatically assembles a new client onboarding package the moment a contract is signed — scope summary, team assignments, milestones, and document checklist.</p>
+						<p class="aia-card__desc">Automatically assembles a new client onboarding package the moment a contract is signed, covering scope summary, team assignments, milestones, and document checklist.</p>
 						<div class="aia-card__systems"><span class="aia-chip">HubSpot</span><span class="aia-chip">Salesforce</span><span class="aia-chip">DocuSign</span><span class="aia-chip">Asana</span><span class="aia-chip">Monday.com</span><span class="aia-chip">Notion</span></div>
 					</div>
 					<div class="aia-card" id="ac-ps-2" data-kw="timesheet utilization monitor billable hours consultant utilization rate harvest toggl bqe quickbooks mavenlink deltek">
@@ -448,7 +448,7 @@ get_header();
 					</div>
 					<div class="aia-card" id="ac-ps-3" data-kw="proposal generator discovery call crm case studies pricing template pandadoc google docs word hubspot salesforce fireflies">
 						<div class="aia-card__head"><span class="aia-card__name">Proposal Generator</span></div>
-						<p class="aia-card__desc">Drafts a customized client proposal from a discovery call transcript and CRM data — pulling in relevant case studies, service descriptions, and pricing templates automatically.</p>
+						<p class="aia-card__desc">Drafts a customized client proposal from a discovery call transcript and CRM data, pulling in relevant case studies, service descriptions, and pricing templates automatically.</p>
 						<div class="aia-card__systems"><span class="aia-chip">HubSpot</span><span class="aia-chip">Salesforce</span><span class="aia-chip">Fireflies.ai</span><span class="aia-chip">PandaDoc</span><span class="aia-chip">Google Docs</span></div>
 					</div>
 					<div class="aia-card" id="ac-ps-4" data-kw="client deliverable tracker overdue engagement leads deliverables asana monday clickup notion jira slack gmail">
@@ -522,7 +522,7 @@ get_header();
 				<div class="aia-cards">
 					<div class="aia-card" id="ac-trades-1" data-kw="estimate follow-up sequencer customers estimate no response reminders availability expiration servicetitan jobber housecall fieldedge twilio sms">
 						<div class="aia-card__head"><span class="aia-card__name">Estimate Follow-Up Sequencer</span></div>
-						<p class="aia-card__desc">Automatically sends timed follow-up messages to customers who received an estimate but haven't responded — including reminders, availability windows, and expiration notices.</p>
+						<p class="aia-card__desc">Automatically sends timed follow-up messages to customers who received an estimate but haven't responded, including reminders, availability windows, and expiration notices.</p>
 						<div class="aia-card__systems"><span class="aia-chip">ServiceTitan</span><span class="aia-chip">Jobber</span><span class="aia-chip">Housecall Pro</span><span class="aia-chip">FieldEdge</span><span class="aia-chip">Twilio SMS</span></div>
 					</div>
 					<div class="aia-card" id="ac-trades-2" data-kw="job completion invoice trigger complete invoice customer satisfaction survey review request servicetitan jobber quickbooks stripe">
@@ -532,17 +532,17 @@ get_header();
 					</div>
 					<div class="aia-card" id="ac-trades-3" data-kw="maintenance reminder engine service history seasonal interval recurring revenue servicetitan jobber housecall mailchimp twilio">
 						<div class="aia-card__head"><span class="aia-card__name">Maintenance Reminder Engine</span></div>
-						<p class="aia-card__desc">Tracks equipment service history and automatically sends seasonal or interval-based maintenance reminders — converting one-time jobs into recurring revenue.</p>
+						<p class="aia-card__desc">Tracks equipment service history and automatically sends seasonal or interval-based maintenance reminders, converting one-time jobs into recurring revenue.</p>
 						<div class="aia-card__systems"><span class="aia-chip">ServiceTitan</span><span class="aia-chip">Jobber</span><span class="aia-chip">Housecall Pro</span><span class="aia-chip">Mailchimp</span><span class="aia-chip">Twilio SMS</span></div>
 					</div>
 					<div class="aia-card" id="ac-trades-4" data-kw="technician schedule optimizer gaps cancellations travel inefficiencies rebalancing servicetitan jobber google maps slack">
 						<div class="aia-card__head"><span class="aia-card__name">Technician Schedule Optimizer</span></div>
-						<p class="aia-card__desc">Monitors daily job schedules for gaps, cancellations, or travel inefficiencies and surfaces rebalancing recommendations — keeping technicians productive.</p>
+						<p class="aia-card__desc">Monitors daily job schedules for gaps, cancellations, or travel inefficiencies and surfaces rebalancing recommendations to keep technicians productive.</p>
 						<div class="aia-card__systems"><span class="aia-chip">ServiceTitan</span><span class="aia-chip">Jobber</span><span class="aia-chip">Housecall Pro</span><span class="aia-chip">Google Maps API</span><span class="aia-chip">Slack</span></div>
 					</div>
 					<div class="aia-card" id="ac-trades-5" data-kw="review request automation google facebook review completed job low satisfaction servicetitan jobber podium birdeye twilio">
 						<div class="aia-card__head"><span class="aia-card__name">Review Request Automation</span></div>
-						<p class="aia-card__desc">Sends a personalized Google or Facebook review request to every customer within hours of a completed job — automatically pausing if a low satisfaction score is detected first.</p>
+						<p class="aia-card__desc">Sends a personalized Google or Facebook review request to every customer within hours of a completed job, automatically pausing if a low satisfaction score is detected first.</p>
 						<div class="aia-card__systems"><span class="aia-chip">ServiceTitan</span><span class="aia-chip">Jobber</span><span class="aia-chip">Google Business Profile</span><span class="aia-chip">Podium</span><span class="aia-chip">Twilio SMS</span></div>
 					</div>
 				</div>
@@ -564,12 +564,12 @@ get_header();
 				<div class="aia-cards">
 					<div class="aia-card" id="ac-agency-1" data-kw="client onboarding orchestrator contract signed intake kickoff asset collection team briefing hubspot docusign asana slack">
 						<div class="aia-card__head"><span class="aia-card__name">Client Onboarding Orchestrator</span></div>
-						<p class="aia-card__desc">Triggers a structured onboarding workflow the moment a new client contract is signed — intake form delivery, kickoff scheduling, asset collection, and team briefing.</p>
+						<p class="aia-card__desc">Triggers a structured onboarding workflow the moment a new client contract is signed, covering intake form delivery, kickoff scheduling, asset collection, and team briefing.</p>
 						<div class="aia-card__systems"><span class="aia-chip">HubSpot</span><span class="aia-chip">Salesforce</span><span class="aia-chip">DocuSign</span><span class="aia-chip">Asana</span><span class="aia-chip">Monday.com</span><span class="aia-chip">Slack</span></div>
 					</div>
 					<div class="aia-card" id="ac-agency-2" data-kw="campaign reporting packager cross-channel branded report narrative annotated google analytics google ads meta hubspot agencyanalytics">
 						<div class="aia-card__head"><span class="aia-card__name">Campaign Reporting Packager</span></div>
-						<p class="aia-card__desc">Pulls cross-channel performance data and assembles it into a client-ready report — branded, narrative-annotated, and delivered automatically without manual exports.</p>
+						<p class="aia-card__desc">Pulls cross-channel performance data and assembles it into a client-ready, branded, narrative-annotated report delivered automatically without manual exports.</p>
 						<div class="aia-card__systems"><span class="aia-chip">Google Analytics</span><span class="aia-chip">Google Ads</span><span class="aia-chip">Meta Ads</span><span class="aia-chip">HubSpot</span><span class="aia-chip">AgencyAnalytics</span><span class="aia-chip">Google Slides</span></div>
 					</div>
 					<div class="aia-card" id="ac-agency-3" data-kw="scope creep monitor hours deliverables budget overrun account managers harvest toggl asana monday clickup hubspot slack">
@@ -584,7 +584,7 @@ get_header();
 					</div>
 					<div class="aia-card" id="ac-agency-5" data-kw="client health churn monitor engagement nps budget utilization contract proximity warning hubspot typeform harvest slack">
 						<div class="aia-card__head"><span class="aia-card__name">Client Health &amp; Churn Monitor</span></div>
-						<p class="aia-card__desc">Scores each client account by engagement responsiveness, NPS trends, budget utilization, and contract proximity — alerting account leads when a relationship shows early warning signs.</p>
+						<p class="aia-card__desc">Scores each client account by engagement responsiveness, NPS trends, budget utilization, and contract proximity, alerting account leads when a relationship shows early warning signs.</p>
 						<div class="aia-card__systems"><span class="aia-chip">HubSpot</span><span class="aia-chip">Salesforce</span><span class="aia-chip">Typeform</span><span class="aia-chip">SurveyMonkey</span><span class="aia-chip">Harvest</span><span class="aia-chip">Slack</span></div>
 					</div>
 				</div>
@@ -606,17 +606,17 @@ get_header();
 				<div class="aia-cards">
 					<div class="aia-card" id="ac-ria-1" data-kw="client review meeting prep portfolio performance life events action items market context salesforce redtail wealthbox orion black diamond fathom">
 						<div class="aia-card__head"><span class="aia-card__name">Client Review Meeting Prep</span></div>
-						<p class="aia-card__desc">Automatically compiles a personalized pre-meeting briefing — pulling portfolio performance, recent life events, open action items, and market context relevant to their holdings.</p>
+						<p class="aia-card__desc">Automatically compiles a personalized pre-meeting briefing pulling portfolio performance, recent life events, open action items, and market context relevant to their holdings.</p>
 						<div class="aia-card__systems"><span class="aia-chip">Salesforce FSC</span><span class="aia-chip">Redtail CRM</span><span class="aia-chip">Wealthbox</span><span class="aia-chip">Orion</span><span class="aia-chip">Black Diamond</span><span class="aia-chip">Fathom</span></div>
 					</div>
 					<div class="aia-card" id="ac-ria-2" data-kw="compliance document monitor adv forms client agreements regulatory disclosures deadlines expiration salesforce redtail docusign sharepoint">
 						<div class="aia-card__head"><span class="aia-card__name">Compliance Document Monitor</span></div>
-						<p class="aia-card__desc">Tracks expiration dates and filing deadlines for ADV forms, client agreements, and regulatory disclosures — sending automated alerts with sufficient lead time to act.</p>
+						<p class="aia-card__desc">Tracks expiration dates and filing deadlines for ADV forms, client agreements, and regulatory disclosures, sending automated alerts with sufficient lead time to act.</p>
 						<div class="aia-card__systems"><span class="aia-chip">Salesforce FSC</span><span class="aia-chip">Redtail CRM</span><span class="aia-chip">Wealthbox</span><span class="aia-chip">DocuSign</span><span class="aia-chip">SharePoint</span></div>
 					</div>
 					<div class="aia-card" id="ac-ria-3" data-kw="prospect nurture sequencer wealth segment goals referral source warm leads salesforce redtail mailchimp activecampaign hubspot">
 						<div class="aia-card__head"><span class="aia-card__name">Prospect Nurture Sequencer</span></div>
-						<p class="aia-card__desc">Enrolls qualified prospects into personalized multi-touch nurture sequences based on wealth segment, stated goals, and referral source — ensuring no warm lead goes cold.</p>
+						<p class="aia-card__desc">Enrolls qualified prospects into personalized multi-touch nurture sequences based on wealth segment, stated goals, and referral source, ensuring no warm lead goes cold.</p>
 						<div class="aia-card__systems"><span class="aia-chip">Salesforce FSC</span><span class="aia-chip">Redtail CRM</span><span class="aia-chip">Wealthbox</span><span class="aia-chip">Mailchimp</span><span class="aia-chip">HubSpot</span></div>
 					</div>
 					<div class="aia-card" id="ac-ria-4" data-kw="client life event monitor job change marriage inheritance retirement crm email google alerts salesforce redtail wealthbox">
@@ -648,12 +648,12 @@ get_header();
 				<div class="aia-cards">
 					<div class="aia-card" id="ac-const-1" data-kw="bid rfp response packager project brief past projects team bios certifications scope procore buildertrend autodesk docusign">
 						<div class="aia-card__head"><span class="aia-card__name">Bid &amp; RFP Response Packager</span></div>
-						<p class="aia-card__desc">Assembles a structured bid response from a project brief — pulling in relevant past project profiles, team bios, compliance certifications, and boilerplate scope language.</p>
+						<p class="aia-card__desc">Assembles a structured bid response from a project brief, pulling in relevant past project profiles, team bios, compliance certifications, and boilerplate scope language.</p>
 						<div class="aia-card__systems"><span class="aia-chip">Procore</span><span class="aia-chip">Buildertrend</span><span class="aia-chip">Autodesk ACC</span><span class="aia-chip">Google Drive</span><span class="aia-chip">DocuSign</span></div>
 					</div>
 					<div class="aia-card" id="ac-const-2" data-kw="subcontractor compliance tracker insurance certificates license expiration lien waivers non-compliant procore buildertrend docusign">
 						<div class="aia-card__head"><span class="aia-card__name">Subcontractor Compliance Tracker</span></div>
-						<p class="aia-card__desc">Monitors insurance certificates, license expiration dates, and lien waiver submissions across your subcontractor roster — flagging non-compliant subs before work begins.</p>
+						<p class="aia-card__desc">Monitors insurance certificates, license expiration dates, and lien waiver submissions across your subcontractor roster, flagging non-compliant subs before work begins.</p>
 						<div class="aia-card__systems"><span class="aia-chip">Procore</span><span class="aia-chip">Buildertrend</span><span class="aia-chip">Autodesk ACC</span><span class="aia-chip">DocuSign</span><span class="aia-chip">Gmail</span></div>
 					</div>
 					<div class="aia-card" id="ac-const-3" data-kw="daily field report summarizer field logs weather crew counts issue flags project status procore buildertrend plangrid fieldwire slack">
@@ -668,7 +668,7 @@ get_header();
 					</div>
 					<div class="aia-card" id="ac-const-5" data-kw="project budget variance alerter actual costs budget baseline overrun line items procore buildertrend sage quickbooks viewpoint slack">
 						<div class="aia-card__head"><span class="aia-card__name">Project Budget Variance Alerter</span></div>
-						<p class="aia-card__desc">Compares actual costs against budget baselines in real time and sends proactive alerts when line items approach or breach threshold — giving PMs time to course-correct.</p>
+						<p class="aia-card__desc">Compares actual costs against budget baselines in real time and sends proactive alerts when line items approach or breach threshold, giving PMs time to course-correct.</p>
 						<div class="aia-card__systems"><span class="aia-chip">Procore</span><span class="aia-chip">Buildertrend</span><span class="aia-chip">Sage 300</span><span class="aia-chip">QuickBooks</span><span class="aia-chip">Slack</span></div>
 					</div>
 				</div>
@@ -690,12 +690,12 @@ get_header();
 				<div class="aia-cards">
 					<div class="aia-card" id="ac-legal-1" data-kw="matter intake conflict check client information practice area clio mycase practicepanther filevine netdocuments salesforce gmail">
 						<div class="aia-card__head"><span class="aia-card__name">Matter Intake &amp; Conflict Check</span></div>
-						<p class="aia-card__desc">Automates the new matter intake process — collecting client information, triggering a conflict check, and routing the matter to the right attorney based on practice area.</p>
+						<p class="aia-card__desc">Automates the new matter intake process, collecting client information, triggering a conflict check, and routing the matter to the right attorney based on practice area.</p>
 						<div class="aia-card__systems"><span class="aia-chip">Clio</span><span class="aia-chip">MyCase</span><span class="aia-chip">PracticePanther</span><span class="aia-chip">Filevine</span><span class="aia-chip">Salesforce</span></div>
 					</div>
 					<div class="aia-card" id="ac-legal-2" data-kw="deadline docket monitor court deadlines statute of limitations filing windows tiered alerts clio mycase filevine courtalert google calendar slack">
 						<div class="aia-card__head"><span class="aia-card__name">Deadline &amp; Docket Monitor</span></div>
-						<p class="aia-card__desc">Tracks court deadlines, statute of limitations dates, and filing windows across all active matters — sending tiered alerts at defined intervals before each deadline.</p>
+						<p class="aia-card__desc">Tracks court deadlines, statute of limitations dates, and filing windows across all active matters, sending tiered alerts at defined intervals before each deadline.</p>
 						<div class="aia-card__systems"><span class="aia-chip">Clio</span><span class="aia-chip">MyCase</span><span class="aia-chip">Filevine</span><span class="aia-chip">CourtAlert</span><span class="aia-chip">Google Calendar</span><span class="aia-chip">Slack</span></div>
 					</div>
 					<div class="aia-card" id="ac-legal-3" data-kw="client status update generator matter status docket billing entries crm notes clio mycase filevine gmail fathom fireflies">
@@ -705,12 +705,12 @@ get_header();
 					</div>
 					<div class="aia-card" id="ac-legal-4" data-kw="contract review summarizer issue summary clause category non-standard terms risk areas netdocuments imanage clio google drive docusign">
 						<div class="aia-card__head"><span class="aia-card__name">Contract Review Summarizer</span></div>
-						<p class="aia-card__desc">Reads incoming contracts and produces a structured issue summary organized by clause category — flagging non-standard terms, missing provisions, and key risk areas.</p>
+						<p class="aia-card__desc">Reads incoming contracts and produces a structured issue summary organized by clause category, flagging non-standard terms, missing provisions, and key risk areas.</p>
 						<div class="aia-card__systems"><span class="aia-chip">NetDocuments</span><span class="aia-chip">iManage</span><span class="aia-chip">Clio</span><span class="aia-chip">Google Drive</span><span class="aia-chip">DocuSign</span></div>
 					</div>
 					<div class="aia-card" id="ac-legal-5" data-kw="billing wip digest unbilled time billing realization outstanding ar revenue leakage clio mycase timesolv bill4time quickbooks slack">
 						<div class="aia-card__head"><span class="aia-card__name">Billing &amp; WIP Digest</span></div>
-						<p class="aia-card__desc">Generates a weekly work-in-progress report for each attorney — showing unbilled time, billing realization rates, and outstanding AR by client — so revenue leakage gets caught before month end.</p>
+						<p class="aia-card__desc">Generates a weekly work-in-progress report for each attorney showing unbilled time, billing realization rates, and outstanding AR by client, so revenue leakage gets caught before month end.</p>
 						<div class="aia-card__systems"><span class="aia-chip">Clio</span><span class="aia-chip">MyCase</span><span class="aia-chip">TimeSolv</span><span class="aia-chip">Bill4Time</span><span class="aia-chip">QuickBooks</span><span class="aia-chip">Slack</span></div>
 					</div>
 				</div>
@@ -753,63 +753,68 @@ get_header();
 .aia-hero__inner { max-width: 780px; margin: 0 auto; text-align: center; }
 
 /* ---------- Search ---------- */
-.aia-search-wrap { max-width: 660px; margin: 2rem auto 0; }
+.aia-search-wrap { max-width: 620px; margin: 2rem auto 0; }
 .aia-search {
 	display: flex; align-items: center;
-	background: rgba(255,255,255,0.1);
-	border: 1px solid rgba(255,255,255,0.2);
-	border-radius: var(--radius-xl);
-	padding: 4px 4px 4px 16px;
-	transition: var(--transition);
+	background: #ffffff;
+	border: none;
+	border-radius: 14px;
+	padding: 6px 6px 6px 18px;
+	box-shadow: 0 4px 24px rgba(0,0,0,0.18);
 }
-.aia-search:focus-within {
-	background: rgba(255,255,255,0.15);
-	border-color: rgba(255,255,255,0.5);
-	box-shadow: 0 0 0 3px rgba(70,44,237,0.25);
-}
-.aia-search__icon { width:17px; height:17px; stroke:rgba(255,255,255,0.5); flex-shrink:0; }
+.aia-search__icon { width:17px; height:17px; stroke:#9ca3af; flex-shrink:0; }
 .aia-search__input {
 	flex:1; background:none; border:none; outline:none;
-	color:#fff; font-family:var(--font-body); font-size:15px; padding:10px 12px;
+	color:#111827; font-family:var(--font-body); font-size:15px; padding:10px 12px;
 }
-.aia-search__input::placeholder { color:rgba(255,255,255,0.4); }
+.aia-search__input::placeholder { color:#9ca3af; }
 .aia-search__spinner {
-	display:none; width:18px; height:18px; border:2px solid rgba(255,255,255,0.2);
-	border-top-color:#fff; border-radius:50%; animation:aia-spin 0.7s linear infinite; flex-shrink:0; margin-right:8px;
+	display:none; width:18px; height:18px; border:2px solid #e5e7eb;
+	border-top-color:#462CED; border-radius:50%; animation:aia-spin 0.7s linear infinite; flex-shrink:0; margin-right:8px;
 }
 .aia-search__spinner.active { display:block; }
 @keyframes aia-spin { to { transform:rotate(360deg); } }
 .aia-search__clear {
-	display:none; background:rgba(255,255,255,0.12); border:none; cursor:pointer;
-	color:rgba(255,255,255,0.7); padding:8px 14px; border-radius:var(--radius-lg);
+	display:none; background:#f3f4f6; border:none; cursor:pointer;
+	color:#6b7280; padding:8px 14px; border-radius:10px;
 	font-size:13px; font-weight:500; transition:var(--transition); font-family:var(--font-body);
 }
-.aia-search__clear:hover { background:rgba(255,255,255,0.2); color:#fff; }
+.aia-search__clear:hover { background:#e5e7eb; color:#374151; }
 .aia-search__clear.visible { display:block; }
 .aia-search__hint {
-	font-size:12px; color:rgba(255,255,255,0.45); margin:8px 0 0; text-align:center;
+	font-size:12px; color:rgba(255,255,255,0.45); margin:10px 0 0; text-align:center;
 }
 
 /* ---------- Tabs ---------- */
 .aia-tabs {
-	display:flex; justify-content:center; gap:0; margin-top:32px;
-	border-bottom:1px solid rgba(255,255,255,0.12);
+	display:flex; justify-content:center; gap:8px; margin-top:32px; padding-bottom:4px;
 	overflow-x:auto; scrollbar-width:none;
 }
 .aia-tabs::-webkit-scrollbar { display:none; }
 .aia-tab {
-	background:none; border:none; cursor:pointer; font-family:var(--font-body);
-	font-size:14px; font-weight:500; color:rgba(255,255,255,0.5);
-	padding:14px 22px; border-bottom:2px solid transparent;
-	white-space:nowrap; transition:var(--transition); display:flex; align-items:center; gap:7px;
+	background: rgba(255,255,255,0.08);
+	border: 1px solid rgba(255,255,255,0.15);
+	cursor:pointer; font-family:var(--font-body);
+	font-size:14px; font-weight:500; color:rgba(255,255,255,0.6);
+	padding:10px 20px; border-radius:50px;
+	white-space:nowrap; transition:var(--transition); display:flex; align-items:center; gap:8px;
 }
-.aia-tab:hover { color:rgba(255,255,255,0.85); }
-.aia-tab--active { color:#fff; border-bottom-color:#fff; }
+.aia-tab:hover {
+	background: rgba(255,255,255,0.14);
+	color: rgba(255,255,255,0.9);
+	border-color: rgba(255,255,255,0.3);
+}
+.aia-tab--active {
+	background: #ffffff;
+	color: #111827;
+	border-color: #ffffff;
+	font-weight: 600;
+}
 .aia-tab__count {
-	background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.5);
+	background:rgba(0,0,0,0.08); color:inherit;
 	font-size:11px; padding:1px 7px; border-radius:10px; font-weight:600;
 }
-.aia-tab--active .aia-tab__count { background:rgba(255,255,255,0.2); color:#fff; }
+.aia-tab--active .aia-tab__count { background:rgba(70,44,237,0.1); color:#462CED; }
 
 /* ---------- Catalog section ---------- */
 .aia-catalog { padding-top:2.5rem; }
@@ -957,7 +962,7 @@ window.aiaToggle = function(header){
 window.aiaClear = function(){
 	document.getElementById('aiaSearchInput').value = '';
 	document.getElementById('aiaClearBtn').classList.remove('visible');
-	document.getElementById('aiaSearchHint').textContent = 'AI-powered — describe your problem in plain English';
+	document.getElementById('aiaSearchHint').textContent = 'AI-powered search — describe your problem in plain English';
 	document.getElementById('aiaNlpBanner').style.display = 'none';
 	nlpMode = false; nlpIds = [];
 	applySearch('');
@@ -969,15 +974,13 @@ document.getElementById('aiaSearchInput').addEventListener('input', function(){
 	document.getElementById('aiaClearBtn').classList.toggle('visible', q.length > 0);
 	clearTimeout(debounceT);
 	if(!q){ aiaClear(); return; }
-	/* Short / tool-name queries → instant keyword search */
 	if(q.length < 5 || q.split(' ').length <= 2){
 		nlpMode = false; nlpIds = [];
 		document.getElementById('aiaNlpBanner').style.display = 'none';
 		applySearch(q);
 	} else {
-		/* Longer queries → debounce then call NLP */
 		debounceT = setTimeout(() => runNLP(q), 600);
-		applySearch(q); /* show keyword results while waiting */
+		applySearch(q);
 	}
 });
 
@@ -1005,15 +1008,12 @@ function applySearch(q){
 				}
 				if(show) gv++;
 			});
-			/* Show/hide group; expand if has results during search */
-			const hasResults = nlpMode ? gv > 0 : gv > 0;
-			group.style.display = (!ql && !nlpMode) || hasResults ? '' : 'none';
-			if(ql && hasResults) group.classList.remove('collapsed');
+			group.style.display = (!ql && !nlpMode) || gv > 0 ? '' : 'none';
+			if(ql && gv > 0) group.classList.remove('collapsed');
 			visible += gv;
 		});
 	});
 	if(!ql && !nlpMode){
-		/* Reset to full tab count */
 		visible = activeTab === 'all'
 			? CARDS.length
 			: document.querySelectorAll(`.aia-group-wrap[data-tab-group="${activeTab}"] .aia-card`).length;
@@ -1028,20 +1028,13 @@ function applySearch(q){
 async function runNLP(query){
 	const spinner = document.getElementById('aiaSpinner');
 	spinner.classList.add('active');
-	document.getElementById('aiaSearchHint').textContent = 'Searching with AI…';
+	document.getElementById('aiaSearchHint').textContent = 'Searching with AI...';
 
 	const catalogJson = JSON.stringify(CATALOG_SUMMARY.map(c => ({
 		id: c.id, name: c.name, desc: c.desc.slice(0,120)
 	})));
 
-	const prompt = `You are a search assistant for a catalog of AI automation accelerators.
-
-A user typed this query: "${query}"
-
-Here is the full catalog as JSON:
-${catalogJson}
-
-Return ONLY a JSON array of matching accelerator IDs (the "id" field), ranked best-match first. Include all accelerators that would genuinely help with the user's problem. Return an empty array if nothing matches. No explanation, no markdown, only the raw JSON array.`;
+	const prompt = `You are a search assistant for a catalog of AI automation accelerators.\n\nA user typed this query: "${query}"\n\nHere is the full catalog as JSON:\n${catalogJson}\n\nReturn ONLY a JSON array of matching accelerator IDs (the "id" field), ranked best-match first. Include all accelerators that would genuinely help with the user's problem. Return an empty array if nothing matches. No explanation, no markdown, only the raw JSON array.`;
 
 	try {
 		const res = await fetch('https://api.anthropic.com/v1/messages', {
@@ -1071,10 +1064,9 @@ Return ONLY a JSON array of matching accelerator IDs (the "id" field), ranked be
 			applySearch(query);
 		}
 	} catch(e){
-		/* Silently fall back to keyword search on error */
 		nlpMode = false; nlpIds = [];
 		document.getElementById('aiaNlpBanner').style.display = 'none';
-		document.getElementById('aiaSearchHint').textContent = 'AI-powered — describe your problem in plain English';
+		document.getElementById('aiaSearchHint').textContent = 'AI-powered search — describe your problem in plain English';
 		applySearch(query);
 	} finally {
 		spinner.classList.remove('active');
