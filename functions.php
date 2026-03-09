@@ -647,11 +647,6 @@ function ansa_stripe_webhook_handler( $request ) {
  * ──────────────────────────────────────────────
  * Claude AI Search Proxy (for Automation Accelerators page)
  * Requires ANTHROPIC_API_KEY defined in wp-config.php
- *
- * System prompt contains the full catalog + matching philosophy.
- * User message contains only the search query — no catalog payload
- * is sent from the browser, keeping requests lean and the catalog
- * server-side only.
  * ──────────────────────────────────────────────
  */
 function ansa_claude_search_system_prompt() {
@@ -1168,3 +1163,92 @@ function ansa_claude_search_handler() {
 }
 add_action( 'wp_ajax_ansa_claude_search',        'ansa_claude_search_handler' );
 add_action( 'wp_ajax_nopriv_ansa_claude_search', 'ansa_claude_search_handler' );
+
+/**
+ * ──────────────────────────────────────────────
+ * Google Sheets Accelerator Loader
+ * Fetches the public accelerator sheet as CSV and returns parsed JSON.
+ * The Sheet ID is stored in wp-config.php as ANSA_ACCELERATORS_SHEET_ID.
+ * Sheet must be published to web: File → Share → Publish to web → CSV format
+ * Cache is cleared by visiting: /wp-admin/?ansa_clear_acc_cache=1
+ * ──────────────────────────────────────────────
+ */
+function ansa_sheet_accelerators_handler() {
+    check_ajax_referer( 'ansa-nonce', 'nonce' );
+
+    $sheet_id = defined( 'ANSA_ACCELERATORS_SHEET_ID' ) ? ANSA_ACCELERATORS_SHEET_ID : '';
+    if ( empty( $sheet_id ) ) {
+        wp_send_json_error( 'Sheet ID not configured. Add ANSA_ACCELERATORS_SHEET_ID to wp-config.php.' );
+    }
+
+    // Cache for 5 minutes to avoid hammering the sheet on every page load
+    $cache_key = 'ansa_accelerators_v1';
+    $cached    = get_transient( $cache_key );
+    if ( $cached !== false ) {
+        wp_send_json_success( $cached );
+    }
+
+    $url      = 'https://docs.google.com/spreadsheets/d/' . rawurlencode( $sheet_id ) . '/export?format=csv&gid=0';
+    $response = wp_remote_get( $url, array( 'timeout' => 15 ) );
+
+    if ( is_wp_error( $response ) ) {
+        wp_send_json_error( 'Could not fetch sheet: ' . $response->get_error_message() );
+    }
+
+    $code = wp_remote_retrieve_response_code( $response );
+    if ( $code !== 200 ) {
+        wp_send_json_error( 'Sheet returned HTTP ' . $code . '. Ensure the sheet is published publicly.' );
+    }
+
+    $csv  = wp_remote_retrieve_body( $response );
+    $rows = array_map( 'str_getcsv', explode( "\n", trim( $csv ) ) );
+
+    if ( empty( $rows ) || count( $rows ) < 2 ) {
+        wp_send_json_error( 'Sheet appears empty.' );
+    }
+
+    // First row = headers; normalise to lowercase with underscores
+    $headers = array_map( function( $h ) {
+        return strtolower( trim( preg_replace( '/\s+/', '_', $h ) ) );
+    }, $rows[0] );
+
+    $accelerators = array();
+    for ( $i = 1; $i < count( $rows ); $i++ ) {
+        $row = $rows[ $i ];
+        if ( count( array_filter( $row ) ) === 0 ) continue; // skip blank rows
+        while ( count( $row ) < count( $headers ) ) { $row[] = ''; }
+        $record = array_combine( $headers, array_slice( $row, 0, count( $headers ) ) );
+        if ( empty( $record['card_id'] ) || empty( $record['card_name'] ) ) continue;
+        $accelerators[] = array(
+            'tab'            => trim( $record['tab']            ?? '' ),
+            'group_id'       => trim( $record['group_id']       ?? '' ),
+            'group_title'    => trim( $record['group_title']    ?? '' ),
+            'group_subtitle' => trim( $record['group_subtitle'] ?? '' ),
+            'group_icon_svg' => trim( $record['group_icon_svg'] ?? '' ),
+            'group_color_bg' => trim( $record['group_color_bg'] ?? 'rgba(70,44,237,0.08)' ),
+            'group_color_fg' => trim( $record['group_color_fg'] ?? '#462CED' ),
+            'card_id'        => trim( $record['card_id']        ?? '' ),
+            'card_name'      => trim( $record['card_name']      ?? '' ),
+            'card_desc'      => trim( $record['card_desc']      ?? '' ),
+            'card_keywords'  => trim( $record['card_keywords']  ?? '' ),
+            'card_systems'   => trim( $record['card_systems']   ?? '' ),
+        );
+    }
+
+    set_transient( $cache_key, $accelerators, 5 * MINUTE_IN_SECONDS );
+    wp_send_json_success( $accelerators );
+}
+add_action( 'wp_ajax_ansa_sheet_accelerators',        'ansa_sheet_accelerators_handler' );
+add_action( 'wp_ajax_nopriv_ansa_sheet_accelerators', 'ansa_sheet_accelerators_handler' );
+
+/**
+ * Admin shortcut to manually bust the accelerator cache.
+ * Visit: /wp-admin/?ansa_clear_acc_cache=1 while logged in as admin.
+ */
+function ansa_maybe_clear_acc_cache() {
+    if ( isset( $_GET['ansa_clear_acc_cache'] ) && current_user_can( 'manage_options' ) ) {
+        delete_transient( 'ansa_accelerators_v1' );
+        wp_die( '&#x2705; Accelerator cache cleared. <a href="javascript:history.back()">Go back</a>' );
+    }
+}
+add_action( 'admin_init', 'ansa_maybe_clear_acc_cache' );
