@@ -1,11 +1,9 @@
-
-<?php
-/**
- * Template Name: AI Readiness Intake Form
- * Template Post Type: page
- */
-get_header();
-?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Readiness Assessment | ANSA Solutions</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -538,13 +536,9 @@ select { cursor: pointer; appearance: none; background-image: url("data:image/sv
   .btn { padding: 12px 20px; font-size: 14px; }
   .section-intro h2 { font-size: 19px; }
 }
-
-/* Ensure form works within WordPress theme */
-.page { padding-top: 0; }
-.site-content { padding: 0; }
-.header { margin-top: 0; }
 </style>
-
+</head>
+<body>
 <div class="page">
 
 <!-- ── Header ── -->
@@ -553,7 +547,6 @@ select { cursor: pointer; appearance: none; background-image: url("data:image/sv
     <div class="header-title" style="text-align:center;">
       <h1 style="font-size:32px; letter-spacing:-0.5px;">AI Readiness Assessment</h1>
       <p>Pre-Discovery Questionnaire</p>
-      <p style="font-size: 13px; color: var(--muted); margin-top: 8px; line-height: 1.5;">You can bookmark this page and return later, but please note the questionnaire must be completed in a single session.</p>
     </div>
   </div>
 </header>
@@ -1012,7 +1005,7 @@ select { cursor: pointer; appearance: none; background-image: url("data:image/sv
       <div class="success-step-text">After the call, we'll deliver your <strong>interactive AI Readiness Report</strong> within 5 business days.</div>
     </div>
   </div>
-  <p style="margin-top:24px;font-size:13px;">Questions? Reach us at <a href="mailto:ai-readiness@ansa.solutions" style="color:var(--purple);font-weight:600;">ai-readiness@ansa.solutions</a></p>
+  <p style="margin-top:24px;font-size:13px;">Questions? Reach us at <a href="/cdn-cgi/l/email-protection#77161e5a051216131e1912040437161904165904181b02031e181904" style="color:var(--purple);font-weight:600;"><span class="__cf_email__" data-cfemail="a3c2ca8ed1c6c2c7cacdc6d0d0e3c2cdd0c28dd0cccfd6d7cacccdd0">[email&#160;protected]</span></a></p>
 </div>
 
 <!-- ── Footer ── -->
@@ -1028,7 +1021,7 @@ select { cursor: pointer; appearance: none; background-image: url("data:image/sv
 
 </div><!-- end .page -->
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ══════════════════════════════════════════════
 // ANSA AI Readiness Form — Controller
 // ══════════════════════════════════════════════
@@ -1193,7 +1186,7 @@ async function submitForm() {
   const data = collectFormData();
 
   // Log payload for debugging
-  console.log('Form payload:', JSON.stringify(data, null, 2));
+  console.log('📋 Form payload:', JSON.stringify(data, null, 2));
 
   try {
     // Send to webhook
@@ -1326,11 +1319,4 @@ init();
 // ── Regulations "Other" toggle ──
 document.querySelectorAll('input[name="regulations"]').forEach(cb => {
   cb.addEventListener('change', () => {
-    const otherField = document.getElementById('regulationsOther');
-    const otherChecked = document.querySelector('input[name="regulations"][value="other"]').checked;
-    otherField.style.display = otherChecked ? 'block' : 'none';
-    if (!otherChecked) otherField.value = '';
-  });
-});
-</script>
-<?php get_footer(); ?>
+    const otherField = document.getElementById('regulati
