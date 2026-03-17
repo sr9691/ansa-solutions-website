@@ -296,11 +296,13 @@ get_header(); ?>
         });
     });
 
-    // URL param bypass: ?member=sundaresh or ?member=ken
+    // URL param bypass: ?ken or ?sundaresh
     var params = new URLSearchParams(window.location.search);
-    var memberParam = params.get('member');
+    var memberParam = null;
+    if (params.has('ken')) memberParam = 'ken';
+    else if (params.has('sundaresh')) memberParam = 'sundaresh';
 
-    if (memberParam && members[memberParam]) {
+    if (memberParam) {
         var selectorSection = document.getElementById('team-selector-section');
         if (selectorSection) selectorSection.style.display = 'none';
 
