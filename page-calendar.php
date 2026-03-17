@@ -65,7 +65,7 @@ get_header(); ?>
 
 <style>
 .page-hero {
-    background: var(--bg-dark, #0a0a0a);
+    background: linear-gradient(135deg, var(--primary) 0%, #1f2937 100%);
     padding: 80px 0 50px;
     text-align: center;
 }
@@ -73,13 +73,13 @@ get_header(); ?>
 .page-hero__title {
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
-    color: var(--text-light, #ffffff);
+    color: #ffffff;
     margin-bottom: 1rem;
 }
 
 .page-hero__description {
     font-size: 1.125rem;
-    color: var(--text-muted, #a0a0a0);
+    color: rgba(255, 255, 255, 0.85);
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.7;
@@ -87,14 +87,14 @@ get_header(); ?>
 
 /* Team Selector */
 .team-selector-section {
-    background: var(--bg-dark, #0a0a0a);
+    background: linear-gradient(135deg, var(--primary) 0%, #1f2937 100%);
     padding: 0 0 50px;
 }
 
 .selector-label {
     text-align: center;
     font-size: 0.875rem;
-    color: var(--text-muted, #a0a0a0);
+    color: rgba(255, 255, 255, 0.6);
     margin-bottom: 1.25rem;
 }
 
@@ -178,7 +178,7 @@ get_header(); ?>
 
 .team-card__role {
     font-size: 0.8125rem;
-    color: var(--text-muted, #a0a0a0);
+    color: rgba(255, 255, 255, 0.6);
 }
 
 /* Calendar Section */
