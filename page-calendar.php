@@ -36,7 +36,7 @@ get_header(); ?>
                     <div class="team-card__role">Founder &amp; CEO</div>
                 </button>
 
-                <button class="team-card" data-member="ken" data-url="https://meetings.hubspot.com/ken-turro?embed=true" data-name="Ken Turro" data-title="COO">
+                <button class="team-card" data-member="ken" data-url="https://meetings.hubspot.com/kturro/30-minute-virtual-coffee?embed=true" data-name="Ken Turro" data-title="COO">
                     <div class="team-card__check">
                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2.5 7L5.5 10L11.5 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -250,7 +250,7 @@ get_header(); ?>
             title: 'Founder & CEO'
         },
         ken: {
-            url: 'https://meetings.hubspot.com/ken-turro?embed=true',
+            url: 'https://meetings.hubspot.com/kturro/30-minute-virtual-coffee?embed=true',
             name: 'Ken Turro',
             title: 'COO'
         }
@@ -259,14 +259,11 @@ get_header(); ?>
     function loadCalendar(url) {
         var embed = document.getElementById('calendar-embed');
         if (!embed) return;
-        // Remove existing iframe if any
         embed.innerHTML = '';
         embed.setAttribute('data-src', url);
-        // Re-trigger HubSpot embed
         if (window.HubSpotMeetings && window.HubSpotMeetings.load) {
             window.HubSpotMeetings.load();
         } else {
-            // Fallback: insert iframe directly
             var iframe = document.createElement('iframe');
             iframe.src = url.replace('?embed=true', '');
             iframe.style.width = '100%';
@@ -281,12 +278,10 @@ get_header(); ?>
         var member = members[key];
         if (!member) return;
 
-        // Update active card
         document.querySelectorAll('.team-card').forEach(function (card) {
             card.classList.toggle('active', card.dataset.member === key);
         });
 
-        // Update hero description
         var desc = document.getElementById('hero-description');
         if (desc) {
             desc.textContent = 'Schedule time with ' + member.name + ' to explore how AI can transform your business.';
@@ -295,7 +290,6 @@ get_header(); ?>
         loadCalendar(member.url);
     }
 
-    // Card click handlers
     document.querySelectorAll('.team-card').forEach(function (card) {
         card.addEventListener('click', function () {
             selectMember(this.dataset.member);
@@ -307,7 +301,6 @@ get_header(); ?>
     var memberParam = params.get('member');
 
     if (memberParam && members[memberParam]) {
-        // Hide selector, go straight to calendar for this person
         var selectorSection = document.getElementById('team-selector-section');
         if (selectorSection) selectorSection.style.display = 'none';
 
