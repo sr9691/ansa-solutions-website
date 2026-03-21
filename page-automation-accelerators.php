@@ -106,6 +106,40 @@ get_header();
 </section>
 
 <!-- ============================================================
+     EVENT CTA
+============================================================ -->
+<section style="padding: 4rem 1.5rem; background: var(--border-light); border-top: 1px solid var(--border);">
+	<div class="container">
+		<div style="max-width: 820px; margin: 0 auto; background: #fff; border: 2px solid var(--accent); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 4px 24px rgba(70,44,237,0.1); display: flex; align-items: stretch; flex-wrap: wrap;">
+			<div style="background: var(--accent); padding: 2rem 2.25rem; display: flex; flex-direction: column; justify-content: center; min-width: 160px;">
+				<div style="color: rgba(255,255,255,0.75); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Upcoming</div>
+				<div style="color: #fff; font-size: 2rem; font-weight: 800; line-height: 1;">APR</div>
+				<div style="color: #fff; font-size: 3rem; font-weight: 900; line-height: 1;">22</div>
+			</div>
+			<div style="padding: 1.75rem 2rem; flex: 1; min-width: 240px;">
+				<div style="font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 0.5rem;">See AI in action — join our next event</div>
+				<h3 style="margin: 0 0 0.6rem; font-size: 1.05rem; line-height: 1.4; color: var(--text);">
+					AI Orchestration for Engineering &amp; Construction
+				</h3>
+				<div style="display: flex; gap: 1rem; flex-wrap: wrap; font-size: 12.5px; color: var(--text-light); margin-bottom: 1.25rem;">
+					<span>5:30 – 7:30 PM EDT</span>
+					<span>Anthony's Chophouse &nbsp;·&nbsp; Carmel, IN</span>
+				</div>
+				<div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+					<a href="https://luma.com/rlqz48f9" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: 13px; padding: 0.55rem 1.1rem; display: inline-flex; align-items: center; gap: 5px;">
+						Request to Join
+						<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+					</a>
+					<a href="<?php echo esc_url( home_url( '/events' ) ); ?>" style="font-size: 13px; font-weight: 600; color: var(--accent);">
+						All events →
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- ============================================================
      CTA
 ============================================================ -->
 <section class="section--cta-dark section--final-cta" id="get-started">
