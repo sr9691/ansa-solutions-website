@@ -78,39 +78,9 @@ body::before {
   justify-content: space-between;
   align-items: center;
 }
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.logo-mark {
-  font-size: 24px;
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: 1px;
-}
-.logo-mark span { color: var(--purple); }
-.logo-sub {
-  font-size: 11px;
-  color: rgba(255,255,255,0.4);
-  font-weight: 500;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-.header-title {
-  text-align: right;
-}
-.header-title h1 {
-  font-size: 18px;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: -0.3px;
-}
-.header-title p {
-  font-size: 12px;
-  color: rgba(255,255,255,0.45);
-  margin-top: 2px;
-}
+.header-title { text-align: right; }
+.header-title h1 { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: -0.3px; }
+.header-title p { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 2px; }
 
 /* ── Progress ── */
 .progress-container {
@@ -119,410 +89,137 @@ body::before {
   padding: 28px 40px 0;
   width: 100%;
 }
-.progress-steps {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  margin-bottom: 8px;
-}
-.progress-step {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 1;
-  position: relative;
-}
-.progress-step::after {
-  content: '';
-  flex: 1;
-  height: 2px;
-  background: var(--border);
-  margin: 0 6px;
-  transition: background 0.4s;
-}
+.progress-steps { display: flex; align-items: center; gap: 0; margin-bottom: 8px; }
+.progress-step { display: flex; align-items: center; gap: 8px; flex: 1; position: relative; }
+.progress-step::after { content: ''; flex: 1; height: 2px; background: var(--border); margin: 0 6px; transition: background 0.4s; }
 .progress-step:last-child::after { display: none; }
 .progress-step.completed::after { background: var(--purple); }
 .step-dot {
   width: 28px; height: 28px;
   border-radius: 50%;
   border: 2px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--muted);
-  background: var(--card);
-  transition: all 0.3s;
-  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: var(--muted);
+  background: var(--card); transition: all 0.3s; flex-shrink: 0;
 }
-.progress-step.active .step-dot {
-  border-color: var(--purple);
-  background: var(--purple);
-  color: #fff;
-  box-shadow: 0 0 0 4px var(--purple-glow);
-}
-.progress-step.completed .step-dot {
-  border-color: var(--purple);
-  background: var(--purple);
-  color: #fff;
-}
-.step-label {
-  display: none;
-}
-.progress-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.progress-section-name {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--purple);
-  letter-spacing: 0.3px;
-}
-.progress-count {
-  font-size: 12px;
-  color: var(--muted);
-}
+.progress-step.active .step-dot { border-color: var(--purple); background: var(--purple); color: #fff; box-shadow: 0 0 0 4px var(--purple-glow); }
+.progress-step.completed .step-dot { border-color: var(--purple); background: var(--purple); color: #fff; }
+.step-label { display: none; }
+.progress-info { display: flex; justify-content: space-between; align-items: center; }
+.progress-section-name { font-size: 13px; font-weight: 600; color: var(--purple); letter-spacing: 0.3px; }
+.progress-count { font-size: 12px; color: var(--muted); }
 
 /* ── Form Container ── */
-.form-container {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 20px 40px 40px;
-  width: 100%;
-  flex: 1;
-}
-
-.form-section {
-  display: none;
-  animation: fadeIn 0.35s ease;
-}
+.form-container { max-width: 720px; margin: 0 auto; padding: 20px 40px 40px; width: 100%; flex: 1; }
+.form-section { display: none; animation: fadeIn 0.35s ease; }
 .form-section.active { display: block; }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
 .section-intro {
-  background: var(--card);
-  border-radius: 14px;
-  border: 1px solid var(--border);
-  padding: 24px 28px;
-  margin-bottom: 24px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  background: var(--card); border-radius: 14px; border: 1px solid var(--border);
+  padding: 24px 28px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);
 }
-.section-intro h2 {
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--dark);
-  letter-spacing: -0.5px;
-  margin-bottom: 6px;
-}
-.section-intro p {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.6;
-}
+.section-intro h2 { font-size: 22px; font-weight: 800; color: var(--dark); letter-spacing: -0.5px; margin-bottom: 6px; }
+.section-intro p { font-size: 14px; color: var(--muted); line-height: 1.6; }
 
 /* ── Form Fields ── */
 .field-group {
-  background: var(--card);
-  border-radius: 14px;
-  border: 1px solid var(--border);
-  padding: 24px 28px;
-  margin-bottom: 16px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  background: var(--card); border-radius: 14px; border: 1px solid var(--border);
+  padding: 24px 28px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);
   transition: border-color 0.2s, box-shadow 0.2s;
 }
-.field-group:focus-within {
-  border-color: rgba(69,44,234,0.3);
-  box-shadow: 0 0 0 3px var(--purple-glow), 0 1px 3px rgba(0,0,0,0.03);
-}
+.field-group:focus-within { border-color: rgba(69,44,234,0.3); box-shadow: 0 0 0 3px var(--purple-glow), 0 1px 3px rgba(0,0,0,0.03); }
 
-label {
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--dark);
-  margin-bottom: 8px;
-  line-height: 1.4;
-}
-label .optional {
-  font-weight: 400;
-  color: var(--muted);
-  font-size: 12px;
-  margin-left: 4px;
-}
-.field-hint {
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 10px;
-  line-height: 1.5;
-}
+label { display: block; font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 8px; line-height: 1.4; }
+label .optional { font-weight: 400; color: var(--muted); font-size: 12px; margin-left: 4px; }
+.field-hint { font-size: 12px; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
 
-input[type="text"],
-input[type="email"],
-input[type="url"],
-input[type="number"],
-textarea,
-select {
-  width: 100%;
-  padding: 12px 16px;
-  border: 1.5px solid var(--border);
-  border-radius: 10px;
-  font-size: 14px;
-  font-family: 'DM Sans', sans-serif;
-  color: var(--dark);
-  background: var(--bg);
-  transition: border-color 0.2s, box-shadow 0.2s;
-  outline: none;
+input[type="text"], input[type="email"], input[type="url"], input[type="number"], textarea, select {
+  width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px;
+  font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--dark); background: var(--bg);
+  transition: border-color 0.2s, box-shadow 0.2s; outline: none;
 }
-input:focus, textarea:focus, select:focus {
-  border-color: var(--purple);
-  box-shadow: 0 0 0 3px var(--purple-glow);
-  background: #fff;
-}
+input:focus, textarea:focus, select:focus { border-color: var(--purple); box-shadow: 0 0 0 3px var(--purple-glow); background: #fff; }
 textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
 select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%238892a4' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; }
 
 /* ── Checkbox / Radio Groups ── */
 .check-group { display: flex; flex-direction: column; gap: 8px; }
 .check-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1.5px solid var(--border);
-  cursor: pointer;
-  transition: all 0.2s;
-  background: var(--bg);
+  display: flex; align-items: center; gap: 12px; padding: 10px 14px;
+  border-radius: 10px; border: 1.5px solid var(--border); cursor: pointer;
+  transition: all 0.2s; background: var(--bg);
 }
 .check-item:hover { border-color: rgba(69,44,234,0.25); background: #faf9ff; }
-.check-item.selected {
-  border-color: var(--purple);
-  background: rgba(69,44,234,0.04);
-  box-shadow: 0 0 0 2px var(--purple-glow);
-}
-.check-item input[type="checkbox"],
-.check-item input[type="radio"] {
-  width: 18px; height: 18px;
-  accent-color: var(--purple);
-  cursor: pointer;
-  flex-shrink: 0;
-}
-.check-item span {
-  font-size: 14px;
-  color: var(--dark);
-  line-height: 1.4;
-}
+.check-item.selected { border-color: var(--purple); background: rgba(69,44,234,0.04); box-shadow: 0 0 0 2px var(--purple-glow); }
+.check-item input[type="checkbox"], .check-item input[type="radio"] { width: 18px; height: 18px; accent-color: var(--purple); cursor: pointer; flex-shrink: 0; }
+.check-item span { font-size: 14px; color: var(--dark); line-height: 1.4; }
 
 /* ── Two columns ── */
-.two-col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
 /* ── Rating Scale ── */
-.rating-scale {
-  display: flex;
-  gap: 8px;
-}
-.rating-option {
-  flex: 1;
-  text-align: center;
-  padding: 12px 4px;
-  border-radius: 10px;
-  border: 1.5px solid var(--border);
-  cursor: pointer;
-  transition: all 0.2s;
-  background: var(--bg);
-}
+.rating-scale { display: flex; gap: 8px; }
+.rating-option { flex: 1; text-align: center; padding: 12px 4px; border-radius: 10px; border: 1.5px solid var(--border); cursor: pointer; transition: all 0.2s; background: var(--bg); }
 .rating-option:hover { border-color: rgba(69,44,234,0.25); }
-.rating-option.selected {
-  border-color: var(--purple);
-  background: var(--purple);
-  color: #fff;
-}
-.rating-option .rating-num {
-  font-size: 18px;
-  font-weight: 700;
-  font-family: 'Fraunces', serif;
-  display: block;
-}
-.rating-option .rating-label {
-  font-size: 10px;
-  display: block;
-  margin-top: 2px;
-  opacity: 0.7;
-}
+.rating-option.selected { border-color: var(--purple); background: var(--purple); color: #fff; }
+.rating-option .rating-num { font-size: 18px; font-weight: 700; font-family: 'Fraunces', serif; display: block; }
+.rating-option .rating-label { font-size: 10px; display: block; margin-top: 2px; opacity: 0.7; }
 
 /* ── Buttons ── */
-.btn-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 28px;
-  gap: 12px;
-}
-.btn {
-  padding: 14px 32px;
-  border-radius: 10px;
-  font-size: 15px;
-  font-weight: 700;
-  font-family: 'DM Sans', sans-serif;
-  cursor: pointer;
-  transition: all 0.2s;
-  border: none;
-  letter-spacing: 0.2px;
-}
-.btn-primary {
-  background: var(--purple);
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(69,44,234,0.25);
-}
-.btn-primary:hover {
-  background: #3820d0;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(69,44,234,0.35);
-}
-.btn-secondary {
-  background: var(--card);
-  color: var(--dark);
-  border: 1.5px solid var(--border);
-}
+.btn-row { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; gap: 12px; }
+.btn { padding: 14px 32px; border-radius: 10px; font-size: 15px; font-weight: 700; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; border: none; letter-spacing: 0.2px; }
+.btn-primary { background: var(--purple); color: #fff; box-shadow: 0 2px 8px rgba(69,44,234,0.25); }
+.btn-primary:hover { background: #3820d0; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(69,44,234,0.35); }
+.btn-secondary { background: var(--card); color: var(--dark); border: 1.5px solid var(--border); }
 .btn-secondary:hover { border-color: var(--purple); color: var(--purple); }
 .btn-secondary:disabled { opacity: 0.4; cursor: not-allowed; }
-.btn-submit {
-  background: linear-gradient(135deg, var(--purple), #6c4ff7);
-  color: #fff;
-  padding: 16px 40px;
-  font-size: 16px;
-  box-shadow: 0 4px 16px rgba(69,44,234,0.3);
-}
+.btn-submit { background: linear-gradient(135deg, var(--purple), #6c4ff7); color: #fff; padding: 16px 40px; font-size: 16px; box-shadow: 0 4px 16px rgba(69,44,234,0.3); }
 .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(69,44,234,0.4); }
+.btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 .btn-icon { display: inline-flex; align-items: center; gap: 6px; }
 
 /* ── Validation ── */
-.field-error {
-  border-color: var(--red) !important;
-  box-shadow: 0 0 0 3px rgba(239,68,68,0.1) !important;
-}
-.error-msg {
-  font-size: 12px;
-  color: var(--red);
-  margin-top: 6px;
-  display: none;
-}
+.field-error { border-color: var(--red) !important; box-shadow: 0 0 0 3px rgba(239,68,68,0.1) !important; }
+.error-msg { font-size: 12px; color: var(--red); margin-top: 6px; display: none; }
 .error-msg.show { display: block; }
+
+/* ── Submit error banner ── */
+.submit-error {
+  display: none;
+  background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px;
+  padding: 14px 18px; margin-top: 16px; font-size: 14px; color: #b91c1c;
+  line-height: 1.5;
+}
+.submit-error.show { display: block; }
 
 /* ── Auto-save indicator ── */
 .save-indicator {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 10px 16px;
-  font-size: 12px;
-  color: var(--muted);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  opacity: 0;
-  transition: opacity 0.3s;
+  position: fixed; bottom: 24px; right: 24px; background: var(--card);
+  border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px;
+  font-size: 12px; color: var(--muted); box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  z-index: 100; display: flex; align-items: center; gap: 6px;
+  opacity: 0; transition: opacity 0.3s;
 }
 .save-indicator.show { opacity: 1; }
-.save-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--green);
-}
+.save-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
 
 /* ── Success Page ── */
-.success-page {
-  display: none;
-  text-align: center;
-  padding: 80px 40px;
-  max-width: 560px;
-  margin: 0 auto;
-  animation: fadeIn 0.5s ease;
-}
+.success-page { display: none; text-align: center; padding: 80px 40px; max-width: 560px; margin: 0 auto; animation: fadeIn 0.5s ease; }
 .success-page.active { display: block; }
-.success-icon {
-  width: 80px; height: 80px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--green), #34d399);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 24px;
-  font-size: 36px;
-  color: #fff;
-  box-shadow: 0 4px 20px rgba(16,185,129,0.3);
-}
-.success-page h2 {
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--dark);
-  letter-spacing: -0.5px;
-  margin-bottom: 12px;
-}
-.success-page p {
-  font-size: 15px;
-  color: var(--muted);
-  line-height: 1.7;
-  margin-bottom: 12px;
-}
-.success-steps {
-  text-align: left;
-  background: var(--card);
-  border-radius: 14px;
-  border: 1px solid var(--border);
-  padding: 24px 28px;
-  margin-top: 28px;
-}
-.success-step {
-  display: flex;
-  gap: 14px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border);
-}
+.success-icon { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--green), #34d399); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 36px; color: #fff; box-shadow: 0 4px 20px rgba(16,185,129,0.3); }
+.success-page h2 { font-size: 28px; font-weight: 800; color: var(--dark); letter-spacing: -0.5px; margin-bottom: 12px; }
+.success-page p { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 12px; }
+.success-steps { text-align: left; background: var(--card); border-radius: 14px; border: 1px solid var(--border); padding: 24px 28px; margin-top: 28px; }
+.success-step { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border); }
 .success-step:last-child { border-bottom: none; }
-.success-step-num {
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  background: var(--purple-light);
-  color: var(--purple);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  font-weight: 800;
-  flex-shrink: 0;
-  font-family: 'Fraunces', serif;
-}
-.success-step-text {
-  font-size: 14px;
-  color: var(--dark);
-  line-height: 1.5;
-}
+.success-step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--purple-light); color: var(--purple); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex-shrink: 0; font-family: 'Fraunces', serif; }
+.success-step-text { font-size: 14px; color: var(--dark); line-height: 1.5; }
 .success-step-text strong { color: var(--purple); }
 
 /* ── Footer ── */
-.footer {
-  text-align: center;
-  padding: 24px 40px;
-  font-size: 12px;
-  color: var(--muted);
-}
+.footer { text-align: center; padding: 24px 40px; font-size: 12px; color: var(--muted); }
 
 /* ── Mobile ── */
 @media (max-width: 640px) {
@@ -982,6 +679,8 @@ select { cursor: pointer; appearance: none; background-image: url("data:image/sv
 
   <!-- ── Navigation Buttons (rendered by JS) ── -->
   <div class="btn-row" id="btnRow"></div>
+  <!-- ── Submit error banner ── -->
+  <div class="submit-error" id="submitError"></div>
 </div>
 
 <!-- ── Success Page ── -->
@@ -1005,7 +704,7 @@ select { cursor: pointer; appearance: none; background-image: url("data:image/sv
       <div class="success-step-text">After the call, we'll deliver your <strong>interactive AI Readiness Report</strong> within 5 business days.</div>
     </div>
   </div>
-  <p style="margin-top:24px;font-size:13px;">Questions? Reach us at <a href="/cdn-cgi/l/email-protection#77161e5a051216131e1912040437161904165904181b02031e181904" style="color:var(--purple);font-weight:600;"><span class="__cf_email__" data-cfemail="a3c2ca8ed1c6c2c7cacdc6d0d0e3c2cdd0c28dd0cccfd6d7cacccdd0">[email&#160;protected]</span></a></p>
+  <p style="margin-top:24px;font-size:13px;">Questions? Reach us at <a href="mailto:hello@ansa.solutions" style="color:var(--purple);font-weight:600;">hello@ansa.solutions</a></p>
 </div>
 
 <!-- ── Footer ── -->
@@ -1021,7 +720,7 @@ select { cursor: pointer; appearance: none; background-image: url("data:image/sv
 
 </div><!-- end .page -->
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ══════════════════════════════════════════════
 // ANSA AI Readiness Form — Controller
 // ══════════════════════════════════════════════
@@ -1035,12 +734,13 @@ const SECTIONS = [
   { name: "Goals & AI Experience", shortName: "Goals" },
 ];
 
-// ══════════════════════════════════════════════
-// CONFIGURATION: Set your webhook URL here
-// ══════════════════════════════════════════════
-const WEBHOOK_URL = "https://webhooks.workato.com/webhooks/rest/7b185dd3-a851-4892-80ef-cbe90de5aae6/new_questionaire";
-// Replace with your actual Workato webhook URL
-// ══════════════════════════════════════════════
+// ── WP AJAX endpoint (server-side proxy — logs before forwarding to Workato) ──
+const WP_AJAX_URL = (typeof ansaTheme !== 'undefined' && ansaTheme.ajaxUrl)
+  ? ansaTheme.ajaxUrl
+  : '/wp-admin/admin-ajax.php';
+const WP_NONCE = (typeof ansaTheme !== 'undefined' && ansaTheme.nonce)
+  ? ansaTheme.nonce
+  : '';
 
 let currentSection = 0;
 const totalSections = SECTIONS.length;
@@ -1063,7 +763,6 @@ function renderProgress() {
     if (i === currentSection) cls = 'active';
     return `<div class="progress-step ${cls}"><div class="step-dot">${i < currentSection ? '✓' : i + 1}</div></div>`;
   }).join('');
-
   document.getElementById('sectionName').textContent = SECTIONS[currentSection].name;
   document.getElementById('progressCount').textContent = `Step ${currentSection + 1} of ${totalSections}`;
 }
@@ -1072,16 +771,13 @@ function renderProgress() {
 function renderButtons() {
   const row = document.getElementById('btnRow');
   const isFirst = currentSection === 0;
-  const isLast = currentSection === totalSections - 1;
-
+  const isLast  = currentSection === totalSections - 1;
   row.innerHTML = `
-    <button class="btn btn-secondary" onclick="prevSection()" ${isFirst ? 'disabled' : ''}>
-      ← Back
-    </button>
+    <button class="btn btn-secondary" onclick="prevSection()" ${isFirst ? 'disabled' : ''}>← Back</button>
     <div style="display:flex;gap:10px;align-items:center">
       <span style="font-size:12px;color:var(--muted)">${Math.round(((currentSection + 1) / totalSections) * 100)}% complete</span>
       ${isLast
-        ? '<button class="btn btn-submit" onclick="submitForm()">Submit Assessment →</button>'
+        ? '<button class="btn btn-submit" id="submitBtn" onclick="submitForm()">Submit Assessment →</button>'
         : '<button class="btn btn-primary" onclick="nextSection()">Continue →</button>'
       }
     </div>
@@ -1116,18 +812,16 @@ function prevSection() {
 
 // ── Validation ──
 function validateSection(idx) {
-  const section = document.querySelectorAll('.form-section')[idx];
+  const section  = document.querySelectorAll('.form-section')[idx];
   const required = section.querySelectorAll('[required]');
   let valid = true;
   required.forEach(field => {
     field.classList.remove('field-error');
     const errMsg = field.parentElement.querySelector('.error-msg');
     if (errMsg) errMsg.classList.remove('show');
-
     if (!field.value.trim()) {
       field.classList.add('field-error');
       valid = false;
-      // Create error message if not exists
       if (!errMsg) {
         const msg = document.createElement('div');
         msg.className = 'error-msg show';
@@ -1149,17 +843,14 @@ function validateSection(idx) {
 function collectFormData() {
   const data = { submitted_at: new Date().toISOString() };
 
-  // Text inputs, textareas, selects
   document.querySelectorAll('input[type="text"], input[type="email"], input[type="url"], input[type="number"], textarea, select').forEach(field => {
     if (field.name) data[field.name] = field.value;
   });
 
-  // Radio buttons
   document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
     data[radio.name] = radio.value;
   });
 
-  // Checkboxes (as arrays)
   const checkboxGroups = {};
   document.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
     if (!checkboxGroups[cb.name]) checkboxGroups[cb.name] = [];
@@ -1167,7 +858,6 @@ function collectFormData() {
   });
   Object.assign(data, checkboxGroups);
 
-  // Hidden fields (rating scales)
   document.querySelectorAll('input[type="hidden"]').forEach(field => {
     if (field.name && field.value) data[field.name] = field.value;
   });
@@ -1175,45 +865,71 @@ function collectFormData() {
   return data;
 }
 
-// ── Submit ──
+// ── Show / hide error banner ──
+function showError(msg) {
+  const banner = document.getElementById('submitError');
+  banner.textContent = msg;
+  banner.classList.add('show');
+  banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+function hideError() {
+  document.getElementById('submitError').classList.remove('show');
+}
+
+// ── Submit via WP AJAX proxy ──
 async function submitForm() {
   if (!validateSection(currentSection)) return;
 
-  const submitBtn = document.querySelector('.btn-submit');
+  hideError();
+
+  const submitBtn = document.getElementById('submitBtn');
   submitBtn.textContent = 'Submitting...';
   submitBtn.disabled = true;
 
   const data = collectFormData();
-
-  // Log payload for debugging
   console.log('📋 Form payload:', JSON.stringify(data, null, 2));
 
+  // Build form-encoded body for WP AJAX
+  const body = new URLSearchParams();
+  body.append('action', 'ansa_questionnaire_submit');
+  body.append('nonce',  WP_NONCE);
+  body.append('payload', JSON.stringify(data));
+
   try {
-    // Send to webhook
-    const response = await fetch(WEBHOOK_URL, {
+    const response = await fetch(WP_AJAX_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-      mode: 'no-cors' // Workato may not return CORS headers
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body.toString(),
     });
 
-    // Show success regardless (no-cors won't give us status)
-    showSuccess();
-    localStorage.removeItem('ansa_form_data');
+    if (!response.ok) {
+      throw new Error('Server returned ' + response.status);
+    }
+
+    const json = await response.json();
+
+    if (json.success) {
+      localStorage.removeItem('ansa_form_data');
+      showSuccess();
+    } else {
+      // WP returned success:false — logged server-side regardless
+      const msg = json.data || 'Something went wrong. Please try again or email hello@ansa.solutions.';
+      showError(msg);
+      submitBtn.textContent = 'Submit Assessment →';
+      submitBtn.disabled = false;
+    }
 
   } catch (err) {
     console.error('Submission error:', err);
-    // Still show success if it's a CORS issue (common with webhooks)
-    // The data was likely sent successfully
-    showSuccess();
-    localStorage.removeItem('ansa_form_data');
+    showError('Unable to reach the server. Please check your connection and try again, or email hello@ansa.solutions directly.');
+    submitBtn.textContent = 'Submit Assessment →';
+    submitBtn.disabled = false;
   }
 }
 
 function showSuccess() {
   document.getElementById('formContainer').style.display = 'none';
   document.querySelector('.progress-container').style.display = 'none';
-  document.getElementById('btnRow').style.display = 'none';
   document.getElementById('successPage').classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -1236,20 +952,13 @@ function loadSavedData() {
       if (key === 'submitted_at') return;
       const field = document.querySelector(`[name="${key}"]`);
       if (!field) return;
-
       if (field.type === 'radio') {
         const radio = document.querySelector(`input[name="${key}"][value="${value}"]`);
-        if (radio) {
-          radio.checked = true;
-          radio.closest('.check-item')?.classList.add('selected');
-        }
+        if (radio) { radio.checked = true; radio.closest('.check-item')?.classList.add('selected'); }
       } else if (field.type === 'checkbox' && Array.isArray(value)) {
         value.forEach(v => {
           const cb = document.querySelector(`input[name="${key}"][value="${v}"]`);
-          if (cb) {
-            cb.checked = true;
-            cb.closest('.check-item')?.classList.add('selected');
-          }
+          if (cb) { cb.checked = true; cb.closest('.check-item')?.classList.add('selected'); }
         });
       } else if (field.type === 'hidden') {
         field.value = value;
@@ -1275,14 +984,10 @@ function setupCheckboxStyles() {
     const input = item.querySelector('input');
     input.addEventListener('change', () => {
       if (input.type === 'radio') {
-        // Deselect siblings
         item.closest('.check-group').querySelectorAll('.check-item').forEach(ci => ci.classList.remove('selected'));
       }
-      if (input.checked) {
-        item.classList.add('selected');
-      } else {
-        item.classList.remove('selected');
-      }
+      if (input.checked) { item.classList.add('selected'); }
+      else { item.classList.remove('selected'); }
     });
   });
 }
@@ -1296,8 +1001,7 @@ function setupMaxCheckboxes() {
       cb.addEventListener('change', () => {
         const checked = group.querySelectorAll('input[type="checkbox"]:checked').length;
         if (checked >= max) {
-          checkboxes.forEach(c => { if (!c.checked) c.closest('.check-item').style.opacity = '0.5'; });
-          checkboxes.forEach(c => { if (!c.checked) c.disabled = true; });
+          checkboxes.forEach(c => { if (!c.checked) { c.closest('.check-item').style.opacity = '0.5'; c.disabled = true; } });
         } else {
           checkboxes.forEach(c => { c.closest('.check-item').style.opacity = '1'; c.disabled = false; });
         }
@@ -1319,4 +1023,13 @@ init();
 // ── Regulations "Other" toggle ──
 document.querySelectorAll('input[name="regulations"]').forEach(cb => {
   cb.addEventListener('change', () => {
-    const otherField = document.getElementById('regulati
+    const otherField = document.getElementById('regulationsOther');
+    const anyOther = document.querySelector('input[name="regulations"][value="other"]');
+    if (otherField && anyOther) {
+      otherField.style.display = anyOther.checked ? 'block' : 'none';
+    }
+  });
+});
+</script>
+</body>
+</html>
