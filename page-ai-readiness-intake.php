@@ -1,3 +1,22 @@
+<?php
+/**
+ * AI Readiness Assessment — Pre-Discovery Questionnaire
+ * Standalone page template (no WP header/footer).
+ * Nonce and AJAX URL are injected server-side so the WP AJAX proxy works.
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+    // Allow direct WordPress bootstrap if accessed outside normal WP flow
+    $wp_load = dirname( __FILE__ );
+    while ( ! file_exists( $wp_load . '/wp-load.php' ) && $wp_load !== '/' ) {
+        $wp_load = dirname( $wp_load );
+    }
+    if ( file_exists( $wp_load . '/wp-load.php' ) ) {
+        require_once $wp_load . '/wp-load.php';
+    }
+}
+$ansa_nonce    = function_exists( 'wp_create_nonce' ) ? wp_create_nonce( 'ansa-nonce' ) : '';
+$ansa_ajax_url = function_exists( 'admin_url' )       ? admin_url( 'admin-ajax.php' )   : '/wp-admin/admin-ajax.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -721,6 +740,10 @@ select { cursor: pointer; appearance: none; background-image: url("data:image/sv
 </div><!-- end .page -->
 
 <script>
+// ── WP AJAX config — injected server-side by PHP ──
+const WP_AJAX_URL = <?php echo json_encode( $ansa_ajax_url ); ?>;
+const WP_NONCE   = <?php echo json_encode( $ansa_nonce ); ?>;
+
 // ══════════════════════════════════════════════
 // ANSA AI Readiness Form — Controller
 // ══════════════════════════════════════════════
@@ -733,14 +756,6 @@ const SECTIONS = [
   { name: "Team & Culture", shortName: "Team" },
   { name: "Goals & AI Experience", shortName: "Goals" },
 ];
-
-// ── WP AJAX endpoint (server-side proxy — logs before forwarding to Workato) ──
-const WP_AJAX_URL = (typeof ansaTheme !== 'undefined' && ansaTheme.ajaxUrl)
-  ? ansaTheme.ajaxUrl
-  : '/wp-admin/admin-ajax.php';
-const WP_NONCE = (typeof ansaTheme !== 'undefined' && ansaTheme.nonce)
-  ? ansaTheme.nonce
-  : '';
 
 let currentSection = 0;
 const totalSections = SECTIONS.length;
@@ -889,10 +904,9 @@ async function submitForm() {
   const data = collectFormData();
   console.log('📋 Form payload:', JSON.stringify(data, null, 2));
 
-  // Build form-encoded body for WP AJAX
   const body = new URLSearchParams();
-  body.append('action', 'ansa_questionnaire_submit');
-  body.append('nonce',  WP_NONCE);
+  body.append('action',  'ansa_questionnaire_submit');
+  body.append('nonce',   WP_NONCE);
   body.append('payload', JSON.stringify(data));
 
   try {
@@ -902,9 +916,7 @@ async function submitForm() {
       body: body.toString(),
     });
 
-    if (!response.ok) {
-      throw new Error('Server returned ' + response.status);
-    }
+    if (!response.ok) throw new Error('Server returned ' + response.status);
 
     const json = await response.json();
 
@@ -912,7 +924,6 @@ async function submitForm() {
       localStorage.removeItem('ansa_form_data');
       showSuccess();
     } else {
-      // WP returned success:false — logged server-side regardless
       const msg = json.data || 'Something went wrong. Please try again or email hello@ansa.solutions.';
       showError(msg);
       submitBtn.textContent = 'Submit Assessment →';
