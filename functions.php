@@ -572,17 +572,16 @@ function ansa_create_payment_intent( $request ) {
  * Handle Stripe webhook events (SDK-free signature verification)
  */
 function ansa_stripe_webhook_handler( $request ) {
-    $secret_key = defined( 'STRIPE_SECRET_KEY' ) ? STRIPE_SECRET_KEY : '';
+    $secret_key     = defined( 'STRIPE_SECRET_KEY' ) ? STRIPE_SECRET_KEY : '';
     $webhook_secret = defined( 'STRIPE_WEBHOOK_SECRET' ) ? STRIPE_WEBHOOK_SECRET : '';
 
     if ( empty( $secret_key ) || empty( $webhook_secret ) ) {
         return new WP_REST_Response( array( 'error' => 'Stripe not configured' ), 500 );
     }
 
-    $payload = $request->get_body();
+    $payload    = $request->get_body();
     $sig_header = $request->get_header( 'stripe-signature' );
 
-    // Parse signature header
     $sig_parts = array();
     foreach ( explode( ',', $sig_header ) as $part ) {
         $kv = explode( '=', trim( $part ), 2 );
@@ -598,15 +597,13 @@ function ansa_stripe_webhook_handler( $request ) {
         return new WP_REST_Response( array( 'error' => 'Invalid signature' ), 400 );
     }
 
-    // Verify signature
-    $signed_payload  = $timestamp . '.' . $payload;
-    $expected_sig    = hash_hmac( 'sha256', $signed_payload, $webhook_secret );
+    $signed_payload = $timestamp . '.' . $payload;
+    $expected_sig   = hash_hmac( 'sha256', $signed_payload, $webhook_secret );
 
     if ( ! hash_equals( $expected_sig, $signature ) ) {
         return new WP_REST_Response( array( 'error' => 'Invalid signature' ), 400 );
     }
 
-    // Reject old events (5 min tolerance)
     if ( abs( time() - intval( $timestamp ) ) > 300 ) {
         return new WP_REST_Response( array( 'error' => 'Timestamp too old' ), 400 );
     }
@@ -1166,6 +1163,153 @@ add_action( 'wp_ajax_nopriv_ansa_claude_search', 'ansa_claude_search_handler' );
 
 /**
  * ──────────────────────────────────────────────
+ * AI Readiness Questionnaire — Server-side submission handler
+ *
+ * Flow:
+ * 1. Validate nonce
+ * 2. Decode and sanitize payload
+ * 3. Log to WordPress (wp_options — lightweight, no custom table needed)
+ * 4. Forward to Workato webhook
+ * 5. Return success/error to browser
+ *
+ * View submissions: wp-admin → Tools → Questionnaire Submissions
+ * Or query directly: get_option('ansa_questionnaire_log') returns array of submissions
+ * ──────────────────────────────────────────────
+ */
+function ansa_questionnaire_submit_handler() {
+    // 1. Nonce check
+    if ( ! check_ajax_referer( 'ansa-nonce', 'nonce', false ) ) {
+        wp_send_json_error( 'Security check failed. Please refresh the page and try again.' );
+    }
+
+    // 2. Decode payload
+    $raw = isset( $_POST['payload'] ) ? wp_unslash( $_POST['payload'] ) : '';
+    if ( empty( $raw ) ) {
+        wp_send_json_error( 'No submission data received.' );
+    }
+
+    $data = json_decode( $raw, true );
+    if ( ! is_array( $data ) ) {
+        wp_send_json_error( 'Malformed submission data.' );
+    }
+
+    // Basic sanitization of top-level string values
+    $clean = array();
+    foreach ( $data as $key => $value ) {
+        $key = sanitize_key( $key );
+        if ( is_array( $value ) ) {
+            $clean[ $key ] = array_map( 'sanitize_text_field', $value );
+        } else {
+            $clean[ $key ] = sanitize_textarea_field( $value );
+        }
+    }
+
+    // Ensure submission timestamp
+    $clean['submitted_at']    = $clean['submitted_at'] ?? current_time( 'c' );
+    $clean['submission_ip']   = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    $clean['submission_ua']   = substr( $_SERVER['HTTP_USER_AGENT'] ?? '', 0, 200 );
+    $clean['submission_id']   = uniqid( 'aqr_', true );
+
+    // 3. Log to WordPress options (append to rolling log, keep last 200)
+    $log = get_option( 'ansa_questionnaire_log', array() );
+    if ( ! is_array( $log ) ) {
+        $log = array();
+    }
+    array_unshift( $log, $clean ); // newest first
+    $log = array_slice( $log, 0, 200 );
+    update_option( 'ansa_questionnaire_log', $log, false ); // autoload=false
+
+    error_log( sprintf(
+        '[ANSA Questionnaire] Submission logged | ID: %s | Company: %s | Email: %s | IP: %s',
+        $clean['submission_id'],
+        $clean['company_name'] ?? 'unknown',
+        $clean['contact_email'] ?? 'unknown',
+        $clean['submission_ip']
+    ) );
+
+    // 4. Forward to Workato (best-effort, non-blocking for user)
+    $webhook_url = 'https://webhooks.workato.com/webhooks/rest/7b185dd3-a851-4892-80ef-cbe90de5aae6/new_questionaire';
+    $workato_response = wp_remote_post( $webhook_url, array(
+        'headers' => array( 'Content-Type' => 'application/json' ),
+        'body'    => wp_json_encode( $clean ),
+        'timeout' => 15,
+    ) );
+
+    if ( is_wp_error( $workato_response ) ) {
+        error_log( '[ANSA Questionnaire] Workato forward FAILED | ID: ' . $clean['submission_id'] . ' | Error: ' . $workato_response->get_error_message() );
+        // Still return success — data is safely logged in WP
+    } else {
+        $workato_code = wp_remote_retrieve_response_code( $workato_response );
+        error_log( '[ANSA Questionnaire] Workato forward | ID: ' . $clean['submission_id'] . ' | HTTP: ' . $workato_code );
+    }
+
+    // 5. Notify admin by email (optional — comment out if noisy)
+    $admin_email = get_option( 'admin_email' );
+    $company     = $clean['company_name'] ?? 'Unknown';
+    $contact     = $clean['contact_name'] ?? 'Unknown';
+    $email       = $clean['contact_email'] ?? 'Unknown';
+    wp_mail(
+        $admin_email,
+        'New AI Readiness Questionnaire — ' . $company,
+        "New questionnaire submission received.\n\nCompany: $company\nContact: $contact\nEmail: $email\nSubmission ID: {$clean['submission_id']}\n\nView all submissions in WP Admin → Tools → Questionnaire Submissions."
+    );
+
+    wp_send_json_success( array( 'submission_id' => $clean['submission_id'] ) );
+}
+add_action( 'wp_ajax_ansa_questionnaire_submit',        'ansa_questionnaire_submit_handler' );
+add_action( 'wp_ajax_nopriv_ansa_questionnaire_submit', 'ansa_questionnaire_submit_handler' );
+
+/**
+ * Admin page to view questionnaire submissions
+ * Access: WP Admin → Tools → Questionnaire Submissions
+ */
+function ansa_questionnaire_submissions_menu() {
+    add_management_page(
+        'Questionnaire Submissions',
+        'Questionnaire Submissions',
+        'manage_options',
+        'ansa-questionnaire-submissions',
+        'ansa_questionnaire_submissions_page'
+    );
+}
+add_action( 'admin_menu', 'ansa_questionnaire_submissions_menu' );
+
+function ansa_questionnaire_submissions_page() {
+    if ( ! current_user_can( 'manage_options' ) ) {
+        wp_die( 'Unauthorized' );
+    }
+
+    $log = get_option( 'ansa_questionnaire_log', array() );
+
+    echo '<div class="wrap">';
+    echo '<h1>AI Readiness Questionnaire Submissions</h1>';
+    echo '<p>Showing ' . count( $log ) . ' submission(s). Newest first. Maximum 200 stored.</p>';
+
+    if ( empty( $log ) ) {
+        echo '<p>No submissions yet.</p>';
+        echo '</div>';
+        return;
+    }
+
+    foreach ( $log as $sub ) {
+        echo '<div style="background:#fff;border:1px solid #ddd;border-radius:6px;padding:16px;margin-bottom:16px;">';
+        echo '<strong>' . esc_html( $sub['company_name'] ?? 'Unknown Company' ) . '</strong>';
+        echo ' — ' . esc_html( $sub['contact_name'] ?? '' );
+        echo ' (' . esc_html( $sub['contact_email'] ?? '' ) . ')';
+        echo ' <span style="color:#999;font-size:12px;">' . esc_html( $sub['submitted_at'] ?? '' ) . '</span>';
+        echo '<br><span style="color:#999;font-size:11px;">ID: ' . esc_html( $sub['submission_id'] ?? '' ) . ' | IP: ' . esc_html( $sub['submission_ip'] ?? '' ) . '</span>';
+        echo '<details style="margin-top:8px;"><summary style="cursor:pointer;color:#462CED;">View full response</summary>';
+        echo '<pre style="background:#f5f5f5;padding:12px;border-radius:4px;overflow:auto;font-size:12px;margin-top:8px;">';
+        echo esc_html( json_encode( $sub, JSON_PRETTY_PRINT ) );
+        echo '</pre></details>';
+        echo '</div>';
+    }
+
+    echo '</div>';
+}
+
+/**
+ * ──────────────────────────────────────────────
  * Google Sheets Accelerator Loader
  * Fetches the public accelerator sheet as CSV and returns parsed JSON.
  * The Sheet ID is stored in wp-config.php as ANSA_ACCELERATORS_SHEET_ID.
@@ -1181,7 +1325,6 @@ function ansa_sheet_accelerators_handler() {
         wp_send_json_error( 'Sheet ID not configured. Add ANSA_ACCELERATORS_SHEET_ID to wp-config.php.' );
     }
 
-    // Cache for 5 minutes to avoid hammering the sheet on every page load
     $cache_key = 'ansa_accelerators_v1';
     $cached    = get_transient( $cache_key );
     if ( $cached !== false ) {
@@ -1207,7 +1350,6 @@ function ansa_sheet_accelerators_handler() {
         wp_send_json_error( 'Sheet appears empty.' );
     }
 
-    // First row = headers; normalise to lowercase with underscores
     $headers = array_map( function( $h ) {
         return strtolower( trim( preg_replace( '/\s+/', '_', $h ) ) );
     }, $rows[0] );
@@ -1215,7 +1357,7 @@ function ansa_sheet_accelerators_handler() {
     $accelerators = array();
     for ( $i = 1; $i < count( $rows ); $i++ ) {
         $row = $rows[ $i ];
-        if ( count( array_filter( $row ) ) === 0 ) continue; // skip blank rows
+        if ( count( array_filter( $row ) ) === 0 ) continue;
         while ( count( $row ) < count( $headers ) ) { $row[] = ''; }
         $record = array_combine( $headers, array_slice( $row, 0, count( $headers ) ) );
         if ( empty( $record['card_id'] ) || empty( $record['card_name'] ) ) continue;
