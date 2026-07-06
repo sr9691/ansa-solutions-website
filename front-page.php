@@ -162,6 +162,60 @@ get_header(); ?>
 			</p>
 		</div>
 
+		<?php
+		$ansa_home_events = function_exists( 'ansa_get_events' ) ? ansa_get_events( 'upcoming', 1 ) : array();
+		$ansa_home_event  = ! empty( $ansa_home_events ) ? $ansa_home_events[0] : null;
+		?>
+		<?php if ( $ansa_home_event ) :
+			$he_date  = get_post_meta( $ansa_home_event->ID, '_ansa_event_date', true );
+			$he_time  = get_post_meta( $ansa_home_event->ID, '_ansa_event_time', true );
+			$he_loc   = get_post_meta( $ansa_home_event->ID, '_ansa_event_location', true );
+			$he_hosts = get_post_meta( $ansa_home_event->ID, '_ansa_event_hosts', true );
+			$he_rsvp  = get_post_meta( $ansa_home_event->ID, '_ansa_event_rsvp_url', true );
+			$he_desc  = get_the_excerpt( $ansa_home_event );
+			$he_badge = $he_date ? wp_date( 'F j, Y', strtotime( $he_date ) ) : '';
+			$he_when  = $he_date ? wp_date( 'l, F j', strtotime( $he_date ) ) : '';
+		?>
+		<!-- Upcoming event card -->
+		<div style="max-width: 720px; margin: 0 auto; background: #fff; border: 2px solid var(--accent); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 4px 24px rgba(70,44,237,0.1);">
+			<div style="background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 6px 18px;">
+				Upcoming<?php echo $he_badge ? ' — ' . esc_html( $he_badge ) : ''; ?>
+			</div>
+			<div style="padding: 1.75rem 2rem;">
+				<?php if ( $he_hosts ) : ?>
+					<div style="font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 0.5rem;"><?php echo esc_html( $he_hosts ); ?></div>
+				<?php endif; ?>
+				<h3 style="margin: 0 0 0.75rem; font-size: 1.15rem; line-height: 1.4; color: var(--text);">
+					<?php echo esc_html( get_the_title( $ansa_home_event ) ); ?>
+				</h3>
+				<div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; font-size: 13px; color: var(--text-light); margin-bottom: 1.5rem;">
+					<?php if ( $he_when ) : ?>
+					<span style="display: flex; align-items: center; gap: 5px;">
+						<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+						<?php echo esc_html( $he_when ); ?><?php if ( $he_time ) : ?> &nbsp;·&nbsp; <?php echo esc_html( $he_time ); ?><?php endif; ?>
+					</span>
+					<?php endif; ?>
+					<?php if ( $he_loc ) : ?>
+					<span style="display: flex; align-items: center; gap: 5px;">
+						<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+						<?php echo esc_html( $he_loc ); ?>
+					</span>
+					<?php endif; ?>
+				</div>
+				<div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+					<?php if ( $he_rsvp ) : ?>
+					<a href="<?php echo esc_url( $he_rsvp ); ?>" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.65rem 1.25rem; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+						Request to Join
+						<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+					</a>
+					<?php endif; ?>
+					<a href="<?php echo esc_url( home_url( '/events' ) ); ?>" style="font-size: 14px; font-weight: 600; color: var(--accent);">
+						View all events →
+					</a>
+				</div>
+			</div>
+		</div>
+		<?php else : ?>
 		<!-- No upcoming events -->
 		<div style="max-width: 720px; margin: 0 auto; background: #fff; border: 1px dashed var(--border); border-radius: var(--radius-lg); padding: 2.25rem 2rem; text-align: center;">
 			<p style="margin: 0 0 1.25rem; font-size: 1rem; color: var(--text-light); line-height: 1.6;">
@@ -171,6 +225,7 @@ get_header(); ?>
 				View all events →
 			</a>
 		</div>
+		<?php endif; ?>
 	</div>
 </section>
 

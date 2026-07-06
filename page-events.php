@@ -33,15 +33,66 @@ get_header();
 			<h2>Join Us Next</h2>
 		</div>
 
-		<div class="events-empty">
-			<p>We don't have an upcoming event on the calendar right now. Check back soon — or get notified below when the next one is announced.</p>
-		</div>
+		<?php $ansa_upcoming = ansa_get_events( 'upcoming' ); ?>
+		<?php if ( $ansa_upcoming ) : ?>
+			<div class="events-grid">
+				<?php foreach ( $ansa_upcoming as $index => $event ) :
+					$e_date  = get_post_meta( $event->ID, '_ansa_event_date', true );
+					$e_time  = get_post_meta( $event->ID, '_ansa_event_time', true );
+					$e_loc   = get_post_meta( $event->ID, '_ansa_event_location', true );
+					$e_hosts = get_post_meta( $event->ID, '_ansa_event_hosts', true );
+					$e_rsvp  = get_post_meta( $event->ID, '_ansa_event_rsvp_url', true );
+					$e_desc  = get_the_excerpt( $event );
+					$e_when  = $e_date ? wp_date( 'l, F j, Y', strtotime( $e_date ) ) : '';
+					$featured = ( 0 === $index ) ? ' event-card--featured' : '';
+				?>
+				<div class="event-card<?php echo esc_attr( $featured ); ?>">
+					<div class="event-card__badge">Upcoming</div>
+					<div class="event-card__body">
+						<div class="event-card__meta-row">
+							<span class="event-card__date">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+								<?php echo esc_html( $e_when ); ?><?php if ( $e_time ) : ?> &nbsp;·&nbsp; <?php echo esc_html( $e_time ); ?><?php endif; ?>
+							</span>
+						</div>
+						<h3 class="event-card__title"><?php echo esc_html( get_the_title( $event ) ); ?></h3>
+						<?php if ( $e_hosts ) : ?>
+							<div class="event-card__hosts"><?php echo esc_html( $e_hosts ); ?></div>
+						<?php endif; ?>
+						<?php if ( $e_loc ) : ?>
+							<div class="event-card__location">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+								<?php echo esc_html( $e_loc ); ?>
+							</div>
+						<?php endif; ?>
+						<?php if ( $e_desc ) : ?>
+							<p class="event-card__desc"><?php echo esc_html( $e_desc ); ?></p>
+						<?php endif; ?>
+					</div>
+					<?php if ( $e_rsvp ) : ?>
+						<div class="event-card__footer">
+							<a href="<?php echo esc_url( $e_rsvp ); ?>" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+								Request to Join
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+							</a>
+						</div>
+					<?php endif; ?>
+				</div>
+				<?php endforeach; ?>
+			</div>
+		<?php else : ?>
+			<div class="events-empty">
+				<p>We don't have an upcoming event on the calendar right now. Check back soon — or get notified below when the next one is announced.</p>
+			</div>
+		<?php endif; ?>
 	</div>
 </section>
 
 <!-- ============================================================
      PAST EVENTS
 ============================================================ -->
+<?php $ansa_past = ansa_get_events( 'past' ); ?>
+<?php if ( $ansa_past ) : ?>
 <section class="section events-section events-section--past">
 	<div class="container">
 		<div class="events-section__header">
@@ -50,79 +101,38 @@ get_header();
 		</div>
 
 		<div class="events-grid events-grid--past">
-
-			<!-- Apr 22, 2025 -->
+			<?php foreach ( $ansa_past as $event ) :
+				$e_date  = get_post_meta( $event->ID, '_ansa_event_date', true );
+				$e_time  = get_post_meta( $event->ID, '_ansa_event_time', true );
+				$e_loc   = get_post_meta( $event->ID, '_ansa_event_location', true );
+				$e_hosts = get_post_meta( $event->ID, '_ansa_event_hosts', true );
+				$e_when  = $e_date ? wp_date( 'l, F j, Y', strtotime( $e_date ) ) : '';
+			?>
 			<div class="event-card event-card--past">
 				<div class="event-card__body">
 					<div class="event-card__meta-row">
 						<span class="event-card__date">
 							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-							Wednesday, April 22, 2025 &nbsp;·&nbsp; 5:30 – 7:30 PM EDT
+							<?php echo esc_html( $e_when ); ?><?php if ( $e_time ) : ?> &nbsp;·&nbsp; <?php echo esc_html( $e_time ); ?><?php endif; ?>
 						</span>
 					</div>
-					<h3 class="event-card__title">From Fragmented Systems to Agentic Enterprise: How Engineering &amp; Construction Leaders Are Using Workato + AI To Redesign Project Delivery</h3>
-					<div class="event-card__hosts">Hosted by ANSA Solutions + Workato</div>
-					<div class="event-card__location">
-						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-						Anthony's Chophouse &nbsp;·&nbsp; Carmel, Indiana
-					</div>
+					<h3 class="event-card__title"><?php echo esc_html( get_the_title( $event ) ); ?></h3>
+					<?php if ( $e_hosts ) : ?>
+						<div class="event-card__hosts"><?php echo esc_html( $e_hosts ); ?></div>
+					<?php endif; ?>
+					<?php if ( $e_loc ) : ?>
+						<div class="event-card__location">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+							<?php echo esc_html( $e_loc ); ?>
+						</div>
+					<?php endif; ?>
 				</div>
 			</div>
-
-			<!-- Oct 29, 2025 -->
-			<div class="event-card event-card--past">
-				<div class="event-card__body">
-					<div class="event-card__meta-row">
-						<span class="event-card__date">
-							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-							Wednesday, October 29, 2025 &nbsp;·&nbsp; 6:00 – 8:30 PM EDT
-						</span>
-					</div>
-					<h3 class="event-card__title">AI in Banking</h3>
-					<div class="event-card__location">
-						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-						1830 Chophouse &nbsp;·&nbsp; Carmel, Indiana
-					</div>
-				</div>
-			</div>
-
-			<!-- Jul 23, 2025 -->
-			<div class="event-card event-card--past">
-				<div class="event-card__body">
-					<div class="event-card__meta-row">
-						<span class="event-card__date">
-							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-							Wednesday, July 23, 2025 &nbsp;·&nbsp; 7:30 – 9:30 AM EDT
-						</span>
-					</div>
-					<h3 class="event-card__title">The New Automation Mindset: Enabling Strategic Value for the C-Suite</h3>
-					<div class="event-card__location">
-						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-						Club Works &nbsp;·&nbsp; Zionsville, Indiana
-					</div>
-				</div>
-			</div>
-
-			<!-- Mar 11, 2026 -->
-			<div class="event-card event-card--past">
-				<div class="event-card__body">
-					<div class="event-card__meta-row">
-						<span class="event-card__date">
-							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-							Wednesday, March 11, 2026 &nbsp;·&nbsp; 5:00 – 7:00 PM EDT
-						</span>
-					</div>
-					<h3 class="event-card__title">AI in Action: Smarter Systems for Growing Businesses</h3>
-					<div class="event-card__location">
-						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-						Club Works &nbsp;·&nbsp; Indianapolis, Indiana
-					</div>
-				</div>
-			</div>
-
+			<?php endforeach; ?>
 		</div>
 	</div>
 </section>
+<?php endif; ?>
 
 <!-- ============================================================
      NOTIFY CTA

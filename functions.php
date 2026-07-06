@@ -1394,3 +1394,269 @@ function ansa_maybe_clear_acc_cache() {
     }
 }
 add_action( 'admin_init', 'ansa_maybe_clear_acc_cache' );
+
+/**
+ * ──────────────────────────────────────────────
+ * Events — Custom Post Type
+ *
+ * Manage events in WP Admin → Events. Rendered by page-events.php
+ * (Upcoming + Past lists) and the home page (soonest upcoming event).
+ * Upcoming vs. past is derived from each event's date, so past events
+ * fall off the upcoming lists automatically — no manual editing needed.
+ * ──────────────────────────────────────────────
+ */
+function ansa_register_event_cpt() {
+    $labels = array(
+        'name'               => 'Events',
+        'singular_name'      => 'Event',
+        'add_new'            => 'Add New Event',
+        'add_new_item'       => 'Add New Event',
+        'edit_item'          => 'Edit Event',
+        'new_item'           => 'New Event',
+        'view_item'          => 'View Event',
+        'search_items'       => 'Search Events',
+        'not_found'          => 'No events found',
+        'not_found_in_trash' => 'No events found in Trash',
+        'all_items'          => 'All Events',
+        'menu_name'          => 'Events',
+    );
+
+    register_post_type( 'ansa_event', array(
+        'labels'              => $labels,
+        'public'              => true,
+        'show_ui'             => true,
+        'show_in_menu'        => true,
+        'menu_icon'           => 'dashicons-calendar-alt',
+        'menu_position'       => 22,
+        'supports'            => array( 'title', 'editor', 'excerpt' ),
+        'has_archive'         => false,
+        'publicly_queryable'  => false,  // no front-end single URLs; RSVP lives on Luma
+        'exclude_from_search' => true,
+        'rewrite'             => false,
+        'show_in_rest'        => true,
+    ) );
+}
+add_action( 'init', 'ansa_register_event_cpt' );
+
+/**
+ * Event details meta box
+ */
+function ansa_event_meta_box() {
+    add_meta_box( 'ansa_event_details', 'Event Details', 'ansa_event_meta_box_html', 'ansa_event', 'normal', 'high' );
+}
+add_action( 'add_meta_boxes', 'ansa_event_meta_box' );
+
+function ansa_event_meta_box_html( $post ) {
+    wp_nonce_field( 'ansa_event_save', 'ansa_event_nonce' );
+    $date     = get_post_meta( $post->ID, '_ansa_event_date', true );
+    $time     = get_post_meta( $post->ID, '_ansa_event_time', true );
+    $location = get_post_meta( $post->ID, '_ansa_event_location', true );
+    $hosts    = get_post_meta( $post->ID, '_ansa_event_hosts', true );
+    $rsvp     = get_post_meta( $post->ID, '_ansa_event_rsvp_url', true );
+    ?>
+    <style>
+        .ansa-field { margin: 0 0 16px; }
+        .ansa-field label { display: block; font-weight: 600; margin-bottom: 4px; }
+        .ansa-field input { width: 100%; max-width: 520px; }
+        .ansa-field .description { display: block; margin-top: 4px; color: #666; }
+    </style>
+    <p class="ansa-field">
+        <label for="ansa_event_date">Date</label>
+        <input type="date" id="ansa_event_date" name="ansa_event_date" value="<?php echo esc_attr( $date ); ?>" />
+        <span class="description">Drives sorting and whether the event shows as Upcoming or Past.</span>
+    </p>
+    <p class="ansa-field">
+        <label for="ansa_event_time">Time label</label>
+        <input type="text" id="ansa_event_time" name="ansa_event_time" value="<?php echo esc_attr( $time ); ?>" placeholder="5:30 – 7:30 PM EDT" />
+    </p>
+    <p class="ansa-field">
+        <label for="ansa_event_location">Location</label>
+        <input type="text" id="ansa_event_location" name="ansa_event_location" value="<?php echo esc_attr( $location ); ?>" placeholder="Anthony's Chophouse · Carmel, Indiana" />
+    </p>
+    <p class="ansa-field">
+        <label for="ansa_event_hosts">Hosts <span style="font-weight:400;">(optional)</span></label>
+        <input type="text" id="ansa_event_hosts" name="ansa_event_hosts" value="<?php echo esc_attr( $hosts ); ?>" placeholder="Hosted by ANSA Solutions + Workato" />
+    </p>
+    <p class="ansa-field">
+        <label for="ansa_event_rsvp_url">RSVP / Luma URL <span style="font-weight:400;">(optional)</span></label>
+        <input type="url" id="ansa_event_rsvp_url" name="ansa_event_rsvp_url" value="<?php echo esc_attr( $rsvp ); ?>" placeholder="https://luma.com/xxxxxxxx" />
+        <span class="description">The "Request to Join" button links here. Leave blank for past events.</span>
+    </p>
+    <p class="ansa-field" style="margin-bottom:0;color:#666;">
+        Tip: the <strong>Excerpt</strong> (Screen Options → Excerpt) is shown as the short blurb on the featured upcoming card.
+    </p>
+    <?php
+}
+
+/**
+ * Save event meta
+ */
+function ansa_event_save_meta( $post_id ) {
+    if ( ! isset( $_POST['ansa_event_nonce'] ) || ! wp_verify_nonce( $_POST['ansa_event_nonce'], 'ansa_event_save' ) ) {
+        return;
+    }
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return;
+    }
+
+    $fields = array(
+        '_ansa_event_date'     => array( 'ansa_event_date',     'sanitize_text_field' ),
+        '_ansa_event_time'     => array( 'ansa_event_time',     'sanitize_text_field' ),
+        '_ansa_event_location' => array( 'ansa_event_location', 'sanitize_text_field' ),
+        '_ansa_event_hosts'    => array( 'ansa_event_hosts',    'sanitize_text_field' ),
+        '_ansa_event_rsvp_url' => array( 'ansa_event_rsvp_url', 'esc_url_raw' ),
+    );
+
+    foreach ( $fields as $meta_key => $conf ) {
+        list( $field, $sanitizer ) = $conf;
+        if ( isset( $_POST[ $field ] ) ) {
+            $value = call_user_func( $sanitizer, wp_unslash( $_POST[ $field ] ) );
+            update_post_meta( $post_id, $meta_key, $value );
+        }
+    }
+}
+add_action( 'save_post_ansa_event', 'ansa_event_save_meta' );
+
+/**
+ * Admin list columns for events (date + location, sortable by date)
+ */
+function ansa_event_admin_columns( $cols ) {
+    $new = array();
+    foreach ( $cols as $key => $label ) {
+        $new[ $key ] = $label;
+        if ( $key === 'title' ) {
+            $new['ansa_event_date']     = 'Event Date';
+            $new['ansa_event_location'] = 'Location';
+        }
+    }
+    return $new;
+}
+add_filter( 'manage_ansa_event_posts_columns', 'ansa_event_admin_columns' );
+
+function ansa_event_admin_column_content( $col, $post_id ) {
+    if ( $col === 'ansa_event_date' ) {
+        $date = get_post_meta( $post_id, '_ansa_event_date', true );
+        echo $date ? esc_html( wp_date( 'M j, Y', strtotime( $date ) ) ) : '—';
+    } elseif ( $col === 'ansa_event_location' ) {
+        $loc = get_post_meta( $post_id, '_ansa_event_location', true );
+        echo $loc ? esc_html( $loc ) : '—';
+    }
+}
+add_action( 'manage_ansa_event_posts_custom_column', 'ansa_event_admin_column_content', 10, 2 );
+
+function ansa_event_sortable_columns( $cols ) {
+    $cols['ansa_event_date'] = 'ansa_event_date';
+    return $cols;
+}
+add_filter( 'manage_edit-ansa_event_sortable_columns', 'ansa_event_sortable_columns' );
+
+function ansa_event_admin_orderby( $query ) {
+    if ( ! is_admin() || ! $query->is_main_query() ) {
+        return;
+    }
+    if ( $query->get( 'orderby' ) === 'ansa_event_date' ) {
+        $query->set( 'meta_key', '_ansa_event_date' );
+        $query->set( 'orderby', 'meta_value' );
+        $query->set( 'meta_type', 'DATE' );
+    }
+}
+add_action( 'pre_get_posts', 'ansa_event_admin_orderby' );
+
+/**
+ * Fetch events for the front end.
+ *
+ * @param string $when  'upcoming' (date >= today, soonest first) or 'past' (date < today, most recent first).
+ * @param int    $limit Max events to return (-1 = all).
+ * @return WP_Post[]
+ */
+function ansa_get_events( $when = 'upcoming', $limit = -1 ) {
+    $today   = current_time( 'Y-m-d' );
+    $compare = ( $when === 'past' ) ? '<' : '>=';
+    $order   = ( $when === 'past' ) ? 'DESC' : 'ASC';
+
+    return get_posts( array(
+        'post_type'      => 'ansa_event',
+        'post_status'    => 'publish',
+        'posts_per_page' => $limit,
+        'meta_key'       => '_ansa_event_date',
+        'orderby'        => 'meta_value',
+        'meta_type'      => 'DATE',
+        'order'          => $order,
+        'meta_query'     => array(
+            array(
+                'key'     => '_ansa_event_date',
+                'value'   => $today,
+                'compare' => $compare,
+                'type'    => 'DATE',
+            ),
+        ),
+    ) );
+}
+
+/**
+ * One-time import of the events that were previously hardcoded in the
+ * templates, so nothing is lost when switching to the Events post type.
+ * Runs once, guarded by the ansa_events_seeded option.
+ */
+function ansa_seed_events() {
+    if ( get_option( 'ansa_events_seeded' ) || ! post_type_exists( 'ansa_event' ) ) {
+        return;
+    }
+
+    $events = array(
+        array(
+            'title'    => 'From Fragmented Systems to Agentic Enterprise: How Engineering & Construction Leaders Are Using Workato + AI To Redesign Project Delivery',
+            'excerpt'  => 'A hands-on executive dinner for engineering and construction leaders exploring how AI orchestration is reshaping project delivery — from fragmented legacy systems to connected, agentic workflows.',
+            'date'     => '2025-04-22',
+            'time'     => '5:30 – 7:30 PM EDT',
+            'location' => "Anthony's Chophouse · Carmel, Indiana",
+            'hosts'    => 'Hosted by ANSA Solutions + Workato',
+            'rsvp'     => 'https://luma.com/rlqz48f9',
+        ),
+        array(
+            'title'    => 'AI in Banking',
+            'date'     => '2025-10-29',
+            'time'     => '6:00 – 8:30 PM EDT',
+            'location' => '1830 Chophouse · Carmel, Indiana',
+        ),
+        array(
+            'title'    => 'The New Automation Mindset: Enabling Strategic Value for the C-Suite',
+            'date'     => '2025-07-23',
+            'time'     => '7:30 – 9:30 AM EDT',
+            'location' => 'Club Works · Zionsville, Indiana',
+        ),
+        array(
+            'title'    => 'AI in Action: Smarter Systems for Growing Businesses',
+            'date'     => '2026-03-11',
+            'time'     => '5:00 – 7:00 PM EDT',
+            'location' => 'Club Works · Indianapolis, Indiana',
+        ),
+    );
+
+    foreach ( $events as $e ) {
+        $post_id = wp_insert_post( array(
+            'post_type'    => 'ansa_event',
+            'post_status'  => 'publish',
+            'post_title'   => $e['title'],
+            'post_excerpt' => isset( $e['excerpt'] ) ? $e['excerpt'] : '',
+        ) );
+
+        if ( $post_id && ! is_wp_error( $post_id ) ) {
+            update_post_meta( $post_id, '_ansa_event_date',     $e['date'] );
+            update_post_meta( $post_id, '_ansa_event_time',     $e['time'] );
+            update_post_meta( $post_id, '_ansa_event_location', $e['location'] );
+            if ( ! empty( $e['hosts'] ) ) {
+                update_post_meta( $post_id, '_ansa_event_hosts', $e['hosts'] );
+            }
+            if ( ! empty( $e['rsvp'] ) ) {
+                update_post_meta( $post_id, '_ansa_event_rsvp_url', $e['rsvp'] );
+            }
+        }
+    }
+
+    update_option( 'ansa_events_seeded', 1 );
+}
+add_action( 'admin_init', 'ansa_seed_events' );
