@@ -162,36 +162,14 @@ get_header(); ?>
 			</p>
 		</div>
 
-		<!-- Upcoming event card -->
-		<div style="max-width: 720px; margin: 0 auto; background: #fff; border: 2px solid var(--accent); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 4px 24px rgba(70,44,237,0.1);">
-			<div style="background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 6px 18px;">
-				Upcoming — April 22, 2025
-			</div>
-			<div style="padding: 1.75rem 2rem;">
-				<div style="font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 0.5rem;">Hosted by ANSA Solutions + Workato</div>
-				<h3 style="margin: 0 0 0.75rem; font-size: 1.15rem; line-height: 1.4; color: var(--text);">
-					From Fragmented Systems to Agentic Enterprise: How Engineering &amp; Construction Leaders Are Using Workato + AI To Redesign Project Delivery
-				</h3>
-				<div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; font-size: 13px; color: var(--text-light); margin-bottom: 1.5rem;">
-					<span style="display: flex; align-items: center; gap: 5px;">
-						<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-						Wednesday, April 22 &nbsp;·&nbsp; 5:30 – 7:30 PM EDT
-					</span>
-					<span style="display: flex; align-items: center; gap: 5px;">
-						<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-						Anthony's Chophouse &nbsp;·&nbsp; Carmel, IN
-					</span>
-				</div>
-				<div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-					<a href="https://luma.com/rlqz48f9" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.65rem 1.25rem; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
-						Request to Join
-						<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-					</a>
-					<a href="<?php echo esc_url( home_url( '/events' ) ); ?>" style="font-size: 14px; font-weight: 600; color: var(--accent);">
-						View all events →
-					</a>
-				</div>
-			</div>
+		<!-- No upcoming events -->
+		<div style="max-width: 720px; margin: 0 auto; background: #fff; border: 1px dashed var(--border); border-radius: var(--radius-lg); padding: 2.25rem 2rem; text-align: center;">
+			<p style="margin: 0 0 1.25rem; font-size: 1rem; color: var(--text-light); line-height: 1.6;">
+				We don't have an upcoming event on the calendar right now. Check back soon for our next executive event.
+			</p>
+			<a href="<?php echo esc_url( home_url( '/events' ) ); ?>" style="font-size: 14px; font-weight: 600; color: var(--accent);">
+				View all events →
+			</a>
 		</div>
 	</div>
 </section>
