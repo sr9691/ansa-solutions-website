@@ -33,36 +33,8 @@ get_header();
 			<h2>Join Us Next</h2>
 		</div>
 
-		<div class="events-grid">
-
-			<!-- April 22 Event -->
-			<div class="event-card event-card--featured">
-				<div class="event-card__badge">Upcoming</div>
-				<div class="event-card__body">
-					<div class="event-card__meta-row">
-						<span class="event-card__date">
-							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-							Wednesday, April 22, 2025 &nbsp;·&nbsp; 5:30 – 7:30 PM EDT
-						</span>
-					</div>
-					<h3 class="event-card__title">From Fragmented Systems to Agentic Enterprise: How Engineering &amp; Construction Leaders Are Using Workato + AI To Redesign Project Delivery</h3>
-					<div class="event-card__hosts">Hosted by ANSA Solutions + Workato</div>
-					<div class="event-card__location">
-						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-						Anthony's Chophouse &nbsp;·&nbsp; Carmel, Indiana
-					</div>
-					<p class="event-card__desc">
-						A hands-on executive dinner for engineering and construction leaders exploring how AI orchestration is reshaping project delivery — from fragmented legacy systems to connected, agentic workflows.
-					</p>
-				</div>
-				<div class="event-card__footer">
-					<a href="https://luma.com/rlqz48f9" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-						Request to Join
-						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-					</a>
-				</div>
-			</div>
-
+		<div class="events-empty">
+			<p>We don't have an upcoming event on the calendar right now. Check back soon — or get notified below when the next one is announced.</p>
 		</div>
 	</div>
 </section>
@@ -78,6 +50,24 @@ get_header();
 		</div>
 
 		<div class="events-grid events-grid--past">
+
+			<!-- Apr 22, 2025 -->
+			<div class="event-card event-card--past">
+				<div class="event-card__body">
+					<div class="event-card__meta-row">
+						<span class="event-card__date">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+							Wednesday, April 22, 2025 &nbsp;·&nbsp; 5:30 – 7:30 PM EDT
+						</span>
+					</div>
+					<h3 class="event-card__title">From Fragmented Systems to Agentic Enterprise: How Engineering &amp; Construction Leaders Are Using Workato + AI To Redesign Project Delivery</h3>
+					<div class="event-card__hosts">Hosted by ANSA Solutions + Workato</div>
+					<div class="event-card__location">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+						Anthony's Chophouse &nbsp;·&nbsp; Carmel, Indiana
+					</div>
+				</div>
+			</div>
 
 			<!-- Oct 29, 2025 -->
 			<div class="event-card event-card--past">
@@ -168,6 +158,21 @@ get_header();
 
 /* Past section bg */
 .events-section--past { background: var(--border-light); }
+
+/* Empty upcoming state */
+.events-empty {
+	max-width: 780px;
+	background: #fff;
+	border: 1px dashed var(--border);
+	border-radius: var(--radius-lg);
+	padding: 2rem 1.75rem;
+}
+.events-empty p {
+	margin: 0;
+	color: var(--text-light);
+	font-size: 1rem;
+	line-height: 1.6;
+}
 
 /* Grid */
 .events-grid {

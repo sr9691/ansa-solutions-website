@@ -13,7 +13,6 @@
         init: function() {
             this.setupEventListeners();
             this.initSmoothScroll();
-            this.initFormHandling();
         },
 
         /**
@@ -61,117 +60,6 @@
                         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 });
-            });
-        },
-
-        /**
-         * Initialize form handling
-         */
-        initFormHandling: function() {
-            const forms = document.querySelectorAll('form');
-            forms.forEach((form) => {
-                form.addEventListener('submit', this.handleFormSubmit.bind(this));
-            });
-        },
-
-        /**
-         * Handle form submission
-         */
-        handleFormSubmit: async function(e) {
-            const form = e.target;
-
-            if (form.getAttribute('data-no-ajax')) {
-                return true;
-            }
-
-            e.preventDefault();
-
-            const formData = new FormData(form);
-            const data = {
-                name: formData.get('name') || formData.get('full_name') || '',
-                email: formData.get('email'),
-                message: formData.get('message') || formData.get('comment') || '',
-            };
-
-            if (!data.name || !data.email) {
-                this.showFormError(form, 'Please fill in all required fields.');
-                return;
-            }
-
-            const submitBtn = form.querySelector('button[type="submit"]');
-            const originalText = submitBtn ? submitBtn.textContent : '';
-
-            if (submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Sending...';
-            }
-
-            try {
-                const response = await fetch(`${ansaTheme.ajaxUrl}?action=ansa_contact_form`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-WP-Nonce': ansaTheme.nonce,
-                    },
-                    body: JSON.stringify(data),
-                });
-
-                const result = await response.json();
-
-                if (result.success) {
-                    this.showFormSuccess(form, 'Thank you! Your message has been sent successfully.');
-                    form.reset();
-                } else {
-                    this.showFormError(form, result.message || 'Failed to send message. Please try again.');
-                }
-            } catch (error) {
-                console.error('Form submission error:', error);
-                this.showFormError(form, 'An error occurred. Please try again later.');
-            } finally {
-                if (submitBtn) {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = originalText;
-                }
-            }
-        },
-
-        /**
-         * Show form error message
-         */
-        showFormError: function(form, message) {
-            this.removeFormMessages(form);
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'form-message form-error';
-            errorDiv.setAttribute('role', 'alert');
-            errorDiv.textContent = message;
-            form.insertBefore(errorDiv, form.firstChild);
-            setTimeout(() => {
-                errorDiv.remove();
-            }, 5000);
-        },
-
-        /**
-         * Show form success message
-         */
-        showFormSuccess: function(form, message) {
-            this.removeFormMessages(form);
-            const successDiv = document.createElement('div');
-            successDiv.className = 'form-message form-success';
-            successDiv.setAttribute('role', 'status');
-            successDiv.textContent = message;
-            form.insertBefore(successDiv, form.firstChild);
-            setTimeout(() => {
-                successDiv.remove();
-            }, 5000);
-        },
-
-        /**
-         * Remove form messages
-         */
-        removeFormMessages: function(form) {
-            const messages = form.querySelectorAll('.form-message');
-            messages.forEach((msg) => {
-                msg.remove();
             });
         },
 
