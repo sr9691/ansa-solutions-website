@@ -23,7 +23,7 @@ define( 'ANSA_NO_HEADER_FOOTER', true );
 // Server-injected config (WP is fully loaded here even though we skip the theme header).
 $ansa_ajax_url = esc_url( admin_url( 'admin-ajax.php' ) );
 $ansa_nonce    = wp_create_nonce( 'ansa-nonce' );
-$ansa_booking  = 'https://meetings.hubspot.com/sundaresh';
+$ansa_booking  = esc_url( home_url( '/calendar/' ) );
 $ansa_home     = esc_url( home_url( '/' ) );
 $ansa_ga_id    = 'G-8M27VDXHXD';
 ?><!DOCTYPE html>
