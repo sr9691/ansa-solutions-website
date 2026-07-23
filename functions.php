@@ -1396,7 +1396,27 @@ function ansa_workforce_lead_handler() {
     $log = array_slice( $log, 0, 300 );
     update_option( 'ansa_workforce_leads', $log, false );
 
-    // 7. Email the admin so leads land in the inbox during the event
+    // 7. Forward to Workato (primary delivery — best-effort, never blocks the visitor).
+    //    Set the webhook URL either as ANSA_WORKFORCE_WEBHOOK_URL in wp-config.php
+    //    or by replacing the placeholder below.
+    $webhook_url = defined( 'ANSA_WORKFORCE_WEBHOOK_URL' )
+        ? ANSA_WORKFORCE_WEBHOOK_URL
+        : 'https://webhooks.workato.com/webhooks/rest/REPLACE-WITH-YOUR-WEBHOOK-ID/workforce_lead';
+
+    if ( $webhook_url && strpos( $webhook_url, 'REPLACE-WITH' ) === false ) {
+        $resp = wp_remote_post( $webhook_url, array(
+            'headers' => array( 'Content-Type' => 'application/json' ),
+            'body'    => wp_json_encode( $lead ),
+            'timeout' => 15,
+        ) );
+        if ( is_wp_error( $resp ) ) {
+            error_log( '[ANSA Workforce] Workato forward FAILED | ' . $lead['lead_id'] . ' | ' . $resp->get_error_message() );
+        } else {
+            error_log( '[ANSA Workforce] Workato forward | ' . $lead['lead_id'] . ' | HTTP ' . wp_remote_retrieve_response_code( $resp ) );
+        }
+    }
+
+    // 8. Also email the admin (fallback for when WP SMTP is configured).
     $dim_lines = '';
     foreach ( $dimensions as $dim ) {
         $dim_lines .= '  - ' . $dim['name'] . ': ' . ( $dim['score_pct'] === null ? 'n/a' : $dim['score_pct'] . '/100' ) . "\n";
