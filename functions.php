@@ -1373,7 +1373,20 @@ function ansa_workforce_lead_handler() {
         }
     }
 
-    $lead = array(
+    // Flat, top-level fields so the Workato email needs no list/repeat mapping.
+    // Dimensions are always in fixed order: Fluency, Human Edge, Learning, Leadership.
+    $flat = array();
+    $dim_keys = array( 'dim_fluency', 'dim_human_edge', 'dim_learning', 'dim_leadership' );
+    foreach ( $dim_keys as $idx => $dim_key ) {
+        $flat[ $dim_key ] = ( isset( $dimensions[ $idx ]['score_pct'] ) && $dimensions[ $idx ]['score_pct'] !== null )
+            ? intval( $dimensions[ $idx ]['score_pct'] )
+            : '';
+    }
+    for ( $n = 0; $n < 12; $n++ ) {
+        $flat[ 'answer_' . ( $n + 1 ) ] = isset( $qa[ $n ]['answer'] ) ? $qa[ $n ]['answer'] : '';
+    }
+
+    $lead = array_merge( array(
         'lead_id'    => uniqid( 'wfa_', true ),
         'name'       => $name,
         'email'      => $email,
@@ -1387,7 +1400,7 @@ function ansa_workforce_lead_handler() {
         'source'     => sanitize_text_field( $data['source'] ?? 'Workforce AI Assessment' ),
         'created_at' => current_time( 'c' ),
         'ip'         => $_SERVER['REMOTE_ADDR'] ?? 'unknown',
-    );
+    ), $flat );
 
     // 6. Store (rolling log, keep last 300, autoload off)
     $log = get_option( 'ansa_workforce_leads', array() );

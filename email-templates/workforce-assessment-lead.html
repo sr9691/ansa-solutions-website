@@ -15,8 +15,10 @@
         {{score}} {{level}} {{source}} {{created_at}} {{lead_id}}
       Dimension scores (fixed order, 0–100 or "n/a"):
         {{dim_fluency}} {{dim_human_edge}} {{dim_learning}} {{dim_leadership}}
-      Answers appendix: repeat the marked <tr> over the "answers" list,
-        mapping {{answer_q}} and {{answer_response}}.
+      Answers (questions are hardcoded; map the 12 flat response fields):
+        {{answer_1}} ... {{answer_12}}
+      All placeholders are flat, top-level webhook fields — no Workato
+      list/repeat mapping required.
       ══════════════════════════════════════════════════════════════════
     -->
     <style type="text/css">
@@ -125,19 +127,36 @@
                         </td>
                     </tr>
 
-                    <!-- Answers appendix (optional; requires a Workato repeat over "answers") -->
+                    <!-- Answers appendix — 12 fixed questions, one flat placeholder each ({{answer_1}}..{{answer_12}}) -->
                     <tr>
                         <td style="padding: 20px 40px 8px 40px;" class="mobile-padding">
-                            <p style="margin: 0 0 12px 0; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #6b7280;">Their answers</p>
+                            <p style="margin: 0 0 14px 0; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #6b7280;">Their answers</p>
                             <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                <!-- ▼▼▼ REPEAT THIS ROW for each item in the "answers" list ▼▼▼ -->
-                                <tr>
-                                    <td style="padding: 10px 0; border-bottom: 1px solid #eef1f6;">
-                                        <p style="margin: 0 0 3px 0; font-size: 13px; font-weight: 600; color: #141b2d;">{{answer_q}}</p>
-                                        <p style="margin: 0; font-size: 13px; color: #6b7280;">{{answer_response}}</p>
-                                    </td>
-                                </tr>
-                                <!-- ▲▲▲ END REPEAT ▲▲▲ -->
+
+                                <!-- AI Fluency -->
+                                <tr><td style="padding: 6px 0 4px 0;"><p style="margin: 0; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #3ecdc6;">AI Fluency</p></td></tr>
+                                <tr><td style="padding: 8px 0; border-bottom: 1px solid #eef1f6;"><p style="margin: 0 0 3px 0; font-size: 13px; font-weight: 600; color: #141b2d;">In a typical week, how is your team actually using AI tools — ChatGPT, Claude, Copilot?</p><p style="margin: 0; font-size: 13px; color: #6b7280;">{{answer_1}}</p></td></tr>
+                                <tr><td style="padding: 8px 0; border-bottom: 1px solid #eef1f6;"><p style="margin: 0 0 3px 0; font-size: 13px; font-weight: 600; color: #141b2d;">Could most of your team tell you where AI helps their role — and where their own judgment matters more?</p><p style="margin: 0; font-size: 13px; color: #6b7280;">{{answer_2}}</p></td></tr>
+                                <tr><td style="padding: 8px 0; border-bottom: 1px solid #eef1f6;"><p style="margin: 0 0 3px 0; font-size: 13px; font-weight: 600; color: #141b2d;">When a new AI capability ships, how long before your organization knows what it means for how you work?</p><p style="margin: 0; font-size: 13px; color: #6b7280;">{{answer_3}}</p></td></tr>
+
+                                <!-- Human Edge -->
+                                <tr><td style="padding: 14px 0 4px 0;"><p style="margin: 0; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #3ecdc6;">Human Edge</p></td></tr>
+                                <tr><td style="padding: 8px 0; border-bottom: 1px solid #eef1f6;"><p style="margin: 0 0 3px 0; font-size: 13px; font-weight: 600; color: #141b2d;">How much of your team's week goes to repetitive work a machine could do — re-keying data, formatting reports, chasing status updates?</p><p style="margin: 0; font-size: 13px; color: #6b7280;">{{answer_4}}</p></td></tr>
+                                <tr><td style="padding: 8px 0; border-bottom: 1px solid #eef1f6;"><p style="margin: 0 0 3px 0; font-size: 13px; font-weight: 600; color: #141b2d;">How much time does your team get for the work AI can't do — judgment calls, relationships, creative problem-solving?</p><p style="margin: 0; font-size: 13px; color: #6b7280;">{{answer_5}}</p></td></tr>
+                                <tr><td style="padding: 8px 0; border-bottom: 1px solid #eef1f6;"><p style="margin: 0 0 3px 0; font-size: 13px; font-weight: 600; color: #141b2d;">When you bring new people onto your team, what are you really screening for?</p><p style="margin: 0; font-size: 13px; color: #6b7280;">{{answer_6}}</p></td></tr>
+
+                                <!-- Learning Culture -->
+                                <tr><td style="padding: 14px 0 4px 0;"><p style="margin: 0; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #3ecdc6;">Learning Culture</p></td></tr>
+                                <tr><td style="padding: 8px 0; border-bottom: 1px solid #eef1f6;"><p style="margin: 0 0 3px 0; font-size: 13px; font-weight: 600; color: #141b2d;">What kind of AI training or upskilling does your team get?</p><p style="margin: 0; font-size: 13px; color: #6b7280;">{{answer_7}}</p></td></tr>
+                                <tr><td style="padding: 8px 0; border-bottom: 1px solid #eef1f6;"><p style="margin: 0 0 3px 0; font-size: 13px; font-weight: 600; color: #141b2d;">When someone on your team finds an AI trick that saves them hours, what happens next?</p><p style="margin: 0; font-size: 13px; color: #6b7280;">{{answer_8}}</p></td></tr>
+                                <tr><td style="padding: 8px 0; border-bottom: 1px solid #eef1f6;"><p style="margin: 0 0 3px 0; font-size: 13px; font-weight: 600; color: #141b2d;">For roles AI is clearly changing, how is your organization responding?</p><p style="margin: 0; font-size: 13px; color: #6b7280;">{{answer_9}}</p></td></tr>
+
+                                <!-- Leadership & Direction -->
+                                <tr><td style="padding: 14px 0 4px 0;"><p style="margin: 0; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #3ecdc6;">Leadership &amp; Direction</p></td></tr>
+                                <tr><td style="padding: 8px 0; border-bottom: 1px solid #eef1f6;"><p style="margin: 0 0 3px 0; font-size: 13px; font-weight: 600; color: #141b2d;">Who owns the question "how does AI change our workforce"?</p><p style="margin: 0; font-size: 13px; color: #6b7280;">{{answer_10}}</p></td></tr>
+                                <tr><td style="padding: 8px 0; border-bottom: 1px solid #eef1f6;"><p style="margin: 0 0 3px 0; font-size: 13px; font-weight: 600; color: #141b2d;">If part of a role can be automated, what's the plan for the person in it?</p><p style="margin: 0; font-size: 13px; color: #6b7280;">{{answer_11}}</p></td></tr>
+                                <tr><td style="padding: 8px 0;"><p style="margin: 0 0 3px 0; font-size: 13px; font-weight: 600; color: #141b2d;">If you rolled out a tool tomorrow that eliminated a chunk of manual work, how would your team react?</p><p style="margin: 0; font-size: 13px; color: #6b7280;">{{answer_12}}</p></td></tr>
+
                             </table>
                         </td>
                     </tr>
