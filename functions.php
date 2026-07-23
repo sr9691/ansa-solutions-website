@@ -1414,7 +1414,7 @@ function ansa_workforce_lead_handler() {
     //    or by replacing the placeholder below.
     $webhook_url = defined( 'ANSA_WORKFORCE_WEBHOOK_URL' )
         ? ANSA_WORKFORCE_WEBHOOK_URL
-        : 'https://webhooks.workato.com/webhooks/rest/REPLACE-WITH-YOUR-WEBHOOK-ID/workforce_lead';
+        : 'https://webhooks.workato.com/webhooks/rest/7b185dd3-a851-4892-80ef-cbe90de5aae6/new_lead';
 
     if ( $webhook_url && strpos( $webhook_url, 'REPLACE-WITH' ) === false ) {
         $resp = wp_remote_post( $webhook_url, array(
