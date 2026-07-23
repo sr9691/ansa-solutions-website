@@ -1310,6 +1310,181 @@ function ansa_questionnaire_submissions_page() {
 
 /**
  * ──────────────────────────────────────────────
+ * Workforce AI Assessment — Lead capture handler
+ *
+ * Used by page-workforce-ai-assessment.php (TechPoint Community Connect).
+ * Only fires when a visitor OPTS IN via the "let's talk about your results"
+ * form on the results screen. Emails the lead (with their score) to the site
+ * admin and stores it for review in WP Admin → Tools → Workforce Leads.
+ * ──────────────────────────────────────────────
+ */
+function ansa_workforce_lead_handler() {
+    // 1. Nonce check (shared theme nonce)
+    if ( ! check_ajax_referer( 'ansa-nonce', 'nonce', false ) ) {
+        wp_send_json_error( 'Security check failed. Please refresh the page and try again.' );
+    }
+
+    // 2. Decode payload
+    $raw = isset( $_POST['payload'] ) ? wp_unslash( $_POST['payload'] ) : '';
+    if ( empty( $raw ) ) {
+        wp_send_json_error( 'No data received.' );
+    }
+    $data = json_decode( $raw, true );
+    if ( ! is_array( $data ) ) {
+        wp_send_json_error( 'Malformed data.' );
+    }
+
+    // 3. Honeypot — bots fill the hidden "website" field. Pretend success, drop it.
+    if ( ! empty( $data['website'] ) ) {
+        wp_send_json_success( array( 'lead_id' => 'skipped' ) );
+    }
+
+    // 4. Validate + sanitize the contact fields
+    $name    = sanitize_text_field( $data['name'] ?? '' );
+    $email   = sanitize_email( $data['email'] ?? '' );
+    $company = sanitize_text_field( $data['company'] ?? '' );
+    $role    = sanitize_text_field( $data['role'] ?? '' );
+    $note    = sanitize_textarea_field( $data['note'] ?? '' );
+
+    if ( empty( $name ) || ! is_email( $email ) ) {
+        wp_send_json_error( 'Please provide your name and a valid email.' );
+    }
+
+    // 5. Pull the score result (defensive — assessment computes it client-side)
+    $result     = is_array( $data['result'] ?? null ) ? $data['result'] : array();
+    $score      = isset( $result['score'] ) ? intval( $result['score'] ) : null;
+    $level      = sanitize_text_field( $result['level'] ?? '' );
+    $dimensions = array();
+    if ( ! empty( $result['dimensions'] ) && is_array( $result['dimensions'] ) ) {
+        foreach ( $result['dimensions'] as $dim ) {
+            $dimensions[] = array(
+                'name'      => sanitize_text_field( $dim['name'] ?? '' ),
+                'score_pct' => isset( $dim['score_pct'] ) ? intval( $dim['score_pct'] ) : null,
+            );
+        }
+    }
+    $qa = array();
+    if ( ! empty( $result['answers'] ) && is_array( $result['answers'] ) ) {
+        foreach ( $result['answers'] as $row ) {
+            $qa[] = array(
+                'q'      => sanitize_text_field( $row['q'] ?? '' ),
+                'answer' => sanitize_text_field( $row['answer'] ?? '' ),
+            );
+        }
+    }
+
+    $lead = array(
+        'lead_id'    => uniqid( 'wfa_', true ),
+        'name'       => $name,
+        'email'      => $email,
+        'company'    => $company,
+        'role'       => $role,
+        'note'       => $note,
+        'score'      => $score,
+        'level'      => $level,
+        'dimensions' => $dimensions,
+        'answers'    => $qa,
+        'source'     => sanitize_text_field( $data['source'] ?? 'Workforce AI Assessment' ),
+        'created_at' => current_time( 'c' ),
+        'ip'         => $_SERVER['REMOTE_ADDR'] ?? 'unknown',
+    );
+
+    // 6. Store (rolling log, keep last 300, autoload off)
+    $log = get_option( 'ansa_workforce_leads', array() );
+    if ( ! is_array( $log ) ) { $log = array(); }
+    array_unshift( $log, $lead );
+    $log = array_slice( $log, 0, 300 );
+    update_option( 'ansa_workforce_leads', $log, false );
+
+    // 7. Email the admin so leads land in the inbox during the event
+    $dim_lines = '';
+    foreach ( $dimensions as $dim ) {
+        $dim_lines .= '  - ' . $dim['name'] . ': ' . ( $dim['score_pct'] === null ? 'n/a' : $dim['score_pct'] . '/100' ) . "\n";
+    }
+    $body  = "New Workforce AI Assessment lead (visitor asked to talk about their results).\n\n";
+    $body .= "Name:    $name\n";
+    $body .= "Email:   $email\n";
+    $body .= "Company: " . ( $company ?: '—' ) . "\n";
+    $body .= "Role:    " . ( $role ?: '—' ) . "\n";
+    $body .= "\nScore:   " . ( $score === null ? 'n/a' : $score . '/100' ) . ( $level ? " ($level)" : '' ) . "\n";
+    if ( $dim_lines ) { $body .= "By dimension:\n$dim_lines"; }
+    if ( $note ) { $body .= "\nNote from them:\n$note\n"; }
+    $body .= "\nSource:  {$lead['source']}\n";
+    $body .= "Time:    {$lead['created_at']}\n";
+    $body .= "\nFull breakdown in WP Admin → Tools → Workforce Leads.";
+
+    $admin_email = get_option( 'admin_email' );
+    $headers     = array();
+    if ( is_email( $email ) ) {
+        $headers[] = 'Reply-To: ' . $name . ' <' . $email . '>';
+    }
+    wp_mail(
+        $admin_email,
+        'Workforce AI Assessment lead — ' . ( $company ? $company . ' · ' : '' ) . $name,
+        $body,
+        $headers
+    );
+
+    wp_send_json_success( array( 'lead_id' => $lead['lead_id'] ) );
+}
+add_action( 'wp_ajax_ansa_workforce_lead',        'ansa_workforce_lead_handler' );
+add_action( 'wp_ajax_nopriv_ansa_workforce_lead', 'ansa_workforce_lead_handler' );
+
+/**
+ * Admin page to view Workforce AI Assessment leads
+ * Access: WP Admin → Tools → Workforce Leads
+ */
+function ansa_workforce_leads_menu() {
+    add_management_page(
+        'Workforce Assessment Leads',
+        'Workforce Leads',
+        'manage_options',
+        'ansa-workforce-leads',
+        'ansa_workforce_leads_page'
+    );
+}
+add_action( 'admin_menu', 'ansa_workforce_leads_menu' );
+
+function ansa_workforce_leads_page() {
+    if ( ! current_user_can( 'manage_options' ) ) {
+        wp_die( 'Unauthorized' );
+    }
+    $log = get_option( 'ansa_workforce_leads', array() );
+
+    echo '<div class="wrap">';
+    echo '<h1>Workforce AI Assessment Leads</h1>';
+    echo '<p>Showing ' . count( $log ) . ' lead(s). Newest first. Maximum 300 stored. These are visitors who opted in to talk about their results.</p>';
+
+    if ( empty( $log ) ) {
+        echo '<p>No leads yet.</p></div>';
+        return;
+    }
+
+    foreach ( $log as $lead ) {
+        echo '<div style="background:#fff;border:1px solid #ddd;border-radius:6px;padding:16px;margin-bottom:16px;">';
+        echo '<strong>' . esc_html( $lead['name'] ?? '' ) . '</strong>';
+        if ( ! empty( $lead['company'] ) ) { echo ' — ' . esc_html( $lead['company'] ); }
+        echo ' &lt;<a href="mailto:' . esc_attr( $lead['email'] ?? '' ) . '">' . esc_html( $lead['email'] ?? '' ) . '</a>&gt;';
+        echo ' <span style="color:#999;font-size:12px;">' . esc_html( $lead['created_at'] ?? '' ) . '</span>';
+        $score = isset( $lead['score'] ) && $lead['score'] !== null ? intval( $lead['score'] ) . '/100' : 'n/a';
+        echo '<br><span style="color:#462CED;font-weight:600;font-size:13px;">Score: ' . esc_html( $score );
+        if ( ! empty( $lead['level'] ) ) { echo ' · ' . esc_html( $lead['level'] ); }
+        echo '</span>';
+        if ( ! empty( $lead['role'] ) ) { echo ' <span style="color:#666;font-size:12px;">· ' . esc_html( $lead['role'] ) . '</span>'; }
+        if ( ! empty( $lead['note'] ) ) {
+            echo '<p style="margin:8px 0 0;color:#333;">' . esc_html( $lead['note'] ) . '</p>';
+        }
+        echo '<details style="margin-top:8px;"><summary style="cursor:pointer;color:#462CED;">View score breakdown &amp; answers</summary>';
+        echo '<pre style="background:#f5f5f5;padding:12px;border-radius:4px;overflow:auto;font-size:12px;margin-top:8px;">';
+        echo esc_html( json_encode( $lead, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE ) );
+        echo '</pre></details>';
+        echo '</div>';
+    }
+    echo '</div>';
+}
+
+/**
+ * ──────────────────────────────────────────────
  * Google Sheets Accelerator Loader
  * Fetches the public accelerator sheet as CSV and returns parsed JSON.
  * The Sheet ID is stored in wp-config.php as ANSA_ACCELERATORS_SHEET_ID.
