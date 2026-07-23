@@ -1354,6 +1354,16 @@ function ansa_workforce_lead_handler() {
     $result     = is_array( $data['result'] ?? null ) ? $data['result'] : array();
     $score      = isset( $result['score'] ) ? intval( $result['score'] ) : null;
     $level      = sanitize_text_field( $result['level'] ?? '' );
+
+    // Human-readable description for the level (used in the responder email).
+    $level_descriptions = array(
+        'Exposed'       => "Right now, a lot of your team's time — and value — is tied up in work machines are getting good at. That's not a verdict on your people; it's a picture of where their week goes. It also means you have the most to gain: teams that start here typically find 20–30 hours a week of recoverable time hiding in a handful of processes.",
+        'AI-Aware'      => "Your team sees what's coming, and pockets of the business are experimenting. What's missing is a system — shared practice, real training time, and a clear owner for the workforce question. Organizations at this stage are usually one focused project away from proving that AI elevates their people instead of threatening them.",
+        'AI-Augmented'  => "The foundations are in place: your people use AI with intent, busywork is shrinking, and leadership is steering instead of watching. The opportunity now is to compound it — redesign roles around judgment and relationships, and let automation absorb the work that was never anyone's best use of a day.",
+        'Irreplaceable' => "You're building the thing this event is named for: a workforce AI strengthens instead of threatens. Your people spend their time on judgment, relationships, and problems worth solving — and the machines handle the rest. The edge now is depth: keep pushing automation into the corners that still run on effort.",
+    );
+    $level_desc = $level_descriptions[ $level ] ?? '';
+
     $dimensions = array();
     if ( ! empty( $result['dimensions'] ) && is_array( $result['dimensions'] ) ) {
         foreach ( $result['dimensions'] as $dim ) {
@@ -1395,6 +1405,7 @@ function ansa_workforce_lead_handler() {
         'note'       => $note,
         'score'      => $score,
         'level'      => $level,
+        'level_desc' => $level_desc,
         'dimensions' => $dimensions,
         'answers'    => $qa,
         'source'     => sanitize_text_field( $data['source'] ?? 'Workforce AI Assessment' ),

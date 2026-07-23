@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Workforce AI-Readiness Score</title>
+    <!--
+      ══════════════════════════════════════════════════════════════════
+      ANSA Solutions — Workforce AI Assessment: RESPONDER email
+      Sent by Workato to the attendee (To = {{email}}) after they opt in.
+      Warm, value-first recap of their score with a book-a-call CTA.
+
+      {{placeholders}} map to the webhook payload datapills:
+        {{name}} {{score}} {{level}} {{level_desc}}
+        {{dim_fluency}} {{dim_human_edge}} {{dim_learning}} {{dim_leadership}}
+      Suggested From: ANSA Solutions <info@ansa.solutions>  Reply-To: info@ansa.solutions
+      ══════════════════════════════════════════════════════════════════
+    -->
+    <style type="text/css">
+        @media only screen and (max-width: 480px) {
+            .mobile-padding { padding: 24px 18px !important; }
+            .score-num { font-size: 46px !important; }
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; background: #eef1f6; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;">
+    <!-- preheader (hidden) -->
+    <div style="display: none; max-height: 0; overflow: hidden; opacity: 0;">Your Workforce AI-Readiness Score is {{score}}/100 — here's what it means and where to start.</div>
+
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="background: #eef1f6;">
+        <tr>
+            <td align="center" style="padding: 40px 20px;">
+                <table cellpadding="0" cellspacing="0" border="0" width="600" style="width: 600px; max-width: 600px; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 24px rgba(20,27,45,0.08);">
+
+                    <!-- Header -->
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #141b2d 0%, #0b2545 60%, #13497b 100%); padding: 34px 40px;" class="mobile-padding">
+                            <p style="margin: 0 0 6px 0; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #3ecdc6;">Workforce AI-Readiness Score</p>
+                            <h1 style="margin: 0; font-size: 26px; font-weight: 800; color: #ffffff; letter-spacing: -0.4px;">Thanks for taking it, {{name}}.</h1>
+                        </td>
+                    </tr>
+
+                    <!-- Intro -->
+                    <tr>
+                        <td style="padding: 30px 40px 4px 40px;" class="mobile-padding">
+                            <p style="margin: 0; font-size: 15px; line-height: 1.65; color: #374151;">Great to connect at TechPoint Community Connect. Here's your result — and, more importantly, what it tells you about building a workforce AI can't replace.</p>
+                        </td>
+                    </tr>
+
+                    <!-- Score hero -->
+                    <tr>
+                        <td style="padding: 24px 40px 8px 40px;" class="mobile-padding">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="background: #f7f8fb; border: 1px solid #e6e9f0; border-radius: 12px;">
+                                <tr>
+                                    <td style="padding: 24px 26px; vertical-align: middle;">
+                                        <div class="score-num" style="font-size: 56px; line-height: 1; font-weight: 800; color: #141b2d; letter-spacing: -2px;">{{score}}<span style="font-size: 20px; color: #9aa7ba; font-weight: 600;"> / 100</span></div>
+                                    </td>
+                                    <td align="right" style="padding: 24px 26px; vertical-align: middle;">
+                                        <span style="display: inline-block; background: rgba(62,205,198,0.14); border: 1px solid rgba(62,205,198,0.5); color: #0e8a83; font-size: 15px; font-weight: 700; padding: 9px 18px; border-radius: 999px;">{{level}}</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Level description -->
+                    <tr>
+                        <td style="padding: 14px 40px 8px 40px;" class="mobile-padding">
+                            <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #374151;">{{level_desc}}</p>
+                        </td>
+                    </tr>
+
+                    <!-- Dimension breakdown -->
+                    <tr>
+                        <td style="padding: 20px 40px 8px 40px;" class="mobile-padding">
+                            <p style="margin: 0 0 12px 0; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #6b7280;">Your score by dimension</p>
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                <tr>
+                                    <td style="padding: 9px 0; border-bottom: 1px solid #eef1f6; font-size: 14px; color: #374151;">AI Fluency</td>
+                                    <td align="right" style="padding: 9px 0; border-bottom: 1px solid #eef1f6; font-size: 14px; font-weight: 700; color: #141b2d;">{{dim_fluency}}<span style="color:#9aa7ba; font-weight: 500;"> / 100</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 9px 0; border-bottom: 1px solid #eef1f6; font-size: 14px; color: #374151;">Human Edge</td>
+                                    <td align="right" style="padding: 9px 0; border-bottom: 1px solid #eef1f6; font-size: 14px; font-weight: 700; color: #141b2d;">{{dim_human_edge}}<span style="color:#9aa7ba; font-weight: 500;"> / 100</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 9px 0; border-bottom: 1px solid #eef1f6; font-size: 14px; color: #374151;">Learning Culture</td>
+                                    <td align="right" style="padding: 9px 0; border-bottom: 1px solid #eef1f6; font-size: 14px; font-weight: 700; color: #141b2d;">{{dim_learning}}<span style="color:#9aa7ba; font-weight: 500;"> / 100</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 9px 0; font-size: 14px; color: #374151;">Leadership &amp; Direction</td>
+                                    <td align="right" style="padding: 9px 0; font-size: 14px; font-weight: 700; color: #141b2d;">{{dim_leadership}}<span style="color:#9aa7ba; font-weight: 500;"> / 100</span></td>
+                                </tr>
+                            </table>
+                            <p style="margin: 14px 0 0 0; font-size: 13px; line-height: 1.6; color: #9aa7ba;">Your lowest dimension is usually the fastest win — it's where automation buys back the most time.</p>
+                        </td>
+                    </tr>
+
+                    <!-- CTA -->
+                    <tr>
+                        <td style="padding: 22px 40px 12px 40px;" class="mobile-padding">
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="background: linear-gradient(135deg, rgba(62,205,198,0.10), rgba(70,44,237,0.10)); border: 1px solid rgba(62,205,198,0.3); border-radius: 12px;">
+                                <tr>
+                                    <td style="padding: 24px 26px; text-align: center;">
+                                        <p style="margin: 0 0 6px 0; font-size: 18px; font-weight: 800; color: #141b2d; letter-spacing: -0.3px;">Want to talk through it?</p>
+                                        <p style="margin: 0 0 18px 0; font-size: 14px; line-height: 1.6; color: #374151;">A 30-minute call, no pitch — we'll look at the one or two processes worth automating first, so your team spends its week on the work only people can do.</p>
+                                        <a href="https://ansa.solutions/calendar/" style="display: inline-block; background: #3ecdc6; color: #0b2545; font-size: 15px; font-weight: 800; text-decoration: none; padding: 13px 30px; border-radius: 10px;">Book a Discovery Call →</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Sign-off -->
+                    <tr>
+                        <td style="padding: 12px 40px 28px 40px;" class="mobile-padding">
+                            <p style="margin: 0; font-size: 14px; line-height: 1.7; color: #374151;">Or just reply to this email — it comes straight to us.</p>
+                            <p style="margin: 16px 0 0 0; font-size: 14px; line-height: 1.6; color: #374151;">— The ANSA Solutions team</p>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background: #141b2d; padding: 24px 40px; text-align: center;">
+                            <p style="margin: 0; font-size: 13px; color: #ffffff;"><strong style="color: #3ecdc6;">ANSA</strong> Solutions &nbsp;·&nbsp; Carmel, IN &nbsp;·&nbsp; <a href="mailto:info@ansa.solutions" style="color: #3ecdc6; text-decoration: none;">info@ansa.solutions</a></p>
+                            <p style="margin: 6px 0 0 0; font-size: 12px; color: #9aa7ba;">Decouple Overhead from Growth.</p>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
