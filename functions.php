@@ -173,6 +173,50 @@ function ansa_add_google_analytics() {
 add_action('wp_head', 'ansa_add_google_analytics', 10);
 
 /**
+ * Conversion tracking (GoHighLevel + WhatConverts).
+ *
+ * Scoped to landing/conversion routes only — HubSpot tracking already runs
+ * globally, and loading three analytics libraries on every page is a
+ * performance problem. Loads in the footer via wp_footer.
+ *
+ * NOTE: Cloudflare Rocket Loader must be DISABLED for these routes or it can
+ * break the WhatConverts script (see README).
+ */
+function ansa_conversion_tracking() {
+    $is_conversion_route = is_front_page() || is_page( array(
+        'contact',
+        'ai-readiness-assessment',
+        'become-a-partner',
+        'calendar',
+        'approach',
+        'workforce-ai-assessment',
+    ) );
+
+    if ( ! $is_conversion_route ) {
+        return;
+    }
+
+    // GoHighLevel external tracking. The script host can be overridden via the
+    // ansa_ghl_tracking_src filter if the account uses a different domain.
+    $ghl_tracking_id = 'tk_b2548077bc114ccbb22b7504c884abd1';
+    $ghl_src         = apply_filters( 'ansa_ghl_tracking_src', 'https://link.hayesgroupmarketing.com/js/external-tracking.js' );
+    if ( $ghl_src ) {
+        printf(
+            '<script src="%s" data-tracking-id="%s" defer></script>' . "\n",
+            esc_url( $ghl_src ),
+            esc_attr( $ghl_tracking_id )
+        );
+    }
+
+    // WhatConverts. Define ANSA_WHATCONVERTS_SRC in wp-config.php with the
+    // account's $wc_leads script URL to enable it (kept out of source).
+    if ( defined( 'ANSA_WHATCONVERTS_SRC' ) && ANSA_WHATCONVERTS_SRC ) {
+        printf( '<script async src="%s"></script>' . "\n", esc_url( ANSA_WHATCONVERTS_SRC ) );
+    }
+}
+add_action( 'wp_footer', 'ansa_conversion_tracking', 20 );
+
+/**
  * Helper function to get Stripe checkout URL placeholder
  */
 function ansa_get_stripe_checkout_url($product_id = '') {

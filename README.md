@@ -29,7 +29,7 @@ Custom WordPress theme for [ansa.solutions](https://ansa.solutions). Built for d
 
 - **Primary**: `#374151`
 - **Accent**: `#462CED`
-- **Fonts**: Plus Jakarta Sans (headings), Inter (body)
+- **Fonts**: Lato (400 / 700 / 900 + 400 italic) throughout
 
 ## Deployment
 
@@ -152,6 +152,52 @@ Add form GUIDs to template files:
     });
 </script>
 ```
+
+## Redesign — ANSA Design System (`ansa-ds`)
+
+The site's presentation layer is the `ansa-ds` design system, namespaced `.ds-*`.
+
+- `assets/css/ansa-ds.css` — component system (bands, editorial rail, hero,
+  lazy video facade, steps, deflist, checklist, FAQ, cases, quote, stats,
+  forms, buttons, ds header/footer). Loaded **after** `style.css`; applies to
+  any document whose `<body>` carries the `ds` class.
+- `assets/js/ansa-ds.js` — mobile nav toggle, lazy Vimeo facade (poster +
+  play; the iframe is injected only on click so the hero LCP is never an
+  embed), and the FAQ accordion.
+- Palette: accent `#462CED`, ink `#0B0D12`, slate `#374151`, text `#111827`,
+  paper `#FFFFFF`. Dark bands (`.ds-band--ink` / `--slate`) auto-adapt their
+  children.
+- The **Approach** page uses `page-approach.php` (assign it to a Page with
+  slug `approach`). It replaces the former `page-process-automation.php`.
+- The homepage "Get Started" form and standalone conversion form use the
+  GoHighLevel iframe embed; the Contact / AI Readiness / Partner pages keep
+  their existing HubSpot embeds (portal `50725925`).
+
+`style.css` is still live (accelerator search UI, form styling, event cards,
+blog partials, admin rules) and must not be gutted.
+
+## Tracking & Cloudflare
+
+Conversion tracking is injected by `ansa_conversion_tracking()` in
+`functions.php`, **scoped to landing/conversion routes only** (home, contact,
+ai-readiness-assessment, become-a-partner, calendar, approach,
+workforce-ai-assessment) — not sitewide, because HubSpot tracking already runs
+globally and three analytics libraries on every page hurts performance.
+
+- **GoHighLevel** — external tracking, ID `tk_b2548077bc114ccbb22b7504c884abd1`.
+  The script host defaults to `link.hayesgroupmarketing.com` and can be
+  overridden with the `ansa_ghl_tracking_src` filter.
+- **WhatConverts** — define `ANSA_WHATCONVERTS_SRC` in `wp-config.php` with the
+  account's `$wc_leads` script URL to enable it (kept out of source control).
+- The eight "See What's Possible" CTAs each carry a distinct
+  `data-cta-location` (`hero`, `problem`, `how-it-works`, `proof`,
+  `conversation`, `faq`, `form`, `nav`) for section-level attribution.
+
+> ⚠️ **Cloudflare Rocket Loader must be disabled for these routes.** Rocket
+> Loader defers/rewrites inline and third-party scripts and will likely break
+> the WhatConverts (and GHL) tracking. Add a Cloudflare Configuration Rule that
+> turns Rocket Loader **off** for the conversion routes above (or sitewide if
+> simpler).
 
 ## Support
 
