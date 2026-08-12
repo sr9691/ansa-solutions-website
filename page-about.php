@@ -1,193 +1,166 @@
 <?php
 /**
  * Template Name: About
- * Description: About page showcasing ANSA Solutions mission, leadership, and approach
+ * Description: About ANSA Solutions — mission, team, and approach.
+ *
+ * @package ANSA_Solutions
  */
 
-get_header();
-?>
+get_header(); ?>
 
-<main id="primary" class="site-main">
+<main id="ds-main" class="site-main">
 
-	<!-- Page Hero Section -->
-	<section class="page-hero" style="background: linear-gradient(135deg, var(--primary) 0%, #1f2937 100%); padding: 5rem 1.5rem; color: #FFFFFF; text-align: center;">
-		<div style="max-width: 800px; margin: 0 auto;">
-			<span class="badge" style="display: inline-block; padding: 0.5rem 1rem; background-color: rgba(255,255,255,0.15); border-radius: 999px; margin-bottom: 1.5rem; font-size: 0.9rem; font-weight: 600; color: #fff; letter-spacing: 0.5px;">About ANSA Solutions</span>
-			<h1 style="font-size: 3rem; color: #FFFFFF; margin-bottom: 1.25rem;">AI Strategy Meets<br><span style="color: var(--accent);">Operational Excellence</span></h1>
-			<p style="font-size: 1.2rem; color: rgba(255,255,255,0.9); max-width: 650px; margin: 0 auto;">We help mid-market organizations harness AI and automation strategically — turning operational friction into measurable business outcomes.</p>
-		</div>
-	</section>
+    <?php // ── Hero ────────────────────────────────────────────────── ?>
+    <section class="ds-hero">
+        <div class="ds-hero__inner">
+            <span class="ds-eyebrow">About ANSA Solutions</span>
+            <h1>AI strategy meets operational excellence.</h1>
+            <p class="ds-hero__lede">We help mid-market organizations harness AI and automation strategically — turning operational friction into measurable business outcomes.</p>
+        </div>
+    </section>
 
-	<!-- Who We Are -->
-	<section style="padding: 5rem 1.5rem; max-width: 900px; margin: 0 auto;">
-		<div style="text-align: center; margin-bottom: 2.5rem;">
-			<div style="color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; font-size: 0.9rem;">Who We Are</div>
-			<h2 style="margin-bottom: 1rem;">Built for the Mid-Market</h2>
-		</div>
-		<p style="font-size: 1.1rem; color: var(--text-light); line-height: 1.8; margin-bottom: 1.5rem;">
-			ANSA Solutions is an AI strategy and implementation firm based in Carmel, Indiana. We work exclusively with mid-market businesses — typically 20 to 500 employees — that are ready to move beyond spreadsheets and manual handoffs but don't need (or want) a Big Four engagement to get there.
-		</p>
-		<p style="font-size: 1.1rem; color: var(--text-light); line-height: 1.8; margin-bottom: 0;">
-			We believe technology should serve your operations, not the other way around. That means we start with your workflows, your pain points, and your goals — then design automation and AI solutions around the outcomes that matter most to your business.
-		</p>
-	</section>
+    <?php // ── Who we are ──────────────────────────────────────────── ?>
+    <section class="ds-band ds-band--paper">
+        <div class="ds-rail">
+            <div class="ds-rail__aside">
+                <span class="ds-eyebrow">Who We Are</span>
+                <p class="ds-kicker">Coordination first. Technology second.</p>
+            </div>
+            <div class="ds-rail__body">
+                <h2>Built for mid-market operators.</h2>
+                <p class="ds-lede">ANSA is an AI strategy and orchestration firm and a Workato MSP partner, working with mid-market companies nationwide.</p>
+                <p>We help those companies coordinate the tools and teams they already have into measurable outcomes by fixing coordination first and adding technology second. We work with mid-market businesses — typically 20 to 500 employees — that are ready to move beyond spreadsheets and manual handoffs but don't need (or want) a Big Four engagement to get there.</p>
+                <p>We believe technology should serve your operations, not the other way around. That means we start with your workflows, your pain points, and your goals — then design automation and AI solutions around the outcomes that matter most to your business.</p>
+            </div>
+        </div>
+    </section>
 
-	<!-- What Makes Us Different -->
-	<section style="background-color: #f9fafb; padding: 5rem 1.5rem;">
-		<div style="max-width: 1200px; margin: 0 auto;">
-			<div style="text-align: center; margin-bottom: 3rem;">
-				<div style="color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; font-size: 0.9rem;">Why ANSA</div>
-				<h2 style="margin-bottom: 1rem;">What Makes Us Different</h2>
-			</div>
+    <?php // ── What makes us different ─────────────────────────────── ?>
+    <section class="ds-band ds-band--paper-2">
+        <div class="ds-rail">
+            <div class="ds-rail__aside">
+                <span class="ds-eyebrow">Why ANSA</span>
+                <p class="ds-kicker">What makes us different.</p>
+            </div>
+            <div class="ds-rail__body">
+                <div class="ds-deflist">
+                    <div class="ds-deflist__row">
+                        <span class="ds-deflist__term">Outcome-focused</span>
+                        <p class="ds-deflist__desc">We don't sell tools. We solve problems. The platform choice follows the solution design — whether that's Workato, cData, or custom integrations.</p>
+                    </div>
+                    <div class="ds-deflist__row">
+                        <span class="ds-deflist__term">Fast time to value</span>
+                        <p class="ds-deflist__desc">Our engagements are designed to deliver measurable results in six to eight weeks. No six-month discovery phases, no bloated SOWs.</p>
+                    </div>
+                    <div class="ds-deflist__row">
+                        <span class="ds-deflist__term">Partnership, not consulting</span>
+                        <p class="ds-deflist__desc">We become an extension of your team. Our goal is to build patterns that scale across your organization — not create dependency on us.</p>
+                    </div>
+                    <div class="ds-deflist__row">
+                        <span class="ds-deflist__term">Built for mid-market</span>
+                        <p class="ds-deflist__desc">We understand the constraints and opportunities of growing businesses. Right-sized solutions that fit your budget, timeline, and team capacity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-			<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;">
-				<!-- Card 1 -->
-				<div style="background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem;">
-					<div style="width: 48px; height: 48px; background: rgba(70,44,237,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; font-size: 1.3rem;">🎯</div>
-					<h3 style="font-size: 1.15rem; margin-bottom: 0.75rem;">Outcome-Focused, Not Platform-Led</h3>
-					<p style="color: var(--text-light); margin: 0; line-height: 1.7;">We don't sell tools. We solve problems. The platform choice follows the solution design — whether that's Workato, cData, or custom integrations.</p>
-				</div>
+    <?php // ── Our team ────────────────────────────────────────────── ?>
+    <section class="ds-band ds-band--paper">
+        <div class="ds-rail">
+            <div class="ds-rail__aside">
+                <span class="ds-eyebrow">Our Team</span>
+                <p class="ds-kicker">Passion, experience, and knowledge.</p>
+            </div>
+            <div class="ds-rail__body">
+                <p>Our team brings together decades of combined experience in technology leadership, process automation, data analytics, and AI-driven transformation. We've led successful implementations across financial services, manufacturing, healthcare, engineering, and professional services — and we bring that cross-industry perspective to every engagement.</p>
+                <p>What unites us is a shared passion for solving real operational problems. We're not theorists — we've been in the trenches, working hands-on with platforms like Workato, building integrations, and delivering results that move the needle. Our engagements have helped organizations reduce operational costs by 30% and improve productivity by 40%.</p>
+                <p>We're driven by a single belief: mid-market businesses deserve the same caliber of AI strategy and automation expertise that enterprise organizations take for granted. Our approach ensures you don't just adopt tools — you build sustainable, scalable practices that drive measurable business value.</p>
+                <div class="ds-cta-row">
+                    <a class="ds-btn ds-btn--ghost" href="https://www.linkedin.com/company/ansa-solutions/" target="_blank" rel="noopener">Follow us on LinkedIn</a>
+                    <a class="ds-btn ds-btn--primary" data-cta-location="about-team" href="<?php echo esc_url( home_url('/contact/') ); ?>">Get in touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-				<!-- Card 2 -->
-				<div style="background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem;">
-					<div style="width: 48px; height: 48px; background: rgba(70,44,237,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; font-size: 1.3rem;">⚡</div>
-					<h3 style="font-size: 1.15rem; margin-bottom: 0.75rem;">Fast Time to Value</h3>
-					<p style="color: var(--text-light); margin: 0; line-height: 1.7;">Our engagements are designed to deliver measurable results in 6–8 weeks. No six-month discovery phases, no bloated SOWs.</p>
-				</div>
+    <?php // ── Our approach ────────────────────────────────────────── ?>
+    <section class="ds-band ds-band--ink">
+        <div class="ds-rail">
+            <div class="ds-rail__aside">
+                <span class="ds-eyebrow">How We Work</span>
+                <p class="ds-kicker">From discovery to delivery, a proven path.</p>
+            </div>
+            <div class="ds-rail__body">
+                <div class="ds-steps">
+                    <div class="ds-step">
+                        <span class="ds-step__num">01</span>
+                        <h3 class="ds-step__title">Discover</h3>
+                        <p class="ds-step__body">We map your workflows, identify friction points, and understand what success looks like for your team.</p>
+                    </div>
+                    <div class="ds-step">
+                        <span class="ds-step__num">02</span>
+                        <h3 class="ds-step__title">Design</h3>
+                        <p class="ds-step__body">We architect a solution around your outcomes — choosing the right tools, integrations, and sequencing.</p>
+                    </div>
+                    <div class="ds-step">
+                        <span class="ds-step__num">03</span>
+                        <h3 class="ds-step__title">Deliver</h3>
+                        <p class="ds-step__body">We build, test, and deploy in focused sprints — targeting measurable value in six to eight weeks.</p>
+                    </div>
+                    <div class="ds-step">
+                        <span class="ds-step__num">04</span>
+                        <h3 class="ds-step__title">Scale</h3>
+                        <p class="ds-step__body">We hand off repeatable patterns and support your team in expanding automation across the organization.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-				<!-- Card 3 -->
-				<div style="background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem;">
-					<div style="width: 48px; height: 48px; background: rgba(70,44,237,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; font-size: 1.3rem;">🤝</div>
-					<h3 style="font-size: 1.15rem; margin-bottom: 0.75rem;">Partnership, Not Consulting</h3>
-					<p style="color: var(--text-light); margin: 0; line-height: 1.7;">We become an extension of your team. Our goal is to build patterns that scale across your organization — not create dependency on us.</p>
-				</div>
+    <?php // ── FAQ ─────────────────────────────────────────────────── ?>
+    <section class="ds-band ds-band--paper-2">
+        <div class="ds-rail">
+            <div class="ds-rail__aside">
+                <span class="ds-eyebrow">Common Questions</span>
+                <p class="ds-kicker">What people ask before the first conversation.</p>
+            </div>
+            <div class="ds-rail__body">
+                <div class="ds-faq" id="ds-faq-about">
+                    <div class="ds-faq__item">
+                        <button type="button" class="ds-faq__q">Do you need access to our systems?</button>
+                        <div class="ds-faq__a"><p>Not for the first conversation. Nothing is connected and nothing is installed. If we go further, access is scoped and agreed before anyone touches anything.</p></div>
+                    </div>
+                    <div class="ds-faq__item">
+                        <button type="button" class="ds-faq__q">Do we have to replace the tools we already run?</button>
+                        <div class="ds-faq__a"><p>No. Orchestration connects what you already own. At Marian, Populi, Great Plains, ADP and Microsoft 365 all stayed exactly where they were.</p></div>
+                    </div>
+                    <div class="ds-faq__item">
+                        <button type="button" class="ds-faq__q">Who does the actual build?</button>
+                        <div class="ds-faq__a"><p>ANSA's team builds it, and we teach yours while we do. Marian's internal integration lead now extends the platform without us, which is the point.</p></div>
+                    </div>
+                    <div class="ds-faq__item">
+                        <button type="button" class="ds-faq__q">Does this only work if we are already on Workato?</button>
+                        <div class="ds-faq__a"><p>No. ANSA is a Workato MSP partner and builds on that control plane, but the first conversation is about where coordination breaks in your business, not about licensing.</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-				<!-- Card 4 -->
-				<div style="background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem;">
-					<div style="width: 48px; height: 48px; background: rgba(70,44,237,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; font-size: 1.3rem;">🏢</div>
-					<h3 style="font-size: 1.15rem; margin-bottom: 0.75rem;">Built for Mid-Market</h3>
-					<p style="color: var(--text-light); margin: 0; line-height: 1.7;">We understand the constraints and opportunities of growing businesses. Right-sized solutions that fit your budget, timeline, and team capacity.</p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Our Team -->
-	<section style="padding: 5rem 1.5rem; max-width: 900px; margin: 0 auto;">
-		<div style="text-align: center; margin-bottom: 2.5rem;">
-			<div style="color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; font-size: 0.9rem;">Our Team</div>
-			<h2 style="margin-bottom: 1rem;">Passion, Experience & Knowledge</h2>
-		</div>
-
-		<p style="font-size: 1.1rem; color: var(--text-light); line-height: 1.8; margin-bottom: 1.5rem;">
-			Our team brings together decades of combined experience in technology leadership, process automation, data analytics, and AI-driven transformation. We've led successful implementations across financial services, manufacturing, healthcare, engineering, and professional services — and we bring that cross-industry perspective to every engagement.
-		</p>
-
-		<p style="font-size: 1.1rem; color: var(--text-light); line-height: 1.8; margin-bottom: 1.5rem;">
-			What unites us is a shared passion for solving real operational problems. We're not theorists — we've been in the trenches, working hands-on with platforms like Workato, building integrations, and delivering results that move the needle. Our engagements have helped organizations reduce operational costs by 30% and improve productivity by 40%.
-		</p>
-
-		<p style="font-size: 1.1rem; color: var(--text-light); line-height: 1.8; margin-bottom: 2rem;">
-			Based in Carmel, Indiana, we're driven by a single belief: mid-market businesses deserve the same caliber of AI strategy and automation expertise that enterprise organizations take for granted. Our approach ensures you don't just adopt tools — you build sustainable, scalable practices that drive measurable business value.
-		</p>
-
-		<div style="display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;">
-			<a href="https://www.linkedin.com/company/ansa-solutions/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent); font-weight: 600; text-decoration: none;">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-				Follow Us on LinkedIn
-			</a>
-			<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent); font-weight: 600; text-decoration: none;">
-				Get in Touch →
-			</a>
-		</div>
-	</section>
-
-	<!-- Our Approach -->
-	<section style="background: linear-gradient(135deg, var(--primary) 0%, #1f2937 100%); color: #FFFFFF; padding: 5rem 1.5rem;">
-		<div style="max-width: 1200px; margin: 0 auto;">
-			<div style="text-align: center; margin-bottom: 3rem;">
-				<div style="color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; font-size: 0.9rem;">How We Work</div>
-				<h2 style="color: #fff; margin-bottom: 1rem;">Our Approach</h2>
-				<p style="color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto; font-size: 1.1rem;">From discovery to delivery, every engagement follows a proven path.</p>
-			</div>
-
-			<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem;">
-				<!-- Step 1 -->
-				<div style="text-align: center; padding: 1.5rem;">
-					<div style="width: 56px; height: 56px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; font-size: 1.5rem; font-weight: 700; color: #fff;">1</div>
-					<h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 0.75rem;">Discover</h3>
-					<p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.95rem; line-height: 1.7;">We map your workflows, identify friction points, and understand what success looks like for your team.</p>
-				</div>
-
-				<!-- Step 2 -->
-				<div style="text-align: center; padding: 1.5rem;">
-					<div style="width: 56px; height: 56px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; font-size: 1.5rem; font-weight: 700; color: #fff;">2</div>
-					<h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 0.75rem;">Design</h3>
-					<p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.95rem; line-height: 1.7;">We architect a solution around your outcomes — choosing the right tools, integrations, and sequencing.</p>
-				</div>
-
-				<!-- Step 3 -->
-				<div style="text-align: center; padding: 1.5rem;">
-					<div style="width: 56px; height: 56px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; font-size: 1.5rem; font-weight: 700; color: #fff;">3</div>
-					<h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 0.75rem;">Deliver</h3>
-					<p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.95rem; line-height: 1.7;">We build, test, and deploy in focused sprints — targeting measurable value in 6–8 weeks.</p>
-				</div>
-
-				<!-- Step 4 -->
-				<div style="text-align: center; padding: 1.5rem;">
-					<div style="width: 56px; height: 56px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; font-size: 1.5rem; font-weight: 700; color: #fff;">4</div>
-					<h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 0.75rem;">Scale</h3>
-					<p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.95rem; line-height: 1.7;">We hand off repeatable patterns and support your team in expanding automation across the organization.</p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Industries -->
-	<section style="padding: 5rem 1.5rem; max-width: 1200px; margin: 0 auto;">
-		<div style="text-align: center; margin-bottom: 3rem;">
-			<div style="color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; font-size: 0.9rem;">Industries</div>
-			<h2 style="margin-bottom: 1rem;">Where We've Made an Impact</h2>
-		</div>
-
-		<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; text-align: center;">
-			<div style="padding: 2rem 1.5rem; border: 1px solid var(--border); border-radius: var(--radius-lg);">
-				<div style="font-size: 2rem; margin-bottom: 0.75rem;">💰</div>
-				<h4 style="margin: 0;">Financial Services</h4>
-			</div>
-			<div style="padding: 2rem 1.5rem; border: 1px solid var(--border); border-radius: var(--radius-lg);">
-				<div style="font-size: 2rem; margin-bottom: 0.75rem;">🏭</div>
-				<h4 style="margin: 0;">Manufacturing</h4>
-			</div>
-			<div style="padding: 2rem 1.5rem; border: 1px solid var(--border); border-radius: var(--radius-lg);">
-				<div style="font-size: 2rem; margin-bottom: 0.75rem;">🏗️</div>
-				<h4 style="margin: 0;">Engineering</h4>
-			</div>
-			<div style="padding: 2rem 1.5rem; border: 1px solid var(--border); border-radius: var(--radius-lg);">
-				<div style="font-size: 2rem; margin-bottom: 0.75rem;">🏥</div>
-				<h4 style="margin: 0;">Healthcare</h4>
-			</div>
-			<div style="padding: 2rem 1.5rem; border: 1px solid var(--border); border-radius: var(--radius-lg);">
-				<div style="font-size: 2rem; margin-bottom: 0.75rem;">⚖️</div>
-				<h4 style="margin: 0;">Professional Services</h4>
-			</div>
-		</div>
-	</section>
-
-	<!-- CTA Section -->
-	<section style="background: linear-gradient(135deg, var(--primary) 0%, #1f2937 100%); color: #FFFFFF; padding: 4rem 1.5rem; text-align: center;">
-		<div style="max-width: 700px; margin: 0 auto;">
-			<h2 style="color: #FFFFFF; margin-bottom: 1rem;">Ready to Explore What's Possible?</h2>
-			<p style="color: rgba(255,255,255,0.9); font-size: 1.1rem; margin-bottom: 2rem;">Let's start a conversation about how ANSA Solutions can help you unlock operational excellence.</p>
-			<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-				<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="btn btn-primary" style="background: var(--accent); color: #fff; padding: 0.85rem 2rem; font-weight: 600; border-radius: 8px; text-decoration: none; display: inline-block;">Start a Conversation</a>
-				<a href="<?php echo esc_url( home_url( '/case-studies/' ) ); ?>" style="color: #fff; padding: 0.85rem 2rem; font-weight: 600; border: 2px solid rgba(255,255,255,0.3); border-radius: 8px; text-decoration: none; display: inline-block;">View Case Studies</a>
-			</div>
-		</div>
-	</section>
+    <?php // ── Final CTA ───────────────────────────────────────────── ?>
+    <section class="ds-band ds-band--ink">
+        <div class="ds-band__inner">
+            <span class="ds-eyebrow">Get Started</span>
+            <h2>Ready to explore what's possible?</h2>
+            <p class="ds-lede">Let's start a conversation about how ANSA can help you unlock operational excellence.</p>
+            <div class="ds-cta-row">
+                <a class="ds-btn ds-btn--primary" data-cta-location="about-footer" href="<?php echo esc_url( home_url('/contact/') ); ?>">See What's Possible</a>
+                <a class="ds-btn ds-btn--ghost" href="<?php echo esc_url( home_url('/case-studies/') ); ?>">View case studies</a>
+            </div>
+        </div>
+    </section>
 
 </main>
 
-<?php
-get_footer();
-?>
+<?php get_footer(); ?>
