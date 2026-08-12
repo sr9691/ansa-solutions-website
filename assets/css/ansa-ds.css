@@ -60,8 +60,8 @@ body.ds h2 { font-size: clamp(1.8rem, 4vw, 2.75rem); }
 body.ds h3 { font-size: clamp(1.25rem, 2.4vw, 1.6rem); }
 body.ds p  { margin: 0 0 1.1rem; }
 body.ds p:last-child { margin-bottom: 0; }
-body.ds a  { color: var(--ds-accent); text-decoration: none; }
-body.ds a:hover { text-decoration: underline; }
+body.ds a:not(.ds-btn)  { color: var(--ds-accent); text-decoration: none; }
+body.ds a:not(.ds-btn):hover { text-decoration: underline; }
 body.ds strong { font-weight: 700; }
 
 /* Visible focus everywhere */
