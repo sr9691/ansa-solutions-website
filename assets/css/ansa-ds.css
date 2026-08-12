@@ -177,7 +177,9 @@ body.ds [tabindex]:focus-visible {
 .ds-video { position: relative; width: 100%; margin-top: 2.5rem; border-radius: var(--ds-radius); overflow: hidden; background: #000; box-shadow: 0 24px 60px rgba(0,0,0,0.4); }
 .ds-video__facade {
     position: relative; display: block; width: 100%; aspect-ratio: 16 / 9;
-    background-size: cover; background-position: center; background-color: #14161c;
+    background-size: cover; background-position: center;
+    background-color: #14161c;
+    background-image: radial-gradient(120% 120% at 80% 10%, rgba(70,44,237,0.45), transparent 55%), linear-gradient(160deg, #191c26 0%, #0b0d12 70%);
     border: 0; cursor: pointer; padding: 0;
 }
 .ds-video__facade::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,13,18,0.05), rgba(11,13,18,0.45)); transition: background 0.3s var(--ds-ease); }
@@ -254,6 +256,18 @@ body.ds [tabindex]:focus-visible {
 /* ---- Cases ------------------------------------------------------------- */
 .ds-cases { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin: 1.75rem 0 0; }
 @media (max-width: 860px) { .ds-cases { grid-template-columns: 1fr; } }
+/* Mobile: swipe instead of a long vertical stack of prose cards */
+@media (max-width: 720px) {
+    .ds-cases--swipe {
+        display: flex; grid-template-columns: none;
+        overflow-x: auto; scroll-snap-type: x mandatory;
+        gap: 1rem; margin-inline: -1.5rem; padding: 0.25rem 1.5rem 1rem;
+        -webkit-overflow-scrolling: touch;
+    }
+    .ds-cases--swipe .ds-case { min-width: 84%; scroll-snap-align: start; }
+    .ds-cases--swipe::-webkit-scrollbar { height: 6px; }
+    .ds-cases--swipe::-webkit-scrollbar-thumb { background: var(--ds-line); border-radius: 6px; }
+}
 .ds-case {
     display: flex; flex-direction: column; padding: 1.75rem; border-radius: var(--ds-radius);
     border: 1px solid var(--ds-line); background: var(--ds-paper);
