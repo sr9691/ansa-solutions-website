@@ -5,94 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?php wp_head(); ?>
-    <style>
-        /* Widen dropdown to prevent menu items wrapping to two lines */
-        .primary-nav .sub-menu {
-            min-width: 260px !important;
-        }
-    </style>
 </head>
-<body <?php body_class(); ?>>
+<body <?php body_class('ds'); ?>>
     <?php wp_body_open(); ?>
 
-    <header class="site-header">
-        <div class="header-wrapper">
-            <!-- Logo -->
-            <div class="site-logo">
+    <a class="ds-skip-link screen-reader-text" href="#ds-main">Skip to content</a>
+
+    <header class="ds-header">
+        <div class="ds-header__inner">
+            <div class="ds-header__brand">
                 <?php if ( has_custom_logo() ) : ?>
                     <?php the_custom_logo(); ?>
                 <?php else : ?>
-                    <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
+                    <a class="ds-logo" href="<?php echo esc_url( home_url('/') ); ?>" rel="home">
                         <span class="logo-an">AN</span><span class="logo-sa">SA</span>
                     </a>
                 <?php endif; ?>
             </div>
 
-            <!-- Navigation -->
-            <nav class="nav-wrapper">
-                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
-                    <span class="menu-icon">☰</span>
-                </button>
+            <button class="ds-navtoggle" id="ds-navtoggle" aria-controls="ds-primary-nav" aria-expanded="false" aria-label="Toggle navigation">&#9776;</button>
 
+            <nav class="ds-nav" id="ds-primary-nav" aria-label="Primary">
                 <?php
                 wp_nav_menu(array(
-                    'theme_location'  => 'primary',
-                    'container'       => false,
-                    'menu_class'      => 'primary-nav',
-                    'fallback_cb'     => 'ansa_primary_menu_fallback',
-                    'depth'           => 2,
-                    'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+                    'theme_location' => 'primary',
+                    'container'      => false,
+                    'menu_id'        => 'menu-primary',
+                    'menu_class'     => 'ds-nav__list',
+                    'fallback_cb'    => 'ansa_primary_menu_fallback',
+                    'depth'          => 1,
+                    'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul>',
                 ));
                 ?>
+                <a class="ds-btn ds-btn--primary ds-nav__cta" data-cta-location="nav" href="<?php echo esc_url( home_url('/contact/') ); ?>">See What&rsquo;s Possible</a>
             </nav>
         </div>
     </header>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggle = document.getElementById('mobile-menu-toggle');
-            const menu = document.querySelector('.primary-nav');
-
-            if (toggle) {
-                toggle.addEventListener('click', function() {
-                    menu.classList.toggle('active');
-                    toggle.setAttribute('aria-expanded', menu.classList.contains('active'));
-                });
-            }
-
-            const menuItems = document.querySelectorAll('.primary-nav li');
-            menuItems.forEach(function(item) {
-                const link = item.querySelector('a');
-                if (item.classList.contains('menu-item-has-children')) {
-                    const submenu = item.querySelector('.sub-menu');
-                    if (submenu) {
-                        link.addEventListener('click', function(e) {
-                            if (window.innerWidth <= 768) {
-                                e.preventDefault();
-                                item.classList.toggle('active');
-                            }
-                        });
-                    }
-                }
-            });
-
-            window.addEventListener('resize', function() {
-                if (window.innerWidth > 768) {
-                    menu.classList.remove('active');
-                    document.querySelectorAll('.primary-nav li').forEach(function(item) {
-                        item.classList.remove('active');
-                    });
-                }
-            });
-
-            const menuLinks = document.querySelectorAll('.primary-nav a');
-            menuLinks.forEach(function(link) {
-                link.addEventListener('click', function(e) {
-                    if (window.innerWidth <= 768 && !link.parentElement.classList.contains('menu-item-has-children')) {
-                        menu.classList.remove('active');
-                    }
-                });
-            });
-        });
-    </script>
-
