@@ -772,7 +772,7 @@ $ansa_ga_id    = 'G-8M27VDXHXD';
   </section>
 
   <div class="footer">
-    <b>ANSA Solutions</b> · Carmel, IN · <a href="mailto:info@ansa.solutions">info@ansa.solutions</a> · Let's talk automation.
+    <b>ANSA Solutions</b> · Nationwide · <a href="mailto:info@ansa.solutions">info@ansa.solutions</a> · Let's talk automation.
   </div>
 </div>
 
