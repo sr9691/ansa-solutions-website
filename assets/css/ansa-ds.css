@@ -236,6 +236,18 @@ body.ds [tabindex]:focus-visible {
 }
 .ds-band--ink .ds-checklist li::before, .ds-band--slate .ds-checklist li::before { color: #b6a8ff; }
 
+/* ---- Tick list (check bullets) ----------------------------------------- */
+.ds-ticklist { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: 0.6rem; }
+.ds-ticklist li { position: relative; padding-left: 1.9rem; line-height: 1.5; }
+.ds-ticklist li::before {
+    content: "✓"; position: absolute; left: 0; top: 0; color: var(--ds-accent); font-weight: 900;
+}
+.ds-band--ink .ds-ticklist li::before, .ds-band--slate .ds-ticklist li::before { color: #b6a8ff; }
+
+/* ---- Success check badge ----------------------------------------------- */
+.ds-check { width: 72px; height: 72px; border-radius: 50%; background: var(--ds-accent); display: grid; place-items: center; margin: 0 0 1.5rem; }
+.ds-check svg { width: 34px; height: 34px; stroke: #fff; stroke-width: 3; fill: none; }
+
 /* ---- FAQ --------------------------------------------------------------- */
 .ds-faq { margin: 1.5rem 0 0; border-top: 1px solid var(--ds-line); }
 .ds-band--ink .ds-faq, .ds-band--slate .ds-faq { border-color: var(--ds-on-dark-line); }

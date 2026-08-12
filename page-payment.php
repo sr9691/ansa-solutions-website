@@ -83,6 +83,7 @@ get_header();
 
     /* Error page */
     .error-page { display: none; text-align: center; background: #fff; border-radius: 12px; padding: 3rem 2.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04); }
+    .error-page--visible { display: block; }
     .error-page h2 { font-size: 1.4rem; margin-bottom: 0.5rem; }
     .error-page p { color: #6b7280; font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem; }
 
@@ -92,16 +93,16 @@ get_header();
     }
 </style>
 
-<main id="main-content" class="site-main">
-    <section class="payment-page">
+<main id="ds-main" class="site-main">
+    <section class="ds-band ds-band--paper-2 payment-page">
         <div class="payment-container">
 
             <?php if ( ! $tier ) : ?>
                 <!-- Invalid / missing tier -->
-                <div class="error-page" style="display: block;">
+                <div class="error-page error-page--visible">
                     <h2>Invalid Link</h2>
                     <p>This payment link is missing a valid assessment package. Please go back and select a package to continue.</p>
-                    <a href="<?php echo esc_url( home_url( '/ai-readiness-assessment/#pricing' ) ); ?>" class="button button--primary">View Packages</a>
+                    <a href="<?php echo esc_url( home_url( '/ai-readiness-assessment/#get-started' ) ); ?>" class="ds-btn ds-btn--primary">View Packages</a>
                 </div>
             <?php else : ?>
 
@@ -178,12 +179,12 @@ get_header();
 
                     var stripe = Stripe(STRIPE_PK);
                     var elements = stripe.elements({
-                        fonts: [{ cssSrc: 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap' }]
+                        fonts: [{ cssSrc: 'https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap' }]
                     });
 
                     var cardElement = elements.create('card', {
                         style: {
-                            base: { fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: '15px', color: '#1f2937', '::placeholder': { color: '#9ca3af' } },
+                            base: { fontFamily: "'Lato', sans-serif", fontSize: '15px', color: '#1f2937', '::placeholder': { color: '#9ca3af' } },
                             invalid: { color: '#ef4444' }
                         }
                     });
