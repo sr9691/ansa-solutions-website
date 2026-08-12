@@ -88,6 +88,7 @@ body.ds [tabindex]:focus-visible {
 .ds-band--slate   { background: var(--ds-slate);   color: var(--ds-on-dark); }
 .ds-band--tight   { padding-top: clamp(2rem, 4vw, 3rem); padding-bottom: clamp(2rem, 4vw, 3rem); }
 .ds-band__inner   { max-width: var(--ds-maxw); margin: 0 auto; }
+.ds-band__inner--narrow { max-width: var(--ds-maxw-narrow); }
 
 /* Dark bands: headings/links adapt */
 .ds-band--ink h1, .ds-band--ink h2, .ds-band--ink h3, .ds-band--ink h4,
