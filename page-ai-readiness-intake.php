@@ -23,10 +23,10 @@ $ansa_ajax_url = function_exists( 'admin_url' )       ? admin_url( 'admin-ajax.p
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Readiness Assessment | ANSA Solutions</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --purple: #452cea;
+  --purple: #462CED;
   --purple-light: #ece8fd;
   --purple-glow: rgba(69, 44, 234, 0.12);
   --dark: #384051;
@@ -43,7 +43,7 @@ $ansa_ajax_url = function_exists( 'admin_url' )       ? admin_url( 'admin-ajax.p
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
   background: var(--bg);
   color: var(--dark);
   min-height: 100vh;
@@ -156,7 +156,7 @@ label .optional { font-weight: 400; color: var(--muted); font-size: 12px; margin
 
 input[type="text"], input[type="email"], input[type="url"], input[type="number"], textarea, select {
   width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px;
-  font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--dark); background: var(--bg);
+  font-size: 14px; font-family: 'Lato', sans-serif; color: var(--dark); background: var(--bg);
   transition: border-color 0.2s, box-shadow 0.2s; outline: none;
 }
 input:focus, textarea:focus, select:focus { border-color: var(--purple); box-shadow: 0 0 0 3px var(--purple-glow); background: #fff; }
@@ -183,12 +183,12 @@ select { cursor: pointer; appearance: none; background-image: url("data:image/sv
 .rating-option { flex: 1; text-align: center; padding: 12px 4px; border-radius: 10px; border: 1.5px solid var(--border); cursor: pointer; transition: all 0.2s; background: var(--bg); }
 .rating-option:hover { border-color: rgba(69,44,234,0.25); }
 .rating-option.selected { border-color: var(--purple); background: var(--purple); color: #fff; }
-.rating-option .rating-num { font-size: 18px; font-weight: 700; font-family: 'Fraunces', serif; display: block; }
+.rating-option .rating-num { font-size: 18px; font-weight: 700; font-family: 'Lato', sans-serif; display: block; }
 .rating-option .rating-label { font-size: 10px; display: block; margin-top: 2px; opacity: 0.7; }
 
 /* ── Buttons ── */
 .btn-row { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; gap: 12px; }
-.btn { padding: 14px 32px; border-radius: 10px; font-size: 15px; font-weight: 700; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; border: none; letter-spacing: 0.2px; }
+.btn { padding: 14px 32px; border-radius: 10px; font-size: 15px; font-weight: 700; font-family: 'Lato', sans-serif; cursor: pointer; transition: all 0.2s; border: none; letter-spacing: 0.2px; }
 .btn-primary { background: var(--purple); color: #fff; box-shadow: 0 2px 8px rgba(69,44,234,0.25); }
 .btn-primary:hover { background: #3820d0; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(69,44,234,0.35); }
 .btn-secondary { background: var(--card); color: var(--dark); border: 1.5px solid var(--border); }
@@ -233,7 +233,7 @@ select { cursor: pointer; appearance: none; background-image: url("data:image/sv
 .success-steps { text-align: left; background: var(--card); border-radius: 14px; border: 1px solid var(--border); padding: 24px 28px; margin-top: 28px; }
 .success-step { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border); }
 .success-step:last-child { border-bottom: none; }
-.success-step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--purple-light); color: var(--purple); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex-shrink: 0; font-family: 'Fraunces', serif; }
+.success-step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--purple-light); color: var(--purple); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex-shrink: 0; font-family: 'Lato', sans-serif; }
 .success-step-text { font-size: 14px; color: var(--dark); line-height: 1.5; }
 .success-step-text strong { color: var(--purple); }
 

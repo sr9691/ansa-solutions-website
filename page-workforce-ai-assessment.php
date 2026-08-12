@@ -35,7 +35,7 @@ $ansa_ga_id    = 'G-8M27VDXHXD';
 <meta name="description" content="12 questions. 3 minutes. Find out if you're building a workforce AI can't replace — or one that's waiting to be disrupted.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
 <?php if ( $ansa_ga_id ) : ?>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr( $ansa_ga_id ); ?>"></script>
@@ -68,7 +68,7 @@ $ansa_ga_id    = 'G-8M27VDXHXD';
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--ansa-dark) linear-gradient(160deg, var(--ansa-dark) 0%, var(--ansa-navy) 55%, #0e3055 100%) no-repeat;
     background-size: 100% 100%;
     color: var(--ink);

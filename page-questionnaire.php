@@ -26,11 +26,11 @@ if (empty($session_id)) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Access Denied - ANSA Solutions</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
         <style>
             * { margin: 0; padding: 0; box-sizing: border-box; }
             body {
-                font-family: 'Plus Jakarta Sans', sans-serif;
+                font-family: 'Lato', sans-serif;
                 background: #f9fafb;
                 display: flex;
                 align-items: center;
