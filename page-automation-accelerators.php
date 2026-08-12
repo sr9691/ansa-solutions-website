@@ -6,17 +6,16 @@
 get_header();
 ?>
 
-<main id="main-content" class="site-main">
+<main id="ds-main" class="site-main">
 
 <!-- ============================================================
      HERO
 ============================================================ -->
-<section class="hero hero--dark-gradient aia-hero">
-	<div class="container">
-		<div class="aia-hero__inner">
-			<span class="badge badge--primary">AI-Powered Automation</span>
-			<h1 class="hero__title">AI Accelerators</h1>
-			<p class="hero__subtitle">
+<section class="ds-hero aia-hero">
+	<div class="ds-hero__inner aia-hero__inner">
+			<span class="ds-eyebrow">AI-Powered Automation</span>
+			<h1>AI Accelerators</h1>
+			<p class="ds-hero__lede">
 				An AI Accelerator is a pre-built automation that connects your existing tools, applies AI where it adds leverage, and delivers a useful output. A briefing, an alert, a draft, a report. No manual work required. Browse ready-to-deploy accelerators across every department and industry we serve.
 			</p>
 
@@ -53,7 +52,6 @@ get_header();
 					All Accelerators <span class="aia-tab__count" id="tc-all">—</span>
 				</button>
 			</div>
-		</div>
 	</div>
 </section>
 
@@ -108,33 +106,13 @@ get_header();
 <!-- ============================================================
      EVENT CTA
 ============================================================ -->
-<section style="padding: 4rem 1.5rem; background: var(--border-light); border-top: 1px solid var(--border);">
-	<div class="container">
-		<div style="max-width: 820px; margin: 0 auto; background: #fff; border: 2px solid var(--accent); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 4px 24px rgba(70,44,237,0.1); display: flex; align-items: stretch; flex-wrap: wrap;">
-			<div style="background: var(--accent); padding: 2rem 2.25rem; display: flex; flex-direction: column; justify-content: center; min-width: 160px;">
-				<div style="color: rgba(255,255,255,0.75); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Upcoming</div>
-				<div style="color: #fff; font-size: 2rem; font-weight: 800; line-height: 1;">APR</div>
-				<div style="color: #fff; font-size: 3rem; font-weight: 900; line-height: 1;">22</div>
-			</div>
-			<div style="padding: 1.75rem 2rem; flex: 1; min-width: 240px;">
-				<div style="font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 0.5rem;">See AI in action — join our next event</div>
-				<h3 style="margin: 0 0 0.6rem; font-size: 1.05rem; line-height: 1.4; color: var(--text);">
-					AI Orchestration for Engineering &amp; Construction
-				</h3>
-				<div style="display: flex; gap: 1rem; flex-wrap: wrap; font-size: 12.5px; color: var(--text-light); margin-bottom: 1.25rem;">
-					<span>5:30 – 7:30 PM EDT</span>
-					<span>Anthony's Chophouse &nbsp;·&nbsp; Carmel, IN</span>
-				</div>
-				<div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-					<a href="https://luma.com/rlqz48f9" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: 13px; padding: 0.55rem 1.1rem; display: inline-flex; align-items: center; gap: 5px;">
-						Request to Join
-						<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-					</a>
-					<a href="<?php echo esc_url( home_url( '/events' ) ); ?>" style="font-size: 13px; font-weight: 600; color: var(--accent);">
-						All events →
-					</a>
-				</div>
-			</div>
+<section class="ds-band ds-band--paper-2">
+	<div class="ds-band__inner">
+		<span class="ds-eyebrow">See AI in Action</span>
+		<h2>Watch these accelerators live at an ANSA event.</h2>
+		<p class="ds-lede">We run in-person and virtual sessions where these accelerators run on real workflows. Browse what's coming up.</p>
+		<div class="ds-cta-row">
+			<a class="ds-btn ds-btn--primary" href="<?php echo esc_url( home_url( '/events/' ) ); ?>">See upcoming events</a>
 		</div>
 	</div>
 </section>
@@ -142,11 +120,12 @@ get_header();
 <!-- ============================================================
      CTA
 ============================================================ -->
-<section class="section--cta-dark section--final-cta" id="get-started">
-	<div class="container">
+<section class="ds-band ds-band--ink section--final-cta" id="get-started">
+	<div class="ds-band__inner">
 		<div class="cta-content">
-			<h2>Request a Live Demo</h2>
-			<p>Tell us a bit about your team and we'll show you an AI Accelerator built for your workflow.</p>
+			<span class="ds-eyebrow">Request a Demo</span>
+			<h2>Request a live demo.</h2>
+			<p class="ds-lede">Tell us a bit about your team and we'll show you an AI Accelerator built for your workflow.</p>
 			<script src="https://js.hsforms.net/forms/embed/50725925.js" defer></script>
 			<div class="hs-form-frame" data-region="na1" data-form-id="1a8a8d6f-d8cb-4876-bf15-5df9da9d85ec" data-portal-id="50725925"></div>
 		</div>

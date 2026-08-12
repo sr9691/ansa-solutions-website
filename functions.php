@@ -53,19 +53,18 @@ add_action('after_setup_theme', 'ansa_theme_setup');
  * Fallback primary menu (used when no menu is assigned)
  */
 function ansa_primary_menu_fallback() {
-    echo '<ul class="primary-nav">';
-    echo '<li><a href="' . esc_url(home_url('/')) . '">Home</a></li>';
-    echo '<li class="menu-item-has-children">';
-    echo '<a href="#">Services <span class="dropdown-arrow">▾</span></a>';
-    echo '<ul class="sub-menu">';
-    echo '<li><a href="' . esc_url(home_url('/process-automation/')) . '">Process Automation</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/ai-readiness-assessment/')) . '">AI Readiness Assessment</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/automation-accelerators/')) . '">Automation Accelerators</a></li>';
-    echo '</ul>';
-    echo '</li>';
-    echo '<li><a href="' . esc_url(home_url('/case-studies/')) . '">Case Studies</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/about/')) . '">About</a></li>';
-    echo '<li class="menu-item-contact"><a href="' . esc_url(home_url('/contact/')) . '">Contact</a></li>';
+    $items = array(
+        'Approach'     => '/approach/',
+        'Accelerators' => '/automation-accelerators/',
+        'AI Readiness' => '/ai-readiness-assessment/',
+        'Case Studies' => '/case-studies/',
+        'Events'       => '/events/',
+        'About'        => '/about/',
+    );
+    echo '<ul id="menu-primary" class="ds-nav__list">';
+    foreach ( $items as $label => $path ) {
+        echo '<li><a href="' . esc_url( home_url( $path ) ) . '">' . esc_html( $label ) . '</a></li>';
+    }
     echo '</ul>';
 }
 /**
@@ -118,32 +117,24 @@ add_action('widgets_init', 'ansa_widgets_init');
  * Enqueue styles and scripts
  */
 function ansa_enqueue_scripts() {
-    wp_enqueue_style('google-fonts-pjs', 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap', array(), null);
-    wp_enqueue_style('google-fonts-inter', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap', array(), null);
+    // Lato — the locked typeface (400 / 700 / 900 + 400 italic)
+    wp_enqueue_style('google-fonts-lato', 'https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap', array(), null);
 
     $css_ver = file_exists(ANSA_THEME_DIR . '/style.css') ? filemtime(ANSA_THEME_DIR . '/style.css') : ANSA_VERSION;
-    wp_enqueue_style('ansa-theme-style', ANSA_THEME_URI . '/style.css', array('google-fonts-pjs', 'google-fonts-inter'), $css_ver);
+    wp_enqueue_style('ansa-theme-style', ANSA_THEME_URI . '/style.css', array('google-fonts-lato'), $css_ver);
 
-    /* Style the last primary nav item (Contact) as a button */
-    $nav_btn_css = '
-        .primary-nav > li:last-child > a {
-            background: var(--accent, #462CED);
-            color: #fff !important;
-            padding: 10px 28px !important;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: background 0.2s ease, transform 0.2s ease;
-        }
-        .primary-nav > li:last-child > a:hover {
-            background: #3520c7;
-            transform: translateY(-1px);
-            color: #fff !important;
-        }
-    ';
-    wp_add_inline_style('ansa-theme-style', $nav_btn_css);
+    // Design system — loaded AFTER style.css so .ds-* wins where it applies
+    $ds_ver = file_exists(ANSA_THEME_DIR . '/assets/css/ansa-ds.css') ? filemtime(ANSA_THEME_DIR . '/assets/css/ansa-ds.css') : ANSA_VERSION;
+    wp_enqueue_style('ansa-ds', ANSA_THEME_URI . '/assets/css/ansa-ds.css', array('ansa-theme-style'), $ds_ver);
 
     if (file_exists(ANSA_THEME_DIR . '/assets/js/main.js')) {
         wp_enqueue_script('ansa-theme-script', ANSA_THEME_URI . '/assets/js/main.js', array('jquery'), ANSA_VERSION, true);
+    }
+
+    // Design system behaviour (nav toggle, lazy Vimeo facade, FAQ accordion)
+    if (file_exists(ANSA_THEME_DIR . '/assets/js/ansa-ds.js')) {
+        $ds_js_ver = filemtime(ANSA_THEME_DIR . '/assets/js/ansa-ds.js');
+        wp_enqueue_script('ansa-ds', ANSA_THEME_URI . '/assets/js/ansa-ds.js', array(), $ds_js_ver, true);
     }
 
     if (is_singular() && comments_open() && get_option('thread_comments')) {
@@ -180,6 +171,50 @@ function ansa_add_google_analytics() {
     <?php
 }
 add_action('wp_head', 'ansa_add_google_analytics', 10);
+
+/**
+ * Conversion tracking (GoHighLevel + WhatConverts).
+ *
+ * Scoped to landing/conversion routes only — HubSpot tracking already runs
+ * globally, and loading three analytics libraries on every page is a
+ * performance problem. Loads in the footer via wp_footer.
+ *
+ * NOTE: Cloudflare Rocket Loader must be DISABLED for these routes or it can
+ * break the WhatConverts script (see README).
+ */
+function ansa_conversion_tracking() {
+    $is_conversion_route = is_front_page() || is_page( array(
+        'contact',
+        'ai-readiness-assessment',
+        'become-a-partner',
+        'calendar',
+        'approach',
+        'workforce-ai-assessment',
+    ) );
+
+    if ( ! $is_conversion_route ) {
+        return;
+    }
+
+    // GoHighLevel external tracking. The script host can be overridden via the
+    // ansa_ghl_tracking_src filter if the account uses a different domain.
+    $ghl_tracking_id = 'tk_b2548077bc114ccbb22b7504c884abd1';
+    $ghl_src         = apply_filters( 'ansa_ghl_tracking_src', 'https://link.hayesgroupmarketing.com/js/external-tracking.js' );
+    if ( $ghl_src ) {
+        printf(
+            '<script src="%s" data-tracking-id="%s" defer></script>' . "\n",
+            esc_url( $ghl_src ),
+            esc_attr( $ghl_tracking_id )
+        );
+    }
+
+    // WhatConverts. Define ANSA_WHATCONVERTS_SRC in wp-config.php with the
+    // account's $wc_leads script URL to enable it (kept out of source).
+    if ( defined( 'ANSA_WHATCONVERTS_SRC' ) && ANSA_WHATCONVERTS_SRC ) {
+        printf( '<script async src="%s"></script>' . "\n", esc_url( ANSA_WHATCONVERTS_SRC ) );
+    }
+}
+add_action( 'wp_footer', 'ansa_conversion_tracking', 20 );
 
 /**
  * Helper function to get Stripe checkout URL placeholder
@@ -345,7 +380,7 @@ function ansa_get_template_part($slug, $name = null, $args = array()) {
  * Enqueue admin scripts and styles
  */
 function ansa_admin_enqueue_scripts() {
-    wp_enqueue_style('google-fonts-pjs', 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+    wp_enqueue_style('google-fonts-lato', 'https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
 }
 add_action('admin_enqueue_scripts', 'ansa_admin_enqueue_scripts');
 

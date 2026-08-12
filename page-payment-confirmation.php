@@ -1,7 +1,10 @@
 <?php
 /**
  * Template Name: Payment Confirmation
- * Description: Thank-you page for payment confirmation with tier-aware content
+ * Description: Thank-you page after payment, with tier-aware content.
+ * The tier/session_id sanitization and questionnaire URL build are unchanged.
+ *
+ * @package ANSA_Solutions
  */
 
 get_header();
@@ -59,249 +62,64 @@ if ( $valid_tier ) {
 $questionnaire_url = add_query_arg( $questionnaire_args, home_url( '/ai-readiness-intake' ) );
 ?>
 
-<style>
-	.confirmation-container {
-		max-width: 700px;
-		margin: 40px auto;
-		padding: 0 20px;
-	}
+<main id="ds-main" class="site-main">
 
-	.confirmation-card {
-		background: white;
-		border-radius: 8px;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-		padding: 40px;
-		margin-bottom: 40px;
-	}
+	<section class="ds-hero">
+		<div class="ds-hero__inner">
+			<span class="ds-eyebrow">Payment Received</span>
+			<h1>Thank you for your investment in AI readiness.</h1>
+		</div>
+	</section>
 
-	.checkmark-icon {
-		width: 80px;
-		height: 80px;
-		background: var(--accent, #462CED);
-		border-radius: 50%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin: 0 auto 30px;
-		font-size: 2.5rem;
-		color: white;
-	}
+	<section class="ds-band ds-band--paper-2">
+		<div class="ds-band__inner ds-band__inner--narrow">
+			<div class="ds-formcard">
+				<div class="ds-check" aria-hidden="true">
+					<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+				</div>
 
-	.confirmation-title {
-		font-size: 1.8rem;
-		color: var(--primary, #374151);
-		margin-bottom: 10px;
-		font-weight: 700;
-	}
+				<?php if ( $tier_data ) : ?>
+					<h2>Thank you!</h2>
+					<p class="ds-lede">Your payment has been successfully received. We're excited to work with you to unlock your organization's AI potential.</p>
 
-	.confirmation-subtitle {
-		color: var(--text-light, #6B7280);
-		font-size: 1rem;
-		margin-bottom: 30px;
-		line-height: 1.6;
-	}
+					<div class="ds-callout">
+						<span class="ds-callout__label"><?php echo esc_html( $tier_data['name'] ); ?> Package — <?php echo esc_html( $tier_data['price'] ); ?></span>
+						<ul class="ds-ticklist">
+							<?php foreach ( $tier_data['includes'] as $item ) : ?>
+								<li><?php echo esc_html( $item ); ?></li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
 
-	.tier-section {
-		background: #f9fafb;
-		border-left: 4px solid var(--accent, #462CED);
-		padding: 20px;
-		border-radius: 4px;
-		margin-bottom: 30px;
-	}
+					<div class="ds-cta-row">
+						<a class="ds-btn ds-btn--primary" href="<?php echo esc_url( $questionnaire_url ); ?>">Start your questionnaire</a>
+					</div>
 
-	.tier-name {
-		font-size: 1.3rem;
-		color: var(--primary, #374151);
-		font-weight: 600;
-		margin-bottom: 10px;
-	}
+					<p class="ds-formnote"><strong>Bookmark this link:</strong> you can save the questionnaire link above and return to it anytime to complete or continue your assessment.</p>
 
-	.tier-price {
-		color: var(--accent, #462CED);
-		font-size: 1.1rem;
-		font-weight: 600;
-		margin-bottom: 15px;
-	}
+					<h3>What happens next</h3>
+					<ol class="ds-checklist">
+						<li><strong>Complete questionnaire</strong> — tell us about your organization and AI goals.</li>
+						<li><strong>Discovery call</strong> — we'll discuss your situation and tailor our approach.</li>
+						<li><strong>Receive your report</strong> — get your personalized assessment within about one week.</li>
+					</ol>
 
-	.tier-includes {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-	}
+				<?php else : ?>
+					<h2>Thank you!</h2>
+					<p class="ds-lede">Your payment has been successfully received. We appreciate your trust and look forward to working with you.</p>
 
-	.tier-includes li {
-		color: var(--text-light, #6B7280);
-		padding: 8px 0;
-		display: flex;
-		align-items: flex-start;
-	}
+					<div class="ds-cta-row">
+						<a class="ds-btn ds-btn--primary" href="<?php echo esc_url( $questionnaire_url ); ?>">Continue to questionnaire</a>
+					</div>
 
-	.tier-includes li::before {
-		content: '✓';
-		color: var(--accent, #462CED);
-		font-weight: bold;
-		margin-right: 12px;
-		flex-shrink: 0;
-	}
+					<p class="ds-formnote">If you have any questions, please <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">contact us</a>.</p>
+				<?php endif; ?>
 
-	.cta-button {
-		display: inline-block;
-		background: var(--accent, #462CED);
-		color: white;
-		padding: 14px 32px;
-		text-decoration: none;
-		border-radius: 6px;
-		font-weight: 600;
-		font-size: 1rem;
-		transition: background-color 0.3s ease;
-		margin-bottom: 30px;
-		border: none;
-		cursor: pointer;
-	}
-
-	.cta-button:hover {
-		background: #3620b8;
-		color: white;
-		text-decoration: none;
-	}
-
-	.bookmark-note {
-		background: rgba(70, 44, 237, 0.06);
-		border: 1px solid rgba(70, 44, 237, 0.15);
-		border-radius: 6px;
-		padding: 12px 16px;
-		font-size: 0.85rem;
-		color: var(--text-light, #6B7280);
-		margin-bottom: 30px;
-	}
-
-	.bookmark-note strong {
-		color: var(--primary, #374151);
-	}
-
-	.next-steps {
-		background: #f3f4f6;
-		border-radius: 6px;
-		padding: 25px;
-		margin-top: 30px;
-	}
-
-	.next-steps-title {
-		font-size: 1.1rem;
-		color: var(--primary, #374151);
-		font-weight: 600;
-		margin-bottom: 15px;
-	}
-
-	.next-steps-list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		counter-reset: step;
-	}
-
-	.next-steps-list li {
-		color: var(--text-light, #6B7280);
-		padding: 10px 0 10px 35px;
-		position: relative;
-		counter-increment: step;
-	}
-
-	.next-steps-list li::before {
-		content: counter(step);
-		position: absolute;
-		left: 0;
-		top: 8px;
-		width: 24px;
-		height: 24px;
-		background: var(--accent, #462CED);
-		color: white;
-		border-radius: 50%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-weight: 600;
-		font-size: 0.85rem;
-	}
-
-	.generic-thanks {
-		text-align: center;
-	}
-
-	.generic-thanks p {
-		color: var(--text-light, #6B7280);
-		font-size: 1rem;
-		line-height: 1.6;
-		margin-bottom: 20px;
-	}
-</style>
-
-<div class="hero hero--dark-gradient">
-	<div class="hero__content">
-		<h1 class="hero__title">Payment Received</h1>
-		<p class="hero__subtitle">Thank you for your investment in AI readiness</p>
-	</div>
-</div>
-
-<div class="confirmation-container">
-	<div class="confirmation-card">
-		<div class="checkmark-icon">✓</div>
-
-		<?php if ( $tier_data ) : ?>
-			<!-- Valid Tier Content -->
-			<h2 class="confirmation-title">Thank You!</h2>
-			<p class="confirmation-subtitle">
-				Your payment has been successfully received. We're excited to work with you to unlock your organization's AI potential.
-			</p>
-
-			<div class="tier-section">
-				<div class="tier-name"><?php echo esc_html( $tier_data['name'] ); ?> Package</div>
-				<div class="tier-price"><?php echo esc_html( $tier_data['price'] ); ?></div>
-				<ul class="tier-includes">
-					<?php foreach ( $tier_data['includes'] as $item ) : ?>
-						<li><?php echo esc_html( $item ); ?></li>
-					<?php endforeach; ?>
-				</ul>
 			</div>
+		</div>
+	</section>
 
-			<a href="<?php echo esc_url( $questionnaire_url ); ?>" class="cta-button">
-				Start Your Questionnaire
-			</a>
-
-			<div class="bookmark-note">
-				<strong>Bookmark this link:</strong> You can save the questionnaire link above and return to it anytime to complete or continue your assessment.
-			</div>
-
-			<div class="next-steps">
-				<div class="next-steps-title">What Happens Next</div>
-				<ol class="next-steps-list">
-					<li><strong>Complete Questionnaire:</strong> Tell us about your organization and AI goals</li>
-					<li><strong>Discovery Call:</strong> We'll discuss your situation and tailor our approach</li>
-					<li><strong>Receive Your Report:</strong> Get your personalized assessment within ~1 week</li>
-				</ol>
-			</div>
-
-		<?php else : ?>
-			<!-- Generic Thank You (No Valid Tier) -->
-			<div class="generic-thanks">
-				<h2 class="confirmation-title">Thank You!</h2>
-				<p class="confirmation-subtitle">
-					Your payment has been successfully received. We appreciate your trust and look forward to working with you.
-				</p>
-
-				<a href="<?php echo esc_url( $questionnaire_url ); ?>" class="cta-button">
-					Continue to Questionnaire
-				</a>
-
-				<p style="color: var(--text-light, #6B7280); font-size: 0.95rem; margin-top: 20px;">
-					If you have any questions, please <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" style="color: var(--accent, #462CED); text-decoration: none;">contact us</a>.
-				</p>
-			</div>
-
-		<?php endif; ?>
-
-	</div>
-</div>
+</main>
 
 <?php
 get_footer();

@@ -482,6 +482,9 @@ get_header(); ?>
 		font-weight: 700;
 	}
 
+	.phase-tag { background-color: var(--border-light); padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+	.phase-tag strong { color: var(--accent); }
+
 	/* CTA Section */
 	.cta-section {
 		background: linear-gradient(135deg, #1F2937 0%, #111827 100%);
@@ -612,18 +615,14 @@ get_header(); ?>
 
 <div class="sample-report-container">
 	<!-- Hero Section -->
-	<section class="hero hero--dark-gradient">
-		<div class="hero__content">
-			<span class="badge badge--primary">Sample Report</span>
-			<h1 class="hero__title">
-				AI Readiness Report <span class="text-accent">Preview</span>
-			</h1>
-			<p class="hero__subtitle">
-				This is a sample report for a fictional mid-market manufacturing company. Your report will be customized to your business.
-			</p>
-			<a href="<?php echo esc_url( home_url( '/ai-readiness#pricing' ) ); ?>" class="button button--primary button--large">
-				Start Your Assessment
-			</a>
+	<section class="ds-hero">
+		<div class="ds-hero__inner">
+			<span class="ds-eyebrow">Sample Report</span>
+			<h1>AI Readiness Report preview.</h1>
+			<p class="ds-hero__lede">This is a sample report for a fictional mid-market manufacturing company. Your report will be customized to your business.</p>
+			<div class="ds-cta-row">
+				<a class="ds-btn ds-btn--primary" data-cta-location="sample-report-hero" href="<?php echo esc_url( home_url( '/ai-readiness-assessment/#get-started' ) ); ?>">Start your assessment</a>
+			</div>
 		</div>
 	</section>
 
@@ -806,8 +805,8 @@ get_header(); ?>
 					<div class="roadmap-phase">
 						<h3>Phase 1</h3>
 						<div class="phase-timeframe">Months 1–3</div>
-						<div style="background-color: var(--border-light); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-							<strong style="color: var(--accent);">Quick Wins</strong>
+						<div class="phase-tag">
+							<strong>Quick Wins</strong>
 						</div>
 						<ul>
 							<li>Invoice Processing Automation</li>
@@ -818,8 +817,8 @@ get_header(); ?>
 					<div class="roadmap-phase">
 						<h3>Phase 2</h3>
 						<div class="phase-timeframe">Months 4–8</div>
-						<div style="background-color: var(--border-light); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-							<strong style="color: var(--accent);">Core Initiatives</strong>
+						<div class="phase-tag">
+							<strong>Core Initiatives</strong>
 						</div>
 						<ul>
 							<li>Customer Demand Forecasting</li>
@@ -830,8 +829,8 @@ get_header(); ?>
 					<div class="roadmap-phase">
 						<h3>Phase 3</h3>
 						<div class="phase-timeframe">Months 9–12</div>
-						<div style="background-color: var(--border-light); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-							<strong style="color: var(--accent);">Strategic Bets</strong>
+						<div class="phase-tag">
+							<strong>Strategic Bets</strong>
 						</div>
 						<ul>
 							<li>Quality Inspection AI</li>
@@ -844,18 +843,15 @@ get_header(); ?>
 	</section>
 
 	<!-- Call to Action -->
-	<section class="cta-section">
-		<div class="container">
+	<section class="ds-band ds-band--ink">
+		<div class="ds-band__inner">
 			<div class="cta-content">
-				<h2>Ready to See Your Own Report?</h2>
-				<p>Get your personalized AI Readiness Assessment — most clients receive their report within one week.</p>
-				<div class="cta-buttons">
-					<a href="<?php echo esc_url( home_url( '/ai-readiness#pricing' ) ); ?>" class="button button--primary button--large">
-						Start Your Assessment
-					</a>
-					<a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="button button--outline button--large">
-						Have Questions?
-					</a>
+				<span class="ds-eyebrow">Get Started</span>
+				<h2>Ready to see your own report?</h2>
+				<p class="ds-lede">Get your personalized AI Readiness Assessment — most clients receive their report within one week.</p>
+				<div class="ds-cta-row">
+					<a class="ds-btn ds-btn--primary" data-cta-location="sample-report-footer" href="<?php echo esc_url( home_url( '/ai-readiness-assessment/#get-started' ) ); ?>">Start your assessment</a>
+					<a class="ds-btn ds-btn--ghost" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Have questions?</a>
 				</div>
 			</div>
 		</div>

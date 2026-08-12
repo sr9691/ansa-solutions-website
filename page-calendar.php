@@ -2,26 +2,29 @@
 /**
  * Template Name: Calendar
  *
+ * Booking page. The team selector, ?ken / ?sundaresh URL bypass, and the
+ * HubSpot Meetings embeds are driven by the script at the bottom — all IDs,
+ * data attributes, and the script are preserved unchanged.
+ *
  * @package ANSA
  */
 
 get_header(); ?>
 
-<main id="main" class="site-main">
+<main id="ds-main" class="site-main">
 
-    <!-- Hero Section -->
-    <section class="page-hero">
-        <div class="container">
-            <div class="page-hero__content">
-                <h1 class="page-hero__title">Book a Meeting</h1>
-                <p class="page-hero__description" id="hero-description">Schedule time with our team to explore how AI can transform your business.</p>
-            </div>
+    <!-- Hero -->
+    <section class="ds-hero">
+        <div class="ds-hero__inner">
+            <span class="ds-eyebrow">Book a Meeting</span>
+            <h1>Book a meeting.</h1>
+            <p class="ds-hero__lede" id="hero-description">Schedule time with our team to explore how AI can transform your business.</p>
         </div>
     </section>
 
     <!-- Team Selector (hidden when URL param bypasses it) -->
-    <section class="team-selector-section" id="team-selector-section">
-        <div class="container">
+    <section class="ds-band ds-band--ink ds-band--tight team-selector-section" id="team-selector-section">
+        <div class="ds-band__inner">
             <p class="selector-label">Who would you like to meet with?</p>
             <div class="team-card-row">
 
@@ -52,8 +55,8 @@ get_header(); ?>
     </section>
 
     <!-- Calendar Embed Section -->
-    <section class="section calendar-section" id="book">
-        <div class="container">
+    <section class="ds-band ds-band--paper-2 calendar-section" id="book">
+        <div class="ds-band__inner">
             <div class="calendar-embed-wrapper">
                 <div class="meetings-iframe-container" id="calendar-embed" data-src="https://meetings.hubspot.com/sundaresh?embed=true"></div>
                 <script type="text/javascript" src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"></script>
@@ -64,180 +67,45 @@ get_header(); ?>
 </main>
 
 <style>
-.page-hero {
-    background: linear-gradient(135deg, var(--primary) 0%, #1f2937 100%);
-    padding: 80px 0 50px;
-    text-align: center;
-}
-
-.page-hero__title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 1rem;
-}
-
-.page-hero__description {
-    font-size: 1.125rem;
-    color: rgba(255, 255, 255, 0.85);
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.7;
-}
-
-/* Team Selector */
-.team-selector-section {
-    background: linear-gradient(135deg, var(--primary) 0%, #1f2937 100%);
-    padding: 0 0 50px;
-}
-
-.selector-label {
-    text-align: center;
-    font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 1.25rem;
-}
-
-.team-card-row {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
+/* Team selector (dark band) */
+.selector-label { text-align: center; font-size: 0.875rem; color: rgba(255,255,255,0.6); margin-bottom: 1.25rem; }
+.team-card-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 .team-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding: 24px 32px;
-    border: 1.5px solid rgba(255, 255, 255, 0.12);
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.04);
-    cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
-    min-width: 200px;
-    text-align: center;
+    position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px;
+    padding: 24px 32px; border: 1.5px solid rgba(255,255,255,0.12); border-radius: 12px;
+    background: rgba(255,255,255,0.04); cursor: pointer; transition: border-color 0.2s, background 0.2s;
+    min-width: 200px; text-align: center; font-family: inherit;
 }
-
-.team-card:hover:not(.active) {
-    border-color: rgba(255, 255, 255, 0.25);
-    background: rgba(255, 255, 255, 0.07);
-}
-
-.team-card.active {
-    border-color: #a78bfa;
-    background: rgba(167, 139, 250, 0.1);
-}
-
+.team-card:hover:not(.active) { border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.07); }
+.team-card.active { border-color: #a78bfa; background: rgba(167,139,250,0.1); }
 .team-card__check {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: #a78bfa;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    opacity: 0;
-    transition: opacity 0.2s;
+    position: absolute; top: 10px; right: 10px; width: 20px; height: 20px; border-radius: 50%;
+    background: #a78bfa; display: flex; align-items: center; justify-content: center; color: #fff;
+    opacity: 0; transition: opacity 0.2s;
 }
-
-.team-card.active .team-card__check {
-    opacity: 1;
-}
-
+.team-card.active .team-card__check { opacity: 1; }
 .team-card__avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ffffff;
-    letter-spacing: 0.05em;
+    width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700;
+    color: #fff; letter-spacing: 0.05em;
 }
+.team-card.active .team-card__avatar { background: rgba(167,139,250,0.25); color: #c4b5fd; }
+.team-card__name { font-size: 0.9375rem; font-weight: 700; color: #fff; }
+.team-card__role { font-size: 0.8125rem; color: rgba(255,255,255,0.6); }
 
-.team-card.active .team-card__avatar {
-    background: rgba(167, 139, 250, 0.25);
-    color: #c4b5fd;
-}
-
-.team-card__name {
-    font-size: 0.9375rem;
-    font-weight: 600;
-    color: #ffffff;
-}
-
-.team-card__role {
-    font-size: 0.8125rem;
-    color: rgba(255, 255, 255, 0.6);
-}
-
-/* Calendar Section */
-.calendar-section {
-    padding: 60px 0 80px;
-    background: var(--bg-light, #f9f9f9);
-}
-
+/* Calendar embed */
 .calendar-embed-wrapper {
-    max-width: 900px;
-    margin: 0 auto;
-    background: #ffffff;
-    border-radius: 12px;
-    border: 1px solid #e5e5e5;
-    overflow: hidden;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    max-width: 900px; margin: 0 auto; background: #fff; border-radius: 12px;
+    border: 1px solid #e5e5e5; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.06);
 }
-
-.meetings-iframe-container {
-    min-height: 700px;
-}
-
-.meetings-iframe-container iframe {
-    width: 100% !important;
-    border: none !important;
-}
+.calendar-section .meetings-iframe-container { min-height: 700px; }
+.calendar-section .meetings-iframe-container iframe { width: 100% !important; border: none !important; }
 
 @media (max-width: 768px) {
-    .page-hero {
-        padding: 60px 0 40px;
-    }
-
-    .team-selector-section {
-        padding: 0 0 40px;
-    }
-
-    .team-card-row {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .team-card {
-        width: 100%;
-        max-width: 320px;
-    }
-
-    .calendar-section {
-        padding: 40px 0 60px;
-    }
-
-    .calendar-embed-wrapper {
-        border-radius: 0;
-        border-left: none;
-        border-right: none;
-    }
-
-    .meetings-iframe-container {
-        min-height: 600px;
-    }
+    .team-card-row { flex-direction: column; align-items: center; }
+    .team-card { width: 100%; max-width: 320px; }
+    .calendar-embed-wrapper { border-radius: 0; border-left: none; border-right: none; }
+    .calendar-section .meetings-iframe-container { min-height: 600px; }
 }
 </style>
 

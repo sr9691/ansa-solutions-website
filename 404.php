@@ -5,44 +5,45 @@
  * @package ANSA_Solutions
  */
 
-get_header();
-?>
+get_header(); ?>
 
-<main class="site-content">
-    <div class="container" style="padding: 6rem 1.5rem; text-align: center;">
-        <div style="max-width: 600px; margin: 0 auto;">
-            <h1 style="font-size: 4rem; color: var(--accent); margin-bottom: 1rem;">404</h1>
-            <h2 style="margin-bottom: 1rem;">Page Not Found</h2>
-            <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2rem;">
-                Sorry, the page you're looking for doesn't exist. It might have been moved or deleted.
-            </p>
+<main id="ds-main" class="site-main">
+    <section class="ds-band ds-band--ink">
+        <div class="ds-band__inner ds-band__inner--narrow">
+            <span class="ds-eyebrow">Error 404</span>
+            <h1>Page not found.</h1>
+            <p class="ds-lede">Sorry, the page you're looking for doesn't exist. It might have been moved or deleted.</p>
 
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
-                <a href="<?php echo esc_url(home_url('/')); ?>" class="btn btn-primary">
-                    Back to Home
-                </a>
-                <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="btn btn-outline">
-                    Contact Us
-                </a>
+            <div class="ds-cta-row">
+                <a class="ds-btn ds-btn--primary" href="<?php echo esc_url( home_url('/') ); ?>">Back to home</a>
+                <a class="ds-btn ds-btn--ghost" href="<?php echo esc_url( home_url('/contact/') ); ?>">Contact us</a>
             </div>
 
-            <div style="background-color: var(--border-light); padding: 2rem; border-radius: var(--radius-lg);">
-                <h3 style="margin-bottom: 1.5rem;">Find What You're Looking For</h3>
+            <div class="ds-callout">
+                <span class="ds-callout__label">Find what you're looking for</span>
                 <?php get_search_form(); ?>
             </div>
 
-            <div style="margin-top: 3rem;">
-                <h3 style="margin-bottom: 1.5rem;">Popular Pages</h3>
-                <ul style="list-style: none; text-align: left; display: inline-block;">
-                    <li><a href="<?php echo esc_url(home_url('/services/')); ?>" style="display: block; padding: 0.5rem 0;">Services</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/case-studies/')); ?>" style="display: block; padding: 0.5rem 0;">Case Studies</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/blog/')); ?>" style="display: block; padding: 0.5rem 0;">Blog</a></li>
-                    <li><a href="<?php echo esc_url(home_url('/about/')); ?>" style="display: block; padding: 0.5rem 0;">About Us</a></li>
-                </ul>
+            <div class="ds-deflist">
+                <div class="ds-deflist__row">
+                    <span class="ds-deflist__term">Approach</span>
+                    <p class="ds-deflist__desc"><a href="<?php echo esc_url( home_url('/approach/') ); ?>">Orchestrate, automate, accelerate</a></p>
+                </div>
+                <div class="ds-deflist__row">
+                    <span class="ds-deflist__term">Case Studies</span>
+                    <p class="ds-deflist__desc"><a href="<?php echo esc_url( home_url('/case-studies/') ); ?>">See our work</a></p>
+                </div>
+                <div class="ds-deflist__row">
+                    <span class="ds-deflist__term">About</span>
+                    <p class="ds-deflist__desc"><a href="<?php echo esc_url( home_url('/about/') ); ?>">Who we are</a></p>
+                </div>
+                <div class="ds-deflist__row">
+                    <span class="ds-deflist__term">Contact</span>
+                    <p class="ds-deflist__desc"><a href="<?php echo esc_url( home_url('/contact/') ); ?>">Start a conversation</a></p>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 </main>
 
-<?php
-get_footer();
+<?php get_footer();

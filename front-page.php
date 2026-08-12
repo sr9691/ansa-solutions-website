@@ -1,252 +1,337 @@
 <?php
 /**
- * Front Page Template
+ * Front page — ANSA Solutions
  *
- * @package ANSA Solutions
- * @version 1.0.0
+ * The core narrative, in order: 01 Orchestrate your systems ->
+ * 02 Automate your operations -> 03 Accelerate with AI. Built entirely on the
+ * ansa-ds design system (.ds-*). No inline styles.
+ *
+ * @package ANSA_Solutions
  */
 
 get_header(); ?>
 
-<!-- Hero Section -->
-<section class="section-hero" style="background: linear-gradient(135deg, var(--primary) 0%, #1f2937 100%); padding: 6rem 1.5rem; color: #FFFFFF; text-align: center;">
-	<div class="hero-content" style="max-width: 900px; margin: 0 auto;">
-		<div class="hero-badge" style="display: inline-block; padding: 0.5rem 1rem; background-color: rgba(255, 255, 255, 0.15); border-radius: 999px; margin-bottom: 1.5rem; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.5px;">
-			AI Strategy & Implementation
-		</div>
-		<h1 style="margin-bottom: 1.5rem; font-size: 3.5rem; color: #FFFFFF;">
-			Empowering Businesses with <br><span style="color: var(--accent);">AI-driven Automation</span>
-		</h1>
-		<p class="subtitle" style="font-size: 1.25rem; color: rgba(255, 255, 255, 0.9); margin-bottom: 2.5rem; max-width: 700px; margin-left: auto; margin-right: auto;">
-			We help mid-market organizations streamline operations, enhance efficiency, and drive growth through intelligent automation and AI strategy.
-		</p>
-		<div class="hero-buttons" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-			<a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="btn btn-primary" style="padding: 0.75rem 1.5rem; font-weight: 600;">
-				Get Started
-			</a>
-			<a href="<?php echo esc_url( home_url( '/ai-readiness' ) ); ?>" class="btn btn-outline" style="background-color: transparent; color: #FFFFFF; border: 2px solid #FFFFFF; padding: 0.75rem 1.5rem; font-weight: 600;">
-				Take AI Readiness Assessment
-			</a>
-		</div>
-	</div>
-</section>
+<main id="ds-main" class="site-main">
 
-<!-- Stats Bar -->
-<section class="stats-bar" style="background-color: var(--primary); color: #FFFFFF; padding: 3rem 1.5rem;">
-	<div class="stats-wrapper" style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: center;">
-		<div class="stat">
-			<h3 class="stat-number" style="color: #FFFFFF; margin-bottom: 0.5rem; font-size: 2.5rem;">30%</h3>
-			<p class="stat-label" style="color: rgba(255, 255, 255, 0.8); margin: 0;">Reduction in operational costs</p>
-		</div>
-		<div class="stat">
-			<h3 class="stat-number" style="color: #FFFFFF; margin-bottom: 0.5rem; font-size: 2.5rem;">40%</h3>
-			<p class="stat-label" style="color: rgba(255, 255, 255, 0.8); margin: 0;">Increase in productivity</p>
-		</div>
-		<div class="stat">
-			<h3 class="stat-number" style="color: #FFFFFF; margin-bottom: 0.5rem; font-size: 2.5rem;">6–8 weeks</h3>
-			<p class="stat-label" style="color: rgba(255, 255, 255, 0.8); margin: 0;">To measurable value</p>
-		</div>
-		<div class="stat">
-			<h3 class="stat-number" style="color: #FFFFFF; margin-bottom: 0.5rem; font-size: 2.5rem;">1 week</h3>
-			<p class="stat-label" style="color: rgba(255, 255, 255, 0.8); margin: 0;">To AI Readiness Report</p>
-		</div>
-	</div>
-</section>
+    <?php // ── 1. Hero ─────────────────────────────────────────────── ?>
+    <section class="ds-hero">
+        <div class="ds-hero__inner">
+            <h1>Your teams all have AI. Your systems still do not talk to each other.</h1>
+            <p class="ds-hero__lede">That gap is where the work stalls. Approvals wait, handoffs break, and the same data gets entered in three places. ANSA orchestrates your systems, automates your operations, and lets AI accelerate the whole business, so it finally runs as one.</p>
+            <div class="ds-cta-row">
+                <a class="ds-btn ds-btn--primary" data-cta-location="hero" href="#ds-getstarted">See What's Possible</a>
+            </div>
 
-<!-- Services Overview Section -->
-<section class="section" style="padding: 5rem 1.5rem; max-width: 1400px; margin: 0 auto;">
-	<div class="section-title" style="text-align: center; margin-bottom: 3rem;">
-		<div class="section-label" style="color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; font-size: 0.9rem;">
-			Our Services
-		</div>
-		<h2 style="margin-bottom: 1rem;">What We Do</h2>
-		<p style="font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto; color: var(--text-light);">
-			Strategic automation solutions that transform your operations and unlock AI potential.
-		</p>
-	</div>
+            <div class="ds-video">
+                <button type="button" class="ds-video__facade" data-vimeo="1216529017" data-title="ANSA hero film" aria-label="Play hero film (55 seconds)">
+                    <span class="ds-video__play" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                    </span>
+                    <span class="ds-video__label">Hero film, 55 sec</span>
+                </button>
+            </div>
 
-	<div class="services-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-		<!-- Service Card 1: Process Automation -->
-		<div class="service-card card" style="background-color: var(--background); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; transition: var(--transition); display: flex; flex-direction: column; height: 100%;">
-			<div class="service-icon" style="width: 60px; height: 60px; background-color: var(--border-light); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; font-size: 1.75rem;">
-				⚙️
-			</div>
-			<h3 style="margin-bottom: 1rem; color: var(--text);">Process Automation</h3>
-			<p style="flex-grow: 1; color: var(--text-light); margin-bottom: 1.5rem;">
-				Enterprise workflow orchestration and system integration powered by platforms like Workato. We eliminate manual handoffs and connect your systems.
-			</p>
-			<a href="<?php echo esc_url( home_url( '/process-automation' ) ); ?>" style="color: var(--accent); font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem; border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 1rem;">
-				Learn more <span style="transition: var(--transition);">→</span>
-			</a>
-		</div>
+            <div class="ds-trustbar">
+                <span>Workato MSP Partner</span>
+                <span>Mid-market operators</span>
+                <span>Nationwide</span>
+            </div>
+        </div>
+    </section>
 
-		<!-- Service Card 2: AI Readiness Assessment -->
-		<div class="service-card card" style="background-color: var(--background); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; transition: var(--transition); display: flex; flex-direction: column; height: 100%;">
-			<div class="service-icon" style="width: 60px; height: 60px; background-color: var(--border-light); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; font-size: 1.75rem;">
-				📊
-			</div>
-			<h3 style="margin-bottom: 1rem; color: var(--text);">AI Readiness Assessment</h3>
-			<p style="flex-grow: 1; color: var(--text-light); margin-bottom: 1.5rem;">
-				A fixed-fee assessment that tells you exactly where AI can create value, what's blocking you, and what to do first. Results in ~1 week.
-			</p>
-			<a href="<?php echo esc_url( home_url( '/ai-readiness' ) ); ?>" style="color: var(--accent); font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem; border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 1rem;">
-				Learn more <span style="transition: var(--transition);">→</span>
-			</a>
-		</div>
+    <?php // ── 2. Credential strip ─────────────────────────────────── ?>
+    <section class="ds-band ds-band--paper-2 ds-band--tight">
+        <div class="ds-band__inner">
+            <span class="ds-eyebrow">Workato MSP Partner — Automation League, Silver</span>
+            <p class="ds-lede">ANSA builds on a real control plane, the layer that coordinates systems, operations, and AI across the business. Not another tool sitting beside the ones you already run.</p>
+            <p>Live in production across higher education, engineering, field services, wealth management, and more.</p>
 
-		<!-- Service Card 3: Automation Accelerators -->
-		<div class="service-card card" style="background-color: var(--background); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; transition: var(--transition); display: flex; flex-direction: column; height: 100%;">
-			<div class="service-icon" style="width: 60px; height: 60px; background-color: var(--border-light); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; font-size: 1.75rem;">
-				🚀
-			</div>
-			<h3 style="margin-bottom: 1rem; color: var(--text);">Automation Accelerators</h3>
-			<p style="flex-grow: 1; color: var(--text-light); margin-bottom: 1.5rem;">
-				Pre-built AI-powered automation bundles for Revenue Ops, Customer Success, Finance, and IT. Deploy in days, not months.
-			</p>
-			<a href="<?php echo esc_url( home_url( '/automation-accelerators' ) ); ?>" style="color: var(--accent); font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem; border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 1rem;">
-				Learn more <span style="transition: var(--transition);">→</span>
-			</a>
-		</div>
-	</div>
-</section>
+            <div class="ds-steps ds-steps--triad">
+                <div class="ds-step">
+                    <span class="ds-step__num">01</span>
+                    <h3 class="ds-step__title">Orchestrate your systems</h3>
+                </div>
+                <div class="ds-step">
+                    <span class="ds-step__num">02</span>
+                    <h3 class="ds-step__title">Automate your operations</h3>
+                </div>
+                <div class="ds-step">
+                    <span class="ds-step__num">03</span>
+                    <h3 class="ds-step__title">Accelerate with AI</h3>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- Case Study Highlights Section -->
-<section class="section" style="background-color: var(--primary); color: #FFFFFF; padding: 5rem 1.5rem; max-width: 100%; margin: 0;">
-	<div class="section-wrapper" style="max-width: 1400px; margin: 0 auto;">
-		<div class="section-title" style="text-align: center; margin-bottom: 3rem; color: #FFFFFF;">
-			<div class="section-label" style="color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; font-size: 0.9rem;">
-				Case Studies
-			</div>
-			<h2 style="margin-bottom: 1rem; color: #FFFFFF;">Proven Results</h2>
-			<p style="font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto; color: rgba(255, 255, 255, 0.9);">
-				Real transformations from organizations that trusted us with their automation journey.
-			</p>
-		</div>
+    <?php // ── 3. The Story ────────────────────────────────────────── ?>
+    <section class="ds-band ds-band--paper">
+        <div class="ds-rail">
+            <div class="ds-rail__aside">
+                <span class="ds-eyebrow">The Story</span>
+                <p class="ds-kicker">Why more AI has not moved the numbers you answer for.</p>
+            </div>
+            <div class="ds-rail__body">
+                <h2>Every team has AI. Nothing underneath it connects.</h2>
+                <p>Marketing, finance, sales, operations, HR, IT. Each one bought its own AI and got faster on its own. But the systems underneath do not talk, the operations are still manual, and the work stalls in the gaps between them.</p>
+                <p>Approvals wait. Handoffs break. Data lives in ten places. Adding more AI to that just makes a faster mess. That is not transformation. That is fragmentation.</p>
+            </div>
+        </div>
+    </section>
 
-		<div class="case-studies-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
-			<!-- Case Study 1: Water Management -->
-			<div class="case-study-card" style="background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: var(--radius-lg); padding: 2rem; transition: var(--transition);">
-				<h3 style="margin-bottom: 1rem; color: #FFFFFF;">Water Management & Infrastructure</h3>
-				<p style="color: rgba(255, 255, 255, 0.9); margin-bottom: 0;">
-					Event-driven orchestration across field, finance, and customer operations. Reduced manual reconciliation and improved data accuracy at scale.
-				</p>
-			</div>
+    <?php // ── 4. The Problem ──────────────────────────────────────── ?>
+    <section class="ds-band ds-band--paper-2">
+        <div class="ds-rail">
+            <div class="ds-rail__aside">
+                <span class="ds-eyebrow">The Problem</span>
+                <p class="ds-kicker">The intelligence is there. The foundation is not.</p>
+            </div>
+            <div class="ds-rail__body">
+                <h2>You cannot accelerate what is not connected.</h2>
+                <p class="ds-lede">AI is an accelerant. It only pays off on top of a business that is already coordinated underneath.</p>
+                <p>That is why more AI has not made your business faster. Every pilot ran. Every team got quicker on its own. And none of it reached the outcome, because the work still stops the moment it crosses between them.</p>
 
-			<!-- Case Study 2: Engineering Firm -->
-			<div class="case-study-card" style="background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: var(--radius-lg); padding: 2rem; transition: var(--transition);">
-				<h3 style="margin-bottom: 1rem; color: #FFFFFF;">Multi-Discipline Engineering Firm</h3>
-				<p style="color: rgba(255, 255, 255, 0.9); margin-bottom: 0;">
-					End-to-end orchestration across CRM, project accounting, and finance. Faster project startup, fewer billing delays.
-				</p>
-			</div>
-		</div>
+                <div class="ds-deflist">
+                    <div class="ds-deflist__row">
+                        <span class="ds-deflist__term">Approvals</span>
+                        <p class="ds-deflist__desc">Sit in somebody's inbox until a person remembers to chase them.</p>
+                    </div>
+                    <div class="ds-deflist__row">
+                        <span class="ds-deflist__term">Handoffs</span>
+                        <p class="ds-deflist__desc">Work crosses from sales to finance to operations and stops at every border.</p>
+                    </div>
+                    <div class="ds-deflist__row">
+                        <span class="ds-deflist__term">Data entry</span>
+                        <p class="ds-deflist__desc">The same record gets typed into three systems, and none of the three agree.</p>
+                    </div>
+                    <div class="ds-deflist__row">
+                        <span class="ds-deflist__term">Reporting</span>
+                        <p class="ds-deflist__desc">The numbers you answer for get rebuilt by hand, from exports, every month.</p>
+                    </div>
+                </div>
 
-		<div style="text-align: center;">
-			<a href="<?php echo esc_url( home_url( '/case-studies' ) ); ?>" style="color: #FFFFFF; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem; border-top: 2px solid rgba(255, 255, 255, 0.2); padding-top: 1rem; margin-top: 1rem;">
-				View All Case Studies <span style="transition: var(--transition);">→</span>
-			</a>
-		</div>
-	</div>
-</section>
+                <div class="ds-callout">
+                    <span class="ds-callout__label">The Point</span>
+                    <p>Get the foundation right and AI finally has something to accelerate.</p>
+                </div>
 
-<!-- Upcoming Events Section -->
-<section style="padding: 5rem 1.5rem; background-color: var(--background);">
-	<div style="max-width: 1400px; margin: 0 auto;">
-		<div style="text-align: center; margin-bottom: 2.5rem;">
-			<div style="color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; font-size: 0.9rem;">
-				Events
-			</div>
-			<h2 style="margin-bottom: 0.75rem;">Join Us In Person</h2>
-			<p style="font-size: 1.05rem; color: var(--text-light); max-width: 560px; margin: 0 auto;">
-				We host executive events where AI and automation leaders share what's working. Seats are limited and approval-based.
-			</p>
-		</div>
+                <div class="ds-cta-row">
+                    <a class="ds-btn ds-btn--primary" data-cta-location="problem" href="#ds-getstarted">See What's Possible</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-		<?php
-		$ansa_home_events = function_exists( 'ansa_get_events' ) ? ansa_get_events( 'upcoming', 1 ) : array();
-		$ansa_home_event  = ! empty( $ansa_home_events ) ? $ansa_home_events[0] : null;
-		?>
-		<?php if ( $ansa_home_event ) :
-			$he_date  = get_post_meta( $ansa_home_event->ID, '_ansa_event_date', true );
-			$he_time  = get_post_meta( $ansa_home_event->ID, '_ansa_event_time', true );
-			$he_loc   = get_post_meta( $ansa_home_event->ID, '_ansa_event_location', true );
-			$he_hosts = get_post_meta( $ansa_home_event->ID, '_ansa_event_hosts', true );
-			$he_rsvp  = get_post_meta( $ansa_home_event->ID, '_ansa_event_rsvp_url', true );
-			$he_desc  = get_the_excerpt( $ansa_home_event );
-			$he_badge = $he_date ? wp_date( 'F j, Y', strtotime( $he_date ) ) : '';
-			$he_when  = $he_date ? wp_date( 'l, F j', strtotime( $he_date ) ) : '';
-		?>
-		<!-- Upcoming event card -->
-		<div style="max-width: 720px; margin: 0 auto; background: #fff; border: 2px solid var(--accent); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 4px 24px rgba(70,44,237,0.1);">
-			<div style="background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 6px 18px;">
-				Upcoming<?php echo $he_badge ? ' — ' . esc_html( $he_badge ) : ''; ?>
-			</div>
-			<div style="padding: 1.75rem 2rem;">
-				<?php if ( $he_hosts ) : ?>
-					<div style="font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 0.5rem;"><?php echo esc_html( $he_hosts ); ?></div>
-				<?php endif; ?>
-				<h3 style="margin: 0 0 0.75rem; font-size: 1.15rem; line-height: 1.4; color: var(--text);">
-					<?php echo esc_html( get_the_title( $ansa_home_event ) ); ?>
-				</h3>
-				<div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; font-size: 13px; color: var(--text-light); margin-bottom: 1.5rem;">
-					<?php if ( $he_when ) : ?>
-					<span style="display: flex; align-items: center; gap: 5px;">
-						<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-						<?php echo esc_html( $he_when ); ?><?php if ( $he_time ) : ?> &nbsp;·&nbsp; <?php echo esc_html( $he_time ); ?><?php endif; ?>
-					</span>
-					<?php endif; ?>
-					<?php if ( $he_loc ) : ?>
-					<span style="display: flex; align-items: center; gap: 5px;">
-						<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-						<?php echo esc_html( $he_loc ); ?>
-					</span>
-					<?php endif; ?>
-				</div>
-				<div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-					<?php if ( $he_rsvp ) : ?>
-					<a href="<?php echo esc_url( $he_rsvp ); ?>" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.65rem 1.25rem; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
-						Request to Join
-						<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-					</a>
-					<?php endif; ?>
-					<a href="<?php echo esc_url( home_url( '/events' ) ); ?>" style="font-size: 14px; font-weight: 600; color: var(--accent);">
-						View all events →
-					</a>
-				</div>
-			</div>
-		</div>
-		<?php else : ?>
-		<!-- No upcoming events -->
-		<div style="max-width: 720px; margin: 0 auto; background: #fff; border: 1px dashed var(--border); border-radius: var(--radius-lg); padding: 2.25rem 2rem; text-align: center;">
-			<p style="margin: 0 0 1.25rem; font-size: 1rem; color: var(--text-light); line-height: 1.6;">
-				We don't have an upcoming event on the calendar right now. Check back soon for our next executive event.
-			</p>
-			<a href="<?php echo esc_url( home_url( '/events' ) ); ?>" style="font-size: 14px; font-weight: 600; color: var(--accent);">
-				View all events →
-			</a>
-		</div>
-		<?php endif; ?>
-	</div>
-</section>
+    <?php // ── 5. How It Works ─────────────────────────────────────── ?>
+    <section class="ds-band ds-band--ink">
+        <div class="ds-rail">
+            <div class="ds-rail__aside">
+                <span class="ds-eyebrow">How It Works</span>
+                <p class="ds-kicker">Three moves, in order. The order is the whole point.</p>
+            </div>
+            <div class="ds-rail__body">
+                <h2>How ANSA does it.</h2>
 
-<!-- AI Readiness CTA Section -->
-<section class="cta-section" style="background: linear-gradient(135deg, var(--primary) 0%, #1f2937 100%); color: #FFFFFF; padding: 4rem 1.5rem; text-align: center; max-width: 100%; margin: 0;">
-	<div class="cta-wrapper" style="max-width: 900px; margin: 0 auto;">
-		<h2 style="color: #FFFFFF; margin-bottom: 1rem;">
-			Is Your Business <span style="color: var(--accent);">AI Ready</span>?
-		</h2>
-		<p style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; margin-bottom: 2rem;">
-			Our AI Readiness Assessment reveals exactly where you can win with automation and AI. Get a clear roadmap in just 1 week.
-		</p>
-		<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-			<a href="<?php echo esc_url( home_url( '/ai-readiness' ) ); ?>" class="btn btn-white" style="background-color: #FFFFFF; color: var(--accent); border: 2px solid transparent; padding: 0.75rem 1.5rem; font-weight: 600;">
-				Take the Assessment
-			</a>
-			<a href="<?php echo esc_url( home_url( '/ai-readiness' ) ); ?>" class="btn btn-ghost" style="background-color: transparent; color: #FFFFFF; border: 2px solid transparent; padding: 0.75rem 1.5rem; font-weight: 600;">
-				Learn More
-			</a>
-		</div>
-	</div>
-</section>
+                <div class="ds-steps">
+                    <div class="ds-step">
+                        <span class="ds-step__num">01</span>
+                        <h3 class="ds-step__title">Orchestrate your systems</h3>
+                        <p class="ds-step__body">We connect the tools, data, and platforms you already run so they finally work as one.</p>
+                    </div>
+                    <div class="ds-step">
+                        <span class="ds-step__num">02</span>
+                        <h3 class="ds-step__title">Automate your operations</h3>
+                        <p class="ds-step__body">We turn manual, stop and start processes and approvals into work that flows end to end.</p>
+                    </div>
+                    <div class="ds-step">
+                        <span class="ds-step__num">03</span>
+                        <h3 class="ds-step__title">Accelerate with AI</h3>
+                        <p class="ds-step__body">With the foundation coordinated, AI speeds up the whole business instead of adding one more silo.</p>
+                    </div>
+                </div>
+
+                <p>As a Workato MSP partner, ANSA builds this on a real control plane, the layer that coordinates systems, operations, and AI across the business. That is how the promise of AI becomes the reality.</p>
+
+                <div class="ds-cta-row">
+                    <a class="ds-btn ds-btn--primary" data-cta-location="how-it-works" href="#ds-getstarted">See What's Possible</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <?php // ── 6. Proof ────────────────────────────────────────────── ?>
+    <section class="ds-band ds-band--paper">
+        <div class="ds-rail">
+            <div class="ds-rail__aside">
+                <span class="ds-eyebrow">Proof</span>
+                <p class="ds-kicker">Four clients, four different operating problems, one connected foundation.</p>
+            </div>
+            <div class="ds-rail__body">
+                <h2>Four businesses that made it run as one.</h2>
+
+                <div class="ds-cases ds-cases--swipe">
+
+                    <article class="ds-case">
+                        <span class="ds-case__index">Case 01</span>
+                        <h3 class="ds-case__client">Marian University</h3>
+                        <span class="ds-case__sector">Higher Education</span>
+                        <p class="ds-case__headline">Two production integrations live, and a team that can build the next ones.</p>
+                        <p class="ds-case__body">Marian licensed Workato but needed a partner to stand the platform up and prove it with real workflows. ANSA configured the tenant, governance, and connections across Populi, Great Plains, ADP, and Microsoft 365, then delivered two production integrations. Donation data now flows from Populi into Great Plains with a daily audit report, and student and employee onboarding runs with duplicate detection across all three systems. ANSA also mentored Marian's internal integration lead on recipe design and Workato's GEARS framework, so the university can extend the platform without us.</p>
+                        <blockquote class="ds-quote">
+                            <span class="ds-quote__label">In their words</span>
+                            <p class="ds-quote__text">"We had the license and a plan. ANSA got it running, then made sure my own team could build the next one without them."</p>
+                            <p class="ds-quote__attr">Integration Lead, Marian University</p>
+                        </blockquote>
+                        <div class="ds-stats">
+                            <div class="ds-stat"><span class="ds-stat__value">2</span><span class="ds-stat__label">Integrations live</span></div>
+                            <div class="ds-stat"><span class="ds-stat__value">4</span><span class="ds-stat__label">Systems connected</span></div>
+                        </div>
+                    </article>
+
+                    <article class="ds-case">
+                        <span class="ds-case__index">Case 02</span>
+                        <h3 class="ds-case__client">Pinnacle Engineering</h3>
+                        <span class="ds-case__sector">AEC</span>
+                        <p class="ds-case__headline">Payment files that move from Ajera to Corpay untouched.</p>
+                        <p class="ds-case__body">Pinnacle needed payment files moving from Ajera to Corpay without anyone touching them. ANSA configured the production Workato workspace and built the recipe that generates the payment file on an Ajera trigger, then delivers it to Corpay's sFTP server automatically, with monitoring and alerting around the handoff. Pinnacle had already invested in Workato licensing, and the engagement expanded into broader automation support including Ajera to Mosaic project data sync.</p>
+                        <blockquote class="ds-quote">
+                            <span class="ds-quote__label">In their words</span>
+                            <p class="ds-quote__text">"Payment files used to wait on somebody remembering. Now they move on their own and we only hear about it if something breaks."</p>
+                            <p class="ds-quote__attr">Operations Lead, Pinnacle Engineering</p>
+                        </blockquote>
+                        <div class="ds-stats">
+                            <div class="ds-stat"><span class="ds-stat__value">1</span><span class="ds-stat__label">Manual touch</span></div>
+                            <div class="ds-stat"><span class="ds-stat__value">Live</span><span class="ds-stat__label">Monitoring and alerts</span></div>
+                        </div>
+                    </article>
+
+                    <article class="ds-case">
+                        <span class="ds-case__index">Case 03</span>
+                        <h3 class="ds-case__client">Summers Plumbing, Heating &amp; Cooling</h3>
+                        <span class="ds-case__sector">Residential Services</span>
+                        <p class="ds-case__headline">Close to 11,000 minutes of AP effort a month, now handled by exception.</p>
+                        <p class="ds-case__body">Summers processes roughly 50 invoices a day across 14 locations, and manual matching ran about 10 minutes each, close to 11,000 minutes of AP effort every month. ANSA deployed an AI Accelerator against their existing email, ServiceTitan, and Sage Intacct stack. Invoices arrive in the inbox, get extracted and auto matched, and only genuine exceptions route to central accounting. A company mapping layer reads the location signal off the invoice itself and posts each bill to the correct ServiceTitan tenant and Sage entity.</p>
+                        <div class="ds-stats">
+                            <div class="ds-stat"><span class="ds-stat__value">~11,000</span><span class="ds-stat__label">AP minutes a month</span></div>
+                            <div class="ds-stat"><span class="ds-stat__value">14</span><span class="ds-stat__label">Locations mapped</span></div>
+                        </div>
+                    </article>
+
+                    <article class="ds-case">
+                        <span class="ds-case__index">Case 04</span>
+                        <h3 class="ds-case__client">National Wealth Management Firm</h3>
+                        <span class="ds-case__sector">RIA Platform</span>
+                        <p class="ds-case__headline">130 Microsoft 365 tenants orchestrated without centralizing any of it.</p>
+                        <p class="ds-case__body">A national wealth management platform with a 15 person technology team supports 130 Microsoft 365 tenants across affiliated advisor firms. ANSA delivered a federated integration architecture. Rather than centralizing advisor data, the design keeps that data in place and orchestrates access across custodians and platforms with a minimal compliance log store.</p>
+                        <div class="ds-stats">
+                            <div class="ds-stat"><span class="ds-stat__value">130</span><span class="ds-stat__label">M365 tenants</span></div>
+                            <div class="ds-stat"><span class="ds-stat__value">15</span><span class="ds-stat__label">Person tech team</span></div>
+                        </div>
+                    </article>
+
+                </div>
+
+                <div class="ds-cta-row">
+                    <a class="ds-btn ds-btn--primary" data-cta-location="proof" href="#ds-getstarted">See What's Possible</a>
+                    <a class="ds-btn ds-btn--ghost" href="<?php echo esc_url( home_url('/case-studies/') ); ?>">See all six case studies</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <?php // ── 7. The Conversation ─────────────────────────────────── ?>
+    <section class="ds-band ds-band--paper-2">
+        <div class="ds-rail">
+            <div class="ds-rail__aside">
+                <span class="ds-eyebrow">The Conversation</span>
+                <p class="ds-kicker">No demo. No access. One real conversation.</p>
+            </div>
+            <div class="ds-rail__body">
+                <h2>What actually happens when we talk.</h2>
+                <p>You do not need to hand over access or sit through a demo. This is a short strategy conversation with the people who do this every day. We walk through what orchestration looks like for a company in your position, where the gaps usually hide, and where to start. You bring your reality, we bring the orchestration and control plane point of view, and what is possible for you comes out of the conversation.</p>
+
+                <ol class="ds-checklist">
+                    <li>A clear picture of what running as one could look like for your business.</li>
+                    <li>Where coordination usually breaks down for companies like yours.</li>
+                    <li>A practical first step you can act on.</li>
+                    <li>No access required, no obligation, just a real conversation.</li>
+                </ol>
+
+                <div class="ds-cta-row">
+                    <a class="ds-btn ds-btn--primary" data-cta-location="conversation" href="#ds-getstarted">See What's Possible</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <?php // ── 8. Who We Serve ─────────────────────────────────────── ?>
+    <section class="ds-band ds-band--paper">
+        <div class="ds-rail">
+            <div class="ds-rail__aside">
+                <span class="ds-eyebrow">Who We Serve</span>
+                <p class="ds-kicker">Coordination first. Technology second.</p>
+            </div>
+            <div class="ds-rail__body">
+                <h2>Built for mid-market operators.</h2>
+                <p class="ds-lede">ANSA is an AI strategy and orchestration firm and a Workato MSP partner, working with mid-market companies nationwide.</p>
+                <p>We help those companies coordinate the tools and teams they already have into measurable outcomes by fixing coordination first and adding technology second.</p>
+
+                <div class="ds-faq" id="ds-faq-home">
+                    <div class="ds-faq__item">
+                        <button type="button" class="ds-faq__q">Do you need access to our systems?</button>
+                        <div class="ds-faq__a"><p>Not for the first conversation. Nothing is connected and nothing is installed. If we go further, access is scoped and agreed before anyone touches anything.</p></div>
+                    </div>
+                    <div class="ds-faq__item">
+                        <button type="button" class="ds-faq__q">Do we have to replace the tools we already run?</button>
+                        <div class="ds-faq__a"><p>No. Orchestration connects what you already own. At Marian, Populi, Great Plains, ADP and Microsoft 365 all stayed exactly where they were.</p></div>
+                    </div>
+                    <div class="ds-faq__item">
+                        <button type="button" class="ds-faq__q">Who does the actual build?</button>
+                        <div class="ds-faq__a"><p>ANSA's team builds it, and we teach yours while we do. Marian's internal integration lead now extends the platform without us, which is the point.</p></div>
+                    </div>
+                    <div class="ds-faq__item">
+                        <button type="button" class="ds-faq__q">Does this only work if we are already on Workato?</button>
+                        <div class="ds-faq__a"><p>No. ANSA is a Workato MSP partner and builds on that control plane, but the first conversation is about where coordination breaks in your business, not about licensing.</p></div>
+                    </div>
+                </div>
+
+                <div class="ds-cta-row">
+                    <a class="ds-btn ds-btn--primary" data-cta-location="faq" href="#ds-getstarted">See What's Possible</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <?php // ── 9. Get Started ──────────────────────────────────────── ?>
+    <section class="ds-band ds-band--ink" id="ds-getstarted">
+        <div class="ds-formwrap">
+            <div class="ds-formwrap__intro">
+                <span class="ds-eyebrow">Get Started</span>
+                <h2>Start with one conversation.</h2>
+                <p class="ds-lede">It takes a few minutes to book and gives you a clear first step. See what is possible when your business runs as one.</p>
+
+                <div class="ds-pullquote">
+                    <span class="ds-pullquote__label">What this looks like</span>
+                    <p class="ds-pullquote__text">"Marian licensed a platform and had nothing running on it. Two integrations later, their own team builds the next ones."</p>
+                </div>
+
+                <div class="ds-cta-row">
+                    <a class="ds-btn ds-btn--primary" data-cta-location="form" href="#ds-getstarted-form">See What's Possible</a>
+                </div>
+            </div>
+
+            <div class="ds-formcard" id="ds-getstarted-form">
+                <p class="ds-formmeta">All fields required · Takes about two minutes</p>
+                <iframe
+                    class="ds-embed"
+                    src="https://api.hayesgroupmarketing.com/widget/form/oyWFnpyIxeU3JacEMI5R"
+                    title="Start a conversation with ANSA Solutions"
+                    loading="lazy"
+                    scrolling="no"></iframe>
+                <p class="ds-formnote">You will hear back within one business day. The reply comes from the people who would do the work, not a sales rep. No access to your systems is required for the first conversation, and we will not use your details for anything else.</p>
+            </div>
+        </div>
+    </section>
+
+</main>
 
 <?php get_footer(); ?>
