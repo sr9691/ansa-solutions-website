@@ -1,36 +1,32 @@
 <?php
 /**
  * Template Name: Events
- * Description: ANSA Solutions Events — upcoming and past
+ * Description: ANSA Solutions Events — upcoming and past. Events are pulled
+ * from the events CPT via ansa_get_events(); all query/meta logic is
+ * unchanged. Local (Indiana) framing is intentionally retained here.
+ *
+ * @package ANSA_Solutions
  */
 get_header();
 ?>
 
-<main id="main-content" class="site-main">
+<main id="ds-main" class="site-main">
 
-<!-- ============================================================
-     HERO
-============================================================ -->
-<section class="hero hero--dark-gradient events-hero">
-	<div class="container">
-		<div class="events-hero__inner">
-			<span class="badge badge--primary">In-Person &amp; Virtual</span>
-			<h1 class="hero__title">Events</h1>
-			<p class="hero__subtitle">
-				We bring together operations, finance, and technology leaders to explore what AI-powered automation looks like in practice. Join us at an upcoming event or browse what we've covered.
-			</p>
-		</div>
+<!-- HERO -->
+<section class="ds-hero">
+	<div class="ds-hero__inner">
+		<span class="ds-eyebrow">In-Person &amp; Virtual</span>
+		<h1>Events</h1>
+		<p class="ds-hero__lede">We bring together operations, finance, and technology leaders to explore what AI-powered automation looks like in practice. Join us at an upcoming event or browse what we've covered.</p>
 	</div>
 </section>
 
-<!-- ============================================================
-     UPCOMING EVENTS
-============================================================ -->
-<section class="section events-section">
-	<div class="container">
+<!-- UPCOMING EVENTS -->
+<section class="ds-band ds-band--paper events-section">
+	<div class="ds-band__inner">
 		<div class="events-section__header">
-			<div class="section-label">Upcoming</div>
-			<h2>Join Us Next</h2>
+			<span class="ds-eyebrow">Upcoming</span>
+			<h2>Join us next.</h2>
 		</div>
 
 		<?php $ansa_upcoming = ansa_get_events( 'upcoming' ); ?>
@@ -71,10 +67,7 @@ get_header();
 					</div>
 					<?php if ( $e_rsvp ) : ?>
 						<div class="event-card__footer">
-							<a href="<?php echo esc_url( $e_rsvp ); ?>" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-								Request to Join
-								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-							</a>
+							<a href="<?php echo esc_url( $e_rsvp ); ?>" target="_blank" rel="noopener noreferrer" class="ds-btn ds-btn--primary">Request to Join</a>
 						</div>
 					<?php endif; ?>
 				</div>
@@ -88,16 +81,14 @@ get_header();
 	</div>
 </section>
 
-<!-- ============================================================
-     PAST EVENTS
-============================================================ -->
+<!-- PAST EVENTS -->
 <?php $ansa_past = ansa_get_events( 'past' ); ?>
 <?php if ( $ansa_past ) : ?>
-<section class="section events-section events-section--past">
-	<div class="container">
+<section class="ds-band ds-band--paper-2 events-section events-section--past">
+	<div class="ds-band__inner">
 		<div class="events-section__header">
-			<div class="section-label">Past Events</div>
-			<h2>What We've Covered</h2>
+			<span class="ds-eyebrow">Past Events</span>
+			<h2>What we've covered.</h2>
 		</div>
 
 		<div class="events-grid events-grid--past">
@@ -134,137 +125,63 @@ get_header();
 </section>
 <?php endif; ?>
 
-<!-- ============================================================
-     NOTIFY CTA
-============================================================ -->
-<section class="section--cta-dark events-notify">
-	<div class="container">
-		<div class="events-notify__inner">
-			<h2>Stay in the Loop</h2>
-			<p>We run events across Indiana and beyond. Get notified when the next one is announced.</p>
-			<a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="btn btn-white">
-				Get Notified
-			</a>
+<!-- NOTIFY CTA -->
+<section class="ds-band ds-band--ink">
+	<div class="ds-band__inner">
+		<span class="ds-eyebrow">Stay in the Loop</span>
+		<h2>Never miss the next one.</h2>
+		<p class="ds-lede">We run events across Indiana and beyond. Get notified when the next one is announced.</p>
+		<div class="ds-cta-row">
+			<a class="ds-btn ds-btn--primary" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Get notified</a>
 		</div>
 	</div>
 </section>
 
 </main>
 
-<!-- ============================================================
-     STYLES
-============================================================ -->
+<!-- Event-card component styles (self-contained; uses live style.css tokens) -->
 <style>
-/* Hero */
-.events-hero__inner { max-width: 700px; margin: 0 auto; text-align: center; }
-
-/* Section headers */
 .events-section__header { margin-bottom: 2rem; }
-.events-section__header .section-label {
-	color: var(--accent); font-weight: 600; text-transform: uppercase;
-	letter-spacing: 0.5px; font-size: 0.85rem; margin-bottom: 0.4rem;
-}
-.events-section__header h2 { margin: 0; }
-
-/* Past section bg */
-.events-section--past { background: var(--border-light); }
-
-/* Empty upcoming state */
 .events-empty {
 	max-width: 780px;
-	background: #fff;
-	border: 1px dashed var(--border);
-	border-radius: var(--radius-lg);
+	background: var(--ds-paper, #fff);
+	border: 1px dashed var(--border, #e5e7eb);
+	border-radius: 12px;
 	padding: 2rem 1.75rem;
 }
-.events-empty p {
-	margin: 0;
-	color: var(--text-light);
-	font-size: 1rem;
-	line-height: 1.6;
-}
-
-/* Grid */
-.events-grid {
-	display: grid;
-	grid-template-columns: 1fr;
-	gap: 1.5rem;
-	max-width: 780px;
-}
-.events-grid--past {
-	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-	max-width: 100%;
-}
-
-/* Event card */
+.events-empty p { margin: 0; color: var(--text-light, #6b7280); font-size: 1rem; line-height: 1.6; }
+.events-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 780px; }
+.events-grid--past { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); max-width: 100%; }
 .event-card {
 	background: #fff;
-	border: 1px solid var(--border);
-	border-radius: var(--radius-lg);
+	border: 1px solid var(--border, #e5e7eb);
+	border-radius: 12px;
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
-	transition: var(--transition);
+	transition: box-shadow .2s ease, transform .2s ease;
 }
-.event-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
-
-.event-card--featured {
-	border-color: var(--accent);
-	box-shadow: 0 0 0 2px rgba(70,44,237,0.1);
-}
-.event-card--past { opacity: 0.8; }
+.event-card:hover { box-shadow: 0 12px 30px rgba(0,0,0,0.1); transform: translateY(-2px); }
+.event-card--featured { border-color: var(--ds-accent, #462CED); box-shadow: 0 0 0 2px rgba(70,44,237,0.1); }
+.event-card--past { opacity: 0.85; }
 .event-card--past:hover { opacity: 1; }
-
 .event-card__badge {
-	background: var(--accent);
-	color: #fff;
-	font-size: 11px;
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.5px;
-	padding: 6px 16px;
-	align-self: flex-start;
-	border-radius: 0 0 var(--radius-sm) 0;
+	background: var(--ds-accent, #462CED); color: #fff; font-size: 11px; font-weight: 700;
+	text-transform: uppercase; letter-spacing: 0.5px; padding: 6px 16px; align-self: flex-start;
+	border-radius: 0 0 8px 0;
 }
-
 .event-card__body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; gap: 0.75rem; }
-
 .event-card__meta-row { display: flex; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
-
 .event-card__date, .event-card__location {
-	display: flex; align-items: center; gap: 6px;
-	font-size: 13px; color: var(--text-light); font-weight: 500;
+	display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-light, #6b7280); font-weight: 500;
 }
-.event-card__date svg, .event-card__location svg {
-	width: 14px; height: 14px; flex-shrink: 0; stroke: var(--accent);
-}
-
-.event-card__hosts { font-size: 12px; color: var(--accent); font-weight: 600; }
-
-.event-card__title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 0; line-height: 1.35; }
+.event-card__date svg, .event-card__location svg { width: 14px; height: 14px; flex-shrink: 0; stroke: var(--ds-accent, #462CED); }
+.event-card__hosts { font-size: 12px; color: var(--ds-accent, #462CED); font-weight: 700; }
+.event-card__title { font-size: 1.1rem; font-weight: 900; color: var(--ds-text, #111827); margin: 0; line-height: 1.35; }
 .event-card--past .event-card__title { font-size: 1rem; }
-
-.event-card__desc { font-size: 14px; color: var(--text-light); line-height: 1.65; margin: 0; }
-
-.event-card__footer {
-	padding: 1rem 1.5rem 1.5rem;
-	border-top: 1px solid var(--border);
-}
-.event-card__footer .btn {
-	display: inline-flex; align-items: center; gap: 6px;
-}
-.event-card__footer .btn svg { width: 14px; height: 14px; }
-
-/* Notify CTA */
-.events-notify { text-align: center; }
-.events-notify__inner { max-width: 560px; margin: 0 auto; }
-.events-notify__inner h2 { color: #fff; margin-bottom: 0.75rem; }
-.events-notify__inner p { color: rgba(255,255,255,0.85); margin-bottom: 1.75rem; font-size: 1.05rem; }
-
-/* Responsive */
-@media (max-width: 640px) {
-	.events-grid--past { grid-template-columns: 1fr; }
-}
+.event-card__desc { font-size: 14px; color: var(--text-light, #6b7280); line-height: 1.65; margin: 0; }
+.event-card__footer { padding: 1rem 1.5rem 1.5rem; border-top: 1px solid var(--border, #e5e7eb); }
+@media (max-width: 640px) { .events-grid--past { grid-template-columns: 1fr; } }
 </style>
 
 <?php get_footer(); ?>

@@ -319,6 +319,12 @@ body.ds [tabindex]:focus-visible {
 .ds-pullquote__text { font-size: 1.2rem; font-style: italic; line-height: 1.5; margin: 0; }
 /* GHL / third-party iframe embed sits flush inside the form card */
 .ds-embed { width: 100%; border: 0; min-height: 620px; display: block; border-radius: var(--ds-radius-sm); background: #fff; }
+/* HubSpot Meetings embed (class name is required by the HubSpot script) */
+.meetings-iframe-container { width: 100%; min-height: 700px; }
+/* Two-column hero (text + media) */
+.ds-hero__split { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(1.5rem, 5vw, 3.5rem); align-items: center; }
+@media (max-width: 860px) { .ds-hero__split { grid-template-columns: 1fr; } }
+.ds-hero__media img { width: 100%; height: auto; border-radius: var(--ds-radius); display: block; }
 
 /* ============================================================================
    Site header + footer (ds chrome)
