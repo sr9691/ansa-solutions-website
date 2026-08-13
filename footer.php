@@ -12,7 +12,7 @@
                     }
                 }
                 if ( ! $footer_logo ) {
-                    $footer_logo = ansa_theme_logo_img( array( 'ansa-logo.svg', 'ansa-logo.png' ), get_bloginfo('name') );
+                    $footer_logo = ansa_theme_logo_img( array( 'ansa-logo.png', 'ansa-logo.svg' ), get_bloginfo('name') );
                 }
                 ?>
                 <a class="ds-logo" href="<?php echo esc_url( home_url('/') ); ?>">

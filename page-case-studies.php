@@ -29,7 +29,7 @@ get_header(); ?>
             <div class="ds-cases">
 
                 <article class="ds-case">
-                    <div class="ds-case__logo">Marian University</div>
+                    <div class="ds-case__logo"><?php echo ansa_theme_logo_img( 'client-marian.png', 'Marian University', 'Marian University' ); ?></div>
                     <div class="ds-case__content">
                         <span class="ds-case__index">Case 01</span>
                         <h2 class="ds-case__client">Marian University</h2>
@@ -49,7 +49,7 @@ get_header(); ?>
                 </article>
 
                 <article class="ds-case">
-                    <div class="ds-case__logo">Pinnacle Engineering</div>
+                    <div class="ds-case__logo"><?php echo ansa_theme_logo_img( 'client-pinnacle.png', 'Pinnacle Engineering', 'Pinnacle Engineering' ); ?></div>
                     <div class="ds-case__content">
                         <span class="ds-case__index">Case 02</span>
                         <h2 class="ds-case__client">Pinnacle Engineering</h2>
@@ -69,7 +69,7 @@ get_header(); ?>
                 </article>
 
                 <article class="ds-case">
-                    <div class="ds-case__logo">Summers Plumbing, Heating &amp; Cooling</div>
+                    <div class="ds-case__logo"><?php echo ansa_theme_logo_img( 'client-summers.png', 'Summers Plumbing, Heating &amp; Cooling', 'Summers Plumbing, Heating &amp; Cooling' ); ?></div>
                     <div class="ds-case__content">
                         <span class="ds-case__index">Case 03</span>
                         <h2 class="ds-case__client">Summers Plumbing, Heating &amp; Cooling</h2>

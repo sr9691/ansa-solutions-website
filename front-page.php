@@ -76,9 +76,9 @@ get_header(); ?>
                 </div>
 
                 <div class="ds-cred__row2">
-                    <div class="ds-cred__logo"><span class="ds-cred__logo--ph">Marian University</span></div>
-                    <div class="ds-cred__logo"><span class="ds-cred__logo--ph">Pinnacle Engineering</span></div>
-                    <div class="ds-cred__logo"><span class="ds-cred__logo--ph">Summers Plumbing,<br>Heating &amp; Cooling</span></div>
+                    <div class="ds-cred__logo"><?php echo ansa_theme_logo_img( 'client-marian.png', 'Marian University', '<span class="ds-cred__logo--ph">Marian University</span>' ); ?></div>
+                    <div class="ds-cred__logo"><?php echo ansa_theme_logo_img( 'client-pinnacle.png', 'Pinnacle Engineering', '<span class="ds-cred__logo--ph">Pinnacle Engineering</span>' ); ?></div>
+                    <div class="ds-cred__logo"><?php echo ansa_theme_logo_img( 'client-summers.png', 'Summers Plumbing, Heating &amp; Cooling', '<span class="ds-cred__logo--ph">Summers Plumbing,<br>Heating &amp; Cooling</span>' ); ?></div>
                 </div>
 
                 <div class="ds-cred__row3">
@@ -199,7 +199,7 @@ get_header(); ?>
                 <div class="ds-cases ds-cases--swipe">
 
                     <article class="ds-case">
-                        <div class="ds-case__logo">Marian University</div>
+                        <div class="ds-case__logo"><?php echo ansa_theme_logo_img( 'client-marian.png', 'Marian University', 'Marian University' ); ?></div>
                         <div class="ds-case__content">
                             <span class="ds-case__index">Case 01</span>
                             <p class="ds-case__client">Marian University</p>
@@ -219,7 +219,7 @@ get_header(); ?>
                     </article>
 
                     <article class="ds-case">
-                        <div class="ds-case__logo">Pinnacle Engineering</div>
+                        <div class="ds-case__logo"><?php echo ansa_theme_logo_img( 'client-pinnacle.png', 'Pinnacle Engineering', 'Pinnacle Engineering' ); ?></div>
                         <div class="ds-case__content">
                             <span class="ds-case__index">Case 02</span>
                             <p class="ds-case__client">Pinnacle Engineering</p>
@@ -239,7 +239,7 @@ get_header(); ?>
                     </article>
 
                     <article class="ds-case">
-                        <div class="ds-case__logo">Summers Plumbing, Heating &amp; Cooling</div>
+                        <div class="ds-case__logo"><?php echo ansa_theme_logo_img( 'client-summers.png', 'Summers Plumbing, Heating &amp; Cooling', 'Summers Plumbing, Heating &amp; Cooling' ); ?></div>
                         <div class="ds-case__content">
                             <span class="ds-case__index">Case 03</span>
                             <p class="ds-case__client">Summers Plumbing, Heating &amp; Cooling</p>

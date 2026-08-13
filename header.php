@@ -17,7 +17,7 @@
                 <?php if ( has_custom_logo() ) :
                     the_custom_logo();
                 else :
-                    $ansa_logo = ansa_theme_logo_img( array( 'ansa-logo.svg', 'ansa-logo.png' ), get_bloginfo('name') );
+                    $ansa_logo = ansa_theme_logo_img( array( 'ansa-logo.png', 'ansa-logo.svg' ), get_bloginfo('name') );
                     ?>
                     <a class="ds-logo" href="<?php echo esc_url( home_url('/') ); ?>" rel="home">
                         <?php if ( $ansa_logo ) {
