@@ -43,7 +43,7 @@
                     'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul>',
                 ));
                 ?>
-                <a class="ds-btn ds-btn--primary ds-nav__cta" data-cta-location="nav" href="<?php echo esc_url( home_url('/contact/') ); ?>">See What&rsquo;s Possible</a>
+                <a class="ds-btn ds-btn--primary ds-nav__cta" data-cta-location="nav" href="<?php echo esc_url( home_url('/#ds-getstarted') ); ?>">See What&rsquo;s Possible</a>
             </nav>
         </div>
     </header>

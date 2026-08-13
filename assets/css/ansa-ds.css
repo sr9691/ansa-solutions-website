@@ -451,7 +451,7 @@ body.ds .ds-header {
 .ds-logo { font-size: 1.35rem; font-weight: 900; letter-spacing: 0.02em; color: var(--ds-text); text-decoration: none; }
 .ds-logo:hover { text-decoration: none; }
 .ds-logo .logo-sa { color: var(--ds-accent); }
-.ds-logo img { max-height: 40px; width: auto; display: block; }
+.ds-logo img { max-height: 56px; width: auto; display: block; }
 .ds-nav { display: flex; align-items: center; gap: 1.75rem; }
 .ds-nav__list { display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
 .ds-nav__list a { color: var(--ds-slate); font-size: 0.95rem; font-weight: 700; text-decoration: none; transition: color 0.2s var(--ds-ease); }
@@ -485,7 +485,7 @@ body.ds .ds-footer { background: var(--ds-ink); color: var(--ds-on-dark-muted); 
 .ds-footer__brand .ds-logo { display: inline-block; margin-bottom: 0.75rem; color: #fff; }
 .ds-footer__brand .ds-logo .logo-sa { color: #b6a8ff; }
 /* Render whatever logo image is set as its white version on the dark footer */
-.ds-footer__brand .ds-logo img { filter: brightness(0) invert(1); max-height: 40px; }
+.ds-footer__brand .ds-logo img { filter: brightness(0) invert(1); max-height: 52px; }
 .ds-footer__tagline { font-size: 0.95rem; line-height: 1.6; max-width: 42ch; }
 .ds-footer h4 { color: #fff; font-size: 0.8rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 1rem; }
 .ds-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
