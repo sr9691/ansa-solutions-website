@@ -149,6 +149,25 @@ function ansa_enqueue_scripts() {
 add_action('wp_enqueue_scripts', 'ansa_enqueue_scripts');
 
 /**
+ * Return an <img> for a theme logo asset if the file exists, else a fallback.
+ *
+ * @param string $rel      Path relative to /assets/images/ (first existing wins).
+ * @param string $alt      Alt text.
+ * @param string $fallback HTML to return when no asset file is present.
+ * @param string $class    Optional class for the <img>.
+ */
+function ansa_theme_logo_img( $rel_candidates, $alt, $fallback = '', $class = '' ) {
+    foreach ( (array) $rel_candidates as $rel ) {
+        $path = get_template_directory() . '/assets/images/' . ltrim( $rel, '/' );
+        if ( file_exists( $path ) ) {
+            $cls = $class ? ' class="' . esc_attr( $class ) . '"' : '';
+            return '<img src="' . esc_url( get_template_directory_uri() . '/assets/images/' . ltrim( $rel, '/' ) ) . '" alt="' . esc_attr( $alt ) . '"' . $cls . '>';
+        }
+    }
+    return $fallback;
+}
+
+/**
  * Add GA4 tracking code to head
  */
 function ansa_add_google_analytics() {

@@ -57,8 +57,14 @@ get_header(); ?>
             <div class="ds-cred">
                 <div class="ds-cred__row1">
                     <div class="ds-cred__logo">
-                        <?php // Workato Silver Partner logo — drop an <img> here when the asset is available ?>
-                        <span class="ds-cred__logo--ph">Workato<br>Silver Partner</span>
+                        <?php
+                        // Drops in automatically once assets/images/workato-silver-partner.(svg|png) is committed.
+                        echo ansa_theme_logo_img(
+                            array( 'workato-silver-partner.svg', 'workato-silver-partner.png' ),
+                            'Workato Automation League — Silver Partner',
+                            '<span class="ds-cred__logo--ph">Workato<br>Silver Partner</span>'
+                        ); // phpcs:ignore -- built with esc_url/esc_attr
+                        ?>
                     </div>
                     <div>
                         <p class="ds-cred__title">Workato MSP Partner</p>

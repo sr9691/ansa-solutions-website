@@ -2,18 +2,26 @@
         <div class="ds-footer__inner">
 
             <div class="ds-footer__brand">
-                <?php if ( has_custom_logo() ) :
+                <?php
+                $footer_logo = '';
+                if ( has_custom_logo() ) {
                     $custom_logo_id = get_theme_mod('custom_logo');
-                    $logo_url = wp_get_attachment_image_url($custom_logo_id, 'medium');
-                    ?>
-                    <a class="ds-logo" href="<?php echo esc_url( home_url('/') ); ?>">
-                        <img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr( get_bloginfo('name') ); ?>">
-                    </a>
-                <?php else : ?>
-                    <a class="ds-logo" href="<?php echo esc_url( home_url('/') ); ?>">
+                    $logo_url = wp_get_attachment_image_url($custom_logo_id, 'full');
+                    if ( $logo_url ) {
+                        $footer_logo = '<img src="' . esc_url($logo_url) . '" alt="' . esc_attr( get_bloginfo('name') ) . '">';
+                    }
+                }
+                if ( ! $footer_logo ) {
+                    $footer_logo = ansa_theme_logo_img( array( 'ansa-logo.svg', 'ansa-logo.png' ), get_bloginfo('name') );
+                }
+                ?>
+                <a class="ds-logo" href="<?php echo esc_url( home_url('/') ); ?>">
+                    <?php if ( $footer_logo ) {
+                        echo $footer_logo; // phpcs:ignore -- built with esc_url/esc_attr
+                    } else { ?>
                         <span class="logo-an">AN</span><span class="logo-sa">SA</span>
-                    </a>
-                <?php endif; ?>
+                    <?php } ?>
+                </a>
 
                 <p class="ds-footer__tagline">
                     AI strategy and orchestration for mid-market companies. Orchestrate your systems, automate your operations, accelerate with AI.

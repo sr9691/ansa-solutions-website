@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 300" role="img" aria-label="ANSA Solutions">
+  <!-- Rectangular brand border, broken along the bottom where "Solutions" sits -->
+  <path d="M6 6 H614 V294 H600 M338 294 H6 V6"
+        fill="none" stroke="#462CED" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/>
+  <!-- ANSA wordmark: AN in slate, SA in brand purple -->
+  <text x="312" y="192" text-anchor="middle"
+        font-family="Lato, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="132" letter-spacing="3">
+    <tspan fill="#384051">AN</tspan><tspan fill="#462CED">SA</tspan>
+  </text>
+  <!-- Solutions -->
+  <text x="592" y="283" text-anchor="end"
+        font-family="Lato, 'Helvetica Neue', Arial, sans-serif" font-weight="500" font-size="46" letter-spacing="1" fill="#384051">Solutions</text>
+</svg>

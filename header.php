@@ -14,11 +14,17 @@
     <header class="ds-header">
         <div class="ds-header__inner">
             <div class="ds-header__brand">
-                <?php if ( has_custom_logo() ) : ?>
-                    <?php the_custom_logo(); ?>
-                <?php else : ?>
+                <?php if ( has_custom_logo() ) :
+                    the_custom_logo();
+                else :
+                    $ansa_logo = ansa_theme_logo_img( array( 'ansa-logo.svg', 'ansa-logo.png' ), get_bloginfo('name') );
+                    ?>
                     <a class="ds-logo" href="<?php echo esc_url( home_url('/') ); ?>" rel="home">
-                        <span class="logo-an">AN</span><span class="logo-sa">SA</span>
+                        <?php if ( $ansa_logo ) {
+                            echo $ansa_logo; // phpcs:ignore -- built with esc_url/esc_attr
+                        } else { ?>
+                            <span class="logo-an">AN</span><span class="logo-sa">SA</span>
+                        <?php } ?>
                     </a>
                 <?php endif; ?>
             </div>
