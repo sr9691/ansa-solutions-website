@@ -492,7 +492,7 @@ body.ds .ds-footer { background: var(--ds-ink); color: var(--ds-on-dark-muted); 
 .ds-footer__brand .ds-logo { display: inline-block; margin-bottom: 0.75rem; color: #fff; }
 .ds-footer__brand .ds-logo .logo-sa { color: #b6a8ff; }
 /* Render whatever logo image is set as its white version on the dark footer */
-.ds-footer__brand .ds-logo img { filter: brightness(0) invert(1); max-height: 52px; }
+.ds-footer__brand .ds-logo img { filter: brightness(0) invert(1); max-height: 80px; }
 .ds-footer__tagline { font-size: 0.95rem; line-height: 1.6; max-width: 42ch; }
 .ds-footer h4 { color: #fff; font-size: 0.8rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 1rem; }
 .ds-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
