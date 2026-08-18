@@ -413,6 +413,7 @@ body.ds [tabindex]:focus-visible {
 .ds-lede--muted { color: var(--ds-muted); font-size: 1rem; font-weight: 400; }
 .ds-band--ink .ds-lede--muted { color: var(--ds-on-dark-muted); }
 .ds-note-spaced { padding-top: 30px; margin-top: 0; }
+.ds-band--ink .ds-note-spaced { color: #fff; }
 .ds-hl-accent { color: var(--ds-accent); }
 
 /* Credential (Workato MSP Partner) band */
