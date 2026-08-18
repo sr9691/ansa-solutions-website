@@ -257,11 +257,11 @@ body.ds [tabindex]:focus-visible {
 .ds-band--ink .ds-steps--rows, .ds-band--slate .ds-steps--rows { border-color: var(--ds-on-dark-line); }
 .ds-steps--rows .ds-step {
     display: grid; grid-template-columns: 64px minmax(160px, 0.9fr) 1.4fr; gap: 1.25rem 1.75rem;
-    align-items: baseline; padding: 1.5rem 0; background: none; border: 0;
+    align-items: center; padding: 1.5rem 0; background: none; border: 0;
     border-bottom: 1px solid var(--ds-line); border-radius: 0;
 }
 .ds-band--ink .ds-steps--rows .ds-step, .ds-band--slate .ds-steps--rows .ds-step { border-bottom-color: var(--ds-on-dark-line); }
-.ds-steps--rows .ds-step__num { align-self: baseline; }
+.ds-steps--rows .ds-step__num { align-self: center; }
 .ds-steps--rows .ds-step__title { margin: 0; }
 @media (max-width: 720px) {
     .ds-steps--rows .ds-step { grid-template-columns: 44px 1fr; }
