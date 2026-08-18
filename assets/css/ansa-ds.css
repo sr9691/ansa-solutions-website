@@ -385,7 +385,7 @@ body.ds [tabindex]:focus-visible {
 .ds-stat__label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ds-case-border); margin-top: 0.4rem; }
 
 /* ---- Forms ------------------------------------------------------------- */
-.ds-formwrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.75rem, 5vw, 4rem); align-items: start; max-width: var(--ds-maxw); margin: 0 auto; }
+.ds-formwrap { display: grid; grid-template-columns: 0.8fr 2fr; gap: 2.5rem; align-items: start; max-width: var(--ds-maxw); margin: 0 auto; }
 @media (max-width: 860px) { .ds-formwrap { grid-template-columns: 1fr; } }
 .ds-formcard { background: var(--ds-paper); color: var(--ds-text); border-radius: var(--ds-radius); padding: clamp(1.5rem, 3vw, 2.25rem); box-shadow: 0 20px 50px rgba(0,0,0,0.25); }
 .ds-formmeta { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ds-accent); margin-bottom: 1.25rem; }
@@ -435,7 +435,7 @@ body.ds [tabindex]:focus-visible {
     .ds-cred__row1, .ds-cred__row2 { grid-template-columns: 1fr; text-align: center; justify-items: center; }
 }
 /* GHL / third-party iframe embed sits flush inside the form card */
-.ds-embed { width: 100%; border: 0; min-height: 1100px; display: block; border-radius: var(--ds-radius-sm); background: #fff; }
+.ds-embed { width: 100%; border: 0; min-height: 720px; display: block; border-radius: var(--ds-radius-sm); background: #fff; }
 /* Bare form container — just the embedded provider form, no card chrome */
 .ds-formcard--bare { background: transparent; box-shadow: none; padding: 0; }
 /* HubSpot Meetings embed (class name is required by the HubSpot script) */
