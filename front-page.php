@@ -358,16 +358,8 @@ get_header(); ?>
                 <iframe
                     class="ds-embed"
                     src="https://api.hayesgroupmarketing.com/widget/form/oyWFnpyIxeU3JacEMI5R"
-                    id="inline-oyWFnpyIxeU3JacEMI5R"
-                    data-layout="{'id':'INLINE'}"
-                    data-trigger-type="alwaysShow"
-                    data-form-id="oyWFnpyIxeU3JacEMI5R"
-                    data-layout-iframe-id="inline-oyWFnpyIxeU3JacEMI5R"
-                    data-form-name="ANSA Conversation Form"
                     title="Start a conversation with ANSA Solutions"
-                    loading="lazy"
-                    scrolling="no"></iframe>
-                <script src="https://api.hayesgroupmarketing.com/js/form_embed.js"></script>
+                    loading="lazy"></iframe>
             </div>
         </div>
     </section>
