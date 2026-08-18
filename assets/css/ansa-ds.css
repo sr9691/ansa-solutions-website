@@ -296,7 +296,8 @@ body.ds [tabindex]:focus-visible {
 .ds-band--ink .ds-checklist li::before, .ds-band--slate .ds-checklist li::before { color: #b6a8ff; }
 /* Divided variant — a hairline between each numbered row */
 .ds-checklist--divided { gap: 0; border-top: 1px solid rgba(17,24,39,0.14); }
-.ds-checklist--divided li { padding-top: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(17,24,39,0.14); }
+.ds-checklist--divided li { display: flex; align-items: center; gap: 1rem; padding-left: 0; padding-top: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(17,24,39,0.14); }
+.ds-checklist--divided li::before { position: static; padding-top: 0; flex: 0 0 auto; min-width: 1.75rem; }
 
 /* ---- The Point (unboxed statement) ------------------------------------- */
 .ds-point { margin-top: 1.75rem; }
