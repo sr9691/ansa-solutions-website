@@ -419,11 +419,13 @@ body.ds [tabindex]:focus-visible {
 .ds-cred__row1 { display: grid; grid-template-columns: 15% 35% 50%; gap: 1.5rem 2rem; align-items: center; }
 .ds-cred__row2 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; align-items: center; }
 .ds-cred__row3 { text-align: center; }
-.ds-cred__row3 p { max-width: 60ch; margin: 0 auto; }
+.ds-cred__row3 p { max-width: none; margin: 0 auto; text-align: center; }
 .ds-cred__title { font-size: 1.15rem; font-weight: 900; margin: 0 0 0.15rem; }
 .ds-cred__sub { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ds-muted); }
 .ds-cred__logo { display: flex; align-items: center; justify-content: center; min-height: 60px; }
-.ds-cred__logo img { max-height: 54px; max-width: 100%; width: auto; }
+.ds-cred__logo img { max-width: 100%; width: auto; }
+.ds-cred__row1 .ds-cred__logo img { max-height: 150px; }
+.ds-cred__row2 .ds-cred__logo img { max-height: 80px; }
 /* Placeholder logo chip (until real logo assets are added) */
 .ds-cred__logo--ph { border: 1px dashed var(--ds-case-border); border-radius: 6px; padding: 0.85rem 1rem; color: var(--ds-slate); font-weight: 800; font-size: 0.85rem; line-height: 1.25; text-align: center; }
 @media (max-width: 760px) {
