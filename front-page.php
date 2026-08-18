@@ -32,7 +32,6 @@ get_header(); ?>
                             <span class="ds-video__play" aria-hidden="true">
                                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
                             </span>
-                            <span class="ds-video__label">Hero film, 55 sec</span>
                         </button>
                     </div>
                     <div class="ds-hero__triad">
