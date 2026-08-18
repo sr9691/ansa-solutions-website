@@ -118,7 +118,7 @@ get_header(); ?>
                 <p class="ds-lede ds-lede--500">AI is an accelerant. It only pays off on top of a business that is already coordinated underneath.</p>
                 <p>That is why more AI has not made your business faster. Every pilot ran. Every team got quicker on its own. And none of it reached the outcome, because the work still stops the moment it crosses between them.</p>
 
-                <div class="ds-deflist">
+                <div class="ds-deflist ds-deflist--tight">
                     <div class="ds-deflist__row">
                         <span class="ds-deflist__term">Approvals</span>
                         <p class="ds-deflist__desc">Sit in somebody's inbox until a person remembers to chase them.</p>
