@@ -447,8 +447,9 @@ body.ds .ds-header {
     background: #FFFFFF; backdrop-filter: saturate(140%) blur(6px);
     border-bottom: 1px solid var(--ds-line);
 }
-.ds-header__inner { max-width: var(--ds-maxw); margin: 0 auto; padding: 0.85rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
-.ds-logo { font-size: 1.35rem; font-weight: 900; letter-spacing: 0.02em; color: var(--ds-text); text-decoration: none; }
+.ds-header__inner { max-width: var(--ds-maxw); margin: 0 auto; padding: 0.6rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+.ds-header__brand { display: flex; align-items: center; }
+.ds-logo { display: inline-flex; align-items: center; line-height: 1; font-size: 1.35rem; font-weight: 900; letter-spacing: 0.02em; color: var(--ds-text); text-decoration: none; }
 .ds-logo:hover { text-decoration: none; }
 .ds-logo .logo-sa { color: var(--ds-accent); }
 .ds-logo img { max-height: 80px; width: auto; display: block; }
