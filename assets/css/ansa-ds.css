@@ -457,11 +457,15 @@ body.ds .ds-header {
 .ds-header__brand { display: flex; align-items: center; }
 .ds-logo { display: inline-flex; align-items: center; line-height: 1; font-size: 1.35rem; font-weight: 900; letter-spacing: 0.02em; color: var(--ds-text); text-decoration: none; }
 .ds-logo:hover { text-decoration: none; }
+/* WordPress Custom Logo (the_custom_logo) — match the ds-logo sizing so a
+   logo set in Customize doesn't render at full size */
+.ds-header .custom-logo-link { display: inline-flex; align-items: center; }
+.ds-header .custom-logo { max-height: 80px; width: auto; height: auto; display: block; }
 .ds-logo .logo-sa { color: var(--ds-accent); }
 .ds-logo img { max-height: 80px; width: auto; display: block; }
 .ds-nav { display: flex; align-items: center; gap: 1.75rem; }
 .ds-nav__list { display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
-.ds-nav__list a { color: var(--ds-slate); font-size: 0.95rem; font-weight: 700; text-decoration: none; transition: color 0.2s var(--ds-ease); }
+.ds-nav__list a { color: var(--ds-slate); font-size: 0.95rem; font-weight: 700; white-space: nowrap; text-decoration: none; transition: color 0.2s var(--ds-ease); }
 .ds-nav__list a:hover { color: var(--ds-text); }
 .ds-nav__list .current-menu-item > a, .ds-nav__list .current_page_item > a { color: var(--ds-text); }
 .ds-nav__cta { white-space: nowrap; }
