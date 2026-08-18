@@ -129,6 +129,7 @@ body.ds [tabindex]:focus-visible {
     color: var(--ds-accent);
 }
 .ds-band--ink .ds-eyebrow, .ds-band--slate .ds-eyebrow { color: #b6a8ff; }
+.ds-hero .ds-eyebrow { color: var(--ds-hl); } /* #9C8CFF — lighter purple on the dark hero */
 .ds-kicker {
     font-size: clamp(1.05rem, 1.8vw, 1.35rem);
     font-weight: 700;
