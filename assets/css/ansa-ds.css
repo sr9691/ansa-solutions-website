@@ -507,6 +507,14 @@ body.ds .ds-footer { background: var(--ds-ink); color: var(--ds-on-dark-muted); 
 .ds-footer__social a:hover { color: #fff; }
 .ds-footer__bottom { max-width: var(--ds-maxw); margin: 2.5rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--ds-on-dark-line); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ds-on-dark-muted); }
 
+/* ---- Legal / long-form prose ------------------------------------------- */
+.ds-legal__meta { color: var(--ds-muted); font-size: 0.9rem; font-weight: 700; letter-spacing: 0.02em; margin: 0 0 2rem; }
+.ds-legal h2 { font-size: clamp(1.35rem, 2.4vw, 1.7rem); margin: 2.5rem 0 0.75rem; }
+.ds-legal p { color: var(--ds-slate); line-height: 1.7; margin: 0 0 1.1rem; }
+.ds-legal ul { margin: 0 0 1.2rem; padding-left: 1.25rem; }
+.ds-legal li { color: var(--ds-slate); line-height: 1.7; margin-bottom: 0.5rem; }
+.ds-legal a { color: var(--ds-accent); }
+
 /* ---- Skip link --------------------------------------------------------- */
 .ds-skip-link { position: absolute; left: -9999px; top: 0; z-index: 200; }
 .ds-skip-link:focus {

@@ -64,7 +64,7 @@
                 <h4><?php esc_html_e('Legal', 'ansa-solutions'); ?></h4>
                 <ul>
                     <li><a href="<?php echo esc_url( home_url('/privacy-policy/') ); ?>">Privacy Policy</a></li>
-                    <li><a href="<?php echo esc_url( home_url('/terms/') ); ?>">Terms of Service</a></li>
+                    <li><a href="<?php echo esc_url( home_url('/terms/') ); ?>">Terms &amp; Conditions</a></li>
                 </ul>
             </div>
 
