@@ -25,6 +25,7 @@ if (empty($session_id)) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Access Denied - ANSA Solutions</title>
+        <?php if ( function_exists( 'ansa_meta_pixel' ) ) { ansa_meta_pixel(); } ?>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
         <style>
