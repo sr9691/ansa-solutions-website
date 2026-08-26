@@ -192,6 +192,33 @@ function ansa_add_google_analytics() {
 add_action('wp_head', 'ansa_add_google_analytics', 10);
 
 /**
+ * Meta (Facebook) Pixel — output high in <head> via wp_head.
+ * data-cfasync="false" keeps Cloudflare Rocket Loader from deferring it.
+ */
+function ansa_meta_pixel() {
+    ?>
+    <!-- Meta Pixel Code -->
+    <script data-cfasync="false">
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1051361131193444');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1051361131193444&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+    <?php
+}
+add_action( 'wp_head', 'ansa_meta_pixel', 1 );
+
+/**
  * Conversion tracking (GoHighLevel + WhatConverts).
  *
  * Scoped to landing/conversion routes only — HubSpot tracking already runs
