@@ -24,6 +24,7 @@ $ansa_ajax_url = function_exists( 'admin_url' )       ? admin_url( 'admin-ajax.p
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Readiness Assessment | ANSA Solutions</title>
 <?php if ( function_exists( 'ansa_meta_pixel' ) ) { ansa_meta_pixel(); } ?>
+<?php if ( function_exists( 'ansa_buywire_pixel' ) ) { ansa_buywire_pixel(); } ?>
 <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
 <style>
 :root {

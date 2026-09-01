@@ -219,6 +219,26 @@ function ansa_meta_pixel() {
 add_action( 'wp_head', 'ansa_meta_pixel', 1 );
 
 /**
+ * BuyWire pixel — output in <head> via wp_head.
+ * data-cfasync="false" keeps Cloudflare Rocket Loader from deferring it.
+ */
+function ansa_buywire_pixel() {
+    ?>
+    <script type="text/javascript" data-cfasync="false">
+    (function(s, p, i, c, e) {
+        s[e] = s[e] || function() { (s[e].a = s[e].a || []).push(arguments); };
+        s[e].l = 1 * new Date();
+        var t = new Date().getTime();
+        var k = c.createElement("script"), a = c.getElementsByTagName("script")[0];
+        k.async = 1, k.src = p + "?request_id=" + i + "&t=" + t, a.parentNode.insertBefore(k, a);
+        s.pixelClientId = i;
+    })(window, "https://app.buywire.ai/script", "ansa-solutions", document, "script");
+    </script>
+    <?php
+}
+add_action( 'wp_head', 'ansa_buywire_pixel', 2 );
+
+/**
  * Conversion tracking (GoHighLevel + WhatConverts).
  *
  * Scoped to landing/conversion routes only — HubSpot tracking already runs

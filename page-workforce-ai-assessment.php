@@ -33,6 +33,7 @@ $ansa_ga_id    = 'G-8M27VDXHXD';
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ANSA Solutions — Workforce AI-Readiness Score</title>
 <?php if ( function_exists( 'ansa_meta_pixel' ) ) { ansa_meta_pixel(); } ?>
+<?php if ( function_exists( 'ansa_buywire_pixel' ) ) { ansa_buywire_pixel(); } ?>
 <meta name="description" content="12 questions. 3 minutes. Find out if you're building a workforce AI can't replace — or one that's waiting to be disrupted.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
