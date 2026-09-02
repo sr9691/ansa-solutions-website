@@ -187,8 +187,11 @@ globally and three analytics libraries on every page hurts performance.
 - **GoHighLevel** — external tracking, ID `tk_b2548077bc114ccbb22b7504c884abd1`.
   The script host defaults to `link.hayesgroupmarketing.com` and can be
   overridden with the `ansa_ghl_tracking_src` filter.
-- **WhatConverts** — define `ANSA_WHATCONVERTS_SRC` in `wp-config.php` with the
-  account's `$wc_leads` script URL to enable it (kept out of source control).
+- **WhatConverts** — emits the inline `$wc_leads` attribution snippet plus the
+  profile script, which defaults to the ANSA profile `170528`
+  (`//s.ksrndkehqnwntyxlhgto.com/170528.js`). Override the full script URL with
+  `ANSA_WHATCONVERTS_SRC` in `wp-config.php` if the profile changes. Both tags
+  carry `data-cfasync="false"` so Rocket Loader can't defer them.
 - The eight "See What's Possible" CTAs each carry a distinct
   `data-cta-location` (`hero`, `problem`, `how-it-works`, `proof`,
   `conversation`, `faq`, `form`, `nav`) for section-level attribution.
