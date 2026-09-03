@@ -239,20 +239,14 @@ function ansa_buywire_pixel() {
 add_action( 'wp_head', 'ansa_buywire_pixel', 2 );
 
 /**
- * Conversion tracking (GoHighLevel + WhatConverts).
+ * Is the current request a landing/conversion route?
  *
- * Scoped to landing/conversion routes only — HubSpot tracking already runs
- * globally, and loading three analytics libraries on every page is a
- * performance problem. Loads early in <head> via wp_head so WhatConverts
- * lead/call tracking fires before the page renders (a footer load lets
- * early-bounce visitors slip through untracked, which is why Hayes Group's
- * checker read the tag as "missing").
- *
- * NOTE: Cloudflare Rocket Loader must be DISABLED for these routes or it can
- * break the WhatConverts script (see README).
+ * Scoped so conversion tracking loads only where it's needed — HubSpot
+ * tracking already runs globally, and loading extra analytics libraries on
+ * every page is a performance problem.
  */
-function ansa_conversion_tracking() {
-    $is_conversion_route = is_front_page() || is_page( array(
+function ansa_is_conversion_route() {
+    return is_front_page() || is_page( array(
         'contact',
         'ai-readiness-assessment',
         'become-a-partner',
@@ -260,13 +254,47 @@ function ansa_conversion_tracking() {
         'approach',
         'workforce-ai-assessment',
     ) );
+}
 
-    if ( ! $is_conversion_route ) {
+/**
+ * Output the WhatConverts tags (inline $wc_leads snippet + profile script).
+ *
+ * Emitted from both wp_head and wp_footer so the tags appear twice, matching
+ * Hayes Group's expected placement (once as the direct/head add, once lower in
+ * the page). The $wc_leads inline snippet is self-guarded ($wc_leads = $wc_leads
+ * || {...}) so the duplicate is harmless.
+ *
+ * Profile defaults to the ANSA profile (170528); override the full URL via
+ * ANSA_WHATCONVERTS_SRC in wp-config.php. data-cfasync="false" keeps Cloudflare
+ * Rocket Loader from deferring these and breaking lead tracking.
+ */
+function ansa_whatconverts_tags() {
+    $wc_src = ( defined( 'ANSA_WHATCONVERTS_SRC' ) && ANSA_WHATCONVERTS_SRC )
+        ? ANSA_WHATCONVERTS_SRC
+        : '//s.ksrndkehqnwntyxlhgto.com/170528.js';
+    if ( $wc_src ) {
+        echo '<script data-cfasync="false">var $wc_load=function(a){return JSON.parse(JSON.stringify(a))},$wc_leads=$wc_leads||{doc:{url:$wc_load(document.URL),ref:$wc_load(document.referrer),search:$wc_load(location.search),hash:$wc_load(location.hash)}};</script>' . "\n";
+        printf( '<script data-cfasync="false" src="%s"></script>' . "\n", esc_url( $wc_src ) );
+    }
+}
+
+/**
+ * Conversion tracking in <head> (GoHighLevel + WhatConverts, instance 1).
+ *
+ * Loads early via wp_head so WhatConverts lead/call tracking fires before the
+ * page renders (a footer-only load lets early-bounce visitors slip through
+ * untracked, which is why Hayes Group's checker read the tag as "missing").
+ *
+ * NOTE: Cloudflare Rocket Loader must be DISABLED for these routes or it can
+ * break the WhatConverts script (see README).
+ */
+function ansa_conversion_tracking_head() {
+    if ( ! ansa_is_conversion_route() ) {
         return;
     }
 
-    // GoHighLevel external tracking. The script host can be overridden via the
-    // ansa_ghl_tracking_src filter if the account uses a different domain.
+    // GoHighLevel external tracking (single instance). The script host can be
+    // overridden via the ansa_ghl_tracking_src filter for a different domain.
     $ghl_tracking_id = 'tk_b2548077bc114ccbb22b7504c884abd1';
     $ghl_src         = apply_filters( 'ansa_ghl_tracking_src', 'https://link.hayesgroupmarketing.com/js/external-tracking.js' );
     if ( $ghl_src ) {
@@ -277,22 +305,21 @@ function ansa_conversion_tracking() {
         );
     }
 
-    // WhatConverts. Two parts, per Hayes Group's embed:
-    //   1. The inline $wc_leads snippet that captures URL/referrer/search/hash
-    //      for lead attribution (must run before the profile script).
-    //   2. The profile tracking script. Defaults to the ANSA profile (170528);
-    //      override the full URL via ANSA_WHATCONVERTS_SRC in wp-config.php.
-    // data-cfasync="false" keeps Cloudflare Rocket Loader from deferring these
-    // and breaking lead tracking.
-    $wc_src = ( defined( 'ANSA_WHATCONVERTS_SRC' ) && ANSA_WHATCONVERTS_SRC )
-        ? ANSA_WHATCONVERTS_SRC
-        : '//s.ksrndkehqnwntyxlhgto.com/170528.js';
-    if ( $wc_src ) {
-        echo '<script data-cfasync="false">var $wc_load=function(a){return JSON.parse(JSON.stringify(a))},$wc_leads=$wc_leads||{doc:{url:$wc_load(document.URL),ref:$wc_load(document.referrer),search:$wc_load(location.search),hash:$wc_load(location.hash)}};</script>' . "\n";
-        printf( '<script data-cfasync="false" src="%s"></script>' . "\n", esc_url( $wc_src ) );
-    }
+    ansa_whatconverts_tags();
 }
-add_action( 'wp_head', 'ansa_conversion_tracking', 3 );
+add_action( 'wp_head', 'ansa_conversion_tracking_head', 3 );
+
+/**
+ * WhatConverts in the footer (instance 2), for the expected duplicate placement.
+ */
+function ansa_conversion_tracking_footer() {
+    if ( ! ansa_is_conversion_route() ) {
+        return;
+    }
+
+    ansa_whatconverts_tags();
+}
+add_action( 'wp_footer', 'ansa_conversion_tracking_footer', 20 );
 
 /**
  * Helper function to get Stripe checkout URL placeholder

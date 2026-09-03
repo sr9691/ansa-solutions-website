@@ -178,19 +178,24 @@ blog partials, admin rules) and must not be gutted.
 
 ## Tracking & Cloudflare
 
-Conversion tracking is injected by `ansa_conversion_tracking()` in
-`functions.php`, **scoped to landing/conversion routes only** (home, contact,
-ai-readiness-assessment, become-a-partner, calendar, approach,
-workforce-ai-assessment) — not sitewide, because HubSpot tracking already runs
-globally and three analytics libraries on every page hurts performance.
+Conversion tracking is injected on the routes matched by
+`ansa_is_conversion_route()` in `functions.php`, **scoped to landing/conversion
+routes only** (home, contact, ai-readiness-assessment, become-a-partner,
+calendar, approach, workforce-ai-assessment) — not sitewide, because HubSpot
+tracking already runs globally and extra analytics libraries on every page
+hurts performance.
 
-- **GoHighLevel** — external tracking, ID `tk_b2548077bc114ccbb22b7504c884abd1`.
-  The script host defaults to `link.hayesgroupmarketing.com` and can be
-  overridden with the `ansa_ghl_tracking_src` filter.
-- **WhatConverts** — emits the inline `$wc_leads` attribution snippet plus the
-  profile script, which defaults to the ANSA profile `170528`
-  (`//s.ksrndkehqnwntyxlhgto.com/170528.js`). Override the full script URL with
-  `ANSA_WHATCONVERTS_SRC` in `wp-config.php` if the profile changes. Both tags
+- **GoHighLevel** — external tracking, ID `tk_b2548077bc114ccbb22b7504c884abd1`,
+  emitted once in `<head>` by `ansa_conversion_tracking_head()`. The script host
+  defaults to `link.hayesgroupmarketing.com` and can be overridden with the
+  `ansa_ghl_tracking_src` filter.
+- **WhatConverts** — the inline `$wc_leads` attribution snippet plus the profile
+  script (`ansa_whatconverts_tags()`), which defaults to the ANSA profile
+  `170528` (`//s.ksrndkehqnwntyxlhgto.com/170528.js`). Override the full script
+  URL with `ANSA_WHATCONVERTS_SRC` in `wp-config.php` if the profile changes.
+  Emitted **twice** — once early in `<head>` (`wp_head`) and once in the footer
+  (`wp_footer`) — matching Hayes Group's expected two-instance placement; the
+  `$wc_leads` snippet is self-guarded so the duplicate is harmless. Both tags
   carry `data-cfasync="false"` so Rocket Loader can't defer them.
 - The eight "See What's Possible" CTAs each carry a distinct
   `data-cta-location` (`hero`, `problem`, `how-it-works`, `proof`,
