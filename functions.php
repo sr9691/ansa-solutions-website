@@ -274,10 +274,19 @@ function ansa_conversion_tracking() {
         );
     }
 
-    // WhatConverts. Define ANSA_WHATCONVERTS_SRC in wp-config.php with the
-    // account's $wc_leads script URL to enable it (kept out of source).
-    if ( defined( 'ANSA_WHATCONVERTS_SRC' ) && ANSA_WHATCONVERTS_SRC ) {
-        printf( '<script async src="%s"></script>' . "\n", esc_url( ANSA_WHATCONVERTS_SRC ) );
+    // WhatConverts. Two parts, per Hayes Group's embed:
+    //   1. The inline $wc_leads snippet that captures URL/referrer/search/hash
+    //      for lead attribution (must run before the profile script).
+    //   2. The profile tracking script. Defaults to the ANSA profile (170528);
+    //      override the full URL via ANSA_WHATCONVERTS_SRC in wp-config.php.
+    // data-cfasync="false" keeps Cloudflare Rocket Loader from deferring these
+    // and breaking lead tracking.
+    $wc_src = ( defined( 'ANSA_WHATCONVERTS_SRC' ) && ANSA_WHATCONVERTS_SRC )
+        ? ANSA_WHATCONVERTS_SRC
+        : '//s.ksrndkehqnwntyxlhgto.com/170528.js';
+    if ( $wc_src ) {
+        echo '<script data-cfasync="false">var $wc_load=function(a){return JSON.parse(JSON.stringify(a))},$wc_leads=$wc_leads||{doc:{url:$wc_load(document.URL),ref:$wc_load(document.referrer),search:$wc_load(location.search),hash:$wc_load(location.hash)}};</script>' . "\n";
+        printf( '<script data-cfasync="false" src="%s"></script>' . "\n", esc_url( $wc_src ) );
     }
 }
 add_action( 'wp_footer', 'ansa_conversion_tracking', 20 );
