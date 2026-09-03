@@ -243,7 +243,10 @@ add_action( 'wp_head', 'ansa_buywire_pixel', 2 );
  *
  * Scoped to landing/conversion routes only — HubSpot tracking already runs
  * globally, and loading three analytics libraries on every page is a
- * performance problem. Loads in the footer via wp_footer.
+ * performance problem. Loads early in <head> via wp_head so WhatConverts
+ * lead/call tracking fires before the page renders (a footer load lets
+ * early-bounce visitors slip through untracked, which is why Hayes Group's
+ * checker read the tag as "missing").
  *
  * NOTE: Cloudflare Rocket Loader must be DISABLED for these routes or it can
  * break the WhatConverts script (see README).
@@ -289,7 +292,7 @@ function ansa_conversion_tracking() {
         printf( '<script data-cfasync="false" src="%s"></script>' . "\n", esc_url( $wc_src ) );
     }
 }
-add_action( 'wp_footer', 'ansa_conversion_tracking', 20 );
+add_action( 'wp_head', 'ansa_conversion_tracking', 3 );
 
 /**
  * Helper function to get Stripe checkout URL placeholder
