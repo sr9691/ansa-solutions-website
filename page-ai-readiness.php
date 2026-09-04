@@ -2,7 +2,7 @@
 /**
  * Template Name: AI Readiness Assessment
  * Description: AI Readiness Assessment service page. The lead form is the
- * existing HubSpot embed (portal 50725925) — preserved unchanged.
+ * GoHighLevel inquiry form embed (Hayes Group).
  *
  * @package ANSA_Solutions
  */
@@ -132,16 +132,36 @@ get_header(); ?>
         </div>
     </section>
 
-    <?php // ── Get started (HubSpot form, unchanged) ───────────────── ?>
+    <?php // ── Get started (GoHighLevel form) ───────────────────────── ?>
     <section class="ds-band ds-band--paper-2" id="get-started">
         <div class="ds-band__inner ds-band__inner--narrow">
             <span class="ds-eyebrow">Get Started</span>
             <h2>Get your AI Readiness Assessment.</h2>
             <p class="ds-lede">Tell us a bit about your business and we'll reach out to schedule your discovery session.</p>
-            <div class="ds-formcard">
-                <noscript><p>Please enable JavaScript to use this form, or <a href="mailto:info@ansa.solutions">email us directly</a>.</p></noscript>
-                <script src="https://js.hsforms.net/forms/embed/50725925.js" defer></script>
-                <div class="hs-form-frame" data-region="na1" data-form-id="1a8a8d6f-d8cb-4876-bf15-5df9da9d85ec" data-portal-id="50725925"></div>
+            <div class="ds-formcard ds-formcard--bare" id="ds-ai-readiness-form">
+                <?php // GoHighLevel embed (Hayes Group). form_embed.js auto-resizes the
+                      // iframe to data-height; data-cfasync="false" keeps Cloudflare
+                      // Rocket Loader from deferring it and leaving the form blank. ?>
+                <iframe
+                    class="ds-embed"
+                    src="https://api.hayesgroupmarketing.com/widget/form/oyWFnpyIxeU3JacEMI5R"
+                    style="width:100%;height:100%;border:none;border-radius:0px"
+                    id="inline-oyWFnpyIxeU3JacEMI5R"
+                    data-layout="{'id':'INLINE'}"
+                    data-trigger-type="alwaysShow"
+                    data-trigger-value=""
+                    data-activation-type="alwaysActivated"
+                    data-activation-value=""
+                    data-deactivation-type="neverDeactivate"
+                    data-deactivation-value=""
+                    data-form-name="Inquiry Form"
+                    data-height="1010"
+                    data-layout-iframe-id="inline-oyWFnpyIxeU3JacEMI5R"
+                    data-form-id="oyWFnpyIxeU3JacEMI5R"
+                    data-cookie-consent="true"
+                    data-cookie-consent-provider="auto"
+                    title="Inquiry Form"></iframe>
+                <script src="https://api.hayesgroupmarketing.com/js/form_embed.js" data-cfasync="false"></script>
             </div>
         </div>
     </section>

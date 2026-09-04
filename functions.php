@@ -248,6 +248,7 @@ add_action( 'wp_head', 'ansa_buywire_pixel', 2 );
 function ansa_is_conversion_route() {
     return is_front_page() || is_page( array(
         'contact',
+        'ai-readiness',
         'ai-readiness-assessment',
         'become-a-partner',
         'calendar',
