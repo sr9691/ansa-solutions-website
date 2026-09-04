@@ -56,7 +56,7 @@ function ansa_primary_menu_fallback() {
     $items = array(
         'Approach'     => '/approach/',
         'Accelerators' => '/automation-accelerators/',
-        'AI Readiness' => '/ai-readiness-assessment/',
+        'AI Readiness' => '/ai-readiness/',
         'Case Studies' => '/case-studies/',
         'Events'       => '/events/',
         'About'        => '/about/',

@@ -45,7 +45,7 @@
                 <ul>
                     <li><a href="<?php echo esc_url( home_url('/approach/') ); ?>">Approach</a></li>
                     <li><a href="<?php echo esc_url( home_url('/automation-accelerators/') ); ?>">Accelerators</a></li>
-                    <li><a href="<?php echo esc_url( home_url('/ai-readiness-assessment/') ); ?>">AI Readiness</a></li>
+                    <li><a href="<?php echo esc_url( home_url('/ai-readiness/') ); ?>">AI Readiness</a></li>
                     <li><a href="<?php echo esc_url( home_url('/case-studies/') ); ?>">Case Studies</a></li>
                     <li><a href="<?php echo esc_url( home_url('/events/') ); ?>">Events</a></li>
                 </ul>
